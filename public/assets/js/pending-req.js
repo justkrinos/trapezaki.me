@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     // Click on table row
     $(".clicktoCust").click(function () {
-        window.location.href = "user1-manage_customer.html"
+        window.location.href = "/seven-seas"
     })
 
 });

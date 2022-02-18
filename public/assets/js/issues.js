@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    
+
     $(".issueName").click(function () {
         //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
         //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
@@ -8,11 +8,11 @@ $(document).ready(function () {
     })
 
     $("#issueBusiness").click(function () {
-        window.location.href = "user1-manage_customer.html";
+        window.location.href = "/seven-seas";
     })
 
     //TODO: if issue.status == solved then
-    //          $("<currentuser_id> btn-outline-success").addClass("active") 
+    //          $("<currentuser_id> btn-outline-success").addClass("active")
     //          and remove class sto allo button
 
     //TODO: (Solved/Can't be solved button).click(

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
     <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
-    
+
 </head>
 
 <body>
@@ -26,7 +26,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-center">
                         <div class="logo">
-                            <a href="index.html"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
+                            <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
                                     srcset=""></a>
                         </div>
                         <div class="toggler">
@@ -39,19 +39,19 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item">
-                            <a href="user3-profile.html" class='sidebar-link'>
+                            <a href="/profile" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>My Profile</span>
                             </a>
                         </li>
                         <li class="sidebar-item active">
-                            <a href="user3-reservations.html" class='sidebar-link'>
+                            <a href="/my-reservations" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>My Reservations</span>
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="user3-search.html" class='sidebar-link'>
+                            <a href="/make-a-reservation" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Make a Reservation</span>
                             </a>
@@ -82,7 +82,7 @@
                                 <div class="user-menu align-items-center">
                                     <div class="user-name text-center me-3">
                                         <h6 class="mb-0 text-gray-600 text-nowrap">
-                                            <a href="/www/user3-search.html">Make a reservation</a>
+                                            <a href="/make-a-reservation">Make a reservation</a>
                                         </h6>
                                     </div>
                                 </div>
@@ -99,10 +99,10 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello, &lt;Name&gt;!</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="/www/user3-profile.html"><i
+                                    <li><a class="dropdown-item" href="/profile"><i
                                                 class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
-                                    <li><a class="dropdown-item" href="/www/user3-reservations.html"><i
+                                    <li><a class="dropdown-item" href="/my-reservations"><i
                                                 class="icon-mid bi bi-wallet me-2"></i>
                                             My Reservations</a></li>
                                     <li>

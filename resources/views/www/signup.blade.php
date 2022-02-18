@@ -10,14 +10,14 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
-    <link rel="stylesheet" href="../assets/vendors/choices.js/choices.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/choices.js/choices.min.css" />
 
-    <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/css/app.css">
-    <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
 </head>
 
 <body>
@@ -35,7 +35,7 @@
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="user3-login.html">Already have an account?</a></li>
+                                    <li class="breadcrumb-item"><a href="/login">Already have an account?</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Input</li>
                                 </ol>
                             </nav>
@@ -60,7 +60,7 @@
                                         <label for="basicInput">Name</label>
                                         <small class="text-muted"><i>(First and Last name)</i></small>
                                         <input type="text" class="form-control" id="basicInput">
-                                       
+
                                     </div>
 
 
@@ -72,11 +72,11 @@
 
                                     <div class="form-group">
                                         <label for="basicInput">Phone number</label>
-                                       
+
                                         <input type="text" class="form-control" id="basicInput">
                                     </div>
-                                        
-                                    
+
+
 
                                     <div class="form-group">
                                         <label for="helpInputTop">Create a Password</label>
@@ -85,22 +85,22 @@
                                             <i class="bi bi-shield-lock"></i>
                                         </div>
                                     </div>
-                                    
+
 
                                     <div class="form-group">
                                         <label for="helpInputTop">Re-enter Password</label>
                                         <input type="password" class="form-control form-control-l" placeholder="Password">
                                     </div>
 
-                                    
-                                   
-                                   
-                                        
+
+
+
+
                                                 </div>
                                             </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                         <div class="col-sm-12 d-flex justify-content-end">
@@ -112,23 +112,23 @@
                     </div>
                 </section>
 
-               
+
 
             </div>
 
             <footer>
-                
+
             </footer>
         </div>
     </div>
-    <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="../assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 
-    <script src="../assets/vendors/choices.js/choices.min.js"></script>
+    <script src="/assets/vendors/choices.js/choices.min.js"></script>
 
-    <script src="../assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 
 </body>

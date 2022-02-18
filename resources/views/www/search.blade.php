@@ -24,7 +24,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-center">
                         <div class="logo">
-                            <a href="index.html"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
+                            <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
                                     srcset=""></a>
                         </div>
                         <div class="toggler">
@@ -37,19 +37,19 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item">
-                            <a href="user3-profile.html" class='sidebar-link'>
+                            <a href="/profile" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>My Profile</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="user3-reservations.html" class='sidebar-link'>
+                            <a href="/my-reservations" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>My Reservations</span>
                             </a>
                         </li>
                         <li class="sidebar-item active">
-                            <a href="user3-search.html" class='sidebar-link'>
+                            <a href="/make-a-reservation" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Make a Reservation</span>
                             </a>
@@ -82,7 +82,7 @@
                                         <h6 class="mb-0 text-gray-600 text-nowrap">
                                         </h6>
                                     </div>
-                                </div>                        
+                                </div>
                             </ul>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
@@ -96,9 +96,9 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello, &lt;Name&gt;!</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="/www/user3-profile.html"><i class="icon-mid bi bi-person me-2"></i> My
+                                    <li><a class="dropdown-item" href="/profile"><i class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
-                                    <li><a class="dropdown-item" href="/www/user3-reservations.html"><i class="icon-mid bi bi-wallet me-2"></i>
+                                    <li><a class="dropdown-item" href="/my-reservation"><i class="icon-mid bi bi-wallet me-2"></i>
                                             My Reservations</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-    
+
                             <section class="section">
                                 <div class="card">
                                     <div class="card-header bg-primary">
@@ -142,17 +142,17 @@
                                             <input type="text" class="form-control"
                                                 placeholder="Find restaurants, bar, cafe..."
                                                 aria-describedby="button-addon2">
-    
+
                                         </div>
                                         <div class="card-content bg-primary">
                                                 <div class="row">
-    
+
                                                     <div class="col-md-4 row-col-4 mb-3">
                                                         <h6 class="text-white">Date</h6>
                                                         <input type="date" id="mydate" class="form-control"
                                                             value="2017-06-01">
                                                     </div>
-    
+
                                                     <div class="col-md-4 mb-2">
                                                         <h6 class="text-white">Number of people </h6>
                                                         <fieldset class="form-group">
@@ -183,7 +183,7 @@
                                         </div>
                                     </div>
                                 </div>
-    
+
                             </section>
                         </div>
                         </div>
@@ -216,7 +216,7 @@
                                         lets see if it is truncated if its too long
                                     </p>
                                     <p class="font-bold">Coffee, Food, Drinks</p>
-                                    <a href="/www/user3-selected_profile.html" class="stretched-link"></a>
+                                    <a href="/seven-seas" class="stretched-link"></a>
                                 </div>
                             </div>
                         </div>
@@ -241,7 +241,7 @@
                                         lets see if it is truncated if its too long
                                     </p>
                                     <p class="font-bold">Coffee, Food, Drinks</p>
-                                    <a href="/www/user3-selected_profile.html" class="stretched-link"></a>
+                                    <a href="/seven-seas" class="stretched-link"></a>
                                 </div>
                             </div>
                         </div>
@@ -266,7 +266,7 @@
                                         lets see if it is truncated if its too long
                                     </p>
                                     <p class="font-bold">Coffee, Food, Drinks</p>
-                                    <a href="/www/user3-selected_profile.html" class="stretched-link"></a>
+                                    <a href="/seven-seas" class="stretched-link"></a>
                                 </div>
                             </div>
                         </div>

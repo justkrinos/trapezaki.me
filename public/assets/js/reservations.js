@@ -24,12 +24,12 @@ $(document).ready(function () {
 
     //On click sto modify reservvation tu modal
     $("#modResv").click(function () {
-        window.location.href = "user2-editres.html";
+        window.location.href = "/edit-reservation";
     })
 
     //Redirect when add a reservation is clicked
     $("#newRes").click(function () {
-        window.location.href = "user2-addres.html";
+        window.location.href = "/add-reservation";
     })
 
 

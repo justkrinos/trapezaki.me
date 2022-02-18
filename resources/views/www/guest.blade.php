@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User 3 signup</title>
+    <title>Trapezaki - Guest</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="user3-login.html">Have an account?</a></li>
+                                    <li class="breadcrumb-item"><a href="/login">Have an account?</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Input</li>
                                 </ol>
                             </nav>
@@ -56,7 +56,7 @@
                                         <label for="basicInput">Name</label>
                                         <small class="text-muted"><i>(First and Last name)</i></small>
                                         <input type="text" class="form-control" id="basicInput">
-                                       
+
                                     </div>
 
 
@@ -68,17 +68,17 @@
 
                                     <div class="form-group">
                                         <label for="basicInput">Phone number</label>
-                                       
+
                                         <input type="text" class="form-control" id="basicInput">
                                     </div>
-                                        
-                               
+
+
 
                                                 </div>
                                             </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                         <div class="col-sm-12 d-flex justify-content-end">
@@ -90,12 +90,12 @@
                     </div>
                 </section>
 
-               
+
 
             </div>
 
             <footer>
-                
+
             </footer>
         </div>
     </div>
