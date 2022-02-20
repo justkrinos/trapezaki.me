@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Andreas -> en mou to anoiei me ta subdomains... mono etsi
-Route::get('/', function () {
-    return view('www.index');
-});
-
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/', function () {
