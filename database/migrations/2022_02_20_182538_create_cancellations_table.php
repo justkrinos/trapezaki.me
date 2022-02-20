@@ -16,6 +16,8 @@ class CreateCancellationsTable extends Migration
         Schema::create('cancellations', function (Blueprint $table) {
             $table->id();
             $table->string('reason');
+
+            $table->timestamps();
         });
     }
 

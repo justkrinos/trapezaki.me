@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User2Tags extends Model
+class User2_Tag extends Model
 {
     use HasFactory;
 }
