@@ -14,7 +14,7 @@ class CreateUser2Table extends Migration
     public function up()
     {
         Schema::create('user2', function (Blueprint $table) {
-            $table->id(); //user2id, apla iparxei idi method id()
+            $table->id('user2id');
             $table->string('username');
             $table->string('password');
             $table->string('business_name');

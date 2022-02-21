@@ -14,17 +14,17 @@ class CreateUser3Table extends Migration
     public function up()
     {
         //Ta pedia tou table
+        //Exume to created_at mesa sto database ara efia to member since
         Schema::create('user3s', function (Blueprint $table) {
-            $table->id(); //user3id, apla iparxei idi method id()
-            $table->string('username');
+            $table->id('user3id');
+            $table->string('username')->unique();
             $table->string('password');
             $table->string('full_name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('phone');
-            $table->string('city');
-            $table->timestamp('member_since')->nullable();
-            $table->boolean('guest');
-            $table->boolean('status');
+            $table->string('city')->nullable();
+            $table->boolean('guest')->default(False);
+            $table->boolean('status')->default(False);
 
             $table->timestamps();
         });
