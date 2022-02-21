@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterUser3;
+use App\Http\Controllers\SessionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,23 +22,34 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     });
 
 
-    Route::get('/login', function () {
-        return view('www.login');
-    });
+    //Use the sessions controller class to handle the login
+    Route::get('/login', [SessionsController::class,'create'])->middleware('guest');
+
+    Route::post('/login', [SessionsController::class,'login'])->middleware('guest');
 
     Route::get('/guest', function () {
         return view('www.guest');
     });
 
+    //when you get, return the view
+    Route::get('/signup', [RegisterUser3::class, 'view'])->middleware('guest');
+                                                        //you can access this page
+                                                        //only if you are not signed in
+                                                        //Http/Kernel.php has a link to a handler for guest
 
-    Route::get('/signup', function () {
-        return view('www.signup');
-    });
+
+    //Handler when signup button is pressed
+    //it uses the RegisterUser3 class and its function "create"
+    //the class is in app/http/controllers
+    Route::post('/signup', [RegisterUser3::class, 'create']);
+
+    //New controller pu elegxei ta sessions gia log in log out
+    Route::get('/logout',[SessionsController::class],'destroy')->middleware('auth');
 
     Route::get('/profile', function () {
         return view('www.profile');
     });
-    //
+
     Route::get('/make-a-reservation', function () {
         return view('www.search');
     });
