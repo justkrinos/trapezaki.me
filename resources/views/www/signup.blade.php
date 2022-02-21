@@ -36,101 +36,152 @@
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/login">Already have an account?</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Input</li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                 </div>
                 <section class="section">
-                    <div class="card">
+                    <div class="card ">
                         <div class="card-header">
                             <h4 class="card-title">Sign up</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
-
+                                <form method="POST" action="/signup" class="col-md-6">
+                                    {{--To prevent csrf attacks--}}
+                                    @csrf
                                     <div class="form-group">
-                                        <label for="basicInput">Username</label>
-                                        <input type="text" class="form-control" id="basicInput">
-                                    </div>
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control
+                                            @error('username') is-invalid @enderror"
+                                            id="username" name="username" value="{{ old('username') }}" required>
 
-                                    <div class="form-group">
-                                        <label for="basicInput">Name</label>
-                                        <small class="text-muted"><i>(First and Last name)</i></small>
-                                        <input type="text" class="form-control" id="basicInput">
-
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="basicInput">Email</label>
-                                        <small class="text-muted">eg.<i>someone@example.com</i></small>
-                                        <input type="text" class="form-control" id="basicInput">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="basicInput">Phone number</label>
-
-                                        <input type="text" class="form-control" id="basicInput">
-                                    </div>
-
-
-
-                                    <div class="form-group">
-                                        <label for="helpInputTop">Create a Password</label>
-                                        <input type="password" class="form-control form-control-l" placeholder="Password">
-                                        <div class="form-control-icon">
-                                            <i class="bi bi-shield-lock"></i>
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('username')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
                                         </div>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="full_name">Full Name</label>
+                                        <small class="text-muted"><i>(First and Last name)</i></small>
+                                        <input type="text" class="form-control
+                                            @error('full_name') is-invalid @enderror"
+                                            id="full_name" name="full_name" value="{{ old('full_name') }}" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('full_name')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <small class="text-muted">eg.<i>someone@example.com</i></small>
+                                        <input type="email" class="form-control
+                                            @error('email') is-invalid @enderror"
+                                            id="email" name="email" value="{{ old('email') }}" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('email')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">Phone number</label>
+                                        <input type="phone" class="form-control
+                                            @error('phone') is-invalid @enderror"
+                                            id="phone" name="phone" value="{{ old('phone') }}" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('phone')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+
+                                    </div>
+
+
+                                    {{--TODO: na fkallei j aman en valid to input --}}
+                                    {{--TODO: ta output messages enne ta idia me jina p evalame sta eggrafa, fix them --}}
+                                    <div class="form-group">
+                                        <label for="password">Create a Password</label>
+                                        <input type="password"
+                                            class="form-control form-control-l
+                                            @error('password') is-invalid @enderror"
+                                            placeholder="Password" name="password" id="password" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('password')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
 
 
                                     <div class="form-group">
-                                        <label for="helpInputTop">Re-enter Password</label>
-                                        <input type="password" class="form-control form-control-l" placeholder="Password">
+                                        <label for="password_ver">Re-enter Password</label>
+                                        <input type="password" class="form-control form-control-l
+                                            @error('password_ver') is-invalid @enderror"
+                                            placeholder="Password" name="password_ver" id="password_ver" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('password_ver')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+
                                     </div>
+                                </form>
 
-
-
-
-
-                                                </div>
-                                            </div>
-                                    </div>
+                                <div class="col-sm-8 d-flex justify-content-end">
+                                    <button type="submit" id="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                 </div>
+
 
                             </div>
                         </div>
-                        <div class="col-sm-12 d-flex justify-content-end">
-                            <button type="submit"
-                                class="btn btn-primary me-1 mb-1">Submit</button>
-                            <button type="reset"
-                                class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                        </div>
                     </div>
-                </section>
-
-
 
             </div>
-
-            <footer>
-
-            </footer>
         </div>
     </div>
+
+
+    </div>
+
+    <footer>
+
+    </footer>
+
+
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
-
-    <script src="/assets/js/main.js"></script>
-
-    <script src="/assets/vendors/choices.js/choices.min.js"></script>
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/register.js"><script>
 
     <script src="/assets/js/main.js"></script>
 
 
 </body>
-
 </html>
