@@ -15,7 +15,7 @@ class CreateUser2PhotosTable extends Migration
     {
         Schema::create('user2_photos', function (Blueprint $table) {
             $table->string('user2_id');
-            $table->string('photo_id');
+            $table->id('photo_id');
             $table->string('photo_path');
 
             $table->timestamps();

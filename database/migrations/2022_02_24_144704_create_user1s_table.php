@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDailySettingsTable extends Migration
+class CreateUser1sTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDailySettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('daily_settings', function (Blueprint $table) {
-            $table->id('user2_id');
-            $table->tinyInteger('day_id');
-            $table->smallInteger('time_min');
-            $table->smallInteger('time_max');
+        Schema::create('user1s', function (Blueprint $table) {
+            $table->id();
+            $table->string('username');
+            $table->string('password');
 
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ class CreateDailySettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('daily_settings');
+        Schema::dropIfExists('user1');
     }
 }

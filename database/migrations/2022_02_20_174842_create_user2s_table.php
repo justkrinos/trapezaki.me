@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUser2Table extends Migration
+class CreateUser2sTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUser2Table extends Migration
      */
     public function up()
     {
-        Schema::create('user2', function (Blueprint $table) {
+        Schema::create('user2s', function (Blueprint $table) {
             $table->id('user2id');
             $table->string('username');
             $table->string('password');
