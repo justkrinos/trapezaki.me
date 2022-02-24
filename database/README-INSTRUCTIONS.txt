@@ -27,7 +27,7 @@ php artisan make:model User3 //panta me kefalaio to prwto
 
 STEP 4)
 kanoume ksana migrate:
-php artisan migration
+php artisan migrate
 
 STEP 5)
 mporoume na ftiaksoume instance tou model(object) kai na valoume times apo tinker:
