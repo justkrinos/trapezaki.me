@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\SessionsController;
+use App\Models\User2;
 
 /*
 |--------------------------------------------------------------------------

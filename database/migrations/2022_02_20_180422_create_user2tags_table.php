@@ -14,8 +14,8 @@ class CreateUser2tagsTable extends Migration
     public function up()
     {
         Schema::create('user2tags', function (Blueprint $table) {
-            $table->id(); //user2id, apla iparxei idi method id()
-            $table->string('user2_id');
+            $table->id();
+            $table->foreignId('user2_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });

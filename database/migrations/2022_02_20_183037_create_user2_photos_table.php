@@ -14,8 +14,8 @@ class CreateUser2PhotosTable extends Migration
     public function up()
     {
         Schema::create('user2_photos', function (Blueprint $table) {
-            $table->string('user2_id');
-            $table->id('photo_id');
+            $table->id();
+            $table->foreignId('user2_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('photo_path');
 
             $table->timestamps();

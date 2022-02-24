@@ -13,9 +13,9 @@ class CreateObjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('objects', function (Blueprint $table) {
+        Schema::create('object_ts', function (Blueprint $table) {
             $table->id();
-            $table->string('user2_id');
+            $table->foreignId('user2_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->smallInteger('x_coord');
             $table->smallInteger('y_coord');
             $table->smallInteger('width');

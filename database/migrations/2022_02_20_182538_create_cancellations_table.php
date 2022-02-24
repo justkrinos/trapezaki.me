@@ -14,7 +14,7 @@ class CreateCancellationsTable extends Migration
     public function up()
     {
         Schema::create('cancellations', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('reservation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('reason');
 
             $table->timestamps();

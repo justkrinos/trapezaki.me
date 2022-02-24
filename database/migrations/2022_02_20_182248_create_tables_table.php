@@ -14,7 +14,11 @@ class CreateTablesTable extends Migration
     public function up()
     {
         Schema::create('tables', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId('object_id')
+                ->unique()
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->smallInteger('table_no');
             $table->smallInteger('capacity');
             

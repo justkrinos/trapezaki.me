@@ -55,3 +55,8 @@ exoume na dume:
 
 erwtiseis:
 -table gia user1?
+
+CONSTRAINTS-PRIMARY&FOREIGN KEYS:
+$table->foreign('table_id')->references('id')->on('tables');
+or
+$table->foreignId('reservation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

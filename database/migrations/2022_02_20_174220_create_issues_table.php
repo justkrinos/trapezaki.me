@@ -15,10 +15,10 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->id();
-            $table->string('user2_id');
+            $table->foreignId('user2_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('type');
-            $table->string('details')->nullable();
-            $table->string('status');
+            $table->text('details');
+            $table->boolean('status');
             $table->timestamp('issue_date');
 
             $table->timestamps();

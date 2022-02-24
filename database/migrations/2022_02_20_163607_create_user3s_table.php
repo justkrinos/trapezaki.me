@@ -16,7 +16,7 @@ class CreateUser3sTable extends Migration
         //Ta pedia tou table
         //Exume to created_at mesa sto database ara efia to member since
         Schema::create('user3s', function (Blueprint $table) {
-            $table->id('user3id');
+            $table->id()->from(1000);
             $table->string('username')->unique();
             $table->string('password');
             $table->string('full_name');

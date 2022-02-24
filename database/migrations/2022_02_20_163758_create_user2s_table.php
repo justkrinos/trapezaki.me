@@ -14,12 +14,12 @@ class CreateUser2sTable extends Migration
     public function up()
     {
         Schema::create('user2s', function (Blueprint $table) {
-            $table->id('user2id');
-            $table->string('username');
+            $table->id();
+            $table->string('username')->unique();
             $table->string('password');
             $table->string('business_name');
             $table->string('company_name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('phone');
             $table->string('representative');
             $table->string('city');
@@ -27,13 +27,13 @@ class CreateUser2sTable extends Migration
             $table->boolean('status');
             $table->timestamp('member_since')->nullable();
             $table->string('address');
-            $table->tinyInteger('res_range');
-            $table->smallInteger('duration');
+            $table->tinyInteger('res_range')->nullable();
+            $table->smallInteger('duration')->nullable();
             $table->decimal('longitude');
             $table->decimal('latitude');
             $table->decimal('floor_width');
             $table->decimal('floor_length');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('logo');
 
             $table->timestamps();

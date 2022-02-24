@@ -183,6 +183,16 @@
                                     <p class="font-bold">Coffee, Food, Drinks</p>
                                     <a href="/seven-seas" class="stretched-link"></a>
                                 </div>
+                                <div class="flex card-body te">
+                                    <p class="text-muted">
+                                        This is a description where you put a description inside the card that is the
+                                        actual description of the business that offers the data that the company
+                                        provided for description when they signed up so that will be displayed here and
+                                        lets see if it is truncated if its too long
+                                    </p>
+                                    <p class="font-bold">Coffee, Food, Drinks</p>
+                                    <a href="/seven-seas" class="stretched-link"></a>
+                                </div>
                             </div>
                         </div>
 

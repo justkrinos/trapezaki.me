@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+    use App\Models\User2;
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -54,7 +57,7 @@
                                             <label for="basicInput">Name</label>
                                             <small class="text-muted"><i>(First and Last name)</i></small>
                                             <input type="text" class="form-control" id="basicInput"
-                                                value="Giorgos Charalambous">
+                                                value='dummy'>
                                         </div>
 
 
