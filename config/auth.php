@@ -14,8 +14,13 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'user3',
         'passwords' => 'users',
+    ],
+
+    'user1' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User1::class,
     ],
 
     /*
@@ -36,9 +41,19 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'user3' => [
             'driver' => 'session',
             'provider' => 'user3',
+        ],
+
+        'user2' => [
+            'driver' => 'session',
+            'provider' => 'user2',
+        ],
+
+        'user1' => [
+            'driver' => 'session',
+            'provider' => 'user1',
         ],
 
     ],
@@ -66,10 +81,15 @@ return [
             'model' => App\Models\User3::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'user2' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User2::class,
+        ],
+
+        'user1' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User1::class,
+        ],
     ],
 
     /*

@@ -22,7 +22,7 @@
                         <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
-                    <p class="auth-subtitle mb-5">Business</p>
+                    <p class="auth-subtitle mb-2">Business</p>
 
                     <form action="/dashboard">
                         <div class="form-group position-relative has-icon-left mb-4">
@@ -43,10 +43,15 @@
                                 Keep me logged in
                             </label>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
-                        <a href="/signup" class='btn btn-primary btn-block btn-lg shadow-lg mt-5'>
-                                <span>Become an associate</span>
-                        </a>
+                        <button class="btn btn-primary btn-lg shadow-lg mt-5">Log in</button>
+
+                        <div class="col-12 col-md-10 mt-5">
+                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-center">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/signup">Become an associate!</a></li>
+                                </ol>
+                            </nav>
+                        </div>
 
                     </form>
                 </div>

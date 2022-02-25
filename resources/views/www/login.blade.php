@@ -23,9 +23,9 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
+                        <a href="/"><img class="" src="../assets/images/logo/logo_small.png" alt="Trapezaki"></a>
                     </div>
-                    <h1 class="auth-title">Log in.</h1>
+                    <h2 class="auth-title">Log in.</h2>
 
 
                     <form method="POST" action="/login">
@@ -64,7 +64,7 @@
                             </label>
                         </div>
 
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                        <button class="btn btn-primary btn-lg shadow-lg mt-4">Log in</button>
 
 
                         <div class="col-12 col-md-10 m-3">

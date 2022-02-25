@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
+use App\Http\Controllers\User1Controller;
 use App\Http\Controllers\SessionsController;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User2;
+use App\Models\User1;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +22,16 @@ use App\Models\User2;
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/', function () {
+        if(Auth::check('user3'))
+            return redirect('/make-a-reservation');
         return view('www.index');
     });
 
 
     //Use the sessions controller class to handle the login
-    Route::get('/login', [SessionsController::class,'create'])->middleware('guest');
+    Route::get('/login', [SessionsController::class,'create']);
 
-    Route::post('/login', [SessionsController::class,'login'])->middleware('guest');
+    Route::post('/login', [SessionsController::class,'login']);
 
     Route::get('/guest', function () {
         return view('www.guest');
@@ -48,6 +53,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::get('/logout',[SessionsController::class,'destroy']);
 
     Route::get('/profile', function () {
+        if(!Auth::check('user3'))
+            return redirect('/');
         return view('www.profile');
     });
 
@@ -57,6 +64,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
 
     Route::get('/my-reservations', function () {
+        if(!Auth::check('user3'))
+            return redirect('/');
         return view('www.reservations');
     });
 
@@ -108,31 +117,44 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
 Route::domain('admin.' . env('APP_URL'))->group(function () {
 
-    Route::get('/', function () {
-        return view('admin.login');
-    });
+    Route::get('/', [User1Controller::class, 'create']);
+
+    Route::post('/', [User1Controller::class, 'login']);
 
     Route::get('/issues', function () {
+        if(!Auth::check('user1'))
+            return redirect('/');
         return view('admin.issues');
     });
 
 
     Route::get('/pending-requests', function () {
+        if(!Auth::check('user1'))
+            return redirect('/');
         return view('admin.pending-requests');
     });
 
     Route::get('/seven-seas', function () {
+        if(!Auth::check('user1'))
+            return redirect('/');
         return view('admin.manage-customer');
     });
 
     Route::get('/manage-customers', function () {
+        if(!Auth::check('user1'))
+            return redirect('/');
         return view('admin.manage-customers');
     });
 
     Route::get('/edit-floorplan', function () {
+        if(!Auth::check('user1'))
+            return redirect('/');
         return view('admin.floorplan-editor');
     });
 
 
 
 });
+
+
+//return abort(404);

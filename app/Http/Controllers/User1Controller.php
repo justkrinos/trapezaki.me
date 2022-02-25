@@ -1,24 +1,17 @@
 <?php
 
+
+
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-//Na metonomasti o controller se user3 controller or LoginUser3?
-//Not sure pos ton metonomazw omws bori na ta santanosume
 
-class SessionsController extends Controller
+class User1Controller extends Controller
 {
-    public function destroy(){
-        auth('user3')->logout();
-
-        //Go back to login page and send a message of goodbye
-        //ddd("ok");
-        return redirect('/login')->with("logout","Goodbye!");
-    }
-
     public function create(){
-            return view('www.login');
+        return view('admin.login');
     }
 
     public function login(){
@@ -30,7 +23,7 @@ class SessionsController extends Controller
         ]);
 
         //Check if credentials ar ok
-        if (! Auth::guard('user3')->attempt($attributes)){
+        if (! Auth::guard('user1')->attempt($attributes)){
             return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);
         }
 
@@ -38,11 +31,8 @@ class SessionsController extends Controller
 
             //To prevent session fixation (stealing session IDs)
         session()->regenerate();
-        return redirect('/make-a-reservation')->withInput()->with('success','Welcome back!');
+        return redirect('/manage-customers')->withInput()->with('success','Welcome back!');
 
 
     }
-
-
-
 }

@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User3;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 //A class to make the registration of user3
 class RegisterUser3 extends Controller
 {
     public function view(){
+        if(Auth::check('user3'))
+            return redirect('/make-a-reservation');
+
         return view('www.signup');
     }
 

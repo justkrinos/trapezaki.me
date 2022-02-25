@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class User3 extends Authenticatable
 {
     use HasFactory;
+    protected $guard = 'user3';
 
     //Gia na men exume thema me ta fillable j mass assignments
     protected $guarded = [];
