@@ -87,14 +87,9 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         return view('business.add-resv');
     });
 
+    Route::get('/signup', [RegisterUser2::class, 'create']);
 
-    Route::get('/signup', function () {
-        return view('business.signup');
-    });
-
-    Route::get('/', [RegisterUser2::class, 'create']);
-
-    Route::post('/', [RegisterUser2::class, 'create']);
+    Route::post('/signup', [RegisterUser2::class, 'store']);
 
     Route::get('/edit-reservation', function () {
         return view('business.edit-resv');
