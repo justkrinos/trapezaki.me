@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use App\Models\User1;
+
 
 class User1Controller extends Controller
 {
@@ -14,16 +16,18 @@ class User1Controller extends Controller
         return view('admin.login');
     }
 
-    public function login(){
+    public function login(Request $request){
 
         //Validate the data
-        $attributes = request()->validate([
+        $request->validate([
             'username' => 'required',
             'password' => 'required'
         ]);
 
+        $creds = $request->only('username','password');
+
         //Check if credentials ar ok
-        if (! Auth::guard('user1')->attempt($attributes)){
+        if (! Auth::guard('user1')->attempt($creds)){
             return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);
         }
 
@@ -34,5 +38,12 @@ class User1Controller extends Controller
         return redirect('/manage-customers')->withInput()->with('success','Welcome back!');
 
 
+    }
+
+    public function logout(){
+        auth('user1')->logout();
+
+        //Go back to login page and send a message of goodbye
+        return redirect('/login')->with("logout","Goodbye!");
     }
 }

@@ -29,13 +29,15 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-center">
                         <div class="logo">
-                            <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
-                                    srcset=""></a>
+                            <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <a href="/logout">Logout</a>
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
@@ -80,21 +82,19 @@
                 <div class="col-md-4 mb-1">
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                        <input type="text" id="SearchCust" class="form-control"
-                            placeholder="Find Businesses" aria-label="Find Businesses" aria-describedby="button-addon2">
+                        <input type="text" id="SearchCust" class="form-control" placeholder="Find Businesses"
+                            aria-label="Find Businesses" aria-describedby="button-addon2">
                     </div>
 
                     <div class='form-check'>
                         <div class="container">
                             <div class="row">
                                 <div class="col-sm checkbox">
-                                    <input type="checkbox" id="checkActive" class='form-check-input'
-                                    unchecked>
+                                    <input type="checkbox" id="checkActive" class='form-check-input' unchecked>
                                     <label for="checkActive">Active</label>
                                 </div>
                                 <div class="col-sm checkbox">
-                                    <input type="checkbox" id="checkDisabled" class='form-check-input'
-                                        unchecked>
+                                    <input type="checkbox" id="checkDisabled" class='form-check-input' unchecked>
                                     <label for="checkDisabled">Disabled</label>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Administrator</p>
 
-                    <form method="POST" action="/">
+                    <form method="POST" action="/login">
                         @csrf
 
                         @error('message')
@@ -75,5 +75,7 @@
 
     </div>
 </body>
-
+@include('components.toasts');
 </html>
+
+

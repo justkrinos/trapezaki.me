@@ -22,16 +22,16 @@ use App\Models\User1;
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/', function () {
-        if(Auth::check('user3'))
+        if (Auth::check('user3'))
             return redirect('/make-a-reservation');
         return view('www.index');
     });
 
 
     //Use the sessions controller class to handle the login
-    Route::get('/login', [SessionsController::class,'create']);
+    Route::get('/login', [SessionsController::class, 'create']);
 
-    Route::post('/login', [SessionsController::class,'login']);
+    Route::post('/login', [SessionsController::class, 'login']);
 
     Route::get('/guest', function () {
         return view('www.guest');
@@ -39,9 +39,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
     //when you get, return the view
     Route::get('/signup', [RegisterUser3::class, 'view'])->middleware('guest');
-                                                        //you can access this page
-                                                        //only if you are not signed in
-                                                        //Http/Kernel.php has a link to a handler for guest
+    //you can access this page
+    //only if you are not signed in
+    //Http/Kernel.php has a link to a handler for guest
 
 
     //Handler when signup button is pressed
@@ -50,10 +50,10 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::post('/signup', [RegisterUser3::class, 'create']);
 
     //New controller pu elegxei ta sessions gia log in log out
-    Route::get('/logout',[SessionsController::class,'destroy']);
+    Route::get('/logout', [SessionsController::class, 'destroy']);
 
     Route::get('/profile', function () {
-        if(!Auth::check('user3'))
+        if (!Auth::check('user3'))
             return redirect('/');
         return view('www.profile');
     });
@@ -64,7 +64,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
 
     Route::get('/my-reservations', function () {
-        if(!Auth::check('user3'))
+        if (!Auth::check('user3'))
             return redirect('/');
         return view('www.reservations');
     });
@@ -72,8 +72,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::get('/seven-seas', function () {
         return view('www.selected-profile');
     });
-
-
 });
 
 
@@ -112,48 +110,37 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
     Route::get('/report-problem', function () {
         return view('business.report-problem');
     });
-
 });
 
 Route::domain('admin.' . env('APP_URL'))->group(function () {
 
-    Route::get('/', [User1Controller::class, 'create']);
-
-    Route::post('/', [User1Controller::class, 'login']);
-
-    Route::get('/issues', function () {
-        if(!Auth::check('user1'))
-            return redirect('/');
-        return view('admin.issues');
+    Route::middleware(['guest:user1'])->group(function () {
+        Route::get('/login', [User1Controller::class, 'create']);
+        Route::post('/login', [User1Controller::class, 'login']);
     });
 
+    Route::middleware(['auth:user1'])->group(function () {
+        Route::get('/manage-customers', function () {
+            return view('admin.manage-customers');
+        });
+        Route::get('/issues', function () {
+            return view('admin.issues');
+        });
 
-    Route::get('/pending-requests', function () {
-        if(!Auth::check('user1'))
-            return redirect('/');
-        return view('admin.pending-requests');
+        Route::get('/pending-requests', function () {
+            return view('admin.pending-requests');
+        });
+
+        Route::get('/seven-seas', function () {
+            return view('admin.manage-customer');
+        });
+
+        Route::get('/edit-floorplan', function () {
+            return view('admin.floorplan-editor');
+        });
+
+        Route::get('/logout',[User1Controller::class, 'logout']);
     });
-
-    Route::get('/seven-seas', function () {
-        if(!Auth::check('user1'))
-            return redirect('/');
-        return view('admin.manage-customer');
-    });
-
-    Route::get('/manage-customers', function () {
-        if(!Auth::check('user1'))
-            return redirect('/');
-        return view('admin.manage-customers');
-    });
-
-    Route::get('/edit-floorplan', function () {
-        if(!Auth::check('user1'))
-            return redirect('/');
-        return view('admin.floorplan-editor');
-    });
-
-
-
 });
 
 
