@@ -45,7 +45,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::post('/signup', [RegisterUser3::class, 'create']);
 
     //New controller pu elegxei ta sessions gia log in log out
-    Route::get('/logout',[SessionsController::class],'destroy')->middleware('auth');
+    Route::get('/logout',[SessionsController::class,'destroy']);
 
     Route::get('/profile', function () {
         return view('www.profile');

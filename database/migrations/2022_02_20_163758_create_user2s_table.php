@@ -35,6 +35,7 @@ class CreateUser2sTable extends Migration
             $table->decimal('floor_length');
             $table->text('description')->nullable();
             $table->string('logo');
+            $table->rememberToken();
 
             $table->timestamps();
         });

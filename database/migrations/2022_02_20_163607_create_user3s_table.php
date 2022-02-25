@@ -25,7 +25,7 @@ class CreateUser3sTable extends Migration
             $table->string('city')->nullable();
             $table->boolean('guest')->default(False);
             $table->boolean('status')->default(False);
-
+            $table->rememberToken();
             $table->timestamps();
         });
     }

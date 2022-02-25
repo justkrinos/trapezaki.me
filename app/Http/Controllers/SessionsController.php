@@ -13,7 +13,8 @@ class SessionsController extends Controller
         auth()->logout();
 
         //Go back to login page and send a message of goodbye
-        return redirect("/")->with("logout","Goodbye!");
+        //ddd("ok");
+        return view('www.login')->with("logout","Goodbye!");
     }
 
     public function create(){
@@ -37,7 +38,7 @@ class SessionsController extends Controller
 
             //To prevent session fixation (stealing session IDs)
         session()->regenerate();
-        return redirect('/')->withInput()->with('success','Welcome back!');
+        return redirect('/make-a-reservation')->withInput()->with('success','Welcome back!');
 
 
     }
