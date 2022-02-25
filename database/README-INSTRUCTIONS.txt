@@ -2,6 +2,10 @@ STEP 1)
 ftiaxnoume migration:
 php artisan make:migration create_user3_table
 
+UPDATE 
+php artisan make:model User3 -m
+ftiaxnei kai model kai to migration tou
+
 STEP 2)
 mpainoume trapezaki.me.database.migrations, sto teleuteo migration pou en touto pu ekamame tr
 jame sazume ta fields peripou etsi:
