@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
+use App\Http\Controllers\RegisterUser2;
 use App\Http\Controllers\User1Controller;
 use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,10 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
     Route::get('/signup', function () {
         return view('business.signup');
     });
+
+    Route::get('/', [RegisterUser2::class, 'create']);
+
+    Route::post('/', [RegisterUser2::class, 'create']);
 
     Route::get('/edit-reservation', function () {
         return view('business.edit-resv');
