@@ -15,12 +15,14 @@ class RegisterUser2 extends Controller
         return view('business.signup');
     }
 
-    public function store()
+
+
+    public function create()
     {
 
         $attributes = request()->validate([
             'username' => 'required|max:50|min:3|unique:user2s',
-            'email' => 'required|email|max:100|unique:user2s',
+            'email' => 'required|max:100|unique:user2s|email',
             'password' => 'required|max:50|min:7',
             //'password_ver' => 'required|max:50|min:7', TODO
             'business_name' => 'required|max:100|min:1',
@@ -38,13 +40,16 @@ class RegisterUser2 extends Controller
         ]);
         //dd("Success validation succeed");
 
-        User2::create($attributes);
+        $user2 = User2::create($attributes);
 
-        return redirect('/')->with('success',"Your account has been created successfully! Check your email for verification.");
-    }
+        //auth()->login($user2);
 
-    public function create()
-    {
-        return view('business.signup');
+        //TODO email verification
+
+        return redirect('/')->with('success',"Your account has been created successfully!
+             Check your email for verification.");
+
+             //The message is not show, idk why
     }
+    
 }

@@ -211,16 +211,23 @@
                                                 <div class="card-body">
                                                     <div class="mb-3">
                                                         <label for="formFileMultiple" class="form-label">Add Photos</label>
-                                                        <input class="form-control" type="file" id="photo" name="photo" value="{{ old('photo') }}"
+                                                        <input class="form-control" type="file" id="photo" name="photo"
                                                             multiple>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div class="mb-3">
+                                                    <div class="form-group mb-3">
                                                         <label for="formFile" class="form-label">Add Logo</label>
-                                                        <input class="form-control" type="file" id="logo" name="logo" value="{{ old('logo') }}">
+                                                        <input class="form-control" type="file" id="logo" name="logo" required>
+                                                        {{-- This will be pulled everytime there's an error --}}
+                                                        @error('logo')
+                                                            <div class="invalid-feedback">
+                                                                <i class="bx bx-radio-circle"></i>
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
