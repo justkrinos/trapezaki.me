@@ -35,8 +35,7 @@ class RegisterUser2 extends Controller
         ]);
         User2::create($attributes);
 
-        return redirect('/')->with('success',"Your account has been created successfully! Check your email for verification.");;
-    
+        return redirect('/')->with('success',"Your account has been created successfully! Check your email for verification.");
     }
 
     public function create()
