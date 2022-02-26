@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\RegisterUser2;
 use App\Http\Controllers\User1Controller;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\SessionsController2;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User2;
 use App\Models\User1;
@@ -92,6 +93,14 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
     Route::get('/signup', [RegisterUser2::class, 'view'])->middleware('guest');
 
     Route::post('/signup', [RegisterUser2::class, 'create']);
+
+    //Creating SessionsController2 to keep things simple
+    //Route::post('/logout', [SessionsController2::class, 'destroy']);
+    Route::get('/logout', [SessionsController2::class, 'destroy']);
+
+    Route::get('/login', [SessionsController2::class, 'create']);
+
+    Route::post('/login', [SessionsController2::class, 'login']);
 
     Route::get('/edit-reservation', function () {
         return view('business.edit-resv');
