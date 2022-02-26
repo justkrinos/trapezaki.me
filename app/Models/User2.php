@@ -12,6 +12,7 @@ class User2 extends Model
     protected $guard = 'user2';
 
     //Can mass assignment-fillables
+    protected $guarded = [];
 
     protected $hidden = [
         'password',

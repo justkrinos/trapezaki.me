@@ -23,18 +23,19 @@ class CreateUser2sTable extends Migration
             $table->string('phone');
             $table->string('representative');
             $table->string('city');
-            $table->string('type');
-            $table->boolean('status');
+            $table->string('type')->default('Cafe');
+            $table->boolean('status')->default(false);
             $table->timestamp('member_since')->nullable();
-            $table->string('address');
+            $table->string('address')->default('default address');
             $table->tinyInteger('res_range')->nullable();
             $table->smallInteger('duration')->nullable();
-            $table->decimal('longitude');
-            $table->decimal('latitude');
-            $table->decimal('floor_width');
-            $table->decimal('floor_length');
+            $table->decimal('longitude')->default('500.0');
+            $table->decimal('latitude')->default('500.0');
+            $table->decimal('floor_width')->default('500.0');
+            $table->decimal('floor_length')->default('500.0');
             $table->text('description')->nullable();
             $table->string('logo');
+            $table->string('photo')->nullable();
             $table->rememberToken();
 
             $table->timestamps();

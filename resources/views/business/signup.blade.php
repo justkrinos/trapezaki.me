@@ -154,13 +154,13 @@
                                             @enderror
 
                                             <input type="text" class="form-control
-                                            @error('representative_name') is-invalid @enderror" placeholder="Representative Name"
-                                            id="representative_name" name="representative_name" value="{{ old('representative_name') }}" required
+                                            @error('representative') is-invalid @enderror" placeholder="Representative Name"
+                                            id="representative" name="representative" value="{{ old('representative') }}" required
                                             <p><small class="text-muted">*Enter representative name</small> 
                                             </p>
 
                                             {{-- This will be pulled everytime there's an error --}}
-                                            @error('representative_name')
+                                            @error('representative')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
