@@ -19,12 +19,29 @@ class RegisterUser2 extends Controller
 
     public function create()
     {
+        request()->validate([
+            'username' => 'required|max:50|min:3|unique:user2s',
+            'email' => 'required|max:100|unique:user2s|email',
+            'password' => 'required|max:50|min:7|confirmed',
+            'password_confirmation' => 'required|max:50|min:7',
+            'business_name' => 'required|max:100|min:1',
+            'company_name' => 'required|max:100|min:1',
+            'representative' =>'required|max:50|min:2',
+            'city' => 'required|max:70|min:1',
+            'phone' => 'required|min:8',
+            'description' =>'nullable',
+            'photo' => 'nullable' ,
+            'logo' => 'required',
+            'location' => 'nullable',
+            'type' => 'nullable', //TODO
+            'tags' => 'nullable' //TODO
+            //genika, menoun ta validations twn pic, checkboxes je tags
+        ]);
 
         $attributes = request()->validate([
             'username' => 'required|max:50|min:3|unique:user2s',
             'email' => 'required|max:100|unique:user2s|email',
             'password' => 'required|max:50|min:7',
-            //'password_ver' => 'required|max:50|min:7', TODO
             'business_name' => 'required|max:100|min:1',
             'company_name' => 'required|max:100|min:1',
             'representative' =>'required|max:50|min:2',

@@ -138,13 +138,13 @@
 
 
                                     <div class="form-group">
-                                        <label for="password_ver">Re-enter Password</label>
+                                        <label for="password_confirmation">Re-enter Password</label>
                                         <input type="password" class="form-control form-control-l
-                                            @error('password_ver') is-invalid @enderror"
-                                            placeholder="Password" name="password_ver" id="password_ver" required>
+                                            @error('password_confirmation') is-invalid @enderror"
+                                            placeholder="Password" name="password_confirmation" id="password_confirmation" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
-                                        @error('password_ver')
+                                        @error('password_confirmation')
                                         <div class="invalid-feedback">
                                             <i class="bx bx-radio-circle"></i>
                                             {{ $message }}
