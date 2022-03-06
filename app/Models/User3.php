@@ -9,8 +9,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User3 extends Authenticatable
-{
+class User3 extends Authenticatable implements MustVerifyEmail
+{                                       //clearly for email verification
     use HasFactory;
     protected $guard = 'user3';
 

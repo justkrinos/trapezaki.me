@@ -29,6 +29,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.index');
     });
 
+    Auth::routes(['verify => true'] );
 
     //Use the sessions controller class to handle the login
     Route::get('/login', [SessionsController::class, 'create']);
