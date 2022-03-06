@@ -5,10 +5,6 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-0 mb-lg-0">
 
-                    {{--If we are at the reservation page, the "make a reservation" button should not exist--}}
-                    @unless( request()->route()->uri === "make-a-reservation")
-
-                    @endif
                 </ul>
                 <div class="dropdown">
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
