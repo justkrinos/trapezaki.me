@@ -21,11 +21,14 @@ class SessionsController2 extends Controller
 
     public function login()
     {
+        echo "hi";
         //validate the request
         $attributes = request()->validate([
             'username' => 'required',
             'password' => 'required'
         ]);
+
+        
 
         if (! Auth::guard('user2')->attempt($attributes)) //attempt to log the user in with the given data/credentials
         {
