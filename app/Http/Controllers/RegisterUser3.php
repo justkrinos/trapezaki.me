@@ -50,7 +50,7 @@ class RegisterUser3 extends Controller
 
 
         //Redirect to the login page
-        return redirect('/login')->with('success',"Your account has been created successfully! Check your email for verification.");;
+        return redirect('/login')->with('success',"Your account has been created successfully! Check your email for verification.");
                 //To with stelnei minima success sto login page
                 //It is checked on the login page using the www/components/toast.blade.php
                 //en gia na fkalei ena popup "success"

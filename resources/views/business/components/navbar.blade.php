@@ -9,6 +9,11 @@
                 <div class="dropdown">
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-menu d-flex">
+                            @guest
+                            <div class="user-name text-end me-3">
+                                <h6 class="mb-0 text-blue">Hello guest</h6>
+                            </div>
+                            @endguest
                             @auth
                             <div class="user-name text-end me-3">
                                 <h6 class="mb-0 text-blue">{{auth()->user()->username}}</h6>

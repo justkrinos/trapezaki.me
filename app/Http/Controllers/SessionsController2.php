@@ -21,7 +21,6 @@ class SessionsController2 extends Controller
 
     public function login()
     {
-        echo "hi";
         //validate the request
         $attributes = request()->validate([
             'username' => 'required',

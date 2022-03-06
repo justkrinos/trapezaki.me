@@ -77,6 +77,7 @@
             {{--Include the navbar from /business/components--}}
             @include('business.components.navbar')
 
+            <?php echo(auth()->user()->username);?>
             <div class="page-heading">
                 <h3>Profile Statistics</h3>
             </div>

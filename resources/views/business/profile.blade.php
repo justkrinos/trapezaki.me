@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+    use App\Models\User2;
+?>
 
 <head>
     <meta charset="UTF-8">
