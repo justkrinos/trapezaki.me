@@ -77,7 +77,7 @@
             {{--Include the navbar from /business/components--}}
             @include('business.components.navbar')
 
-            <?php echo(auth()->user()->username);?>
+            
             <div class="page-heading">
                 <h3>Profile Statistics</h3>
             </div>
@@ -147,11 +147,7 @@
 
     <script src="../assets/js/main.js"></script>
 
-    {{--Toast dependencies--}}
-    <script src="assets/vendors/toastify/toastify.js"></script>
-    <script src="assets/js/extensions/toastify.js"></script>
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-    @include("components.toasts")
+    
 
 </body>
 

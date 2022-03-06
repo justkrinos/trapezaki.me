@@ -9,6 +9,7 @@
                 <div class="dropdown">
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-menu d-flex">
+                            <?php//testing guest and auth ?>
                             @guest
                             <div class="user-name text-end me-3">
                                 <h6 class="mb-0 text-blue">Hello guest</h6>
@@ -38,3 +39,8 @@
         </div>
     </nav>
 </header>
+    {{--Toast dependencies--}}
+    <script src="assets/vendors/toastify/toastify.js"></script>
+    <script src="assets/js/extensions/toastify.js"></script>
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    @include("components.toasts")
