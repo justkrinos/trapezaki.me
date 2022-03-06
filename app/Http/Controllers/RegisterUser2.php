@@ -65,7 +65,7 @@ class RegisterUser2 extends Controller
 
         //TODO email verification
 
-        return redirect('/profile')->with('success',"Your account has been created successfully!
+        return redirect('business.profile')->with('success',"Your account has been created successfully!
              Check your email for verification.");
 
              //The message is shown ugly, idk why
