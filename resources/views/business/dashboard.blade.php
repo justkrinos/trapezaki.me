@@ -145,6 +145,8 @@
     <script src="../assets/js/pages/dashboard.js"></script>
 
     <script src="../assets/js/main.js"></script>
+    @include("www.components.toasts")
+
 </body>
 
 </html>

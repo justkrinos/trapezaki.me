@@ -19,7 +19,7 @@ class User3 extends Authenticatable
 
     protected $hidden = [
         'password',
-        'password_ver'
+        'password_confirmation'
     ];
 
     //Opote ena kamw set password, prin na mpei mesto database enna kamei run to function

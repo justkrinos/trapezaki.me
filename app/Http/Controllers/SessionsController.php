@@ -18,7 +18,7 @@ class SessionsController extends Controller
     }
 
     public function create(){
-            return view('www.login');
+        return view('www.login');
     }
 
     public function login(){

@@ -98,9 +98,9 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
     //Route::post('/logout', [SessionsController2::class, 'destroy']);
     Route::get('/logout', [SessionsController2::class, 'destroy']);
 
-    Route::get('/login', [SessionsController2::class, 'create']);
+    Route::get('/', [SessionsController2::class, 'create']);
 
-    Route::post('/login', [SessionsController2::class, 'login']);
+    Route::post('/', [SessionsController2::class, 'login']);
 
     Route::get('/edit-reservation', function () {
         return view('business.edit-resv');

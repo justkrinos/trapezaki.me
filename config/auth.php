@@ -23,6 +23,11 @@ return [
         'model' => App\Models\User1::class,
     ],
 
+    'user2' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\User2::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -76,6 +81,7 @@ return [
     */
 
     'providers' => [
+
         'user3' => [
             'driver' => 'eloquent',
             'model' => App\Models\User3::class,

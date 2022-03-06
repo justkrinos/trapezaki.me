@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trapezaki - Business Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    {{--Toast dependency--}}
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
@@ -24,7 +28,17 @@
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-2">Business</p>
 
-                    <form action="/dashboard">
+                    <form method="POST" action="/">
+                    @csrf
+
+                    @error('message')   
+                    <input class="is-invalid text-center" hidden>
+                        <div class="invalid-feedback">
+                            <i class="bx bx-radio-circle"></i>
+                            {{ $message }}
+                        </div>
+                    @enderror
+
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Username">
                             <div class="form-control-icon">
