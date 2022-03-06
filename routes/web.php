@@ -76,7 +76,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     });
 });
 
-
+//Busiess domain right here
 Route::domain('business.' . env('APP_URL'))->group(function () {
 
     Route::get('/', function () {
@@ -92,7 +92,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
     Route::get('/signup', [RegisterUser2::class, 'view'])->middleware('guest');
 
-    Route::post('/signup', [RegisterUser2::class, 'create']);
+    Route::post('/signup', [RegisterUser2::class, 'create'])->middleware('guest');
 
     //Creating SessionsController2 to keep things simple
     //Route::post('/logout', [SessionsController2::class, 'destroy']);

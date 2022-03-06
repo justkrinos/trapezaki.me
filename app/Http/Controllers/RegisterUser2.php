@@ -19,16 +19,17 @@ class RegisterUser2 extends Controller
 
     public function create()
     {
+        //First only validate
         request()->validate([
             'username' => 'required|max:50|min:3|unique:user2s',
-            'email' => 'required|max:100|unique:user2s|email',
+            'email' => 'required|max:50|unique:user2s|email',
             'password' => 'required|max:50|min:7|confirmed',
-            'password_confirmation' => 'required|max:50|min:7',
-            'business_name' => 'required|max:100|min:1',
-            'company_name' => 'required|max:100|min:1',
+            'password_confirmation' => 'required|max:50|min:7', //only check, don't save
+            'business_name' => 'required|max:50|min:1',
+            'company_name' => 'required|max:50|min:1',
             'representative' =>'required|max:50|min:2',
-            'city' => 'required|max:70|min:1',
-            'phone' => 'required|min:8',
+            'city' => 'required|max:30|min:1',
+            'phone' => 'required|max:13|min:8',
             'description' =>'nullable',
             'photo' => 'nullable' ,
             'logo' => 'required',
@@ -37,16 +38,16 @@ class RegisterUser2 extends Controller
             'tags' => 'nullable' //TODO
             //genika, menoun ta validations twn pic, checkboxes je tags
         ]);
-
+        //Then save the attributes of the record, because we don't want to include password confirmation
         $attributes = request()->validate([
             'username' => 'required|max:50|min:3|unique:user2s',
-            'email' => 'required|max:100|unique:user2s|email',
+            'email' => 'required|max:50|unique:user2s|email',
             'password' => 'required|max:50|min:7',
-            'business_name' => 'required|max:100|min:1',
-            'company_name' => 'required|max:100|min:1',
+            'business_name' => 'required|max:50|min:1',
+            'company_name' => 'required|max:50|min:1',
             'representative' =>'required|max:50|min:2',
-            'city' => 'required|max:70|min:1',
-            'phone' => 'required|min:8',
+            'city' => 'required|max:30|min:1',
+            'phone' => 'required|max:13|min:8',
             'description' =>'nullable',
             'photo' => 'nullable' ,
             'logo' => 'required',
@@ -60,13 +61,14 @@ class RegisterUser2 extends Controller
         $user2 = User2::create($attributes);
 
         //auth()->login($user2);
+        //ssession()->flash('success', 'Your account has been created');
 
         //TODO email verification
 
-        return redirect('/')->with('success',"Your account has been created successfully!
+        return redirect('/profile')->with('success',"Your account has been created successfully!
              Check your email for verification.");
 
-             //The message is not show, idk why
+             //The message is shown ugly, idk why
     }
     
 }

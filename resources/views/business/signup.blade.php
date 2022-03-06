@@ -114,7 +114,7 @@
                                             {{-- This will be pulled everytime there's an error --}}
                                             @error('password_confirmation')
                                             <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
+                                                <i class="bx bx-radio-circle"></i>  
                                                 {{ $message }}
                                             </div>
                                             @enderror
@@ -219,7 +219,7 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="form-group mb-3">
-                                                        <label for="formFile" class="form-label">Add Logo</label>
+                                                        <label for="logo" class="form-label">Add Logo</label>
                                                         <input class="form-control" type="file" id="logo" name="logo" required>
                                                         {{-- This will be pulled everytime there's an error --}}
                                                         @error('logo')
@@ -248,18 +248,18 @@
                                                     <div class="card-body">
                                                         <div class="form-check" id="type" name="type">
                                                             <div class="checkbox">
-                                                                <input type="checkbox" id="coffee" name="coffee" class="form-check-input"
-                                                                    checked>
+                                                                <input type="checkbox" id="coffee" name="type" class="form-check-input"
+                                                                    unchecked>
                                                                 <label for="checkbox1">Coffee</label>
                                                             </div>
                                                             <div class="checkbox">
-                                                                <input type="checkbox" id="food" name="food" class="form-check-input"
+                                                                <input type="checkbox" id="food" name="type" class="form-check-input"
                                                                     unchecked>
                                                                 <label for="checkbox1">Food</label>
                                                             </div>
                                                             <div class="checkbox">
-                                                                <input type="checkbox" id="drinks" name="drinks" class="form-check-input"
-                                                                    checked>
+                                                                <input type="checkbox" id="drinks" name="type" class="form-check-input"
+                                                                    unchecked>
                                                                 <label for="checkbox1">Drinks</label>
                                                             </div>
                                                         </div>

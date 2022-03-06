@@ -16,7 +16,7 @@ class User2 extends Model
 
     protected $hidden = [
         'password',
-        'password_ver'
+        'password_confirmation'
     ];
 
     //bcrypt = password encryption function
