@@ -1,3 +1,4 @@
+@auth('user3')
 <div id="sidebar" class="">
     <div class="sidebar-wrapper active">
         <div class="sidebar-header">
@@ -51,3 +52,4 @@
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
     </div>
 </div>
+@endauth
