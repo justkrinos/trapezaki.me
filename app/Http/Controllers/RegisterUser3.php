@@ -28,7 +28,7 @@ class RegisterUser3 extends Controller
             'email' => 'required|email|max:100|unique:user3s,email',
             'phone' => 'required|max:13|min:8',
             'password' => 'required|max:50|min:7|confirmed',
-            'password_confirmation' => 'required|max:50|min:7'
+            'password_confirmation' => 'required'
         ]);
 
         $attributes = request()->validate([
