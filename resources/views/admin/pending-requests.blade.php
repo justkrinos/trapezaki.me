@@ -22,47 +22,7 @@
 
 <body>
     <div id="app">
-        <div id="sidebar" class="active">
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <div class="d-flex justify-content-center">
-                        <div class="logo">
-                            <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
-                                    srcset=""></a>
-                        </div>
-                        <div class="toggler">
-                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item">
-                            <a href="/manage-customers" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Manage Customers</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item active">
-                            <a href="/pending-requests" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Pending Requests</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item ">
-                            <a href="/issues" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Issues</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
-            </div>
-        </div>
+        @include("admin.components.sidebar")
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
