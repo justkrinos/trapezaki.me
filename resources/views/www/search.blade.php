@@ -218,7 +218,7 @@
 <script src="../assets/js/date-no-prev.js"></script>
 
 
-@include("www.components.toasts")
+@include("components.toasts")
 
 </html>
 
