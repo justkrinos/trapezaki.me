@@ -23,111 +23,141 @@ use App\Models\User1;
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
-    Route::get('/', function () {
-        if (Auth::check('user3'))
-            return redirect('/make-a-reservation');
-        return view('www.index');
-    });
-
-    Auth::routes(['verify => true'] );
-
-    //Use the sessions controller class to handle the login
-    Route::get('/login', [SessionsController::class, 'create']);
-
-    Route::post('/login', [SessionsController::class, 'login']);
-
-    Route::get('/guest', function () {
-        return view('www.guest');
-    });
-
-    //when you get, return the view
-    Route::get('/signup', [RegisterUser3::class, 'view'])->middleware('guest');
-    //you can access this page
-    //only if you are not signed in
-    //Http/Kernel.php has a link to a handler for guest
-
-
-    //Handler when signup button is pressed
-    //it uses the RegisterUser3 class and its function "create"
-    //the class is in app/http/controllers
-    Route::post('/signup', [RegisterUser3::class, 'create']);
-
-    //New controller pu elegxei ta sessions gia log in log out
-    Route::get('/logout', [SessionsController::class, 'destroy']);
-
-    Route::get('/profile', function () {
-        if (!Auth::check('user3'))
-            return redirect('/');
-        return view('www.profile');
-    });
-
     Route::get('/make-a-reservation', function () {
         return view('www.search');
     });
 
-
-    Route::get('/my-reservations', function () {
-        if (!Auth::check('user3'))
-            return redirect('/');
-        return view('www.reservations');
+    Route::get('/seven-seas', function () {
+        //TODO:
+        //tuta prp nan /user/seven-seas gt meta isos exume thema me ta login j tuta
+        //epd bori na eshi logariasmo me onom "login"
+        //extos an kamume blacklist
+        //j gia to pukatw route to idio
+        return view('www.selected-profile');
     });
 
-    Route::get('/seven-seas', function () {
-        return view('www.selected-profile');
+    Route::get('/seven-seas/book', function () {
+        if(Auth::check('user3')) //TODO na checkari j an ise guest logged in
+            return view('www.book');
+        else
+            return redirect('/seven-seas#login');
+        //An en logged in -> continue kanonika
+        //An den en logged in -> redirect piso /seven-seas me login popup
+    });
+
+
+
+    // ^ Tuta ta 3 panw en eksw pu to middleware
+    //   epd boris na to dis ite ise logged in ite oi
+
+
+    Route::middleware(['guest:user3'])->group(function () {
+        Route::get('/', function () {
+            return view('www.index');
+        });
+
+        Route::get('/login', [SessionsController::class, 'create']);
+
+        Route::post('/login', [SessionsController::class, 'login']);
+
+        Route::post('/login_popup', [SessionsController::class, 'login_popup']);
+
+        //Use the sessions controller class to handle the login
+        Route::get('/guest', function () {
+            return view('www.guest');
+        });
+
+        //when you get, return the view
+        Route::get('/signup', [RegisterUser3::class, 'view']);
+        //you can access this page
+        //only if you are not signed in
+        //Http/Kernel.php has a link to a handler for guest
+
+
+        //Handler when signup button is pressed
+        //it uses the RegisterUser3 class and its function "create"
+        //the class is in app/http/controllers
+        Route::post('/signup', [RegisterUser3::class, 'create']);
+    });
+
+
+
+    Route::middleware(['auth:user3'])->group(function () {
+        //New controller pu elegxei ta sessions gia log in log out
+        Route::get('/logout', [SessionsController::class, 'destroy']);
+
+        Route::get('/profile', function () {
+            if (!Auth::check('user3'))
+                return redirect('/');
+            return view('www.profile');
+        });
+
+        Route::get('/my-reservations', function () {
+            return view('www.reservations');
+        });
+
     });
 });
 
 //Busiess domain right here
 Route::domain('business.' . env('APP_URL'))->group(function () {
 
-    Route::get('/', function () {
-        return view('business.login');
+
+    Route::middleware(['guest:user1'])->group(function () {
+        Route::get('/login', [SessionsController2::class, 'create']);
+        Route::post('/login', [SessionsController2::class, 'login']);
+
+        //TODO: Na sasun ta "/" gia oullous tous users
+        //      An en logged in na kami redirect sto main page
+        //      an den en logged in na kami redirect sto login page
+        //      gia ton logged in user dulefki gia kapio logo
+        //      kapws to ixa kami alla en thimume pws
+        Route::get('/', [SessionsController2::class, 'create']);
+        Route::post('/', [SessionsController2::class, 'login']);
+
+        Route::get('/signup', [RegisterUser2::class, 'view']);
+        Route::post('/signup', [RegisterUser2::class, 'create']);
     });
 
 
-    Route::get('/add-reservation', function () {
-        return view('business.add-resv');
-    });
 
-    //Route::get('/signup', [RegisterUser2::class, 'create']);
+    Route::middleware(['auth:user2'])->group(function () {
 
-    Route::get('/signup', [RegisterUser2::class, 'view'])->middleware('guest');
+        Route::get('/add-reservation', function () {
+            return view('business.add-resv');
+        });
 
-    Route::post('/signup', [RegisterUser2::class, 'create'])->middleware('guest');
+        Route::get('/logout', [SessionsController2::class, 'destroy']);
 
-    //Creating SessionsController2 to keep things simple
-    //Route::post('/logout', [SessionsController2::class, 'destroy']);
-    Route::get('/logout', [SessionsController2::class, 'destroy']);
+        Route::get('/edit-reservation', function () {
+            return view('business.edit-resv');
+        });
 
-    Route::get('/', [SessionsController2::class, 'create']);
+        Route::get('/manage-reservations', function () {
+            return view('business.manage-resv');
+        });
 
-    Route::post('/', [SessionsController2::class, 'login']);
+        Route::get('/dashboard', function () {
+            return view('business.dashboard');
+        });
 
-    Route::get('/edit-reservation', function () {
-        return view('business.edit-resv');
-    });
+        Route::get('/profile', function () {
+            return view('business.profile');
+        });
 
-    Route::get('/manage-reservations', function () {
-        return view('business.manage-resv');
-    });
-
-    Route::get('/dashboard', function () {
-        return view('business.dashboard');
-    });
-
-    Route::get('/profile', function () {
-        return view('business.profile');
-    });
-
-    Route::get('/report-problem', function () {
-        return view('business.report-problem');
+        Route::get('/report-problem', function () {
+            return view('business.report-problem');
+        });
     });
 });
+
 
 Route::domain('admin.' . env('APP_URL'))->group(function () {
 
     Route::middleware(['guest:user1'])->group(function () {
         Route::get('/login', [User1Controller::class, 'create']);
+        Route::get('/', [User1Controller::class, 'create']);
+
         Route::post('/login', [User1Controller::class, 'login']);
     });
 
@@ -151,12 +181,12 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
             return view('admin.floorplan-editor');
         });
 
-        Route::get('/logout',[User1Controller::class, 'logout']);
+        Route::get('/logout', [User1Controller::class, 'logout']);
     });
 });
 
-
-//return abort(404);
+//Gia otidipote allo na kamume
+//abort(404);
 
 Auth::routes();
 
