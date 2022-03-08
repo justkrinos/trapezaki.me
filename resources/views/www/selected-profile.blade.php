@@ -77,7 +77,20 @@
                                     <div clas="card-body">
                                         <div class="col-sm-12 d-flex justify-content-center">
                                             <form></form>
-                                            <button class="btn btn-primary" id="btnBook" style="margin:5px;"> Book
+                                            <button class="btn btn-primary"
+
+                                            {{-- An ise logged in perni se apefthias sto book--}}
+                                            @auth('user3')
+                                                id="btnBook"
+                                            @endauth
+
+
+                                            {{-- An den ise logged in fkalli su popup --}}
+                                            @guest
+                                                id="btnPop"
+                                            @endguest
+
+                                            style="margin:5px;"> Book
                                                 Now</button>
                                             <button class="btn btn-primary" style="margin:5px;"
                                                 id="resvMenu">Menu</button>
@@ -167,57 +180,16 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <form action="#">
-                                    <div class="modal-body">
-                                        <label>Username: </label>
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Username or Email" class="form-control">
-                                        </div>
-                                        <label>Password: </label>
-                                        <div class="form-group">
-                                            <input type="password" placeholder="Password" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                            <i class="bx bx-x d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Close</span>
-                                        </button>
-                                        <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
-                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Login</span>
-                                        </button>
-                                    </div>
-                                </form>
+                                <span id="login">
+                                    {{-- tuto tulefki me javascript. see book-profile.js --}}
+                                    @include('www.components.login-pop')
+                                </span>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <form action="#">
-                                    <div class="modal-body">
-                                        <label>Name: </label>
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Your name" class="form-control">
-                                        </div>
-                                        <label>Phone: </label>
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Phone Number" class="form-control">
-                                        </div>
-                                        <label>Email: </label>
-                                        <div class="form-group">
-                                            <input type="text" placeholder="example@example.com" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                            <i class="bx bx-x d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Close</span>
-                                        </button>
-                                        <button type="button" class="btn btn-primary ml-1" data-bs-dismiss="modal">
-                                            <i class="bx bx-check d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Continue
-                                                as Guest</span>
-                                        </button>
-                                    </div>
-                                </form>
+                                <span id="guest">
+                                    {{-- tuto tulefki me javascript. see book-profile.js --}}
+                                    @include('www.components.guest-pop')
+                                </span>
                             </div>
                         </div>
                     </div>
