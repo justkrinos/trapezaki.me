@@ -22,11 +22,9 @@
 
 <body>
     <div id="app">
-    {{--Include the sidebar from /business/components--}}
+        {{--Include the sidebar from /business/components--}}
         @include('business.components.sidebar')
 
-    {{--Include the navbar from /www/components--}}
-        @include('business.components.navbar')
 
         <div id="main">
             <header class="mb-3">
