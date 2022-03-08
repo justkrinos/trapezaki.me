@@ -24,7 +24,7 @@ class RegisterUser2 extends Controller
             'username' => 'required|max:50|min:3|unique:user2s',
             'email' => 'required|max:50|unique:user2s|email',
             'password' => 'required|max:50|min:7|confirmed',
-            'password_confirmation' => 'required|max:50|min:7', //only check, don't save
+            'password_confirmation' => 'required', //only check, don't save
             'business_name' => 'required|max:50|min:1',
             'company_name' => 'required|max:50|min:1',
             'representative' =>'required|max:50|min:2',
@@ -38,6 +38,7 @@ class RegisterUser2 extends Controller
             'tags' => 'nullable' //TODO
             //genika, menoun ta validations twn pic, checkboxes je tags
         ]);
+
         //Then save the attributes of the record, because we don't want to include password confirmation
         $attributes = request()->validate([
             'username' => 'required|max:50|min:3|unique:user2s',
@@ -70,5 +71,5 @@ class RegisterUser2 extends Controller
 
              //The message is shown ugly, idk why
     }
-    
+
 }
