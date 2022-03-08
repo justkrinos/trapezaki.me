@@ -23,12 +23,14 @@ class Authenticate extends Middleware
             // }
 
             // if(str_contains($request->url(),'www')){
+            //     return '/make-a-reservation';
+            // }
+
+            // if(str_contains($request->url(),'business')){
             //     return '/login';
             // }
 
-            // if(str_contains($request->url(),'w')){
-            //     return '/login';
-            // }
+
         }
 
 
