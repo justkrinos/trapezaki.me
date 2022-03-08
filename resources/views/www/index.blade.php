@@ -34,7 +34,7 @@
                                         alt="singleminded">
                                     <div class="card-body">
                                         <h5 class="card-title">Limassol.</h5>
-                                        <a href="/login" class="stretched-link"></a>
+                                        <a href="/make-a-reservation" class="stretched-link"></a>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-flush">
@@ -50,7 +50,7 @@
                                         alt="singleminded">
                                     <div class="card-body">
                                         <h5 class="card-title">Nicosia.</h5>
-                                        <a href="/login" class="stretched-link"></a>
+                                        <a href="/make-a-reservation" class="stretched-link"></a>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-flush">
@@ -66,12 +66,12 @@
                                         alt="singleminded">
                                     <div class="card-body">
                                         <h5 class="card-title">Paphos.</h5>
-                                        <a href="/login" class="stretched-link"></a>
+                                        <a href="/make-a-reservation" class="stretched-link"></a>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">The best city.</li>
-                                    <a href="/login" class="stretched-link"></a>
+                                    <a href="/make-a-reservation" class="stretched-link"></a>
                                 </ul>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                                         alt="singleminded">
                                     <div class="card-body">
                                         <h5 class="card-title">Larnaca.</h5>
-                                        <a href="/login" class="stretched-link"></a>
+                                        <a href="/make-a-reservation" class="stretched-link"></a>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-flush">
@@ -99,7 +99,7 @@
                                         alt="singleminded">
                                     <div class="card-body">
                                         <h5 class="card-title">Famagusta.</h5>
-                                        <a href="/login" class="stretched-link"></a>
+                                        <a href="/make-a-reservation" class="stretched-link"></a>
                                     </div>
                                 </div>
                                 <ul class="list-group list-group-flush">
