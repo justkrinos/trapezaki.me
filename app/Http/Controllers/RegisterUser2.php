@@ -29,7 +29,7 @@ class RegisterUser2 extends Controller
             'company_name' => 'required|max:50|min:1',
             'representative' =>'required|max:50|min:2',
             'city' => 'required|max:30|min:1',
-            'phone' => 'required|max:13|min:8',
+            'phone' => 'required|digits_between:8,13|numeric',
             'description' =>'nullable',
             'photo' => 'nullable' ,
             'logo' => 'required',
