@@ -36,18 +36,13 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.selected-profile');
     });
 
-    Route::get('/seven-seas/book', function () {
-        if(Auth::check('user3')) //TODO na checkari j an ise guest logged in
-            return view('www.book');
-        else
-            return redirect('/seven-seas#login');
-        //An en logged in -> continue kanonika
-        //An den en logged in -> redirect piso /seven-seas me login popup
-    });
+    Route::get('/seven-seas/book',[SessionsController::class, 'showBook']);
+
+    Route::post('/seven-seas/book',[SessionsController::class, 'createBook']);
 
 
 
-    // ^ Tuta ta 3 panw en eksw pu to middleware
+    // ^ Tuta  panw en eksw pu to middleware
     //   epd boris na to dis ite ise logged in ite oi
 
 
@@ -61,11 +56,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::post('/login', [SessionsController::class, 'login']);
 
         Route::post('/login_popup', [SessionsController::class, 'login_popup']);
-
-        //Use the sessions controller class to handle the login
-        Route::get('/guest', function () {
-            return view('www.guest');
-        });
+        Route::post('/guest_popup', [SessionsController::class, 'guest_popup']);
 
         //when you get, return the view
         Route::get('/signup', [RegisterUser3::class, 'view']);
