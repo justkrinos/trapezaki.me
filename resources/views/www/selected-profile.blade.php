@@ -22,11 +22,11 @@
 <body>
     <div id="app">
 
-        @include("www.components.sidebar")
+        @include('www.components.sidebar')
 
         <div id="main" class='layout-navbar'>
 
-            @include("www.components.navbar")
+            @include('www.components.navbar')
 
             <div id="main-content">
 
@@ -77,20 +77,9 @@
                                     <div clas="card-body">
                                         <div class="col-sm-12 d-flex justify-content-center">
                                             <form></form>
-                                            <button class="btn btn-primary"
-
-                                            {{-- An ise logged in perni se apefthias sto book--}}
-                                            @auth('user3')
-                                                id="btnBook"
-                                            @endauth
-
-
-                                            {{-- An den ise logged in fkalli su popup --}}
-                                            @guest
-                                                id="btnPop"
-                                            @endguest
-
-                                            style="margin:5px;"> Book
+                                            <button class="btn btn-primary" {{-- An ise logged in perni se apefthias sto book --}}
+                                                @auth('user3') id="btnBook" @endauth {{-- An den ise logged in fkalli su popup --}} @guest
+                                                id="btnPop" @endguest style="margin:5px;"> Book
                                                 Now</button>
                                             <button class="btn btn-primary" style="margin:5px;"
                                                 id="resvMenu">Menu</button>
@@ -161,7 +150,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="text-center" id="myModalLabel33">Please
-                            Log in to continue.</h4>
+                            select an option to continue</h4>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <i data-feather="x"></i>
                         </button>
@@ -173,23 +162,86 @@
                                     aria-controls="home" aria-selected="true">Have an Account</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab"
-                                    aria-controls="profile" aria-selected="false">Continue as
+                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
+                                    role="tab" aria-controls="profile" aria-selected="false">Continue as
                                     Guest</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <span id="login">
-                                    {{-- tuto tulefki me javascript. see book-profile.js --}}
-                                    @include('www.components.login-pop')
-                                </span>
+                                <form action="#">
+                                    @csrf
+                                    <div class="modal-body">
+
+                                        <input class="is-invalid text-center" hidden>
+                                        <div class="invalid-feedback">
+                                            <i id="login-error" class="bx bx-radio-circle"></i>
+                                        </div>
+
+                                        <label>Username: </label>
+                                        <div class="form-group">
+                                            <input type="text" placeholder="Username or Email" id="username"
+                                                class="form-control">
+                                        </div>
+                                        <label>Password: </label>
+                                        <div class="form-group">
+                                            <input type="password" placeholder="Password" id="password"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                            <span class="d-sm-block">Close</span>
+                                        </button>
+                                        <button type="button d-sm-block" id="btnLogin" class="btn btn-primary ml-1">
+                                            Login
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <span id="guest">
-                                    {{-- tuto tulefki me javascript. see book-profile.js --}}
-                                    @include('www.components.guest-pop')
-                                </span>
+
+                                <form action="#">
+                                    @csrf
+                                    <div class="modal-body">
+
+                                        <label>Name: </label>
+                                        <div class="form-group">
+                                            <input type="text" id="full_name" placeholder="Your name"
+                                                class="form-control">
+                                            <div class="invalid-feedback">
+                                                <i id="full_name-error" class="bx bx-radio-circle"></i>
+                                            </div>
+                                        </div>
+
+                                        <label>Phone: </label>
+                                        <div class="form-group">
+                                            <input type="text" id="phone" placeholder="Phone Number"
+                                                class="form-control">
+                                            <div class="invalid-feedback">
+                                                <i id="phone-error" class="bx bx-radio-circle"></i>
+                                            </div>
+                                        </div>
+
+                                        <label>Email: </label>
+                                        <div class="form-group">
+                                            <input type="text" id="email" placeholder="example@example.com"
+                                                class="form-control">
+                                            <div class="invalid-feedback">
+                                                <i id="email-error" class="bx bx-radio-circle"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                            <span class="d-sm-block">Close</span>
+                                        </button>
+                                        <button type="button" id="btnGuest" class="btn btn-primary ml-1">
+                                            <span class="d-sm-block">Continue</span>
+                                        </button>
+                                    </div>
+                                </form>
+
                             </div>
                         </div>
                     </div>
