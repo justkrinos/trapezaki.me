@@ -1,16 +1,3 @@
-error_uname_html = "    <input class=\"is-invalid text-center\" hidden>"
-    + "<div class=\"invalid-feedback\"\>"
-    + "    <i class=\"bx bx-radio-circle\"></i>"
-    + "    <span id=\"err-msg\" >Username cannot be empty</span>"
-    + "</div>";
-
-error_passwd_html = "    <input class=\"is-invalid text-center\" hidden>"
-    + "<div class=\"invalid-feedback\"\>"
-    + "    <i class=\"bx bx-radio-circle\"></i>"
-    + "    <span id=\"err-msg\" >Password cannot be empty</span>"
-    + "</div>";
-
-
 $(document).ready(function () {
     if (window.location.hash.match("login")) {
         $("#inlineForm").modal('show')
