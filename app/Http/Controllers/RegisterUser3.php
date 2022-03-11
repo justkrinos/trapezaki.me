@@ -35,10 +35,10 @@ class RegisterUser3 extends Controller
             'username' =>  'required|max:50|min:3|unique:user3s,username',
             'full_name' => 'required|max:50|min:3',
             'email' => 'required|email|max:100|unique:user3s,email',
-            'phone' => 'required|max:13|min:8|numeric',
+            'phone' => 'required|digits_between:8,13|numeric',
             'password' => 'required|max:50|min:7|confirmed'
         ]);
-
+        //Must remove from $attributes
 
         //Make the account and add to db
         User3::create($attributes);
