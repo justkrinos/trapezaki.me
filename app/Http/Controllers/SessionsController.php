@@ -58,7 +58,7 @@ class SessionsController extends Controller
 
         //Check if credentials ar ok
         if (!Auth::guard('user3')->attempt($attributes)) {
-            return view("www.components.login-errormsg")->withErrors(['message' => 'Your provided credentials could not be verified.']);
+            return 'Your provided credentials could not be verified.';
         }
 
         //Continue to login
