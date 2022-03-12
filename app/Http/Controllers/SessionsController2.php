@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;  
 use Illuminate\Http\Request;
-
+//For USER2
 class SessionsController2 extends Controller
 {
     public function destroy()
