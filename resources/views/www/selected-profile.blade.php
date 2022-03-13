@@ -188,6 +188,7 @@
                                             <input type="password" placeholder="Password" id="password"
                                                 class="form-control">
                                         </div>
+                                        <a href="/signup">Don't have an account? Signup</a>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
