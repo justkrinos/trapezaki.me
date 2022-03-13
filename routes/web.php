@@ -69,6 +69,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         //it uses the RegisterUser3 class and its function "create"
         //the class is in app/http/controllers
         Route::post('/signup', [RegisterUser3::class, 'create']);
+
+        //Should be able to handle guest
+        //Route::post('/selected-profile', [RegisterUser3::class, 'createGuest']);
     });
 
 
