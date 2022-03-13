@@ -23,7 +23,7 @@
             <div class="col-lg-6 col-13">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="/"><img class="" src="../assets/images/logo/logo_small.png" alt="Trapezaki"></a>
+                        <a href="/"><img class="" src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
                     </div>
                     <h2 class="auth-title">Log in.</h2>
 

@@ -59,7 +59,7 @@
                         </div>
                         <button class="btn btn-primary btn-lg shadow-lg mt-4">Log in</button>
 
-                        <div class="col-12 col-md-10 mt-5">
+                        <div class="col-12 col-md-10 mt-4">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-center">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/signup">Become an associate!</a></li>
