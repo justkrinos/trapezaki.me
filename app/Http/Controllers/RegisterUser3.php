@@ -54,4 +54,16 @@ class RegisterUser3 extends Controller
                 //en gia na fkalei ena popup "success"
     }
 
+    public function createGuest(){
+        //pws na mpenei o guest sto db?
+        $attributes = request()->validate([
+            'email' => 'required|email|max:100|unique:user3s,email'
+        ]);
+        //Must remove from $attributes
+
+        //Make the account and add to db
+        User3::create($attributes);
+
+    }
+
 }
