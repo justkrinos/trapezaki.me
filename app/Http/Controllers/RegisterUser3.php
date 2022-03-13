@@ -22,11 +22,9 @@ class RegisterUser3 extends Controller
         //Ta validation rules iparxun sto documentation tis laravel
         //An den einai success to validation, en tha proxorisi, enna kami redirect stin idia page me ta errors
         //Ta errors ginunte catch pu to blade view
+
+        //extra validation for the password confirmation
         request()->validate([
-            'username' =>  'required|max:50|min:3|unique:user3s,username',
-            'full_name' => 'required|max:50|min:3',
-            'email' => 'required|email|max:100|unique:user3s,email',
-            'phone' => 'required|digits_between:8,13|numeric',
             'password' => 'required|max:50|min:7|confirmed',
             'password_confirmation' => 'required'
         ]);

@@ -21,22 +21,8 @@ class RegisterUser2 extends Controller
     {
         //First only validate
         request()->validate([
-            'username' => 'required|max:50|min:3|unique:user2s',
-            'email' => 'required|max:50|unique:user2s|email',
             'password' => 'required|max:50|min:7|confirmed',
             'password_confirmation' => 'required', //only check, don't save
-            'business_name' => 'required|max:50|min:1',
-            'company_name' => 'required|max:50|min:1',
-            'representative' =>'required|max:50|min:2',
-            'city' => 'required|max:30|min:1',
-            'phone' => 'required|digits_between:8,13|numeric',
-            'description' =>'nullable',
-            'photo' => 'nullable' ,
-            'logo' => 'required',
-            'location' => 'nullable',
-            'type' => 'nullable', //TODO
-            'tags' => 'nullable' //TODO
-            //genika, menoun ta validations twn pic, checkboxes je tags
         ]);
 
         //Then save the attributes of the record, because we don't want to include password confirmation
