@@ -20,7 +20,7 @@
     <div id="auth">
 
         <div class="row h-100">
-            <div class="col-lg-5 col-12">
+            <div class="col-lg-6 col-13">
                 <div id="auth-left">
                     <div class="auth-logo">
                         <a href="/"><img class="" src="../assets/images/logo/logo_small.png" alt="Trapezaki"></a>
@@ -81,7 +81,7 @@
 
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
+            <div class="col-lg-6 d-none d-lg-block">
                 <div id="auth-right">
 
                 </div>

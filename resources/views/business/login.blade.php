@@ -20,7 +20,7 @@
     <div id="auth">
 
         <div class="row h-100">
-            <div class="col-lg-5 col-12">
+            <div class="col-lg-6 col-13">
                 <div id="auth-left">
                     <div class="auth-logo">
                         <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
@@ -57,7 +57,7 @@
                                 Keep me logged in
                             </label>
                         </div>
-                        <button class="btn btn-primary btn-lg shadow-lg mt-5">Log in</button>
+                        <button class="btn btn-primary btn-lg shadow-lg mt-4">Log in</button>
 
                         <div class="col-12 col-md-10 mt-5">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-center">
@@ -70,7 +70,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
+            <div class="col-lg-6 d-none d-lg-block">
                 <div id="auth-right">
 
                 </div>
