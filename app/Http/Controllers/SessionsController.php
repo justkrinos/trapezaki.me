@@ -92,7 +92,7 @@ class SessionsController extends Controller
                 'password' => 'required'
             ],
             [
-                'email.unique' => 'The mail already exists, so you already have an account.'
+                'email.unique' => 'An account already exists with this email. You can just log in. :)'
             ]
         );
         // } catch (\Illuminate\Validation\ValidationException $e ) {
