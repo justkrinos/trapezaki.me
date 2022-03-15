@@ -21,11 +21,18 @@ use App\Models\User1;
 |
 */
 
+//An paei xwris to www, na ton kamnei redirect sto first page
+//to first page en dilomeno san name('first_page')
+//pio katw sto make-a-reservation route fenete
+Route::get('/', function(){
+    return redirect()->route('first_page');
+});
+
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/make-a-reservation', function () {
         return view('www.search');
-    });
+    })->name('first_page');
 
     Route::get('/seven-seas', function () {
         //TODO:
