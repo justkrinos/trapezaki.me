@@ -17,7 +17,7 @@
 
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+                <li class="sidebar-title" style="font-weight: bold;  text-decoration: underline;">MENU</li>
 
                 <li
                     class="sidebar-item
