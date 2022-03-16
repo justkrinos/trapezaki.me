@@ -192,6 +192,16 @@ Route::get('/', function(){
     return redirect()->route('first_page');
 });
 
+//redirect customer on page that does not exist
+Route::get('/{not_exist}', function($slug){
+    $path = __DIR__ . "../views/www/{$slug}";
+
+    if(! file_exists($path))
+    {
+        return redirect('/');
+    }
+});
+
 
 //Gia otidipote allo na kamume
 //abort(404);
