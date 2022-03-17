@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\issueControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\RegisterUser2;
@@ -24,9 +25,6 @@ use App\Models\User1;
 //An paei xwris to www, na ton kamnei redirect sto first page
 //to first page en dilomeno san name('first_page')
 //pio katw sto make-a-reservation route fenete
-Route::get('/', function(){
-    return redirect()->route('first_page');
-});
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
@@ -39,7 +37,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         //tuta prp nan /user/seven-seas gt meta isos exume thema me ta login j tuta
         //epd bori na eshi logariasmo me onom "login"
         //extos an kamume blacklist
-        //j gia to pukatw route to idio
+        //j gia to pukatw   route to idio
         return view('www.selected-profile');
     });
 
@@ -149,6 +147,9 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/report-problem', function () {
             return view('business.report-problem');
         });
+
+        Route::post('/report-problem',[issueControler::class,'store']);
+
     });
 });
 
@@ -189,14 +190,5 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 //Gia otidipote allo na kamume
 //abort(404);
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -18,12 +18,10 @@ class CreateIssuesTable extends Migration
             $table->foreignId('user2_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('type');
             $table->text('details');
-            $table->boolean('status');
-            $table->timestamp('issue_date');
-
+            $table->boolean('status')->default(0);
             $table->timestamps();
 
-           
+
         });
     }
 

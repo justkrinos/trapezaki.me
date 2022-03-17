@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;  
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 //For USER2
 class SessionsController2 extends Controller
@@ -27,7 +27,7 @@ class SessionsController2 extends Controller
             'password' => 'required'
         ]);
 
-        
+
 
         if (! Auth::guard('user2')->attempt($attributes)) //attempt to log the user in with the given data/credentials
         {
@@ -38,6 +38,6 @@ class SessionsController2 extends Controller
         session()->regenerate();
 
         return redirect('/dashboard')->withInput()->with('success','Welcome back!');
-    
+
     }
 }
