@@ -55,6 +55,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
             return view('www.index');
         });
 
+        Route::get('verify/{email}/{secret}/{?uer_type}','Auth\VerificationController@verifyEmail');
+
         Route::get('/login', [SessionsController::class, 'create']);
 
         Route::post('/login', [SessionsController::class, 'login']);

@@ -36,6 +36,10 @@ class CreateUser2sTable extends Migration
             $table->text('description')->nullable();
             $table->string('logo');
             $table->string('photo')->nullable();
+            //testing
+            $table->string('verification_code',100)->nullable();
+            $table->integer('is_verified')->nullable();
+            //
             $table->rememberToken();
 
             $table->timestamps();
