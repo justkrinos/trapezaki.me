@@ -43,6 +43,7 @@ class SessionsController extends Controller
             return view('www.login')->withErrors(['message' => 'Your provided credentials could not be verified.']);
         }
 
+
         //Continue to login
         session()->regenerate();
         return redirect('/make-a-reservation')->withInput()->with('success', 'Welcome back!');
@@ -108,6 +109,7 @@ class SessionsController extends Controller
             'phone'     => $attributes['phone'],
             'email'     => $attributes['email']
         ]);
+
         return "success";
     }
 
