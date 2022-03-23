@@ -26,7 +26,7 @@
 <body>
     <div id="app">
 
-        @include("admin.components.sidebar")
+        @include('admin.components.sidebar')
 
         <div id="main">
             <header class="mb-3">
@@ -259,38 +259,87 @@
                 </div>
 
 
-                <div class="card">
+                <div class="card" href="#location">
                     <div class="card-header">
                         <h4 class="card-title">Location</h4>
                     </div>
+
                     <div class="card-body">
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <input type="text" id="location" class="form-control round" value="99818181">
-                            </div>
+                        <div class="col-md-6 col-12 mb-1">
+                            <input type="text" id="location" class="form-control round" name="location">
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <div id="us2" style="width: 500px; height: 400px;"></div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-md-6 col-12 mb-2">
+                                <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
                             </div>
+
+                            <div class="col-md-6 col-12">
+
+                                <div class="row flex">
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Lat</label>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="lat" class="form-control" value="" name="lat"
+                                            disabled>
+                                    </div>
+
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Long</label>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="long" class="form-control" value="" name="long"
+                                            disabled>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">Address</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="address" class="form-control" name="address" value="">
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label text-nowrap">Zip Code</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="zip" class="form-control" name="zip" value="">
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">City</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="city" class="form-control" value="" name="city">
+                                </div>
+
+                            </div>
+
                         </div>
+
+
+
                     </div>
 
                     <div class="form-group col-md-2 d-flex">
                         <label for="lat" hidden>Latitude</label>
                         <input type="text" id="lat" style="width: 200px" hidden />
                         <label for="lng" hidden>Longitude</label>
-                        <input type="text" id="lng" style="width: 200px" hidden/>
+                        <input type="text" id="lng" style="width: 200px" hidden />
                     </div>
                     <!--To javascript maps-script prepei na allaksei-->
                     <!-- Na elegxei to City tu XE2 j na allassei ta coordinates analoga-->
-                    <!--TODO: na rotisume ton kathigiti an en ok na afikume extsi xoris to license tis google-->
                     <!--https://embed.plnkr.co/mfiPLrChUShIMLvpqjHI/ -->
                 </div>
             </div>
 
             <footer>
-            <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
+                <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
             </footer>
         </div>
     </div>
@@ -308,7 +357,9 @@
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript"
-    src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnTnFmCJUu_QEZiPRRReksNQtJuvpl2OQ&libraries=places&callback=initMap">
+</script>
+<script type="text/javascript"
+src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script src="../assets/js/maps-script.js"></script>
