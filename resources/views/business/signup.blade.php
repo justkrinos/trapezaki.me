@@ -14,6 +14,9 @@
 
     <link rel="stylesheet" href="../assets/vendors/choices.js/choices.min.css" />
 
+    <link rel="stylesheet" href="assets/vendors/quill/quill.bubble.css">
+    <link rel="stylesheet" href="assets/vendors/quill/quill.snow.css">
+
     <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
@@ -22,333 +25,420 @@
 
 <body>
     <div id="app">
-        <div id="main">
+        <div class="container">
             <header class="mb-3">
-                <a href="#" class="burger-btn d-block d-xl-none">
-                    <i class="bi bi-justify fs-3"></i>
-                </a>
+
             </header>
 
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-2 order-first">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/">Already have an account?</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Input</li>
-                                </ol>
-                            </nav>
+
                         </div>
                     </div>
                 </div>
-                <section class="section">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">Become an associate</h4>
+
+                <section class="section d-flex justify-content-center">
+                    <div class="card col-md-12 col-12">
+                        <div class="card-header text-center justify-content-center">
+                            <h3 class="title">Become an associate</h3>
+                            <p class="breadcrumb-item">Already an associate? <a href="/login">Login</a></p>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
 
-                                    <form method="POST" action="/signup" class="col-md-10">
-                                        {{--To prevent csrf attacks--}}
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control
+                            <form method="POST" action="/signup" class="">
+                                {{-- To prevent csrf attacks --}}
+                                @csrf
+
+                                <h5 class="mb-3">Account Information</h5>
+                                <div class="d-flex row col-md-12 justify-content-center">
+                                    <div class="form-group col-md-5 col-12">
+                                        <label for="username">Username</label>
+                                        <input type="text"
+                                            class="form-control
                                                 @error('username') is-invalid @enderror"
-                                                id="username" name="username" value="{{ old('username') }}" required>
+                                            id="username" name="username" value="{{ old('username') }}" required>
 
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('username')
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('username')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
                                             </div>
-                                            @enderror
+                                        @enderror
 
-                                        </div>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <small class="text-muted">eg.<i>someone@example.com</i></small>
-                                            <input type="email" class="form-control
+                                    <div class="form-group col-md-5 col-12 justify-content-center">
+                                        <label for="email">Email</label>
+                                        <input type="email"
+                                            class="form-control
                                                 @error('email') is-invalid @enderror"
-                                                id="email" name="email" value="{{ old('email') }}" required>
+                                            id="email" name="email" value="{{ old('email') }}" required>
 
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('email')
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('email')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
                                             </div>
-                                            @enderror
+                                        @enderror
 
-                                        </div>
+                                    </div>
+                                </div>
 
 
-
-                                        <div class="form-group">
-                                            <label for="password">Create a Password</label>
-                                            <input type="password"
-                                                class="form-control form-control-l
+                                <div class="d-flex row col-md-12 mb-4 justify-content-center">
+                                    <div class="form-group col-md-5 col-12">
+                                        <label for="password">Create a Password</label>
+                                        <input type="password"
+                                            class="form-control form-control-l
                                                 @error('password') is-invalid @enderror"
-                                                placeholder="Password" name="password" id="password" required>
+                                            placeholder="Password" name="password" id="password" required>
 
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('password')
+                                        @error('password')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
                                             </div>
-                                            @enderror
-                                        </div>
+                                        @enderror
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="password_confirmation">Re-enter Password</label>
-                                            <input type="password" class="form-control form-control-l
+                                    <div class="form-group col-md-5 col-12 justify-content-center">
+                                        <label for="password_confirmation">Re-enter Password</label>
+                                        <input type="password"
+                                            class="form-control form-control-l
                                                 @error('password_confirmation') is-invalid @enderror"
-                                                placeholder="Password" name="password_confirmation" id="password_confirmation" required>
+                                            placeholder="Password" name="password_confirmation"
+                                            id="password_confirmation" required>
 
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('password_confirmation')
+                                        @error('password_confirmation')
                                             <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>  
+                                                <i class="bx bx-radio-circle"></i>
                                                 {{ $message }}
                                             </div>
-                                            @enderror
+                                        @enderror
+
+                                    </div>
+                                </div>
+
+                                <h5 class="mb-4">Business Information</h5>
+
+                                <div class="d-flex row col-md-12 mb-4 justify-content-center">
+                                    <div class="form-group col-md-5 col-12">
+                                        <label for="business_name">Business Name</label>
+                                        <input type="text"
+                                            class="form-control
+                                            @error('business_name') is-invalid @enderror"
+                                            placeholder="Business Name" id="business_name" name="business_name"
+                                            value="{{ old('business_name') }}" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('business_name')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-5 col-12 justify-content-center">
+                                        <label for="company_name">Company Name</label>
+                                        <input type="text"
+                                            class="form-control
+                                            @error('company_name') is-invalid @enderror"
+                                            placeholder="Company Name" id="company_name" name="company_name"
+                                            value="{{ old('company_name') }}" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('company_name')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group col-md-5 col-12 justify-content-center">
+                                        <label for="representative">Representative Name</label>
+                                        <input type="text"
+                                            class="form-control
+                                            @error('representative') is-invalid @enderror"
+                                            placeholder="Representative Name" id="representative" name="representative"
+                                            value="{{ old('representative') }}" required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('representative')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group col-md-5 col-12 justify-content-center">
+                                        <label for="phone">Phone number</label>
+                                        <input type="phone"
+                                            class="form-control
+                                                    @error('phone') is-invalid @enderror"
+                                            id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}"
+                                            required>
+
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('phone')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+
+                                    </div>
+                                </div>
+
+
+                                        <h5 class="h6 mb-2">Description</h5>
+                                        <div class="col-mb-6 col-12 mb-5">
+                                        <div id="snow">
+                                            <p>Description goes here, </p>
+                                            <p>some initial <strong>bold</strong> text</p>
+                                            <p><br></p>
+
+                                        </div>
+                                        </div>
+
+                                {{-- <div class="form-group col-12 justify-content-center mb-5">
+                                    <label for="description" class="form-label">
+                                        Description</label>
+                                    <textarea class="form-control" id="description" name="description" value="{{ old('description') }}"
+                                        rows=" 4"></textarea>
+                                </div> --}}
+
+
+                                <h5 class="mb-1">File Uploads</h5>
+                                <div class="card-body">
+                                    <div class="col-md-5 col-12">
+                                        <label for="formFileMultiple" class="form-label">Add
+                                            Photos</label>
+                                        <input class="form-control" type="file" id="photo" name="photo" multiple>
+                                    </div>
+                                </div>
+
+                                <div class="card-body mb-3">
+                                    <div class="form-group col-md-5 col-12">
+                                        <label for="logo" class="form-label">Add Logo</label>
+                                        <input class="form-control" type="file" id="logo" name="logo" required>
+                                        @error('logo')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+                                <h5 class="mb-4">Location</h5>
+                                <div class="col-md-6 col-12 mb-1">
+                                    <input type="text" id="location" class="form-control round" name="location">
+                                </div>
+
+
+
+                                <div class="form-group row mb-5">
+                                    <div class="col-md-6 col-12 mb-2">
+                                        <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+
+                                        <div class="row flex">
+                                            <div class="col-sm-2 col-2">
+                                                <label class="col-form-label">Lat</label>
+                                            </div>
+                                            <div class="col-md-4 col-4">
+                                                <input type="text" id="lat" class="form-control" value="" name="lat"
+                                                    disabled>
+                                            </div>
+
+                                            <div class="col-sm-2 col-2">
+                                                <label class="col-form-label">Long</label>
+                                            </div>
+                                            <div class="col-md-4 col-4">
+                                                <input type="text" id="long" class="form-control" value="" name="long"
+                                                    disabled>
+                                            </div>
 
                                         </div>
 
-                                        <h4 class="card-title">Business Information</h4>
-
-                                        <div class="form-group">
-
-                                            <input type="text" class="form-control
-                                            @error('business_name') is-invalid @enderror" placeholder="Business Name"
-                                            id="business_name" name="business_name" value="{{ old('business_name') }}" required
-                                            <p><small class="text-muted">*Enter business name</small> 
-                                            </p>
-
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('business_name')
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-
-                                            <input type="text" class="form-control
-                                            @error('company_name') is-invalid @enderror" placeholder="Company Name"
-                                            id="company_name" name="company_name" value="{{ old('company_name') }}" required
-                                            <p><small class="text-muted">*Enter company name</small> 
-                                            </p>
-
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('company_name')
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-
-                                            <input type="text" class="form-control
-                                            @error('representative') is-invalid @enderror" placeholder="Representative Name"
-                                            id="representative" name="representative" value="{{ old('representative') }}" required
-                                            <p><small class="text-muted">*Enter representative name</small> 
-                                            </p>
-
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('representative')
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-
-                                            <input type="text" class="form-control
-                                            @error('city') is-invalid @enderror" placeholder="City"
-                                            id="city" name="city" value="{{ old('city') }}" required
-                                            <p><small class="text-muted">*Enter business location city</small> 
-                                            </p>
-
-                                            {{-- This will be pulled everytime there's an error --}}
-                                            @error('city')
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-
-                                            <div class="form-group">
-                                                <label for="phone">Phone number</label>
-                                                <input type="phone" class="form-control
-                                                    @error('phone') is-invalid @enderror"
-                                                    id="phone" name="phone" value="{{ old('phone') }}" required>
-
-                                                {{-- This will be pulled everytime there's an error --}}
-                                                @error('phone')
+                                        <div class="col-sm-4">
+                                            <label class="col-form-label">Address</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="address"
+                                                class="form-control @error('city') is-invalid @enderror" name="address"
+                                                value="{{ old('postal') }}">
+                                            @error('address')
                                                 <div class="invalid-feedback">
                                                     <i class="bx bx-radio-circle"></i>
                                                     {{ $message }}
                                                 </div>
-                                                @enderror
+                                            @enderror
+                                        </div>
 
-                                            </div>
+                                        <div class="col-sm-4">
+                                            <label class="col-form-label text-nowrap">Zip
+                                                Code</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="zip"
+                                                class="form-control @error('city') is-invalid @enderror" name="postal"
+                                                value="{{ old('postal') }}" required>
 
-                                            <div class="card-body">
-                                                <div class="form-group mb-3">
-                                                    <label for="description" class="form-label">
-                                                        Description</label>
-                                                    <textarea class="form-control" id="description" name="description" 
-                                                        value="{{ old('description') }}""
-                                                        rows="4"></textarea>
+                                            @error('postal')
+                                                <div class="invalid-feedback">
+                                                    <i class="bx bx-radio-circle"></i>
+                                                    {{ $message }}
                                                 </div>
-                                            </div>
-                                            <!--end of description-->
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="mb-3">
-                                                        <label for="formFileMultiple" class="form-label">Add Photos</label>
-                                                        <input class="form-control" type="file" id="photo" name="photo"
-                                                            multiple>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="form-group mb-3">
-                                                        <label for="logo" class="form-label">Add Logo</label>
-                                                        <input class="form-control" type="file" id="logo" name="logo" required>
-                                                        {{-- This will be pulled everytime there's an error --}}
-                                                        @error('logo')
-                                                            <div class="invalid-feedback">
-                                                                <i class="bx bx-radio-circle"></i>
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h4 class="card-title">Choose Location</h4>
-                                                </div>
-                                                <div class="card-body">
-                                                    <iframe src="https://maps.google.com/maps?q=CUT%20cyprus&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" style="border:0; width: 100%; height: 290px;"id="location" name="location" allowfullscreen></iframe>
-                                                </div>
-                                            </div>
-                                            <section class="section">
+                                            @enderror
+                                        </div>
 
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title">Choose Type</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="form-check" id="type" name="type">
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="coffee" name="type" class="form-check-input"
-                                                                    unchecked>
-                                                                <label for="checkbox1">Coffee</label>
-                                                            </div>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="food" name="type" class="form-check-input"
-                                                                    unchecked>
-                                                                <label for="checkbox1">Food</label>
-                                                            </div>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="drinks" name="type" class="form-check-input"
-                                                                    unchecked>
-                                                                <label for="checkbox1">Drinks</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                        <div class="col-sm-4">
+                                            <label class="col-form-label">City</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <input type="text"
+                                                class="form-control
+                                                                @error('city') is-invalid @enderror"
+                                                placeholder="City" id="city" name="city" value="{{ old('city') }}"
+                                                required>
+
+                                            @error('city')
+                                                <div class="invalid-feedback">
+                                                    <i class="bx bx-radio-circle"></i>
+                                                    {{ $message }}
                                                 </div>
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h5 class="card-title">Select Tags</h5>
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <!-- Multiple choices start -->
+                                            @enderror
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <h5 class="mb-4">Business Characteristics</h5>
+                                <div class="form-group row">
+                                    <div class="col-md-6 col-12">
+
+                                        <div class="card-body">
+                                            <h6 class="h6">Type</h6>
+                                            <div class="form-check" id="type" name="type">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="coffee" name="type"
+                                                        class="form-check-input" unchecked>
+                                                    <label for="checkbox1">Coffee</label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="food" name="type"
+                                                        class="form-check-input" unchecked>
+                                                    <label for="checkbox1">Food</label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="drinks" name="type"
+                                                        class="form-check-input" unchecked>
+                                                    <label for="checkbox1">Drinks</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="card-header">
+                                            <h6 class="h6">Tags</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <!-- Multiple choices start -->
                                             <section class="multiple-choices" id="tags" name="tags">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="card">
-                                                                    <div class="row">
+                                                            <div class="row">
 
-                                                                        <div class="col-md-18 mb-4">
+                                                                <div class="col-md-12">
 
-                                                                                <select class="choices form-select multiple-remove"
-                                                                                    multiple="multiple">
-                                                                                    <optgroup label="Food">
-                                                                                        <option value="souvlakia">Souvlakia</option>
-                                                                                        <option value="gyros" selected>Gyros</option>
-                                                                                        <option value="burher">Burger</option>
-                                                                                        <option value="mezedes">Mezedes</option>
-                                                                                    </optgroup>
-                                                                                    <optgroup label="Tavern">
-                                                                                        <option value="live">Live music</option>
-                                                                                        <option value="mpires">Mpires</option>
-                                                                                        <option value="stakes" selected>Stakes</option>
-                                                                                        <option value="tsamarella">Tsamarella</option>
-                                                                                    </optgroup>
-                                                                                </select>
+                                                                    <select class="choices form-select multiple-remove"
+                                                                        multiple="multiple">
+                                                                        <optgroup label="Food">
+                                                                            <option value="souvlakia">
+                                                                                Souvlakia</option>
+                                                                            <option value="gyros" selected>
+                                                                                Gyros</option>
+                                                                            <option value="burher">Burger
+                                                                            </option>
+                                                                            <option value="mezedes">Mezedes
+                                                                            </option>
+                                                                        </optgroup>
+                                                                        <optgroup label="Tavern">
+                                                                            <option value="live">Live music
+                                                                            </option>
+                                                                            <option value="mpires">Mpires
+                                                                            </option>
+                                                                            <option value="stakes" selected>
+                                                                                Stakes</option>
+                                                                            <option value="tsamarella">
+                                                                                Tsamarella</option>
+                                                                        </optgroup>
+                                                                    </select>
 
 
-                                                                        </div>
-                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            
+
                                             </section>
-                                        <!-- Multiple choices end -->
+                                            <!-- Multiple choices end -->
 
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-8 d-flex justify-content-end">
-                                                <button type="submit" id="submit"
-                                                    class="btn btn-primary me-1 mb-1">Submit</button>
-                                                <button type="reset"
-                                                    class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                            </div>
                                         </div>
-                                    </form>
-                                    
+                                    </div>
                                 </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" id="submit" class="btn btn-primary btn-lg me-3 mb-1">Sign
+                                        Up</button>
                                 </div>
-                            
-                    </div>
-                        </div>
-                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
 
+                            </form>
+                        </div>
 
+                    </div>
 
             </div>
-
-            <footer>
-
-            </footer>
         </div>
     </div>
-    <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/register.js"><script>
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/vendors/choices.js/choices.min.js"></script>
 
-    {{--Toast dependencies--}}
-    <script src="assets/vendors/toastify/toastify.js"></script>
-    <script src="assets/js/extensions/toastify.js"></script>
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-
-    @include("components.toasts");
 
 </body>
+
+
+<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="../assets/js/register.js"> </script>
+<script src="../assets/vendors/choices.js/choices.min.js"></script>
+
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+
+{{-- Maps Api Dependencies --}}
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnTnFmCJUu_QEZiPRRReksNQtJuvpl2OQ&libraries=places&callback=initMap">
+</script>
+<script type="text/javascript"
+src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+<script src="../assets/js/maps-script.js"></script>
+
+<script src="assets/vendors/quill/quill.min.js"></script>
+<script src="assets/js/pages/form-editor.js"></script>
+<script src="../assets/js/main.js"></script>
+@include('components.toasts');
+
 
 </html>
