@@ -326,15 +326,6 @@
 
                     </div>
 
-                    <div class="form-group col-md-2 d-flex">
-                        <label for="lat" hidden>Latitude</label>
-                        <input type="text" id="lat" style="width: 200px" hidden />
-                        <label for="lng" hidden>Longitude</label>
-                        <input type="text" id="lng" style="width: 200px" hidden />
-                    </div>
-                    <!--To javascript maps-script prepei na allaksei-->
-                    <!-- Na elegxei to City tu XE2 j na allassei ta coordinates analoga-->
-                    <!--https://embed.plnkr.co/mfiPLrChUShIMLvpqjHI/ -->
                 </div>
             </div>
 
