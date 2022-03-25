@@ -92,6 +92,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
             return view('www.profile');
         });
 
+        Route::post('/profile', [SessionsController::class, 'edit']);
+
         Route::get('/my-reservations', function () {
             return view('www.reservations');
         });

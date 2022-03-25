@@ -46,37 +46,46 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <form method="POST" action="/profile" class="col-md-12">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label for="basicInput">Username</label>
+                                                <input type="text" value="{{Auth::guard('user3')->user()->username}}" 
+                                                class="form-control" id="username" name="username" readonly></input>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="basicInput">Username</label>
-                                            <input type="text" value="Giorkos" class="form-control" id="basicInput"
-                                                readonly>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="basicInput">Name</label>
+                                                <small class="text-muted"><i>(First and Last name)</i></small>
+                                                <input type="text" class="form-control" id="full_name" name="full_name"
+                                                    value="{{Auth::guard('user3')->user()->full_name}}">
+                                                <div style="color:red">{{$errors->first('full_name')}}</div>
 
-                                        <div class="form-group">
-                                            <label for="basicInput">Name</label>
-                                            <small class="text-muted"><i>(First and Last name)</i></small>
-                                            <input type="text" class="form-control" id="basicInput"
-                                                value='dummy'>
-                                        </div>
+                                            </div>
 
+                                            <div class="form-group">
+                                                <label for="basicInput">Email</label>
+                                                <input type="text" class="form-control" id="email" name="email"
+                                                    value="{{Auth::guard('user3')->user()->email}}" readonly>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="basicInput">Email</label>
-                                            <input type="text" class="form-control" id="basicInput"
-                                                value="ijsij@jsgsgj.com" readonly>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="basicInput">Phone number</label>
 
-                                        <div class="form-group">
-                                            <label for="basicInput">Phone number</label>
+                                                <input type="text" class="form-control" id="phone" name="phone" value="{{Auth::guard('user3')->user()->phone}}">
+                                                <div style="color:red">{{$errors->first('phone')}}</div>
+                                            </div>
 
-                                            <input type="text" class="form-control" id="basicInput" value="99818181">
-                                        </div>
+                                            {{--Hidden id, to show each time which user to update--}}
+                                            <div class="form-group">
+                                                <input type="hidden" class="form-control" id="id" name="id" value="{{Auth::guard('user3')->user()->id}}">
+                                            </div>
 
-                                        <div class="col-sm-12 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary me-1 mb-1">Change</button>
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">Save Changes</button>
 
-                                        </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

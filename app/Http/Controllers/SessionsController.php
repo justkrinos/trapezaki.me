@@ -12,6 +12,23 @@ use Illuminate\Http\Request;
 //FOR USER1
 class SessionsController extends Controller
 {
+    public function edit()
+    {
+        //User3 edit profile
+        $attributes = request()->validate([
+            'full_name' => 'required|max:50|min:3',
+            'phone' => 'required|digits_between:8,13|numeric',
+        ]);
+        //get the id of the user
+        $id = request()->validate(['id' => 'required']);
+
+        //$guest = User3::update($attributes);
+
+        User3::where('id', $id)->first()->update($attributes);
+
+        return redirect('/')->withInput()->with('success', 'Welcome back!');
+    }
+
     public function destroy()
     {
         auth('user3')->logout();
