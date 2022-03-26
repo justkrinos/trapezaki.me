@@ -48,7 +48,7 @@ class RegisterUser3 extends Controller
         //Make the account and add to db
         
 
-        $guest = User3::create($attributes);
+        $user = User3::create($attributes);
 
 
 

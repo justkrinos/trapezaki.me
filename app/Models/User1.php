@@ -18,4 +18,8 @@ class User1 extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $guarded = [];
+
+    public function setPasswordAttribute($password){
+        $this->attributes['password'] = bcrypt($password);
+    }
 }
