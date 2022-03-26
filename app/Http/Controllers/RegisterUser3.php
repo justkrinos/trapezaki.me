@@ -31,7 +31,7 @@ class RegisterUser3 extends Controller
             'password' => 'required|max:50|min:7|confirmed',
             'password_confirmation' => 'required'
         ]);
-        
+
         $request = request()->merge(['verification_code' => substr(md5(rand()),0,7)]);
 
         $attributes = $request->validate([
@@ -43,20 +43,19 @@ class RegisterUser3 extends Controller
         ]);
         //Must remove from $attributes
 
-        
+
 
         //Make the account and add to db
-        
+
 
         $user = User3::create($attributes);
 
 
-
-        $message='verify/'.\base64_encode($guest->email).'/'.\base64_encode($guest->verification_code);
-            //$message='verify/'.\base64_encode($this->email).'/'.\base64_encode($guest>verification_code).'/'.\base64_encode('user_type');
-              $subject = 'Email verification';
-              // Mail::to($guest->email)->queue(new \App\Mail\verification($subject,$message));
-               Mail::raw('Hello', function($message) {$message->to('as.efstathiou@edu.cut.ac.cy')->subject('test');});
+        // $message='verify/'.\base64_encode($guest->email).'/'.\base64_encode($guest->verification_code);
+        //     //$message='verify/'.\base64_encode($this->email).'/'.\base64_encode($guest>verification_code).'/'.\base64_encode('user_type');
+        //       $subject = 'Email verification';
+        //       // Mail::to($guest->email)->queue(new \App\Mail\verification($subject,$message));
+        //        Mail::raw('Hello', function($message) {$message->to('as.efstathiou@edu.cut.ac.cy')->subject('test');});
 
         //TODO: email verification
 
