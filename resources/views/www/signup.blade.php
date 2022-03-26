@@ -43,7 +43,7 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <form method="POST" action="/profile" class="col-md-6">
+                                <form method="POST" action="/signup" class="col-md-6">
                                     {{--To prevent csrf attacks--}}
                                     @csrf
                                     <div class="form-group">
