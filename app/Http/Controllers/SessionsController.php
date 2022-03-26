@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 //FOR USER1
 class SessionsController extends Controller
 {
-   
+
     //Edit user3 profile
     public function edit()
     {
@@ -33,7 +33,7 @@ class SessionsController extends Controller
 
 
 
-            return redirect('/profile')->with("success", "Doesn't work, idk why not!");
+            return redirect('/profile')->with("success", "Your changes have been applied successfully!");
         }
         //Change password
         else if(request()->has('form2'))
@@ -70,20 +70,20 @@ class SessionsController extends Controller
                 session()->flash('error','New Password cannot be the same as the old one!');
                 return redirect('/profile')->with("error", "New Password cannot be the same as the old one!");
             }
-   
+
             $id = $_POST['id'];
             //updating user password
             $user = User3::find($id);
             $user->password = $pass;
             $user->save();
-            
+
             //dd($user);
             //User3::where('id', $id)->first()->update($pass);
             //session()->flash('success','Your password has been updated');
-    
+
             return redirect('/profile')->with("success", "Your password has been updated");
         }
-        
+
     }
 
     public function destroy()
