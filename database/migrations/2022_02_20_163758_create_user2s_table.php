@@ -25,9 +25,9 @@ class CreateUser2sTable extends Migration
 
             $table->string('city');
             $table->string('address');
-            $table->int('postal');
-            $table->decimal('longitude');
-            $table->decimal('latitude');
+            $table->integer('postal');
+            $table->decimal('long');
+            $table->decimal('lat');
 
             $table->string('type');
             $table->boolean('status')->default(false);
@@ -39,8 +39,7 @@ class CreateUser2sTable extends Migration
             $table->decimal('floor_width')->default('500.0');
             $table->decimal('floor_length')->default('500.0');
             $table->text('description')->nullable();
-            $table->string('logo');
-            $table->string('photo')->nullable();
+
             //testing
             $table->string('verification_code',100)->nullable();
             $table->integer('is_verified')->nullable();
