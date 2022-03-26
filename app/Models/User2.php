@@ -10,8 +10,13 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+//O user2 einai taggable (eshei tags)
+use Cviebrock\EloquentTaggable\Taggable;
+
 class User2 extends Authenticatable
 {
+    // O user2 eshei tags (has-a relationship)
+    use Taggable;
     use HasFactory;
 
     protected $guard = 'user2';
