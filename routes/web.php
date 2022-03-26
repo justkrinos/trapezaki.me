@@ -6,6 +6,8 @@ use App\Http\Controllers\RegisterUser2;
 use App\Http\Controllers\User1Controller;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SessionsController2;
+use App\Http\Controllers\PhotosController;
+use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User2;
 use App\Models\User1;
@@ -117,6 +119,11 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/signup', [RegisterUser2::class, 'view']);
         Route::post('/signup', [RegisterUser2::class, 'create']);
+
+        Route::get('/api/tags', function(){
+            $tag = Tag::all()->pluck('name')->toArray();
+            return response($tag);
+        });
     });
 
 
