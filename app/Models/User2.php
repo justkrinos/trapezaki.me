@@ -33,4 +33,9 @@ class User2 extends Authenticatable
     public function setPasswordAttribute($password){
         $this->attributes['password'] = bcrypt($password);
     }
+
+    //for the relationship
+    public function getTagsRelation(){
+        return $this->hasMany(related: 'App\User2_Tag', foreignKey:'taggable_id', localKey:'id');
+    }
 }
