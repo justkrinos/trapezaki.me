@@ -80,7 +80,7 @@
                                     @foreach (App\Models\User2::all() as $user)
                                         <tr>
                                             <td class="col-8">
-                                                <a href="/seven-seas">
+                                                <a href="/user/{{$user->username}}">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
                                                             <img src="../assets/images/faces/5.jpg">

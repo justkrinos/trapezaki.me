@@ -184,7 +184,8 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
             return view('admin.pending-requests');
         });
 
-        Route::get('/seven-seas', function () {
+        Route::get('/user/{user}', function ($slug) {
+        
             return view('admin.manage-customer');
         });
 
