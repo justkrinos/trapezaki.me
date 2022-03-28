@@ -440,7 +440,7 @@
 
 {{-- Maps Api Dependencies --}}
 <script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCnLh3PZYlknu8YGxXDGDCMp7-Y__nGKo&libraries=places&callback=initMap">
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
 </script>
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
