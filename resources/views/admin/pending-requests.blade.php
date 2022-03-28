@@ -45,22 +45,23 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Date</th>
+                                            <th>Date/Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach (App\Models\User2::all() as $user)
+                                        @if ($user->status == 0)
                                         <tr>
                                             <td class="col-8 clicktoCust">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
                                                             <img src="../assets/images/faces/5.jpg">
                                                         </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                                        <p class="font-bold ms-3 mb-0">{{ $user->username }}</p>
                                                     </div>
-                                                </a>
                                             </td>
                                             <td class="clicktoCust">
-                                                <p class="mb-0" data-type="date" data-format="DD/MM/YYYY">07/12/2020</p>
+                                                <p class="mb-0" data-type="date" style="overflow: auto; height: 60px; width: 150px;" data-format="DD/MM/YYYY">{{ $user->created_at }}</p>
                                             </td>
                                             <td class="d-flex flex-nowrap">
                                                 <a href="#" class="btn btn-outline-danger">Decline</a>
@@ -68,43 +69,9 @@
                                             </td>
 
                                         </tr>
-                                        <tr>
-                                            <td class="col-8 clicktoCust">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/2.jpg">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si ioakim</p>
-                                                    </div>
-                                            </td>
-                                            <td class="clicktoCust">
-                                                <p class=" mb-0" data-type="date" data-format="DD/MM/YYYY">10/05/2021
-                                                </p>
-                                            </td>
-                                            <td class="d-flex flex-nowrap">
-                                                <a href="#" class="btn btn-outline-danger">Decline</a>
-                                                <a href="#" class="btn btn-outline-success">Accept</a>
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td class="col-8 clicktoCust">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/5.jpg">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                                                    </div>
-                                            </td>
-                                            <td class="clicktoCust">
-                                                <p class=" mb-0" data-type="date" data-format="DD/MM/YYYY">09/6/2021</p>
-                                            </td>
-                                            <td class="d-flex flex-nowrap">
-                                                <a href="#" class="btn btn-outline-danger">Decline</a>
-                                                <a href="#" class="btn btn-outline-success">Accept</a>
-                                            </td>
-
-                                        </tr>
+                                        @endif
+                                    @endforeach
+                                       
                                     </tbody>
                                 </table>
                             </div>
