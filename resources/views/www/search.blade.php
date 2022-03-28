@@ -110,6 +110,8 @@
                             <p class="text-subtitle text-muted">You searched for "bar" </p>
                         </div>
 
+
+                        @foreach (App\Models\User2::all() as $user)
                         <div class="card">
                             <div class="row-cols-1">
                                 <div class="card-header">
@@ -117,7 +119,7 @@
                                         <div class="avatar avatar-xl me-4">
                                             <img src="../assets/images/faces/3.jpg">
                                         </div>
-                                        <h4 class="card-title text-nowrap">Bordello Bar </h4>
+                                        <h4 class="card-title text-nowrap">{{ $user->business_name }}</h4>
                                         <div class="container" style="text-align: end;">
                                             <div class="text-danger">5 chairs left</div>
                                         </div>
@@ -125,76 +127,16 @@
                                 </div>
                                 <div class="flex card-body te">
                                     <p class="text-muted">
-                                        This is a description where you put a description inside the card that is the
-                                        actual description of the business that offers the data that the company
-                                        provided for description when they signed up so that will be displayed here and
-                                        lets see if it is truncated if its too long
+                                    {{ $user->description }}
                                     </p>
-                                    <p class="font-bold">Coffee, Food, Drinks</p>
-                                    <a href="/seven-seas" class="stretched-link"></a>
+                                    <p class="font-bold">{{ str_replace(":", ", ",ucfirst($user->type)) }}</p>
+                                    <a href="/user/{{$user->username}}" class="stretched-link"></a>
+                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="row-cols-1">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-xl me-4">
-                                            <img src="../assets/images/faces/3.jpg">
-                                        </div>
-                                        <h4 class="card-title text-nowrap">Bordello Bar </h4>
-                                        <div class="container" style="text-align: end;">
-                                            <div class="text-danger">5 chairs left</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex card-body te">
-                                    <p class="text-muted">
-                                        This is a description where you put a description inside the card that is the
-                                        actual description of the business that offers the data that the company
-                                        provided for description when they signed up so that will be displayed here and
-                                        lets see if it is truncated if its too long
-                                    </p>
-                                    <p class="font-bold">Coffee, Food, Drinks</p>
-                                    <a href="/seven-seas" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="row-cols-1">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div class="avatar avatar-xl me-4">
-                                            <img src="../assets/images/faces/3.jpg">
-                                        </div>
-                                        <h4 class="card-title text-nowrap">Bordello Bar </h4>
-                                        <div class="container" style="text-align: end;">
-                                            <div class="text-danger">5 chairs left</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex card-body te">
-                                    <p class="text-muted">
-                                        This is a description where you put a description inside the card that is the
-                                        actual description of the business that offers the data that the company
-                                        provided for description when they signed up so that will be displayed here and
-                                        lets see if it is truncated if its too long
-                                    </p>
-                                    <p class="font-bold">Coffee, Food, Drinks</p>
-                                    <a href="/seven-seas" class="stretched-link"></a>
-                                </div>
-                                <div class="flex card-body te">
-                                    <p class="text-muted">
-                                        This is a description where you put a description inside the card that is the
-                                        actual description of the business that offers the data that the company
-                                        provided for description when they signed up so that will be displayed here and
-                                        lets see if it is truncated if its too long
-                                    </p>
-                                    <p class="font-bold">Coffee, Food, Drinks</p>
-                                    <a href="/seven-seas" class="stretched-link"></a>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
+                        
 
                     </div>
 

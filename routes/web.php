@@ -33,7 +33,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.search');
     })->name('first_page');
 
-    Route::get('/seven-seas', function () {
+    Route::get('/user/{user}', function ($slug) {
         //TODO:
         //tuta prp nan /user/seven-seas gt meta isos exume thema me ta login j tuta
         //epd bori na eshi logariasmo me onom "login"
@@ -42,9 +42,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.selected-profile');
     });
 
-    Route::get('/seven-seas/book',[SessionsController::class, 'showBook']);
+    Route::get('/user/{user}/book',[SessionsController::class, 'showBook']);
 
-    Route::post('/seven-seas/book',[SessionsController::class, 'createBook']);
+    Route::post('/user/{user}/book',[SessionsController::class, 'createBook']);
 
 
 
