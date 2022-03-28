@@ -137,6 +137,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         });
 
         Route::get('/logout', [SessionsController2::class, 'destroy']);
+        
+        Route::post('/profile', [SessionsController2::class, 'edit']);
 
         Route::get('/edit-reservation', function () {
             return view('business.edit-resv');
