@@ -36,6 +36,12 @@
                 <h3>Manage Customer</h3>
             </header>
 
+            <?php 
+                $username = Request::segment(2);
+                $user_id = DB::table('user2s')->where('username', $username)->first()->id;
+                use App\Models\User2;
+            ?>
+
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
@@ -49,15 +55,17 @@
                                                 <img src="../assets/images/faces/1.jpg" alt="Face 1">
                                             </div>
                                             <div class="ms-3 name container">
-                                                <h5 class="font-bold">Business Name</h5>
-                                                <h6 class="text-muted mb-0">Company Name</h6>
+                                                <h5 class="font-bold">{{User2::find($user_id)->business_name}}</h5>
+                                                <h6 class="text-muted mb-0">{{User2::find($user_id)->company_name}}</h6>
                                             </div>
                                             <div class="dropdown">
-                                                <button class="btn btn-success dropdown-toggle me-1" type="button"
+                                                <?php $status = User2::find($user_id)->status ?>
+                                                <button class="btn btn-<?php if($status == 1){echo "success";} else {echo "danger";} ?> dropdown-toggle me-1" type="button"
                                                     id="dropdownMenuButton" data-bs-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
                                                     <!-- Tuto na to allassei aftomata o server -->
-                                                    Active
+                                                    
+                                                    <?php if($status == 1){echo "Active";} else {echo "Disabled";} ?>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a id="cust-active" class="dropdown-item">Active</a>
@@ -79,7 +87,7 @@
                         <h4 class="card-title">Description</h4>
                     </div>
                     <div class="card-body">
-                        <textarea class="form-control" id="description" rows="3">Text here</textarea>
+                        <textarea class="form-control" id="description" rows="3">{{User2::find($user_id)->description}}</textarea>
                     </div>
                 </div>
 
@@ -93,14 +101,14 @@
                             <div class="col-md-5">
                                 <label for="email">Email</label>
                                 <input type="text" id="email" class="form-control round"
-                                    value="letsgoout@letsgohome.com">
+                                    value="{{User2::find($user_id)->email}}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-2">
                                 <label for="phone">Phone Number</label>
-                                <input type="text" id="phone" class="form-control round" value="99818181">
+                                <input type="text" id="phone" class="form-control round" value="{{User2::find($user_id)->phone}}">
                             </div>
                         </div>
                     </div>
@@ -112,7 +120,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Reservation Management</h4>
+                                    <h4 class="card-title">Reservation Management(TODO)</h4>
                                 </div>
 
                                 <div class="card-body">
@@ -168,15 +176,19 @@
                     <div class="card-body">
                         <div class="form-check">
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" checked>
+                                <?php $type = User2::find($user_id)->type ?>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" 
+                                    <?php if(str_contains($type, "coffee")) {echo "checked";} ?>>
                                 <label for="checkbox1">Coffee</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" unchecked>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" 
+                                    <?php if(str_contains($type, "food")) {echo "checked";} ?>>
                                 <label for="checkbox1">Food</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" checked>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" 
+                                    <?php if(str_contains($type, "drinks")) {echo "checked";} ?>>
                                 <label for="checkbox1">Drinks</label>
                             </div>
                         </div>
@@ -346,11 +358,16 @@
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/status-cust.js"></script>
 
+{{-- Maps Api Dependencies --}}
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
+</script>
+<script type="text/javascript"
+src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+<script src="../assets/js/maps-script.js"></script>
+
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnTnFmCJUu_QEZiPRRReksNQtJuvpl2OQ&libraries=places&callback=initMap">
-</script>
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script src="../assets/js/maps-script.js"></script>
