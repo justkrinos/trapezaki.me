@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterUser2 extends Controller
 {
+
+
     public function view(){
         if(Auth::check('user2'))
             return redirect('/profile');
@@ -56,6 +58,8 @@ class RegisterUser2 extends Controller
              Check your email for verification.");
 
              //The message is shown ugly, idk why
+
+
     }
 
 }

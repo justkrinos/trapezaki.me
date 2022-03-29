@@ -44,6 +44,17 @@
                 <li
                     class="sidebar-item
 
+                        @if (request()->route()->uri === 'list-problems') active @endif
+
+                        ">
+                    <a href="/list-problems" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>View Reported Problems</span>
+                    </a>
+                </li>
+                <li
+                    class="sidebar-item
+
                         @if (request()->route()->uri === 'report-problem') active @endif
 
                         ">

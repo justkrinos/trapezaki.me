@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\issueControler;
+use App\Http\Controllers\issuesBusinessControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\RegisterUser2;
@@ -143,12 +144,17 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/profile', function () {
             return view('business.profile');
         });
+        Route::get('/list-problems', function () {
+            return view('business.list-problems');
+        });
 
         Route::get('/report-problem', function () {
             return view('business.report-problem');
         });
 
         Route::post('/report-problem',[issueControler::class,'store']);
+
+        Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
 
     });
 });
@@ -184,6 +190,9 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         });
 
         Route::get('/logout', [User1Controller::class, 'logout']);
+
+        Route::resource('/issues.', issueControler::class); //DOKIMI
+
     });
 });
 

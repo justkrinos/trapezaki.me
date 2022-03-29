@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <?php
+    use App\Models\User2;
+    use App\Models\Issue;
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +28,7 @@
         {{-- Include the sidebar from /business/components --}}
         @include('business.components.sidebar')
 
+
     </div>
     <div id="main">
         <header class="mb-3">
@@ -33,40 +37,72 @@
             </a>
         </header>
 
-        <div class="card">
-            <div class="card-content">
-                <div class="card-body">
-                    <h3>Report a Problem</h3>
 
-                    <form action="/report-problem" method="POST">
-                        @csrf
+
+        <section class="section">
+            <div class="card">
+
+                <div class="card-content">
+                    <div class="card-body">
+                        <h3>Previous Problems</h3>
                         <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <div class="input-group mb-3">
-                                    <label class="input-group-text" for="inputGroupSelect01">Type</label>
-                                    <select class="form-select" id="type" name="type">
-                                        <option value="Technical">Technical</option>
-                                        <option value="design Preference">Design Preference</option>
-                                        <option value="Change Account Details">Change Account Details</option>
-                                        <option value="Change Floor Plan">Change Floor Plan</option>
-                                    </select>
+                            <!-- Hoverable rows start -->
+                            <section class="section">
+                                <div class="row" id="table-hover-row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                <div class="card-body">
+                                                </div>
+                                                <!-- table hover -->
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover mb-0" id="probTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <!-- <th>ResNum</th> -->
+                                                                <th>Date</th>
+                                                                <th>Type</th>
+                                                                <th>Status</th>
+                                                                <!-- Analogws me ti ena epileksei na tu fkallei to analogo text -->
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $user2_id = Auth::guard('user2')->user()->id;
+                                                            $usernane = User2::find($user2_id)->username;
+                                                            ?>
+                                                            @foreach (App\Models\Issue::all() as $issue)
+                                                            @if($issue->user2_id == $user2_id)
+                                                              <tr class="probPopup">
+                                                                    <td class="date">{{ $issue->created_at }}
+                                                                    </td>
+                                                                    <td class="type">{{ $issue->type }}</td>
+                                                                    <td>
+                                                                        <span
+                                                                            class="status">{{ $issue->status }}</span>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
+                            </section>
+                            <!-- Hoverable rows end -->
                         </div>
-                        <div class="card">
-                            <h4 class="card-title" for="details">Details</h4>
-                            <textarea class="form-control" id="details" rows="2" name="details"></textarea>
-                        </div>
-                        <div class="col-sm-12 d-flex justify-content-start">
-                            <input type="submit" class="btn btn-primary" value="Submit Issue" />
-
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
+
+
+
+
 
     <!-- Modal starts here-->
     <div class="modal fade" id="probModal" tabindex="-1" role="dialog" aria-labelledby="probModalCenterTitle"
@@ -136,6 +172,4 @@
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
-
-
 <script src="../assets/js/prev-issues.js"></script>
