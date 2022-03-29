@@ -162,18 +162,9 @@
                         {{-- Hidden tag_id --}}
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="tag_id" name="tag_id"
-                                value="{{ $tag = User2_Tag::where('taggable_id', $id)->get(); }}">
+                                value="{{ $tags = User2_Tag::where('taggable_id', $id)->get(); }}">
                         </div>
-                       
-                        <?php
-                            $tag_ids = array();
-                            foreach ($tag as $key => $value) {
-                                array_push($tag_ids, $value->{"tag_id"});
-                            }
-                            
-                        ?>
 
-                        
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="tags_id" name="tags_id"
                                 value="{{ $test = Tag::where('tag_id', '2')->get() }}">
@@ -191,35 +182,21 @@
                                                                 <div class="row">
                                                                     <div class="col-md-7">
                                                                         @csrf
+                                                                        <?php $arr = array(); ?>
+                                                                        @foreach($tags as $tag)
+                                                                                        @foreach (App\Models\Tag::all() as $tag_get)
+                                                                                            @if($tag_get->tag_id==$tag->tag_id)
+                                                                                                <?php array_push($arr, $tag_get->name)?>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endforeach
                                                                         
                                                                         
                                                                         <input name="tags" id="tags" data-role="tagsinput"
                                                                             class="@error('tags.*') is-invalid @enderror
-                                                                            @error('tags') is-invalid @enderror" value=<?php
-                                                                                                                        $test = array();
-                                                                                                                        $numItems = count($tag_ids);
-                                                                                                                        $i=0;
-                                                                                                                        foreach($tag_ids as $tag_id)
-                                                                                                                        {
-                                                                                                                            array_push($test, Tag::where('tag_id', $tag_id)->get());
-                                                                                                                        }
-                                                                                                                        foreach ($test as $key => $value)
-                                                                                                                        {
-                                                                                                                        
-                                                                                                                            
-                                                                                                                            foreach ($value as $key2 => $value2)
-                                                                                                                            {
-                                                                                                                                
-                                                                                                                                echo $value2->{"name"};
-                                                                                                                                $i++;
-                                                                                                                                if($i < $numItems)
-                                                                                                                                {
-                                                                                                                                    echo ",";
-                                                                                                                                }
-                                                                                                                            }
-                                                                                                                            
-                                                                                                                        }
-                                                                                                                        ?>>
+                                                                            @error('tags') is-invalid @enderror" value=
+                                                                                <?php echo implode(",",$arr); ?>
+                                                                                >
 
                                                                         <div class="invalid-feedback">
                                                                             <i class="bx bx-radio-circle"></i>
