@@ -1,7 +1,8 @@
 $(document).ready(function () {
     // Click on table row
     $(".clicktoCust").click(function () {
-        window.location.href = "/user/seven-seas";
+        //fuck javascript
+        //window.location.href = "/user/";
     });
 });
 
