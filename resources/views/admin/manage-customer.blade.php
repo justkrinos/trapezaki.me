@@ -37,9 +37,10 @@
             </header>
 
             <?php 
+                use App\Models\User2;
                 $username = Request::segment(2);
                 $user_id = DB::table('user2s')->where('username', $username)->first()->id;
-                use App\Models\User2;
+               
             ?>
 
             <div class="page-heading">
