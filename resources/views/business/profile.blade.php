@@ -129,17 +129,19 @@
                                 <div class="checkbox">
                                     <input type="checkbox" id="checkbox1" class="form-check-input" 
                                         <?php $type = Auth::guard('user2')->user()->type ; 
+                                            
                                             if(str_contains($type, 'coffee'))
                                             {
                                                 echo "checked";
                                             }
                                         ?>>
                                     <label for="checkbox1">Coffee</label>
+                                    
                                 </div>
                                 <div class="checkbox">
                                     <input type="checkbox" id="checkbox1" class="form-check-input" 
                                         <?php 
-                                            if(str_contains($type, 'Food'))
+                                            if(str_contains($type, 'food'))
                                             {
                                                 echo "checked";
                                             }
@@ -149,7 +151,7 @@
                                 <div class="checkbox">
                                     <input type="checkbox" id="checkbox1" class="form-check-input" 
                                         <?php 
-                                            if(str_contains($type, 'Drinks'))
+                                            if(str_contains($type, 'drinks'))
                                             {
                                                 echo "checked";
                                             }
