@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 use App\Models\User2;
 use App\Models\Issue;
@@ -88,46 +89,58 @@ use App\Models\Issue;
                                         <tbody>
 
                                             @foreach (App\Models\Issue::all() as $issue)
-                                                <?php $issue_id = $issue->id; ?>
-                                                <tr id={{$issue_id}}>
-                                                    <td class="col-8 issueName">
-                                                        <!-- The popup opens with issues.js when class= issueName is cicked-->
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar avatar-md">
-                                                                <img src="../assets/images/faces/5.jpg">
+                                                    <?php $issue_id = $issue->id; ?>
+                                                    <tr id={{ $issue_id }}>
+                                                        <td class="col-8 issueName">
+                                                            <!-- The popup opens with issues.js when class= issueName is cicked-->
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar avatar-md">
+                                                                    <img src="../assets/images/faces/5.jpg">
+                                                                </div>
+                                                                <?php $user2_id = $issue->user2_id; ?>
+                                                                <p class="font-bold ms-3 mb-0">
+                                                                    {{ $username = User2::find($user2_id)->username }}
+                                                                </p>
                                                             </div>
-                                                           <?php $user2_id = $issue->user2_id; ?>
-                                                            <p class="font-bold ms-3 mb-0">
-                                                                {{ $username = User2::find($user2_id)->username }}</p>
-                                                            <!--DAME PREPI NA KATAFERO NA KALESO APLA TO USERNAME APO TO TABLE user2 KAI NA TO VADO STIN THESI TOU type -->
+                                                        </td>
+                                                        <td class="col-8 issueName">
+                                                            <p class=" mb-0">{{ $issue->created_at }}</p>
+                                                        </td>
+                                                        <!--To pass to JQuery -->
+                                                        <td class="issue-description" hidden>{{$issue->details}}</td>
+                                                        <td class="issue-business" hidden>{{$username}}</td>
+                                                        <td class="issue-type" hidden>{{$issue->type}}</td>
+                                                        <td class="d-flex flex-nowrap">
+
+
+
+                                                        <form action="/issues" method="POST">
+                                                        @csrf
+                                                        {{--Hidden ID--}}
+                                                        <input type="hidden" id="id" name="id"
+                                                                value="{{ $issue_id }}">
+                                                        <div class="form-group mb-3" style="width:300px;">
+                                                        <button type="submit" name="status" value="1"
+                                                                class="btn btn-outline-success text-nowrap <?php if($issue->status=='1') {echo "active";} ?>">Solved</button>
+
+                                                        <button type="submit" name="status" value="2"
+                                                                class="btn btn-outline-danger text-nowrap <?php if($issue->status=='2') {echo "active";} ?>">Can't
+                                                                be
+                                                                solved</button>
+
+                                                        </form>
+
+
+                                                           <form action="{{ route('admin.destroy',$issue->id) }}" method="POST">
+                                                              @csrf
+                                                              @method('DELETE')
+
+                                                             <button type="submit" class="btn btn-outline-dark text-nowrap">Delete</button>
+                                                           </form>
                                                         </div>
-                                                    </td>
-                                                    <td class="col-8 issueName">
-                                                        <p class=" mb-0">{{ $issue->created_at }}</p>
-                                                    </td>
-                                                    <td class="issue-description" hidden>{{$issue->details}}</td>
-                                                    <td class="issue-business" hidden>{{$username}}</td>
-                                                    <td class="issue-type" hidden>{{$issue->type}}</td>
-                                                    <td class="d-flex flex-nowrap">
-
-                                                        <!-- DOKIMASTIKO 109-115 -->
-                                                        <?php //   <form action="{{ route('admin.destroy',$issue->id) }}" method="POST">
-                                                        //  @csrf
-                                                        //  @method('DELETE')
-
-                                                        // <button type="submit" class="btn btn-danger">Delete</button> -->
-                                                        ?>
-
-                                                        <a href="#" class="greenButton"
-                                                            class="btn btn-outline-success text-nowrap <?php if($issue->status==1) {echo "Active";} ?>">Solved</a>
-
-                                                        <a href="#" class="redButton"
-                                                        class="btn btn-outline-danger text-nowrap <?php if($issue->status==2) {echo "Active";} ?>">Can't be
-                                                        solved</a>
-                                                    </td>
-                                                </tr>
+                                                            </td>
+                                                    </tr>
                                             @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -136,65 +149,65 @@ use App\Models\Issue;
                     </div>
                 </section>
 
-                <?php $issue = Issue::find(1); ?>
-                    <!-- Modal starts here-->
-                    <div class="modal fade" id="issueModal" tabindex="-1" role="dialog"
-                        aria-labelledby="issueModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
-                            role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="issueModalCenterTitle">Issue Details
-                                    </h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal"
-                                        aria-label="Close">
-                                        x
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <!-- body here-->
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-sm-10">
-                                                <div class="flex-nowrap input-group col-md-5 mb-4">
-                                                    <label class="input-group-text" for="issueBusiness">Issuer</label>
-                                                    <label type="text" class="form-control link-primary"
-                                                        id="issueBusiness" role="button">{{ $username }}</label>
-                                                    <!-- Ginetai redirect mesw tou script issues.js-->
-                                                </div>
-                                            </div>
 
-                                            <div class="col-sm-7">
-                                                <div class="d-flex input-group col-md-5 mb-4">
-                                                    <label class="input-group-text" for="issueType">Type</label>
-
-                                                    <label type="text" class="form-control" id="issueType">
-                                                        <p id="issueType" class=" mb-0">{{ $issue->type }}</p></label>
-                                                </div>
-                                            </div>
-
-                                            <br>
-                                            <br>
-                                            <div class="card">
-                                                <h4 class="card-title" for="issueTextArea">Description</h4>
-                                                <label class="form-control" id="issueTextArea">
-                                                    <p class=" mb-0">{{ $issue->details }}</p></label>
+                <!-- Modal starts here-->
+                <div class="modal fade" id="issueModal" tabindex="-1" role="dialog"
+                    aria-labelledby="issueModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                        role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="issueModalCenterTitle">Issue Details
+                                </h5>
+                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                    x
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- body here-->
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <div class="flex-nowrap input-group col-md-5 mb-4">
+                                                <label class="input-group-text" for="issueBusiness">Issuer</label>
+                                                <label type="text" class="form-control link-primary" id="issueBusiness"
+                                                    role="button">Si Cantik</label>
+                                                <!-- Ginetai redirect mesw tou script issues.js-->
                                             </div>
                                         </div>
+
+                                        <div class="col-sm-7">
+                                            <div class="d-flex input-group col-md-5 mb-4">
+                                                <label class="input-group-text" for="issueType">Type</label>
+                                                <label type="text" class="form-control" id="issueType">Design
+                                                    Preference</label>
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                        <br>
+                                        <div class="card">
+                                            <h4 class="card-title" for="issueTextArea">Description</h4>
+                                            <label class="form-control"  id="issueTextArea">The issue will be
+                                                written here and might be a long one but it doenst matter
+                                                because the lines can wrap and the modal can scroll down as much
+                                                as you want so that you can see the details written by the
+                                                business.</label>
+                                        </div>
                                     </div>
+                                </div>
 
 
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                        <i class="bx bx-x d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Close</span>
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                    <span class="d-none d-sm-block">Close</span>
+                                </button>
                             </div>
                         </div>
                     </div>
-
+                </div>
             </div>
         </div>
     </div>

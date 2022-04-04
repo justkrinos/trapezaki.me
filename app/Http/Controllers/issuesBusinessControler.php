@@ -12,6 +12,8 @@ class issuesBusinessControler extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    //We will see if we need it
     public function index()
     {
         $issues = Issue::all();
@@ -27,17 +29,9 @@ class issuesBusinessControler extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('business.report-problem');
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store()
     {
         $request = request()->merge(['user2_id' => Auth::guard('user2')->user()->id]);
 
@@ -48,10 +42,9 @@ class issuesBusinessControler extends Controller
             'user2_id' => 'required'
         ]);
 
-        Issue::create($request->all());
+        Issue::create($attribute);
 
-        return redirect()->route('report-problem.blade.php')
-            ->with('success', 'Problem Reported Successfully.');
+        return view('business.report-problem');
     }
 
     /**

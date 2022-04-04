@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <?php
-    use App\Models\User2;
-    use App\Models\Issue;
-    ?>
+<?php
+use App\Models\User2;
+use App\Models\Issue;
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
     <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 </head>
 
 <body>
@@ -72,17 +74,27 @@
                                                             $usernane = User2::find($user2_id)->username;
                                                             ?>
                                                             @foreach (App\Models\Issue::all() as $issue)
-                                                            @if($issue->user2_id == $user2_id)
-                                                              <tr class="probPopup">
-                                                                    <td class="date">{{ $issue->created_at }}
-                                                                    </td>
-                                                                    <td class="type">{{ $issue->type }}</td>
-                                                                    <td>
-                                                                        <span
-                                                                            class="status">{{ $issue->status }}</span>
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
+                                                                @if ($issue->user2_id == $user2_id)
+                                                                    <tr>
+                                                                        <td class="date probPopup">
+                                                                            {{ $issue->created_at }}
+                                                                        </td>
+                                                                        <td class="type">{{ $issue->type }}
+                                                                        </td>
+                                                                        <td>
+                                                                            <span
+                                                                                class="status"><?php
+                                                                                if($issue->status==0) {echo "Pending.";}
+                                                                                else if($issue->status==1) {echo "<p style='color:green;'>Solved!</p>";}
+                                                                                else if($issue->status==2) {echo "<p style='color:red;'>Cannot be solved...</p>";}
+                                                                                ?></span>
+                                                                        </td>
+                                                                        <td class="problem-description" hidden>
+                                                                            {{ $issue->details }}</td>
+                                                                        <td class="problem-type" hidden>
+                                                                            {{ $issue->type }}</td>
+                                                                    </tr>
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>
@@ -99,9 +111,6 @@
             </div>
         </section>
     </div>
-
-
-
 
 
     <!-- Modal starts here-->
@@ -121,11 +130,10 @@
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col-sm-7">
+                            <div class="col-sm-7 probPopup">
                                 <div class="d-flex input-group col-md-5 mb-4">
                                     <label class="input-group-text" for="issueType">Type</label>
-                                    <label type="text" class="form-control" id="issueType">Design
-                                        Preference</label>
+                                    <label type="text" class="form-control" id="issueType"></label>
                                 </div>
                             </div>
 
@@ -133,15 +141,7 @@
                             <br>
                             <div class="card">
                                 <h4 class="card-title" for="issueTextArea">Details</h4>
-                                <label class="form-control" id="issueTextArea">The issue
-                                    will be
-                                    written here and might be a long one but it doenst
-                                    matter
-                                    because the lines can wrap and the modal can scroll down
-                                    as much
-                                    as you want so that you can see the details written by
-                                    the
-                                    business.</label>
+                                <label class="form-control" id="issueTextArea"></label>
                             </div>
                         </div>
                     </div>
@@ -173,3 +173,9 @@
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/prev-issues.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+<script>$(document).ready( function () {
+    $('#probTable').DataTable();
+} );</script>

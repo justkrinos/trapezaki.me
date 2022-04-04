@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -24,58 +25,45 @@ class issueControler extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    //We will see if we need it
     public function index()
     {
         $issues = Issue::latest()->paginate(5);
 
-        return view('admin.issues',compact('issues'))
+        return view('admin.issues', compact('issues'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
 
-            $users = DB::table('users')->select('id','name','email')->get();
-            return view('some-view')->with('users', $users);
+        $users = DB::table('users')->select('id', 'name', 'email')->get();
+        return view('some-view')->with('users', $users);
     }
 
-
-
-
-    public function store()
+    public function flagIssue()
     {
-     //create the user `report`
-     //an grapso
+        //return request()->all();
+        $attribute = request()->validate([
+            'status' => 'required',
+            'id' => 'required'
+        ]);
+
+        //Issue::create($attribute);
+        $id = request()->validate(['id' => 'required']);
+
+        //$guest = User3::update($attributes);
+        if($attribute!=NULL)
+        {
+            Issue::where('id', $id)->first()->update($attribute);
+        }
 
 
-
-    $request = request()->merge(['user2_id' => Auth::guard('user2')->user()->id]);
-
-
-    $attribute = $request->validate
-     ([
-        'details' => 'required',
-        'type' => 'required',
-        'user2_id' => 'required'
-     ]);
-
-    Issue::create($attribute);
-
-    return request()-> all() ;
-     //return "ok";
-    //return view('business.report-problem');
-
-
+        return view('admin.issues');
     }
 
+    public function destroy($id)
+    {
+        $issue = Issue::findOrFail($id);
+        $issue->delete();
 
-    public function destroy(Issue $Issue)   //DOKIMASTIKO
-    {                                       //DOKIMASTIKO
-       $Issue->delete();                    //DOKIMASTIKO
-
-        return redirect()->route('admin.issues')    //DOKIMASTIKO
-                        ->with('faild ','Cant Be Solved your problem ');    //DOKIMASTIKO
-      }                                                                      //DOKIMASTIKO
-
-
-
+        return redirect()->route('admin.index');
+    }
 }
-
-
-?>

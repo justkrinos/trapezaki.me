@@ -152,7 +152,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
             return view('business.report-problem');
         });
 
-        Route::post('/report-problem',[issueControler::class,'store']);
+        Route::post('/report-problem',[issuesBusinessControler::class,'store']);
 
         Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
 
@@ -177,6 +177,12 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
             return view('admin.issues');
         });
 
+        Route::post('/issues', [issueControler::class, 'flagIssue']);
+
+        Route::get('/destroy', function () {
+            return view('admin.destroy');
+        });
+
         Route::get('/pending-requests', function () {
             return view('admin.pending-requests');
         });
@@ -195,6 +201,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
     });
 });
+Route::resource('admin', issueControler::class);
 
 //Gia otidipote allo na kamume
 //abort(404);
