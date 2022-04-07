@@ -4,11 +4,21 @@ $(document).ready(function () {
     $(".issueName").click(function () {
         //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
         //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
-        $("#issueModal").modal('show')
+        $description = $(this).siblings(".issue-description").html();
+        $issuer = $(this).siblings(".issue-business").html();
+        $type = $(this).siblings(".issue-type").html();
+
+        $("#issueTextArea").html($description);
+        $("#issueBusiness").html($issuer);
+        $("#issueType").html($type);
+
+
+
+        $("#issueModal").modal('show');
     })
 
     $("#issueBusiness").click(function () {
-        window.location.href = "/seven-seas";
+        window.location.href = "/manage-customers" + "/" + $(this).html();
     })
 
     //TODO: if issue.status == solved then

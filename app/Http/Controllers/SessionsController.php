@@ -106,6 +106,7 @@ class SessionsController extends Controller
         //Validate the data
         //TODO: na dulefki j me email
         $request = request()->merge(['guest' => 0]);
+
         $attributes = $request->validate([
             'username' => 'required',
             'password' => 'required',

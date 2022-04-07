@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\issueControler;
+use App\Http\Controllers\issuesBusinessControler;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\RegisterUser2;
@@ -24,9 +26,6 @@ use App\Models\User1;
 */
 
 
-
-
-
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/make-a-reservation', function () {
@@ -38,7 +37,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         //tuta prp nan /user/seven-seas gt meta isos exume thema me ta login j tuta
         //epd bori na eshi logariasmo me onom "login"
         //extos an kamume blacklist
-        //j gia to pukatw route to idio
+        //j gia to pukatw   route to idio
         return view('www.selected-profile');
     });
 
@@ -155,10 +154,18 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/profile', function () {
             return view('business.profile');
         });
+        Route::get('/list-problems', function () {
+            return view('business.list-problems');
+        });
 
         Route::get('/report-problem', function () {
             return view('business.report-problem');
         });
+
+        Route::post('/report-problem',[issuesBusinessControler::class,'store']);
+
+        Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
+
     });
 });
 
@@ -172,13 +179,20 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::post('/login', [User1Controller::class, 'login']);
     });
 
+
+
+
     Route::middleware(['auth:user1'])->group(function () {
+
         Route::get('/manage-customers', function () {
             return view('admin.manage-customers');
         });
         Route::get('/issues', function () {
             return view('admin.issues');
         });
+
+        Route::post('/issues', [issueControler::class, 'flagIssue']);
+
 
         Route::get('/pending-requests', function () {
             return view('admin.pending-requests');
@@ -194,6 +208,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         });
 
         Route::get('/logout', [User1Controller::class, 'logout']);
+
     });
 });
 
@@ -219,3 +234,4 @@ Route::get('/', function(){
 
 //Gia otidipote allo na kamume
 //abort(404);
+

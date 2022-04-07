@@ -2,11 +2,21 @@
 data_resv();
 modalpop();
 
+
 function modalpop(){
 $(".probPopup").click(function () {
     //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
     //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
-    $("#probModal").modal('show')
+
+    $descriptionProblem = $(this).siblings(".problem-description").html();
+    $typeProblem = $(this).siblings(".problem-type").html();
+
+
+    $("#issueTextArea").html($descriptionProblem);
+    $("#issueType").html($typeProblem);
+
+    $("#probModal").modal('show');
+
 })
 
 }
@@ -33,3 +43,4 @@ function data_resv() {
     });
 
 }
+

@@ -37,122 +37,36 @@
             <div class="card-content">
                 <div class="card-body">
                     <h3>Report a Problem</h3>
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="inputGroupSelect01">Type</label>
-                                <select class="form-select" id="inputGroupSelect01">
-                                    <option value="1">Technical</option>
-                                    <option value="2">Design Preference</option>
-                                    <option value="3">Change Account Details</option>
-                                    <option value="4">Change Floor Plan</option>
-                                </select>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="card">
-                        <h4 class="card-title" for="details">Details</h4>
-                        <textarea class="form-control" id="details" rows="2"></textarea>
-                    </div>
-                    <div class="col-sm-12 d-flex justify-content-start">
-                        <form action="user2-profile.html">
+                    <form action="/report-problem" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="inputGroupSelect01">Type</label>
+                                    <select class="form-select" id="type" name="type">
+                                        <option value="Technical">Technical</option>
+                                        <option value="Design Preference">Design Preference</option>
+                                        <option value="Change Account Details">Change Account Details</option>
+                                        <option value="Change Floor Plan">Change Floor Plan</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="card">
+                            <h4 class="card-title" for="details">Details</h4>
+                            <textarea class="form-control" id="details" rows="2" name="details"></textarea>
+                        </div>
+                        <div class="col-sm-12 d-flex justify-content-start">
                             <input type="submit" class="btn btn-primary" value="Submit Issue" />
-                        </form>
-                    </div>
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <section class="section">
-            <div class="card">
-
-                <div class="card-content">
-                    <div class="card-body">
-                        <h3>Previous Problems</h3>
-                        <div class="row">
-                            <!-- Hoverable rows start -->
-                            <section class="section">
-                                <div class="row" id="table-hover-row">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                </div>
-                                                <!-- table hover -->
-                                                <div class="table-responsive">
-                                                    <table class="table table-hover mb-0" id="probTable">
-                                                        <thead>
-                                                            <tr>
-                                                                <!-- <th>ResNum</th> -->
-                                                                <th>Date</th>
-                                                                <th>Type</th>
-                                                                <th>Status</th>
-                                                                <!-- Analogws me ti ena epileksei na tu fkallei to analogo text -->
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr class="probPopup">
-                                                                <td class="date">25/02/2020</td>
-                                                                <td class="type">Technical</td>
-                                                                <td>
-                                                                    <span class="status">Solved</span>
-                                                                </td>
-
-                                                            </tr>
-                                                            <tr class="probPopup">
-                                                                <td class="date">25/02/2020</td>
-                                                                <td class="type">Technical</td>
-                                                                <td>
-                                                                    <span class="status">Solved</span>
-                                                                </td>
-
-                                                            </tr>
-                                                            <tr class="probPopup">
-                                                                <td class="date">05/02/2020</td>
-                                                                <td class="type">Design</td>
-                                                                <td>
-                                                                    <span class="status">Solved</span>
-                                                                </td>
-
-                                                            </tr>
-                                                            <tr class="probPopup">
-                                                                <td class="date">10/02/2020</td>
-                                                                <td class="type">Technical</td>
-                                                                <td>
-                                                                    <span class="status">Solved</span>
-                                                                </td>
-
-                                                            </tr>
-                                                            <tr class="probPopup">
-                                                                <td class="date">22/02/2020</td>
-                                                                <td class="type">Technical</td>
-                                                                <td>
-                                                                    <span class="status">Solved</span>
-                                                                </td>
-
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <!-- Hoverable rows end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
     </div>
-
-
-
-
 
     <!-- Modal starts here-->
     <div class="modal fade" id="probModal" tabindex="-1" role="dialog" aria-labelledby="probModalCenterTitle"

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+use App\Models\User2;
+use App\Models\Issue;
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +16,7 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/vendors/iconly/bold.css">
 
-    <!-- Datatable Css Include -->
+     {{-- Datatable Css Include --}}
     <link rel="stylesheet" href="../assets/vendors/simple-datatables/style.css">
 
     <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
@@ -23,7 +28,7 @@
 <body>
     <div id="app">
 
-        @include("admin.components.sidebar")
+        @include('admin.components.sidebar')
 
         <div id="main">
             <header class="mb-3">
@@ -82,67 +87,45 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="col-8 issueName" >
-                                                        <!-- The popup opens with issues.js when class= issueName is cicked-->
+
+                                            @foreach (Issue::all() as $issue)
+                                                <tr id={{ $issue->id }}>
+                                                    <td class="col-8 issueName">
+                                                        {{-- The popup opens with issues.js when class= issueName is cicked --}}
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar avatar-md">
                                                                 <img src="../assets/images/faces/5.jpg">
                                                             </div>
-                                                            <p class="font-bold ms-3 mb-0">Si Cantik</p>
+                                                            <p class="font-bold ms-3 mb-0">
+                                                                {{ $username = User2::find($issue->user2_id)->username }}
+                                                            </p>
                                                         </div>
-                                                </td>
-                                                <td class="col-8 issueName">
-                                                    <p class=" mb-0">07/12/2020</p>
-                                                </td>
-                                                <td class="d-flex flex-nowrap">
-                                                    <a href="#" class="btn btn-outline-danger text-nowrap active">Can't
-                                                        be
-                                                        solved</a>
-                                                    <a href="#" class="btn btn-outline-success text-nowrap">Solved</a>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td class="col-8 issueName">
+                                                        <p class=" mb-0">{{ $issue->created_at }}</p>
+                                                    </td>
+                                                    {{-- To pass to JQuery --}}
+                                                    <td class="issue-description" hidden>{{ $issue->details }}</td>
+                                                    <td class="issue-business" hidden>{{ $username }}</td>
+                                                    <td class="issue-type" hidden>{{ $issue->type }}</td>
+                                                    <td class="d-flex flex-nowrap">
 
-                                            <tr>
-                                                <td class="col-8 issueName">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/2.jpg">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si ioakim</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-8 issueName">
-                                                    <p class="mb-0">10/05/2021</p>
-                                                </td>
-                                                <td class="d-flex flex-nowrap">
-                                                    <a href="#" class="btn btn-outline-danger text-nowrap">Can't be
-                                                        solved</a>
-                                                    <a href="#"
-                                                        class="btn btn-outline-success text-nowrap active">Solved</a>
-                                                </td>
 
-                                            </tr>
 
-                                            <tr>
-                                                <td class="col-8 issueName">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/2.jpg">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si IoRa</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-8 issueName">
-                                                    <p class="mb-0">10/05/2021</p>
-                                                </td>
-                                                <td class="d-flex flex-nowrap">
-                                                    <a href="#" class="btn btn-outline-danger text-nowrap">Can't be
-                                                        solved</a>
-                                                    <a href="#" class="btn btn-outline-success text-nowrap">Solved</a>
-                                                </td>
+                                                        <form action="/issues" method="POST">
+                                                            @csrf
+                                                            {{-- Hidden ID --}}
+                                                            <input type="hidden" id="id" name="id"
+                                                                value="{{ $issue->id }}">
+                                                            <div class="form-group mb-3" style="width:300px;">
+                                                                <button type="submit" name="status" value="1"
+                                                                    class="btn btn-outline-success text-nowrap @if($issue->status == '1') active @endif " >Solved</button>
 
-                                            </tr>
+                                                                <button type="submit" name="status" value="2"
+                                                                    class="btn btn-outline-danger text-nowrap  @if($issue->status == '2') active @endif">Can't be solved</button>
+                                                            </div>
+                                                        </form>
+                                                @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -152,66 +135,66 @@
                 </section>
 
 
-                <!-- Modal starts here-->
-                <div class="modal fade" id="issueModal" tabindex="-1" role="dialog"
-                    aria-labelledby="issueModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
-                        role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="issueModalCenterTitle">Issue Details
-                                </h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                    x
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- body here-->
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-10">
-                                            <div class="flex-nowrap input-group col-md-5 mb-4">
-                                                <label class="input-group-text" for="issueBusiness">Issuer</label>
-                                                <label type="text" class="form-control link-primary" id="issueBusiness"
-                                                    role="button">Si Cantik</label>
-                                                <!-- Ginetai redirect mesw tou script issues.js-->
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-7">
-                                            <div class="d-flex input-group col-md-5 mb-4">
-                                                <label class="input-group-text" for="issueType">Type</label>
-                                                <label type="text" class="form-control" id="issueType">Design
-                                                    Preference</label>
-                                            </div>
-                                        </div>
-
-                                        <br>
-                                        <br>
-                                        <div class="card">
-                                            <h4 class="card-title" for="issueTextArea">Description</h4>
-                                            <label class="form-control" id="issueTextArea">The issue will be
-                                                written here and might be a long one but it doenst matter
-                                                because the lines can wrap and the modal can scroll down as much
-                                                as you want so that you can see the details written by the
-                                                business.</label>
+            {{-- Modal starts here --}}
+            <div class="modal fade" id="issueModal" tabindex="-1" role="dialog"
+                aria-labelledby="issueModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                    role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="issueModalCenterTitle">Issue Details
+                            </h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                x
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                             {{-- body here --}}
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <div class="flex-nowrap input-group col-md-5 mb-4">
+                                            <label class="input-group-text" for="issueBusiness">Issuer</label>
+                                            <label type="text" class="form-control link-primary" id="issueBusiness"
+                                                role="button">Si Cantik</label>
+                                            {{-- Ginetai redirect mesw tou script issues.js --}}
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-7">
+                                        <div class="d-flex input-group col-md-5 mb-4">
+                                            <label class="input-group-text" for="issueType">Type</label>
+                                            <label type="text" class="form-control" id="issueType">Design
+                                                Preference</label>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <br>
+                                    <div class="card">
+                                        <h4 class="card-title" for="issueTextArea">Description</h4>
+                                        <label class="form-control" id="issueTextArea">The issue will be
+                                            written here and might be a long one but it doenst matter
+                                            because the lines can wrap and the modal can scroll down as much
+                                            as you want so that you can see the details written by the
+                                            business.</label>
+                                    </div>
                                 </div>
+                            </div>
 
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Close</span>
-                                </button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                <i class="bx bx-x d-block d-sm-none"></i>
+                                <span class="d-none d-sm-block">Close</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -235,7 +218,7 @@
 
 </html>
 
-<!-- Datatable Js Include -->
+ {{-- Datatable Js Include  --}}
 <script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

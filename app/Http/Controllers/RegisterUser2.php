@@ -9,11 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterUser2 extends Controller
 {
-    public function view()
-    {
-        if (Auth::check('user2'))
+    public function view(){
+        if(Auth::check('user2'))
             return redirect('/profile');
-
         return view('business.signup');
     }
 
@@ -104,6 +102,7 @@ class RegisterUser2 extends Controller
 
         return redirect('/login')->with('success', "Your account has been created successfully!
              Check your email for verification.");
+
 
         //The message is shown ugly, idk why
     }
