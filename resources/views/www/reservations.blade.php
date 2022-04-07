@@ -23,6 +23,9 @@
 
 <body>
     <div id="app">
+    {{-- TODO: na mpoun popups gia ta ratings
+    j pano sto username j sta list items tu
+    j sto sidebar dipla gia ulla ta pages--}}
 
         @include("www.components.sidebar")
 
@@ -32,11 +35,11 @@
 
             <div id="main-content">
 
-                <div class="page-heading">
+                <div class="container card-transparent mb-4">
                     <h3>My Reservations</h3>
                 </div>
 
-                <div class="card">
+                <div class="container card">
                     <div class="card-content">
                         <div class="card-body">
                             <div class="row">
@@ -305,7 +308,7 @@
                                         <br>
                                         <br>
                                         <div class="card">
-                                            <h7 class="" for="myresvTextArea">Details</h7>
+                                            <h6 class="" for="myresvTextArea">Details</h6>
                                             <label class="form-control" id="myresvTextArea">The description
                                                 will be
                                                 written here and might be a long one but it doenst matter
@@ -385,4 +388,4 @@
 <script src="../assets/vendors/rater-js/rater-js.js"></script>
 <script src="../assets/js/my-resv.js"></script>
 
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/main-nosidepop.js"></script>
