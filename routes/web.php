@@ -169,7 +169,11 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::post('/login', [User1Controller::class, 'login']);
     });
 
+
+
+
     Route::middleware(['auth:user1'])->group(function () {
+
         Route::get('/manage-customers', function () {
             return view('admin.manage-customers');
         });
@@ -179,9 +183,6 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
         Route::post('/issues', [issueControler::class, 'flagIssue']);
 
-        Route::get('/destroy', function () {
-            return view('admin.destroy');
-        });
 
         Route::get('/pending-requests', function () {
             return view('admin.pending-requests');
