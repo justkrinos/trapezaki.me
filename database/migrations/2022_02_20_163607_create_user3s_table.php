@@ -26,7 +26,10 @@ class CreateUser3sTable extends Migration
             $table->boolean('guest')->default(False);
             $table->boolean('status')->default(False);
             $table->rememberToken();
-            $table->timestamp('email_verified_at')->nullable(); //to verify email
+            //testing
+            $table->string('verification_code',100)->nullable();
+            $table->integer('is_verified')->nullable();
+            //
             $table->timestamps();
         });
     }
