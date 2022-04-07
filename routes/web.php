@@ -169,13 +169,34 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::post('/login', [User1Controller::class, 'login']);
     });
 
+
+
+
     Route::middleware(['auth:user1'])->group(function () {
+
         Route::get('/manage-customers', function () {
             return view('admin.manage-customers');
         });
+
+
+
+       // Route::get('/issue-previous', function () {
+          //  return view('admin.issue-previous');
+        // });
+
+        //Route::get('/seven-seas', function () {
+          //  return view('admin.issue-previous');
+       // });
+
+
+
         Route::get('/issues', function () {
             return view('admin.issues');
         });
+
+         Route::get('/issue-previous', function () {
+            return view('admin.issue-previous-list');
+         });
 
         Route::post('/issues', [issueControler::class, 'flagIssue']);
 

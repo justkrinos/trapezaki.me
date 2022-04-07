@@ -128,8 +128,11 @@ use App\Models\Issue;
                                                                 be
                                                                 solved</button>
 
-                                                        </form>
+                                                                <button type="submit" name="hidden" value="1"
+                                                                 class="btn btn-outline-warning text-nowrap">Hide</button>
 
+
+                                                            </form>
 
                                                            <form action="{{ route('admin.destroy',$issue->id) }}" method="POST">
                                                               @csrf

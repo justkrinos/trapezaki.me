@@ -19,6 +19,7 @@ class CreateIssuesTable extends Migration
             $table->string('type');
             $table->text('details');
             $table->boolean('status')->default(0);
+            $table->boolean('hidden')->default(0);
             $table->timestamps();
 
 

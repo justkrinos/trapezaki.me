@@ -43,7 +43,9 @@ class issueControler extends Controller
         //return request()->all();
         $attribute = request()->validate([
             'status' => 'required',
+            'hidden' => 'required',
             'id' => 'required'
+
         ]);
 
         //Issue::create($attribute);
