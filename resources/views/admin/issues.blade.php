@@ -113,6 +113,7 @@ use App\Models\Issue;
 
 
                                                         <form action="/issues" method="POST">
+<<<<<<< HEAD
                                                             @csrf
                                                             {{-- Hidden ID --}}
                                                             <input type="hidden" id="id" name="id"
@@ -126,6 +127,37 @@ use App\Models\Issue;
                                                             </div>
                                                         </form>
                                                 @endforeach
+=======
+                                                        @csrf
+                                                        {{--Hidden ID--}}
+                                                        <input type="hidden" id="id" name="id"
+                                                                value="{{ $issue_id }}">
+                                                        <div class="form-group mb-3" style="width:300px;">
+                                                        <button type="submit" name="status" value="1"
+                                                                class="btn btn-outline-success text-nowrap <?php if($issue->status=='1') {echo "active";} ?>">Solved</button>
+
+                                                        <button type="submit" name="status" value="2"
+                                                                class="btn btn-outline-danger text-nowrap <?php if($issue->status=='2') {echo "active";} ?>">Can't
+                                                                be
+                                                                solved</button>
+
+                                                                <button type="submit" name="hidden" value="1"
+                                                                 class="btn btn-outline-warning text-nowrap">Hide</button>
+
+
+                                                            </form>
+
+                                                           <form action="{{ route('admin.destroy',$issue->id) }}" method="POST">
+                                                              @csrf
+                                                              @method('DELETE')
+
+                                                             <button type="submit" class="btn btn-outline-dark text-nowrap">Delete</button>
+                                                           </form>
+                                                        </div>
+                                                            </td>
+                                                    </tr>
+                                            @endforeach
+>>>>>>> 3ab6e9e01c018ccaa7d0c84e9b4b67bf306be6db
                                         </tbody>
                                     </table>
                                 </div>
