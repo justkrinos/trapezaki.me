@@ -16,6 +16,12 @@ class SessionsController extends Controller
     //Edit user3 profile
     public function edit()
     {
+
+        //##TODO:
+        //-Se tuntes formes na sasun ta error messages
+        //-Na ginunte kochina ta input boxes j na mpenni to error me to class tou pukatw
+        //-Ta error messages kapies fores ennen sta sosta field na sasun
+
         //Both change password and edit profile are here
         if(request()->has('form1'))
         {
@@ -24,8 +30,9 @@ class SessionsController extends Controller
                 'full_name' => 'required|max:50|min:3',
                 'phone' => 'required|digits_between:8,13|numeric',
             ]);
+
             //get the id of the user
-            $id = request()->validate(['id' => 'required']);
+            $id = Auth::guard('user3')->user()->id;
 
             //$guest = User3::update($attributes);
 
@@ -39,20 +46,14 @@ class SessionsController extends Controller
         else if(request()->has('form2'))
         {
              //get the id of the user
-            $id = request()->validate(['id' => 'required', 'username' => 'required']);
+            $id = Auth::guard('user3')->user()->id;
 
-            //dd(bcrypt($_POST['old-password']));
-
-            //$_POST["username"] = User3::find($id)->username;
-
+            $request = request()->merge([ 'username' => Auth::guard('user3')->user()->username]);
+            $oldPassword = request()->validate(['username' => 'required', 'password' => 'required']);
 
 
-            $oldPassword = request()->validate(['username' => 'required', 'password' => 'required|max:50|min:7']);
-
-            //dd($oldPassword);
             if (!Auth::guard('user3')->attempt($oldPassword))
             {
-                session()->flash('error','Wrong old password!');
                 return redirect('/profile')->with("error", "Wrong old password!");
             }
 
@@ -71,7 +72,7 @@ class SessionsController extends Controller
                 return redirect('/profile')->with("error", "New Password cannot be the same as the old one!");
             }
 
-            $id = $_POST['id'];
+
             //updating user password
             $user = User3::find($id);
             $user->password = $pass;
