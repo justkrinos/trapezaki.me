@@ -46,7 +46,7 @@
                                     <label class="input-group-text" for="inputGroupSelect01">Type</label>
                                     <select class="form-select" id="type" name="type">
                                         <option value="Technical">Technical</option>
-                                        <option value="design Preference">Design Preference</option>
+                                        <option value="Design Preference">Design Preference</option>
                                         <option value="Change Account Details">Change Account Details</option>
                                         <option value="Change Floor Plan">Change Floor Plan</option>
                                     </select>
