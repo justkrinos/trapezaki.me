@@ -26,7 +26,7 @@
 <body>
     <div id="app">
 
-        @include("admin.components.sidebar")
+        @include('admin.components.sidebar')
 
         <div id="main">
             <header class="mb-3">
@@ -35,6 +35,13 @@
                 </a>
                 <h3>Manage Customer</h3>
             </header>
+
+            <?php 
+                use App\Models\User2;
+                $username = Request::segment(2);
+                $user_id = DB::table('user2s')->where('username', $username)->first()->id;
+               
+            ?>
 
             <div class="page-heading">
                 <div class="page-title">
@@ -49,15 +56,17 @@
                                                 <img src="../assets/images/faces/1.jpg" alt="Face 1">
                                             </div>
                                             <div class="ms-3 name container">
-                                                <h5 class="font-bold">Business Name</h5>
-                                                <h6 class="text-muted mb-0">Company Name</h6>
+                                                <h5 class="font-bold">{{User2::find($user_id)->business_name}}</h5>
+                                                <h6 class="text-muted mb-0">{{User2::find($user_id)->company_name}}</h6>
                                             </div>
                                             <div class="dropdown">
-                                                <button class="btn btn-success dropdown-toggle me-1" type="button"
+                                                <?php $status = User2::find($user_id)->status ?>
+                                                <button class="btn btn-<?php if($status == 1){echo "success";} else {echo "danger";} ?> dropdown-toggle me-1" type="button"
                                                     id="dropdownMenuButton" data-bs-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
                                                     <!-- Tuto na to allassei aftomata o server -->
-                                                    Active
+                                                    
+                                                    <?php if($status == 1){echo "Active";} else {echo "Disabled";} ?>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a id="cust-active" class="dropdown-item">Active</a>
@@ -79,7 +88,7 @@
                         <h4 class="card-title">Description</h4>
                     </div>
                     <div class="card-body">
-                        <textarea class="form-control" id="description" rows="3">Text here</textarea>
+                        <textarea class="form-control" id="description" rows="3">{{User2::find($user_id)->description}}</textarea>
                     </div>
                 </div>
 
@@ -93,14 +102,14 @@
                             <div class="col-md-5">
                                 <label for="email">Email</label>
                                 <input type="text" id="email" class="form-control round"
-                                    value="letsgoout@letsgohome.com">
+                                    value="{{User2::find($user_id)->email}}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-2">
                                 <label for="phone">Phone Number</label>
-                                <input type="text" id="phone" class="form-control round" value="99818181">
+                                <input type="text" id="phone" class="form-control round" value="{{User2::find($user_id)->phone}}">
                             </div>
                         </div>
                     </div>
@@ -112,7 +121,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Reservation Management</h4>
+                                    <h4 class="card-title">Reservation Management(TODO)</h4>
                                 </div>
 
                                 <div class="card-body">
@@ -168,15 +177,19 @@
                     <div class="card-body">
                         <div class="form-check">
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" checked>
+                                <?php $type = User2::find($user_id)->type ?>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" 
+                                    <?php if(str_contains($type, "coffee")) {echo "checked";} ?>>
                                 <label for="checkbox1">Coffee</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" unchecked>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" 
+                                    <?php if(str_contains($type, "food")) {echo "checked";} ?>>
                                 <label for="checkbox1">Food</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" checked>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" 
+                                    <?php if(str_contains($type, "drinks")) {echo "checked";} ?>>
                                 <label for="checkbox1">Drinks</label>
                             </div>
                         </div>
@@ -259,38 +272,78 @@
                 </div>
 
 
-                <div class="card">
+                <div class="card" href="#location">
                     <div class="card-header">
                         <h4 class="card-title">Location</h4>
                     </div>
+
                     <div class="card-body">
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <input type="text" id="location" class="form-control round" value="99818181">
-                            </div>
+                        <div class="col-md-6 col-12 mb-1">
+                            <input type="text" id="location" class="form-control round" name="location">
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-2">
-                                <div id="us2" style="width: 500px; height: 400px;"></div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-md-6 col-12 mb-2">
+                                <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
                             </div>
+
+                            <div class="col-md-6 col-12">
+
+                                <div class="row flex">
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Lat</label>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="lat" class="form-control" value="" name="lat"
+                                            disabled>
+                                    </div>
+
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Long</label>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="long" class="form-control" value="" name="long"
+                                            disabled>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">Address</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="address" class="form-control" name="address" value="">
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label text-nowrap">Zip Code</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="zip" class="form-control" name="zip" value="">
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">City</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="city" class="form-control" value="" name="city">
+                                </div>
+
+                            </div>
+
                         </div>
+
+
+
                     </div>
 
-                    <div class="form-group col-md-2 d-flex">
-                        <label for="lat" hidden>Latitude</label>
-                        <input type="text" id="lat" style="width: 200px" hidden />
-                        <label for="lng" hidden>Longitude</label>
-                        <input type="text" id="lng" style="width: 200px" hidden/>
-                    </div>
-                    <!--To javascript maps-script prepei na allaksei-->
-                    <!-- Na elegxei to City tu XE2 j na allassei ta coordinates analoga-->
-                    <!--TODO: na rotisume ton kathigiti an en ok na afikume extsi xoris to license tis google-->
-                    <!--https://embed.plnkr.co/mfiPLrChUShIMLvpqjHI/ -->
                 </div>
             </div>
 
             <footer>
-            <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
+                <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
             </footer>
         </div>
     </div>
@@ -306,9 +359,16 @@
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/status-cust.js"></script>
 
+{{-- Maps Api Dependencies --}}
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
+</script>
+<script type="text/javascript"
+src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+<script src="../assets/js/maps-script.js"></script>
+
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
 <script type="text/javascript"
-    src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script src="../assets/js/maps-script.js"></script>

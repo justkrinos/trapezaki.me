@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php 
+    $username = Request::segment(2);
+    $user_id = DB::table('user2s')->where('username', $username)->first()->id;
+    use App\Models\User2;
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +44,7 @@
                                     <img src="../assets/images/faces/1.jpg" alt="Face 1">
                                 </div>
                                 <div class="ms-3 name">
-                                    <h2 class="font-bold text-nowrap">CAFE John Duck</h2>
+                                    <h2 class="font-bold text-nowrap">{{User2::find($user_id)->business_name}}</h2>
                                 </div>
                                 <div class="container">
                                     <button class="btn btn-light-primary text-nowrap" type="button" id="btnBack"
@@ -62,13 +68,7 @@
                                         <h4 class="card-title">Description</h4>
                                     </div>
                                     <div class="card-body">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, commodi?
-                                        Ullam quaerat
-                                        similique iusto
-                                        temporibus, vero aliquam praesentium, odit deserunt eaque nihil saepe hic
-                                        deleniti? Placeat
-                                        delectus
-                                        quibusdam ratione ullam!
+                                    {{User2::find($user_id)->description}}
                                     </div>
                                 </div>
 
@@ -122,22 +122,75 @@
                                     </div>
                                 </div>
 
+                <!-- Something's wrong with the locations -->
+                <div class="card" href="#location">
+                    <div class="card-header">
+                        <h4 class="card-title">Location</h4>
+                    </div>
 
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Location</h4>
+                    <div class="card-body">
+                        <div class="col-md-6 col-12 mb-1">
+                            <input type="text" id="location" class="form-control round" name="location">
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-md-6 col-12 mb-2">
+                                <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+
+                                <div class="row flex">
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Lat</label>
                                     </div>
-                                    <div class="card-body">
-                                        <iframe
-                                            src="https://maps.google.com/maps?q=CUT%20cyprus&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                            frameborder="0" style="border:0; width: 100%; height: 290px;"
-                                            allowfullscreen></iframe>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="lat" class="form-control" value="" name="lat"
+                                            disabled>
+                                    </div>
+
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Long</label>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="long" class="form-control" value="" name="long"
+                                            disabled>
                                     </div>
 
                                 </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">Address</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="address" class="form-control" name="address" value="">
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label text-nowrap">Zip Code</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="zip" class="form-control" name="zip" value="">
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">City</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="city" class="form-control" value="" name="city">
+                                </div>
+
                             </div>
+
                         </div>
+
+
+
                     </div>
+
+                </div>
                 </section>
 
             </div>
@@ -253,6 +306,14 @@
 </body>
 
 </html>
+
+{{-- Maps Api Dependencies --}}
+<script type="text/javascript"
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
+</script>
+<script type="text/javascript"
+src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+<script src="../assets/js/maps-script.js"></script>
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>

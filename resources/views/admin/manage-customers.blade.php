@@ -77,70 +77,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach (App\Models\User2::all() as $user)
                                         <tr>
                                             <td class="col-8">
-                                                <a href="/seven-seas">
+                                                <a href="/user/{{$user->username}}">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
                                                             <img src="../assets/images/faces/5.jpg">
                                                         </div>
-                                                        <p class="font-bold ms-3 mb-0 text-nowrap">Si Cantik</p>
+                                                        <p class="font-bold ms-3 mb-0 text-nowrap">{{ $user->username }}</p>
                                                     </div>
                                                 </a>
                                             </td>
-                                            <td>5/10/2020</td>
+                                            <td>{{ $user->created_at }}</td>
                                             <td class="text-center">
-                                                <span class="badge bg-success">Active</span>
+                                                <?php 
+                                                    $status = $user->status; 
+                                                    if($status==1)
+                                                    {
+                                                        echo "<span class=\"badge bg-success\">\"Active\"</span>";
+                                                    }
+                                                    else
+                                                    {
+                                                        echo "<span class=\"badge bg-secondary\">Disabled</span>";
+                                                    }
+                                                ?>
+                                                <span class="badge bg-success"></span>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="col-8">
-                                                <a href="/seven-seas">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/2.jpg">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0 text-nowrap">Si Ganteng</p>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                            <td>5/10/2020</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-secondary">Disabled</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-8">
-                                                <a href="/seven-seas">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/2.jpg">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0 text-nowrap">Gai Santeng</p>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                            <td>5/10/2020</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-secondary">Disabled</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-8">
-                                                <a href="/manage-customer">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/2.jpg">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0 text-nowrap">Si Ganteng</p>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                            <td>5/10/2020</td>
-                                            <td class="text-center">
-                                                <span class="badge bg-success">Active</span>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

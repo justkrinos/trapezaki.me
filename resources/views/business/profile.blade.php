@@ -2,6 +2,8 @@
 <html lang="en">
 <?php
     use App\Models\User2;
+    use App\Models\User2_Tag;
+    use App\Models\Tag;
 ?>
 
 <head>
@@ -23,6 +25,9 @@
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
     <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+
+    {{-- Gia ta tags --}}
+    <link rel="stylesheet" href="../assets/css/bootstrap-tagsinput.css" />
 </head>
 
 
@@ -52,8 +57,8 @@
                                                 <img src="../assets/images/faces/1.jpg" alt="Face 1">
                                             </div>
                                             <div class="ms-3 name container">
-                                                <h5 class="font-bold">Business Name</h5>
-                                                <h6 class="text-muted mb-0">Company Name</h6>
+                                                <h5 class="font-bold">{{ Auth::guard('user2')->user()->business_name }}</h5>
+                                                <h6 class="text-muted mb-0">{{ Auth::guard('user2')->user()->company_name }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -67,46 +72,164 @@
                         </div>
                     </div>
                 </div>
+                <form method="POST" action="/profile" class="col-md-12">
+                    @csrf
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Description</h4>
+                        </div>
+                        <div class="form-group col-12 justify-content-center mb-5">
+                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                rows=" 4">{{ Auth::guard('user2')->user()->description }}</textarea>
+                                <div class="invalid-feedback">
+                                    @error('description')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                        </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Description</h4>
-                    </div>
-                    <div class="card-body">
-                        <textarea class="form-control" id="description" rows="3">Text here</textarea>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Business Information</h6>
-                    </div>
-
-                    <div class="card-body">
+                        {{-- Hidden id, to show each time which user to update --}}
                         <div class="form-group">
-                            <div class="col-md-5">
-                                <label for="email">Email</label>
-                                <input type="text" id="email" class="form-control round"
-                                    value="letsgoout@letsgohome.com" disabled>
+                            <input type="hidden" class="form-control" id="id" name="id"
+                                value="{{ $id = Auth::guard('user2')->user()->id }}">
+                        </div>
+
+                        <div class="card-header">
+                            <h6 class="card-title">Business Information</h6>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="col-md-5">
+                                    <label for="email">Email</label>
+                                    <input type="text" id="email" class="form-control round"
+                                        value="{{ Auth::guard('user2')->user()->email }}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" id="phone" class="form-control round" value="{{ Auth::guard('user2')->user()->phone }}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label for="phone">Work Number</label>
+                                    <input type="text" id="phone" class="form-control round" value="{{ Auth::guard('user2')->user()->phone }}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="card-header">
+                            <h4 class="card-title">Type</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-check">
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox1" class="form-check-input"
+                                        <?php $type = Auth::guard('user2')->user()->type ;
+
+                                            if(str_contains($type, 'coffee'))
+                                            {
+                                                echo "checked";
+                                            }
+                                        ?>>
+                                    <label for="checkbox1">Coffee</label>
+
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox1" class="form-check-input"
+                                        <?php
+                                            if(str_contains($type, 'food'))
+                                            {
+                                                echo "checked";
+                                            }
+                                        ?>>
+                                    <label for="checkbox1">Food</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" id="checkbox1" class="form-check-input"
+                                        <?php
+                                            if(str_contains($type, 'drinks'))
+                                            {
+                                                echo "checked";
+                                            }
+                                        ?>>
+                                    <label for="checkbox1">Drinks</label>
+                                </div>
                             </div>
                         </div>
 
+                        {{-- Hidden tag_id --}}
                         <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="phone">Phone Number</label>
-                                <input type="text" id="phone" class="form-control round" value="99818181" disabled>
-                            </div>
+                            {{-- <input type="hidden" class="form-control" id="tag_id" name="tag_id"
+                                value="{{ $tags = User2_Tag::where('taggable_id', $id)->get(); }}"> --}}
                         </div>
 
                         <div class="form-group">
-                            <div class="col-md-2">
-                                <label for="phone">Work Number</label>
-                                <input type="text" id="phone" class="form-control round" value="26818181" disabled>
-                            </div>
+                            <input type="hidden" class="form-control" id="tags_id" name="tags_id"
+                                value="{{ $test = Tag::where('tag_id', '2')->get() }}">
                         </div>
+
+                        <div class="col-md-6 col-12">
+                                            <div class="card-header">
+                                                <h6 class="h6">Tags</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <section class="multiple-choices">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="card">
+                                                                <div class="row">
+                                                                    <div class="col-md-7">
+                                                                        @csrf
+                                                                        {{-- <?php $arr = array();
+                                                                        @foreach($tags as $tag)
+                                                                                        @foreach (App\Models\Tag::all() as $tag_get)
+                                                                                            @if($tag_get->tag_id==$tag->tag_id)
+                                                                                                <?php array_push($arr, $tag_get->name)?>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endforeach --}}
+
+
+                                                                        <input name="tags" id="tags" data-role="tagsinput"
+                                                                            class="@error('tags.*') is-invalid @enderror
+                                                                            @error('tags') is-invalid @enderror" value=
+                                                                                {{-- <?php echo implode(",",$arr); ?> --}}
+                                                                                >
+
+                                                                        <div class="invalid-feedback">
+                                                                            <i class="bx bx-radio-circle"></i>
+                                                                            @error('tags.*')
+                                                                                {{ $message }}
+                                                                            @enderror
+                                                                            @error('tags')
+                                                                                {{ $message }}
+                                                                            @enderror
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </section>
+                                                <!-- Multiple choices end -->
+
+                                            </div>
+                                        </div>
+
+
+                            <button type="submit" name="form1" class="btn btn-success me-1 mb-1">Save changes</button>
+
+
+                        </div>
+
+
                     </div>
-
-                </div>
+                </form>
 
                 <section id="input-style">
                     <div class="row">
@@ -165,70 +288,6 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Type</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-check">
-                            <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" checked>
-                                <label for="checkbox1">Coffee</label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" unchecked>
-                                <label for="checkbox1">Food</label>
-                            </div>
-                            <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" checked>
-                                <label for="checkbox1">Drinks</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Tags</h4>
-                    </div>
-                    <div class="card-body">
-
-                        <!-- Multiple choices start -->
-                        <section class="multiple-choices">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="row">
-
-                                            <div class="col-md-6 mb-4">
-
-                                                <select class="choices form-select multiple-remove" multiple="multiple">
-                                                    <optgroup label="Food">
-                                                        <option value="romboid">Souvlakia</option>
-                                                        <option value="trapeze" selected>Gyros</option>
-                                                        <option value="triangle">Burger</option>
-                                                        <option value="polygon">Mezedes</option>
-                                                    </optgroup>
-                                                    <optgroup label="Tavern">
-                                                        <option value="red">Live music</option>
-                                                        <option value="green">Mpires</option>
-                                                        <option value="blue" selected>Stakes</option>
-                                                        <option value="purple">Tsamarella</option>
-                                                    </optgroup>
-                                                </select>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Multiple choices end -->
-
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
                         <h4 class="card-title">Photos</h4>
                     </div>
                     <div class="card-body">
@@ -269,40 +328,69 @@
                     <div class="card-header">
                         <h4 class="card-title">Change Password</h4>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
 
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                <form method="POST" action="/profile" class="col-md-12">
+                                @csrf
                                 <div class="form-group">
-                                    <label for="basicInput">Old Password</label>
-                                    <input type="password" class="form-control form-control-l"
-                                        placeholder="Password">
-                                </div>
+                                                <label for="basicInput">Old Password</label>
+                                                <input type="password" class="form-control form-control-l" id="password"
+                                                    name="password" placeholder="Password" required>
+                                                <div style="color:red">{{ $errors->first('password') }}</div>
+                                                @if (session()->has('error'))
+                                                    <div>
+                                                        <p style="color:red;">{{ session('error') }}</p>
+                                                    </div>
+                                                @endif
+                                            </div>
 
-                                <div class="form-group">
-                                    <label for="basicInput">New Password</label>
-                                    <input type="password" class="form-control form-control-l"
-                                        placeholder="Password">
-                                </div>
+                                            <div class="form-group">
+                                                <label for="basicInput">New Password</label>
+                                                <input type="password" class="form-control form-control-l"
+                                                    id="new-password" name="new-password" placeholder="Password"
+                                                    required>
+                                                <div style="color:red">{{ $errors->first('new-password') }}</div>
+                                            </div>
 
-                                <div class="form-group">
-                                    <label for="basicInput">Re-enter New Password</label>
-                                    <input type="password" class="form-control form-control-l"
-                                        placeholder="Password">
-                                </div>
+                                            <div class="form-group">
+                                                <label for="basicInput">Re-enter New Password</label>
+                                                <input type="password" class="form-control form-control-l"
+                                                    id="new-password_confirmation" name="new-password_confirmation"
+                                                    placeholder="Password" required>
+                                                <div style="color:red">{{ $errors->first('password_confirmation') }}
+                                                </div>
+                                            </div>
 
-                                <div class="col-sm-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Change</button>
+                                            {{-- Hidden id, to show each time which user to update --}}
+                                            <div class="form-group">
+                                                <input type="hidden" class="form-control" id="id" name="id"
+                                                    value="{{ Auth::guard('user2')->user()->id }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <input type="hidden" class="form-control" id="username"
+                                                    name="username"
+                                                    value="{{ Auth::guard('user2')->user()->username }}">
+                                            </div>
+
+                                            <div class="col-sm-12 d-flex justify-content-end">
+                                                <button type="submit" name="form2"
+                                                    class="btn btn-primary me-1 mb-1">Change</button>
+                                            </div>
                                 </div>
+                                </from>
+
                             </div>
                         </div>
-                    </div>
+
                 </div>
 
             </div>
 
             <footer>
-                <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
+
             </footer>
         </div>
     </div>
@@ -314,6 +402,12 @@
 
 
 
+{{-- Gia ta tags --}}
+<script src="../assets/js/typeahead.bundle.js"></script>
+<script src="../assets/js/bloodhound.js"></script>
+<script src="../assets/js/bootstrap-tagsinput.js"></script>
+<script src="../assets/vendors/choices.js/choices.min.js"></script>
+<script src="../assets/js/tags.js"></script>
 
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

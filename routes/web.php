@@ -8,6 +8,8 @@ use App\Http\Controllers\RegisterUser2;
 use App\Http\Controllers\User1Controller;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SessionsController2;
+use App\Http\Controllers\PhotosController;
+use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User2;
 use App\Models\User1;
@@ -23,16 +25,14 @@ use App\Models\User1;
 |
 */
 
-//An paei xwris to www, na ton kamnei redirect sto first page
-//to first page en dilomeno san name('first_page')
-//pio katw sto make-a-reservation route fenete
+
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/make-a-reservation', function () {
         return view('www.search');
     })->name('first_page');
 
-    Route::get('/seven-seas', function () {
+    Route::get('/user/{user}', function ($slug) {
         //TODO:
         //tuta prp nan /user/seven-seas gt meta isos exume thema me ta login j tuta
         //epd bori na eshi logariasmo me onom "login"
@@ -41,9 +41,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.selected-profile');
     });
 
-    Route::get('/seven-seas/book',[SessionsController::class, 'showBook']);
+    Route::get('/user/{user}/book',[SessionsController::class, 'showBook']);
 
-    Route::post('/seven-seas/book',[SessionsController::class, 'createBook']);
+    Route::post('/user/{user}/book',[SessionsController::class, 'createBook']);
 
 
 
@@ -55,6 +55,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/', function () {
             return view('www.index');
         });
+
+        Route::get('verify/{email}/{secret}/{?uer_type}','Auth\VerificationController@verifyEmail');
 
         Route::get('/login', [SessionsController::class, 'create']);
 
@@ -91,6 +93,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
             return view('www.profile');
         });
 
+        Route::post('/profile', [SessionsController::class, 'edit']);
+
         Route::get('/my-reservations', function () {
             return view('www.reservations');
         });
@@ -116,6 +120,11 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/signup', [RegisterUser2::class, 'view']);
         Route::post('/signup', [RegisterUser2::class, 'create']);
+
+        Route::get('/api/tags', function(){
+            $tag = Tag::all()->pluck('name')->toArray();
+            return response($tag);
+        });
     });
 
 
@@ -127,6 +136,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         });
 
         Route::get('/logout', [SessionsController2::class, 'destroy']);
+        
+        Route::post('/profile', [SessionsController2::class, 'edit']);
 
         Route::get('/edit-reservation', function () {
             return view('business.edit-resv');
@@ -187,7 +198,8 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
             return view('admin.pending-requests');
         });
 
-        Route::get('/seven-seas', function () {
+        Route::get('/user/{user}', function ($slug) {
+        
             return view('admin.manage-customer');
         });
 
@@ -200,9 +212,26 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
     });
 });
 
+
+//An paei xwris domain (dld trapezaki.me j xoris www),
+//na ton kamnei redirect sto first page
+//to first page en dilomeno san name('first_page')
+//pio panw sto make-a-reservation route fenete
 Route::get('/', function(){
     return redirect()->route('first_page');
 });
 
+// //redirect customer on page that does not exist
+// Route::get('/{not_exist}', function($slug){
+//     $path = __DIR__ . "../views/www/{$slug}";
 
+//     if(! file_exists($path))
+//     {
+//         return redirect('/');
+//     }
+// });
+
+
+//Gia otidipote allo na kamume
+//abort(404);
 
