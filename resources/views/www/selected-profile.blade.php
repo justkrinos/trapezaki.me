@@ -40,7 +40,7 @@ use App\Models\User2;
 
         @include('www.components.sidebar')
 
-        <div id="main" class='layout-navbar'>
+        <div class='layout-navbar'>
 
             @include('www.components.navbar')
 
@@ -135,7 +135,6 @@ use App\Models\User2;
                                         </div>
                                     </div>
 
-                                    <!-- Something's wrong with the locations -->
                                     <div class="card" href="#location">
                                         <div class="card-header">
                                             <h4 class="card-title">Location</h4>
@@ -155,7 +154,7 @@ use App\Models\User2;
                 </div>
             </div>
 
-            <!--login form Modal -->
+            {{-- login form Modal --}}
             <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel33" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -275,11 +274,5 @@ use App\Models\User2;
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/book-profile.js"></script>
-
-{{-- Maps Api Dependencies --}}
-{{-- <script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
-</script> --}}
-
 
 <script src="../assets/js/main-nosidepop.js"></script>
