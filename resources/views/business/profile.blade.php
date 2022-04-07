@@ -87,13 +87,13 @@
                                     @enderror
                                 </div>
                         </div>
-                        
+
                         {{-- Hidden id, to show each time which user to update --}}
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="id" name="id"
                                 value="{{ $id = Auth::guard('user2')->user()->id }}">
                         </div>
-                    
+
                         <div class="card-header">
                             <h6 class="card-title">Business Information</h6>
                         </div>
@@ -127,20 +127,20 @@
                         <div class="card-body">
                             <div class="form-check">
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input" 
-                                        <?php $type = Auth::guard('user2')->user()->type ; 
-                                            
+                                    <input type="checkbox" id="checkbox1" class="form-check-input"
+                                        <?php $type = Auth::guard('user2')->user()->type ;
+
                                             if(str_contains($type, 'coffee'))
                                             {
                                                 echo "checked";
                                             }
                                         ?>>
                                     <label for="checkbox1">Coffee</label>
-                                    
+
                                 </div>
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input" 
-                                        <?php 
+                                    <input type="checkbox" id="checkbox1" class="form-check-input"
+                                        <?php
                                             if(str_contains($type, 'food'))
                                             {
                                                 echo "checked";
@@ -149,8 +149,8 @@
                                     <label for="checkbox1">Food</label>
                                 </div>
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input" 
-                                        <?php 
+                                    <input type="checkbox" id="checkbox1" class="form-check-input"
+                                        <?php
                                             if(str_contains($type, 'drinks'))
                                             {
                                                 echo "checked";
@@ -163,15 +163,15 @@
 
                         {{-- Hidden tag_id --}}
                         <div class="form-group">
-                            <input type="hidden" class="form-control" id="tag_id" name="tag_id"
-                                value="{{ $tags = User2_Tag::where('taggable_id', $id)->get(); }}">
+                            {{-- <input type="hidden" class="form-control" id="tag_id" name="tag_id"
+                                value="{{ $tags = User2_Tag::where('taggable_id', $id)->get(); }}"> --}}
                         </div>
 
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="tags_id" name="tags_id"
                                 value="{{ $test = Tag::where('tag_id', '2')->get() }}">
                         </div>
-                        
+
                         <div class="col-md-6 col-12">
                                             <div class="card-header">
                                                 <h6 class="h6">Tags</h6>
@@ -184,20 +184,20 @@
                                                                 <div class="row">
                                                                     <div class="col-md-7">
                                                                         @csrf
-                                                                        <?php $arr = array(); ?>
+                                                                        {{-- <?php $arr = array();
                                                                         @foreach($tags as $tag)
                                                                                         @foreach (App\Models\Tag::all() as $tag_get)
                                                                                             @if($tag_get->tag_id==$tag->tag_id)
                                                                                                 <?php array_push($arr, $tag_get->name)?>
                                                                                             @endif
                                                                                         @endforeach
-                                                                                    @endforeach
-                                                                        
-                                                                        
+                                                                                    @endforeach --}}
+
+
                                                                         <input name="tags" id="tags" data-role="tagsinput"
                                                                             class="@error('tags.*') is-invalid @enderror
                                                                             @error('tags') is-invalid @enderror" value=
-                                                                                <?php echo implode(",",$arr); ?>
+                                                                                {{-- <?php echo implode(",",$arr); ?> --}}
                                                                                 >
 
                                                                         <div class="invalid-feedback">
@@ -220,13 +220,13 @@
 
                                             </div>
                                         </div>
-                        
-                        
+
+
                             <button type="submit" name="form1" class="btn btn-success me-1 mb-1">Save changes</button>
 
 
                         </div>
-                    
+
 
                     </div>
                 </form>
@@ -328,7 +328,7 @@
                     <div class="card-header">
                         <h4 class="card-title">Change Password</h4>
                     </div>
-                    
+
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -384,13 +384,13 @@
 
                             </div>
                         </div>
-                    
+
                 </div>
 
             </div>
 
             <footer>
-                
+
             </footer>
         </div>
     </div>
