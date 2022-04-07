@@ -16,7 +16,7 @@ use App\Models\Issue;
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/vendors/iconly/bold.css">
 
-    <!-- Datatable Css Include -->
+     {{-- Datatable Css Include --}}
     <link rel="stylesheet" href="../assets/vendors/simple-datatables/style.css">
 
     <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
@@ -88,7 +88,7 @@ use App\Models\Issue;
                                         </thead>
                                         <tbody>
 
-                                            @foreach (App\Models\Issue::all() as $issue)
+                                            @foreach (Issue::all() as $issue)
                                                 <tr id={{ $issue->id }}>
                                                     <td class="col-8 issueName">
                                                         {{-- The popup opens with issues.js when class= issueName is cicked --}}
