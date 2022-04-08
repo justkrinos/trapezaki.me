@@ -41,4 +41,13 @@ class User2_Photo extends Model
         //Create the record in the table
         User2_Photo::create(['user2_id' => $userid,'photo_path'=> $imageName]);
     }
+
+    public static function store_one(UploadedFile $photo, int $userid){
+        $imageName = time() . strval(User2_Photo::max('id') + 1) . uniqid() . '.' . $photo->extension();
+
+        $photo->move(public_path('assets/images/uploads'), $imageName);
+
+        User2_Photo::create(['user2_id' => $userid,'photo_path'=> $imageName]);
+    }
+
 }

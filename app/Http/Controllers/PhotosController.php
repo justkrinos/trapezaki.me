@@ -6,6 +6,7 @@ use App\Models\User2_Photo;
 use App\Models\User1;
 use App\Models\Tag;
 use Image;
+use Illuminate\Support\Facades\File;
 
 use Illuminate\Http\Request;
 
@@ -38,6 +39,59 @@ class PhotosController extends Controller
 
         //save in the public folder as a normal scaled image
         $request->logo->move($destinationPath, $imageName);
+    }
+
+
+    public function show(){
+        $request = request()->validate([
+            'user_id' => 'required|numeric'
+        ]);
+
+        //return User2_Photo::where('user2_id',->$request['user_id'])->where('photo_path','!like','logo%')->get()->first()->photo_path);
+
+
+        return User2_Photo::select('photo_path')
+                            ->where('user2_id',$request['user_id'])
+                            ->where('photo_path','not like','logo%')
+                            ->get();
+    }
+
+    public function modify()
+    {
+        $request = request()->validate([
+            'action' => 'required|in:delete,modify',
+            'user_id' => 'required|numeric'
+        ]);
+        $user2_id = $request['user_id'];
+
+        if(strcmp($request['action'],'delete')==0){
+
+            $request =  request()->validate([
+                'photo_path' => 'required'
+            ]);
+        
+            
+            $photo_path = $request['photo_path'];
+
+            
+        
+            $deleted = User2_Photo::where('photo_path', $photo_path)->where('user2_id', $user2_id)->delete();
+
+            File::delete('assets/images/uploads/' . $photo_path);
+
+            return ['ok'];
+        }
+
+        else if(strcmp($request['action'],'modify')==0){
+            $request = request()->validate([
+                'photo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
+            ]);
+
+            User2_Photo::store_one(request()->file('photo'),$user2_id);
+    
+            return ['ok'];   
+        }
+        
     }
 
 
