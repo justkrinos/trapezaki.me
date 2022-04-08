@@ -4,6 +4,7 @@
 <?php
 use App\Models\User2;
 use App\Models\Issue;
+use App\Models\User2_Photo;
 ?>
 
 <head>
@@ -94,7 +95,7 @@ use App\Models\Issue;
                                                         {{-- The popup opens with issues.js when class= issueName is cicked --}}
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar avatar-md">
-                                                                <img src="../assets/images/faces/5.jpg">
+                                                                <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$issue->user2_id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
                                                             </div>
                                                             <p class="font-bold ms-3 mb-0">
                                                                 {{ $username = User2::find($issue->user2_id)->username }}
@@ -217,6 +218,7 @@ use App\Models\Issue;
 </body>
 
 </html>
+
 
  {{-- Datatable Js Include  --}}
 <script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>

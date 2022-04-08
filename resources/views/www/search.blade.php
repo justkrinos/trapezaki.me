@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+    use App\Models\User2_Photo;
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,7 +83,8 @@
                                         <div class="card-header">
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar avatar-xl me-4">
-                                                    <img src="../assets/images/faces/3.jpg">
+
+                                                    <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
                                                 </div>
                                                 <h4 class="card-title text-nowrap">{{ $user->business_name }}</h4>
                                                 <div class="container" style="text-align: end;">
@@ -94,7 +99,6 @@
                                             <p class="font-bold">
                                                 {{ str_replace(':', ', ', ucfirst($user->type)) }}</p>
                                             <a href="/user/{{ $user->username }}" class="stretched-link"></a>
-
                                         </div>
                                     </div>
                                 </div>
