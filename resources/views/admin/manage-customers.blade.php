@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@php
+    use App\Models\User2_Photo
+@endphp
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +87,7 @@
                                                 <a href="/user/{{$user->username}}">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
-                                                            <img src="../assets/images/faces/5.jpg">
+                                                            <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
                                                         </div>
                                                         <p class="font-bold ms-3 mb-0 text-nowrap">{{ $user->username }}</p>
                                                     </div>
