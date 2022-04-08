@@ -7,6 +7,7 @@ $user2= DB::table('user2s')
     ->where('username', $username)->first();
 
 use App\Models\User2;
+use App\Models\User2_Photo;
 ?>
 
 {{-- TODO:  //- Na mpoun oi photos se blocks p na fenunte wraia j na tes tsillas j na kamnun pop up
@@ -15,7 +16,9 @@ use App\Models\User2;
             //- To sidebar na sasei j dame j se ulla tu user1
             //- to book na pai se selida p kamnei book
             //- Na sasun oi santanoshies me tin php
-            //- To modal na mpi sta components alla na dw an dulefki prota --}}
+            //- To modal na mpi sta components alla na dw an dulefki prota 
+            //- TO BACK EN DULEFKI
+--}}
 
 <head>
     <meta charset="UTF-8">
@@ -27,6 +30,9 @@ use App\Models\User2;
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
 
     <link rel="stylesheet" href="../assets/vendors/choices.js/choices.min.css" />
+
+    {{--Nano gallery--}}
+    <link href="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
 
     <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -51,7 +57,8 @@ use App\Models\User2;
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-xl">
-                                        <img src="../assets/images/faces/1.jpg" alt="Face 1">
+                                        
+                                        <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user2->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}" alt="Face 1">
                                     </div>
                                     <div class="ms-3 name">
                                         <h2 class="font-bold text-nowrap">{{ $user2->business_name }}
@@ -106,31 +113,16 @@ use App\Models\User2;
                                                 <h4>Photos</h4>
                                             </div>
                                             <div class="card-body">
-                                                <div id="carouselExampleControls" class="carousel slide"
-                                                    data-ride="carousel">
-                                                    <div class="carousel-inner">
-                                                        <div class="carousel-item active">
-                                                            <img src="../assets/images/samples/banana.jpg"
-                                                                class="d-block w-100" alt="...">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img src="../assets/images/samples/bg-mountain.jpg"
-                                                                class="d-block w-100" alt="...">
-                                                        </div>
-                                                    </div>
-                                                    <a class="carousel-control-prev" href="#carouselExampleControls"
-                                                        role="button" data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon"
-                                                            aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Previous</span>
-                                                    </a>
-                                                    <a class="carousel-control-next" href="#carouselExampleControls"
-                                                        role="button" data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon"
-                                                            aria-hidden="true"></span>
-                                                        <span class="visually-hidden">Next</span>
-                                                    </a>
-                                                </div>
+                                                <div id="gallery"></div>
+                                                <span id="user-photos">
+
+                                                @foreach(User2_Photo::where('user2_id',$user2->id)->get() as $photo)
+                                                    @if(!str_starts_with($photo->photo_path,'logo'))  
+                                                        <span class="photo" img="{{$photo->photo_path}}"></span>
+                                                    @endif
+                                                @endforeach
+                                                    
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -275,4 +267,46 @@ use App\Models\User2;
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/book-profile.js"></script>
 
+
 <script src="../assets/js/main-nosidepop.js"></script>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
+
+{{--TODO: iparxi nmz to image-gallery kati etsi na ginete etsi link dame--}}
+<script>
+
+var photopaths = [];
+$('#user-photos').children('.photo').each(function(){
+
+    photopaths.push(  { src: '../assets/images/uploads/' + $(this).attr('img'), srct: '../assets/images/uploads/' + $(this).attr('img')})
+})
+
+console.log(photopaths)
+
+
+$("#gallery").nanogallery2({
+  thumbnailHeight:  150,
+  thumbnailWidth:   150,
+  {{-- "itemsBaseURL": "http://nanogallery2.nanostudio.org/samples/", --}}
+
+  thumbnailBorderVertical: 0,
+  thumbnailBorderHorizontal: 0,
+  thumbnailLabel: {
+        position: "overImageOnBottom",
+        display: false
+    },
+  thumbnailHoverEffect2: "imageBlurOn",
+  galleryLastRowFull: true,
+  thumbnailAlignment: "center",
+  breadcrumbOnlyCurrentLevel: false,
+  thumbnailOpenImage: false,
+
+  items: photopaths
+});
+</script>
+
+
+
+
