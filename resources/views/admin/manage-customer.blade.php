@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+use App\Models\User2_Photo;
+use App\Models\User2;
+$username = Request::segment(2);
+$user_id = DB::table('user2s')
+    ->where('username', $username)
+    ->first()->id;
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Customer</title>
 
-    <!-- Include Choices CSS -->
+    {{-- Include Choices CSS --}}
     <link rel="stylesheet" href="../assets/vendors/choices.js/choices.min.css" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,6 +27,8 @@
     <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="../assets/css/photo-upload.css">
+
     <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
 
 
@@ -35,14 +46,6 @@
                 </a>
                 <h3>Manage Customer</h3>
             </header>
-
-            <?php 
-                use App\Models\User2;
-                $username = Request::segment(2);
-                $user_id = DB::table('user2s')->where('username', $username)->first()->id;
-               
-            ?>
-
             <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
@@ -53,20 +56,31 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center conainer">
                                             <div class="avatar avatar-xl">
-                                                <img src="../assets/images/faces/1.jpg" alt="Face 1">
+                                                <img src="../assets/images/uploads/{{ User2_Photo::where('user2_id', $user_id)->where('photo_path', 'like', 'logo%')->get()->first()->photo_path }}"
+                                                    alt="Face 1">
                                             </div>
                                             <div class="ms-3 name container">
-                                                <h5 class="font-bold">{{User2::find($user_id)->business_name}}</h5>
-                                                <h6 class="text-muted mb-0">{{User2::find($user_id)->company_name}}</h6>
+                                                <h5 class="font-bold">{{ User2::find($user_id)->business_name }}
+                                                </h5>
+                                                <h6 class="text-muted mb-0">{{ User2::find($user_id)->company_name }}
+                                                </h6>
                                             </div>
                                             <div class="dropdown">
-                                                <?php $status = User2::find($user_id)->status ?>
-                                                <button class="btn btn-<?php if($status == 1){echo "success";} else {echo "danger";} ?> dropdown-toggle me-1" type="button"
-                                                    id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                                <?php $status = User2::find($user_id)->status; ?>
+                                                <button class="btn btn-<?php if ($status == 1) {
+    echo 'success';
+} else {
+    echo 'danger';
+} ?> dropdown-toggle me-1"
+                                                    type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
                                                     <!-- Tuto na to allassei aftomata o server -->
-                                                    
-                                                    <?php if($status == 1){echo "Active";} else {echo "Disabled";} ?>
+
+                                                    <?php if ($status == 1) {
+                                                        echo 'Active';
+                                                    } else {
+                                                        echo 'Disabled';
+                                                    } ?>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a id="cust-active" class="dropdown-item">Active</a>
@@ -88,7 +102,7 @@
                         <h4 class="card-title">Description</h4>
                     </div>
                     <div class="card-body">
-                        <textarea class="form-control" id="description" rows="3">{{User2::find($user_id)->description}}</textarea>
+                        <textarea class="form-control" id="description" rows="3">{{ User2::find($user_id)->description }}</textarea>
                     </div>
                 </div>
 
@@ -102,14 +116,15 @@
                             <div class="col-md-5">
                                 <label for="email">Email</label>
                                 <input type="text" id="email" class="form-control round"
-                                    value="{{User2::find($user_id)->email}}">
+                                    value="{{ User2::find($user_id)->email }}">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-md-2">
                                 <label for="phone">Phone Number</label>
-                                <input type="text" id="phone" class="form-control round" value="{{User2::find($user_id)->phone}}">
+                                <input type="text" id="phone" class="form-control round"
+                                    value="{{ User2::find($user_id)->phone }}">
                             </div>
                         </div>
                     </div>
@@ -177,19 +192,22 @@
                     <div class="card-body">
                         <div class="form-check">
                             <div class="checkbox">
-                                <?php $type = User2::find($user_id)->type ?>
-                                <input type="checkbox" id="checkbox1" class="form-check-input" 
-                                    <?php if(str_contains($type, "coffee")) {echo "checked";} ?>>
+                                <?php $type = User2::find($user_id)->type; ?>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" <?php if (str_contains($type, 'coffee')) {
+    echo 'checked';
+} ?>>
                                 <label for="checkbox1">Coffee</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" 
-                                    <?php if(str_contains($type, "food")) {echo "checked";} ?>>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" <?php if (str_contains($type, 'food')) {
+    echo 'checked';
+} ?>>
                                 <label for="checkbox1">Food</label>
                             </div>
                             <div class="checkbox">
-                                <input type="checkbox" id="checkbox1" class="form-check-input" 
-                                    <?php if(str_contains($type, "drinks")) {echo "checked";} ?>>
+                                <input type="checkbox" id="checkbox1" class="form-check-input" <?php if (str_contains($type, 'drinks')) {
+    echo 'checked';
+} ?>>
                                 <label for="checkbox1">Drinks</label>
                             </div>
                         </div>
@@ -244,8 +262,20 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
+                            @csrf
                             <label for="formFileMultiple" class="form-label">Upload photos here</label>
-                            <input class="form-control" type="file" id="formFileMultiple" multiple>
+                            <form id="image-upload-form">
+                                <input class="form-control" type="file" id="upload_photo">
+                                <div class="invalid-feedback">
+                                    <i id="upload-photo-error" class="bx bx-radio-circle"></i>
+                                </div>
+
+                            </form>
+                            <div id="fileupload" class="mb-3"></div>
+                            <div class="user_id" value="{{ $user_id }}"></div>
+                            <ul class="images">
+                                @csrf
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -345,6 +375,13 @@
             <footer>
                 <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
             </footer>
+
+
+            {{-- Photo Popup Modal --}}
+            <div id="photo-popup" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="img01">
+            </div>
         </div>
     </div>
 
@@ -368,7 +405,12 @@ src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locati
 <script src="../assets/js/maps-script.js"></script>
 
 
+
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script src="../assets/js/maps-script.js"></script>
+
+<script src="../assets/js/fileupload.js"></script>
