@@ -169,7 +169,7 @@
 
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="tags_id" name="tags_id"
-                                value="{{ $test = Tag::where('tag_id', '2')->get() }}">
+                                {{-- value="{{ $test = Tag::where('tag_id', '2')->get() }}" --}}>
                         </div>
 
                         <div class="col-md-6 col-12">
