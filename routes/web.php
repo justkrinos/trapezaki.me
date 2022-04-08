@@ -209,6 +209,10 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
         Route::get('/logout', [User1Controller::class, 'logout']);
 
+        Route::post('/api/photo-paths', [PhotosController::class, 'show']);
+
+        Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
+
     });
 });
 
