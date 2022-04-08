@@ -47,13 +47,13 @@ use App\Models\User2;
 
 
                     <section class="section">
-                        <div class="card">
+                        <div class="container card">
                             <div class="card-header">
                                 <h4 class="card-title">Account info</h4>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
+                                <div class="row  d-flex justify-content-center">
+                                    <div class="col-md-4">
                                         <form method="POST" action="/profile" class="col-md-12">
                                             @csrf
                                             <div class="form-group">
@@ -103,13 +103,13 @@ use App\Models\User2;
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="container card">
                             <div class="card-header">
                                 <h4 class="card-title">Change Password</h4>
                             </div>
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-4">
                                         <form method="POST" action="/profile" class="col-md-12">
                                             @csrf
                                             <div class="form-group">
@@ -141,18 +141,6 @@ use App\Models\User2;
                                                 </div>
                                             </div>
 
-                                            {{-- Hidden id, to show each time which user to update --}}
-                                            <div class="form-group">
-                                                <input type="hidden" class="form-control" id="id" name="id"
-                                                    value="{{ Auth::guard('user3')->user()->id }}">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input type="hidden" class="form-control" id="username"
-                                                    name="username"
-                                                    value="{{ Auth::guard('user3')->user()->username }}">
-                                            </div>
-
                                             <div class="col-sm-12 d-flex justify-content-end">
                                                 <button type="submit" name="form2"
                                                     class="btn btn-primary me-1 mb-1">Change</button>
@@ -174,12 +162,12 @@ use App\Models\User2;
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/main.js"></script>
-
 {{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 <script src="assets/js/extensions/toastify.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="../assets/js/main-nosidepop.js"></script>
 
 
 @include('components.toasts')

@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php 
-    $username = Request::segment(2);
-    $user_id = DB::table('user2s')->where('username', $username)->first()->id;
-    use App\Models\User2;
+<?php
+$username = Request::segment(2);
+$user2= DB::table('user2s')
+    ->where('username', $username)->first();
+
+use App\Models\User2;
 ?>
+
+{{-- TODO:  //- Na mpoun oi photos se blocks p na fenunte wraia j na tes tsillas j na kamnun pop up
+                    opws dame https://www.e-table.cy/restaurant/pier-one-cafe-restobar
+            //- To location na sioureftoume oti dulefki
+            //- To sidebar na sasei j dame j se ulla tu user1
+            //- to book na pai se selida p kamnei book
+            //- Na sasun oi santanoshies me tin php
+            //- To modal na mpi sta components alla na dw an dulefki prota --}}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trapezaki - &lt;Cafe Name&gt;</title>
+    <title>Trapezaki - {{$user2->business_name}}</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -30,293 +40,239 @@
 
         @include('www.components.sidebar')
 
-        <div id="main" class='layout-navbar'>
+        <div class='layout-navbar'>
 
             @include('www.components.navbar')
 
             <div id="main-content">
+                <div class="container">
+                    <section class="section">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-xl">
+                                        <img src="../assets/images/faces/1.jpg" alt="Face 1">
+                                    </div>
+                                    <div class="ms-3 name">
+                                        <h2 class="font-bold text-nowrap">{{ $user2->business_name }}
+                                        </h2>
+                                    </div>
+                                    <div class="container">
+                                        <button class="btn btn-light-primary text-nowrap" type="button" id="btnBack"
+                                            style="float: right;">
+                                            <svg class="bi" width="1em" height="1em" fill="currentColor">
+                                                <use
+                                                    xlink:href="../assets/vendors/bootstrap-icons/bootstrap-icons.svg#arrow-left-circle-fill">
+                                                </use>
+                                            </svg>
+                                            Back</button>
+                                    </div>
+                                </div>
 
-                <section class="section">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="d-flex align-items-center">
-                                <div class="avatar avatar-xl">
-                                    <img src="../assets/images/faces/1.jpg" alt="Face 1">
-                                </div>
-                                <div class="ms-3 name">
-                                    <h2 class="font-bold text-nowrap">{{User2::find($user_id)->business_name}}</h2>
-                                </div>
-                                <div class="container">
-                                    <button class="btn btn-light-primary text-nowrap" type="button" id="btnBack"
-                                        style="float: right;">
-                                        <svg class="bi" width="1em" height="1em" fill="currentColor">
-                                            <use
-                                                xlink:href="../assets/vendors/bootstrap-icons/bootstrap-icons.svg#arrow-left-circle-fill">
-                                            </use>
-                                        </svg>
-                                        Back</button>
-                                </div>
+
                             </div>
+                            <div class="card-body">
+                                <div class="row">
 
-
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="card-title">Description</h4>
-                                    </div>
-                                    <div class="card-body">
-                                    {{User2::find($user_id)->description}}
-                                    </div>
-                                </div>
-
-
-                                <div class="card">
-                                    <div clas="card-body">
-                                        <div class="col-sm-12 d-flex justify-content-center">
-                                            <form></form>
-                                            <button class="btn btn-primary" {{-- An ise logged in perni se apefthias sto book --}}
-                                                @auth('user3') id="btnBook" @endauth {{-- An den ise logged in fkalli su popup --}} @guest
-                                                id="btnPop" @endguest style="margin:5px;"> Book
-                                                Now</button>
-                                            <button class="btn btn-primary" style="margin:5px;"
-                                                id="resvMenu">Menu</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-md-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h4>Photos</h4>
+                                            <h4 class="card-title">Description</h4>
                                         </div>
                                         <div class="card-body">
-                                            <div id="carouselExampleControls" class="carousel slide"
-                                                data-ride="carousel">
-                                                <div class="carousel-inner">
-                                                    <div class="carousel-item active">
-                                                        <img src="../assets/images/samples/banana.jpg"
-                                                            class="d-block w-100" alt="...">
+                                            {{ $user2->description }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card">
+                                        <div clas="card-body">
+                                            <div class="col-sm-12 d-flex justify-content-center">
+                                                <form></form>
+                                                <button class="btn btn-primary" {{-- An ise logged in perni se apefthias sto book --}}
+                                                    @auth('user3') id="btnBook" @endauth {{-- An den ise logged in fkalli su popup --}} @guest
+                                                    id="btnPop" @endguest style="margin:5px;"> Book
+                                                    Now</button>
+                                                <button class="btn btn-primary" style="margin:5px;"
+                                                    id="resvMenu">Menu</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Photos</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="carouselExampleControls" class="carousel slide"
+                                                    data-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <img src="../assets/images/samples/banana.jpg"
+                                                                class="d-block w-100" alt="...">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="../assets/images/samples/bg-mountain.jpg"
+                                                                class="d-block w-100" alt="...">
+                                                        </div>
                                                     </div>
-                                                    <div class="carousel-item">
-                                                        <img src="../assets/images/samples/bg-mountain.jpg"
-                                                            class="d-block w-100" alt="...">
-                                                    </div>
+                                                    <a class="carousel-control-prev" href="#carouselExampleControls"
+                                                        role="button" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselExampleControls"
+                                                        role="button" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </a>
                                                 </div>
-                                                <a class="carousel-control-prev" href="#carouselExampleControls"
-                                                    role="button" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </a>
-                                                <a class="carousel-control-next" href="#carouselExampleControls"
-                                                    role="button" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                <!-- Something's wrong with the locations -->
-                <div class="card" href="#location">
-                    <div class="card-header">
-                        <h4 class="card-title">Location</h4>
-                    </div>
+                                    <div class="card" href="#location">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Location</h4>
+                                        </div>
 
-                    <div class="card-body">
-                        <div class="col-md-6 col-12 mb-1">
-                            <input type="text" id="location" class="form-control round" name="location">
-                        </div>
-
-
-
-                        <div class="form-group row">
-                            <div class="col-md-6 col-12 mb-2">
-                                <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
-                            </div>
-
-                            <div class="col-md-6 col-12">
-
-                                <div class="row flex">
-                                    <div class="col-sm-2 col-2">
-                                        <label class="col-form-label">Lat</label>
+                                        <div class="card-body">
+                                            <iframe src = "https://maps.google.com/maps?q={{$user2->lat}},{{$user2->long}}&hl=es;z=14&amp;output=embed"
+                                            frameborder="0" style="border:0; width: 100%; height: 290px;"
+                                             loading="lazy"
+                                             referrerpolicy="no-referrer-when-downgrade"
+                                            allowfullscreen>
+                                            </iframe>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 col-4">
-                                        <input type="text" id="lat" class="form-control" value="" name="lat"
-                                            disabled>
-                                    </div>
-
-                                    <div class="col-sm-2 col-2">
-                                        <label class="col-form-label">Long</label>
-                                    </div>
-                                    <div class="col-md-4 col-4">
-                                        <input type="text" id="long" class="form-control" value="" name="long"
-                                            disabled>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <label class="col-form-label">Address</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" id="address" class="form-control" name="address" value="">
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <label class="col-form-label text-nowrap">Zip Code</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" id="zip" class="form-control" name="zip" value="">
-                                </div>
-
-                                <div class="col-sm-4">
-                                    <label class="col-form-label">City</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" id="city" class="form-control" value="" name="city">
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
+                    </section>
 
                 </div>
-                </section>
-
             </div>
-        </div>
 
-        <!--login form Modal -->
-        <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="text-center" id="myModalLabel33">Please
-                            select an option to continue</h4>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <i data-feather="x"></i>
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab"
-                                    aria-controls="home" aria-selected="true">Have an Account</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
-                                    role="tab" aria-controls="profile" aria-selected="false">Continue as
-                                    Guest</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <form action="#">
-                                    @csrf
-                                    <div class="modal-body">
+            {{-- login form Modal --}}
+            <div class="modal fade text-left" id="inlineForm" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel33" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="text-center" id="myModalLabel33">Please
+                                select an option to continue</h4>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <i data-feather="x"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home"
+                                        role="tab" aria-controls="home" aria-selected="true">Have an Account</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile"
+                                        role="tab" aria-controls="profile" aria-selected="false">Continue as
+                                        Guest</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <form action="#">
+                                        @csrf
+                                        <div class="modal-body">
 
-                                        <input class="is-invalid text-center" hidden>
-                                        <div class="invalid-feedback">
-                                            <i id="login-error" class="bx bx-radio-circle"></i>
-                                        </div>
-
-                                        <label>Username: </label>
-                                        <div class="form-group">
-                                            <input type="text" placeholder="Username or Email" id="username"
-                                                class="form-control">
-                                        </div>
-                                        <label>Password: </label>
-                                        <div class="form-group">
-                                            <input type="password" placeholder="Password" id="password"
-                                                class="form-control">
-                                        </div>
-                                        <a href="/signup">Don't have an account? Signup</a>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                            <span class="d-sm-block">Close</span>
-                                        </button>
-                                        <button type="button d-sm-block" id="btnLogin" class="btn btn-primary ml-1">
-                                            Login
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
-                                <form action="#">
-                                    @csrf
-                                    <div class="modal-body">
-
-                                        <label>Name: </label>
-                                        <div class="form-group">
-                                            <input type="text" id="full_name" placeholder="Your name"
-                                                class="form-control">
+                                            <input class="is-invalid text-center" hidden>
                                             <div class="invalid-feedback">
-                                                <i id="full_name-error" class="bx bx-radio-circle"></i>
+                                                <i id="login-error" class="bx bx-radio-circle"></i>
+                                            </div>
+
+                                            <label>Username: </label>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Username or Email" id="username"
+                                                    class="form-control">
+                                            </div>
+                                            <label>Password: </label>
+                                            <div class="form-group">
+                                                <input type="password" placeholder="Password" id="password"
+                                                    class="form-control">
+                                            </div>
+                                            <a href="/signup">Don't have an account? Signup</a>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-secondary"
+                                                data-bs-dismiss="modal">
+                                                <span class="d-sm-block">Close</span>
+                                            </button>
+                                            <button type="button d-sm-block" id="btnLogin" class="btn btn-primary ml-1">
+                                                Login
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                                    <form action="#">
+                                        @csrf
+                                        <div class="modal-body">
+
+                                            <label>Name: </label>
+                                            <div class="form-group">
+                                                <input type="text" id="full_name" placeholder="Your name"
+                                                    class="form-control">
+                                                <div class="invalid-feedback">
+                                                    <i id="full_name-error" class="bx bx-radio-circle"></i>
+                                                </div>
+                                            </div>
+
+                                            <label>Phone: </label>
+                                            <div class="form-group">
+                                                <input type="text" id="phone" placeholder="Phone Number"
+                                                    class="form-control">
+                                                <div class="invalid-feedback">
+                                                    <i id="phone-error" class="bx bx-radio-circle"></i>
+                                                </div>
+                                            </div>
+
+                                            <label>Email: </label>
+                                            <div class="form-group">
+                                                <input type="text" id="email" placeholder="example@example.com"
+                                                    class="form-control">
+                                                <div class="invalid-feedback">
+                                                    <i id="email-error" class="bx bx-radio-circle"></i>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <label>Phone: </label>
-                                        <div class="form-group">
-                                            <input type="text" id="phone" placeholder="Phone Number"
-                                                class="form-control">
-                                            <div class="invalid-feedback">
-                                                <i id="phone-error" class="bx bx-radio-circle"></i>
-                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-secondary"
+                                                data-bs-dismiss="modal">
+                                                <span class="d-sm-block">Close</span>
+                                            </button>
+                                            <button type="button" id="btnGuest" class="btn btn-primary ml-1">
+                                                <span class="d-sm-block">Continue</span>
+                                            </button>
                                         </div>
+                                    </form>
 
-                                        <label>Email: </label>
-                                        <div class="form-group">
-                                            <input type="text" id="email" placeholder="example@example.com"
-                                                class="form-control">
-                                            <div class="invalid-feedback">
-                                                <i id="email-error" class="bx bx-radio-circle"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                            <span class="d-sm-block">Close</span>
-                                        </button>
-                                        <button type="button" id="btnGuest" class="btn btn-primary ml-1">
-                                            <span class="d-sm-block">Continue</span>
-                                        </button>
-                                    </div>
-                                </form>
-
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
 </body>
 
 </html>
 
-{{-- Maps Api Dependencies --}}
-<script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
-</script>
-<script type="text/javascript"
-src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
-<script src="../assets/js/maps-script.js"></script>
+
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/book-profile.js"></script>
-<script src="../assets/js/main.js"></script>
+
+<script src="../assets/js/main-nosidepop.js"></script>
