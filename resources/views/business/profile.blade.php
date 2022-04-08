@@ -4,6 +4,7 @@
     use App\Models\User2;
     use App\Models\User2_Tag;
     use App\Models\Tag;
+    use App\Models\User2_Photo;
 ?>
 
 <head>
@@ -54,7 +55,8 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center conainer">
                                             <div class="avatar avatar-xl">
-                                                <img src="../assets/images/faces/1.jpg" alt="Face 1">
+                                                
+                                                <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',Auth::guard('user2')->user()->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}" alt="Face 1">
                                             </div>
                                             <div class="ms-3 name container">
                                                 <h5 class="font-bold">{{ Auth::guard('user2')->user()->business_name }}</h5>
