@@ -2,7 +2,7 @@
 <html lang="en">
 
 @php
-    use App\Models\User2_Photo
+    use App\Models\User2_Photo;
 @endphp
 
 <head>
@@ -95,8 +95,8 @@
                                             </td>
                                             <td>{{ $user->created_at }}</td>
                                             <td class="text-center">
-                                                <?php 
-                                                    $status = $user->status; 
+                                                <?php
+                                                    $status = $user->status;
                                                     if($status==1)
                                                     {
                                                         echo "<span class=\"badge bg-success\">\"Active\"</span>";
