@@ -166,6 +166,10 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
 
+        Route::post('/api/photo-paths', [PhotosController::class, 'show']);
+
+        Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
+
     });
 });
 
