@@ -22,7 +22,7 @@ class MailSender extends Mailable
     public function __construct($email, $name, $secret, $user)
     {
         $this->name = $name;
-        $this->link = $user . env('APP_URL') . '/verify' . $email . '/' . $secret . '/';
+        $this->link = $user . 'trapezaki.me' . '/verify/' . $email . '/' . $secret . '/';
 
     }
 
@@ -33,6 +33,6 @@ class MailSender extends Mailable
      */
     public function build()
     {
-        return $this->subject("Trapezaki Email Verification")->view('email.verify');
+        return $this->subject("Trapezaki Email Verification")->view('emails.verify');
     }
 }
