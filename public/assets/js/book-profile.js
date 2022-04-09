@@ -1,11 +1,12 @@
 $(document).ready(function () {
+    var back = document.referrer
     if (window.location.hash.match("login")) {
         $("#inlineForm").modal('show')
     }
 
     //Go back button
     $("#btnBack").click(function () {
-        history.go(-1)
+        window.location.href = back;
     })
 
     //An ise logged in fkenni tunto button

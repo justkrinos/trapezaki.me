@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-$username = Request::segment(2);
-$user2= DB::table('user2s')
-    ->where('username', $username)->first();
-
+@php
 use App\Models\User2;
 use App\Models\User2_Photo;
-?>
+
+$username = Request::segment(2);
+$user2= User2::where('username', $username)
+        ->first();
+
+@endphp
+
+
 
 {{-- TODO:  //- Na mpoun oi photos se blocks p na fenunte wraia j na tes tsillas j na kamnun pop up
                     opws dame https://www.e-table.cy/restaurant/pier-one-cafe-restobar
@@ -16,7 +19,7 @@ use App\Models\User2_Photo;
             //- To sidebar na sasei j dame j se ulla tu user1
             //- to book na pai se selida p kamnei book
             //- Na sasun oi santanoshies me tin php
-            //- To modal na mpi sta components alla na dw an dulefki prota 
+            //- To modal na mpi sta components alla na dw an dulefki prota
             //- TO BACK EN DULEFKI
 --}}
 
@@ -57,7 +60,7 @@ use App\Models\User2_Photo;
                             <div class="card-header">
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-xl">
-                                        
+
                                         <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user2->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}" alt="Face 1">
                                     </div>
                                     <div class="ms-3 name">
@@ -117,11 +120,11 @@ use App\Models\User2_Photo;
                                                 <span id="user-photos">
 
                                                 @foreach(User2_Photo::where('user2_id',$user2->id)->get() as $photo)
-                                                    @if(!str_starts_with($photo->photo_path,'logo'))  
+                                                    @if(!str_starts_with($photo->photo_path,'logo'))
                                                         <span class="photo" img="{{$photo->photo_path}}"></span>
                                                     @endif
                                                 @endforeach
-                                                    
+
                                                 </span>
                                             </div>
                                         </div>
@@ -306,7 +309,5 @@ $("#gallery").nanogallery2({
   items: photopaths
 });
 </script>
-
-
 
 
