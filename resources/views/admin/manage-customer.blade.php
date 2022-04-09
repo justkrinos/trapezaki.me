@@ -27,6 +27,8 @@ $user_id = DB::table('user2s')
     <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
+
+    {{-- Photos Ajax Dependencies--}}
     <link rel="stylesheet" href="../assets/css/photo-upload.css">
 
     <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
@@ -274,7 +276,6 @@ $user_id = DB::table('user2s')
                             <div id="fileupload" class="mb-3"></div>
                             <div class="user_id" value="{{ $user_id }}"></div>
                             <ul class="images">
-                                @csrf
                             </ul>
                         </div>
                     </div>
@@ -413,4 +414,5 @@ src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locati
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script src="../assets/js/maps-script.js"></script>
 
+{{-- Photos Ajax Dependencies--}}
 <script src="../assets/js/fileupload.js"></script>
