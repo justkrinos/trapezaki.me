@@ -162,6 +162,7 @@ use App\Models\User2;
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
 {{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 <script src="assets/js/extensions/toastify.js"></script>
