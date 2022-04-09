@@ -3,11 +3,11 @@
 
 @if (session()->has('success'))
 
-<span id="msg">{{ session('success') }}</span>
+<span id="msg" txt="{{ session('success') }}"></span>
 
 <script>
 Toastify({
-    text: $("#msg").text(),
+    text: $("#msg").attr('txt'),
     duration: 5000,
     close:true,
     gravity:"top",
@@ -21,11 +21,11 @@ Toastify({
 
 @if (session()->has('logout'))
 
-<span id="msg">{{ session('logout') }}</span>
+<span id="msg" txt="{{ session('success') }}"></span>
 
 <script>
 Toastify({
-    text: $("#msg").text(),
+    text: $("#msg").attr('txt'),
     duration: 5000,
     close:true,
     gravity:"top",
