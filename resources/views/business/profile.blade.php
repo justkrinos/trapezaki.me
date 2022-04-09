@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    use App\Models\User2;
-    use App\Models\User2_Tag;
-    use App\Models\Tag;
-    use App\Models\User2_Photo;
+use App\Models\User2;
+use App\Models\User2_Tag;
+use App\Models\Tag;
+use App\Models\User2_Photo;
+
+$tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
 ?>
 
 <head>
@@ -29,13 +31,22 @@
 
     {{-- Gia ta tags --}}
     <link rel="stylesheet" href="../assets/css/bootstrap-tagsinput.css" />
+
+    {{-- Photos Ajax Dependencies --}}
+    <link rel="stylesheet" href="../assets/css/photo-upload.css">
+
+    {{-- Toast dependency --}}
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+
 </head>
 
 
 <body>
     <div id="app">
-    {{--Include the sidebar from /business/components--}}
+        {{-- Include the sidebar from /business/components --}}
         @include('business.components.sidebar')
+
+
 
         <div id="main">
             <header class="mb-3">
@@ -55,12 +66,15 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center conainer">
                                             <div class="avatar avatar-xl">
-                                                
-                                                <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',Auth::guard('user2')->user()->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}" alt="Face 1">
+
+                                                <img src="../assets/images/uploads/{{ User2_Photo::where('user2_id', Auth::guard('user2')->user()->id)->where('photo_path', 'like', 'logo%')->get()->first()->photo_path }}"
+                                                    alt="Face 1">
                                             </div>
                                             <div class="ms-3 name container">
-                                                <h5 class="font-bold">{{ Auth::guard('user2')->user()->business_name }}</h5>
-                                                <h6 class="text-muted mb-0">{{ Auth::guard('user2')->user()->company_name }}</h6>
+                                                <h5 class="font-bold">
+                                                    {{ Auth::guard('user2')->user()->business_name }}</h5>
+                                                <h6 class="text-muted mb-0">
+                                                    {{ Auth::guard('user2')->user()->company_name }}</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -83,17 +97,11 @@
                         <div class="form-group col-12 justify-content-center mb-5">
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
                                 rows=" 4">{{ Auth::guard('user2')->user()->description }}</textarea>
-                                <div class="invalid-feedback">
-                                    @error('description')
-                                        {{ $message }}
-                                    @enderror
-                                </div>
-                        </div>
-
-                        {{-- Hidden id, to show each time which user to update --}}
-                        <div class="form-group">
-                            <input type="hidden" class="form-control" id="id" name="id"
-                                value="{{ $id = Auth::guard('user2')->user()->id }}">
+                            <div class="invalid-feedback">
+                                @error('description')
+                                    {{ $message }}
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="card-header">
@@ -112,116 +120,92 @@
                             <div class="form-group">
                                 <div class="col-md-2">
                                     <label for="phone">Phone Number</label>
-                                    <input type="text" id="phone" class="form-control round" value="{{ Auth::guard('user2')->user()->phone }}" disabled>
+                                    <input type="text" id="phone" class="form-control round"
+                                        value="{{ Auth::guard('user2')->user()->phone }}" disabled>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-md-2">
                                     <label for="phone">Work Number</label>
-                                    <input type="text" id="phone" class="form-control round" value="{{ Auth::guard('user2')->user()->phone }}" disabled>
+                                    <input type="text" id="phone" class="form-control round"
+                                        value="{{ Auth::guard('user2')->user()->phone }}" disabled>
                                 </div>
                             </div>
 
                             <div class="card-header">
-                            <h4 class="card-title">Type</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-check">
-                                <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input"
-                                        <?php $type = Auth::guard('user2')->user()->type ;
+                                <h4 class="card-title">Type</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <div class="checkbox">
+                                        <input name="coffee" type="checkbox" id="checkbox1" class="form-check-input"
+                                            @php $type = Auth::guard('user2')->user()->type;
 
-                                            if(str_contains($type, 'coffee'))
-                                            {
-                                                echo "checked";
+                                            if (str_contains($type, 'coffee')) {
+                                                echo 'checked';
                                             }
-                                        ?>>
-                                    <label for="checkbox1">Coffee</label>
+                                            @endphp>
+                                        <label for="checkbox1">Coffee</label>
 
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input"
-                                        <?php
-                                            if(str_contains($type, 'food'))
-                                            {
-                                                echo "checked";
+                                    </div>
+                                    <div class="checkbox">
+                                        <input type="checkbox" name="food" id="checkbox1" class="form-check-input"
+                                            @php
+                                            if (str_contains($type, 'food')) {
+                                                echo 'checked';
                                             }
-                                        ?>>
-                                    <label for="checkbox1">Food</label>
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" id="checkbox1" class="form-check-input"
-                                        <?php
-                                            if(str_contains($type, 'drinks'))
-                                            {
-                                                echo "checked";
+                                            @endphp>
+                                        <label for="checkbox1">Food</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <input name="drinks" type="checkbox" id="checkbox1" class="form-check-input"
+                                            @php
+                                            if (str_contains($type, 'drinks')) {
+                                                echo 'checked';
                                             }
-                                        ?>>
-                                    <label for="checkbox1">Drinks</label>
+                                            @endphp>
+                                        <label for="checkbox1">Drinks</label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {{-- Hidden tag_id --}}
-                        <div class="form-group">
-                            {{-- <input type="hidden" class="form-control" id="tag_id" name="tag_id"
-                                value="{{ $tags = User2_Tag::where('taggable_id', $id)->get(); }}"> --}}
-                        </div>
-
-                        <div class="form-group">
-                            <input type="hidden" class="form-control" id="tags_id" name="tags_id"
-                                {{-- value="{{ $test = Tag::where('tag_id', '2')->get() }}" --}}>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-                                            <div class="card-header">
-                                                <h6 class="h6">Tags</h6>
-                                            </div>
-                                            <div class="card-body">
-                                                <section class="multiple-choices">
+                            <div class="col-md-6 col-12">
+                                <div class="card-header">
+                                    <h6 class="h6">Tags</h6>
+                                </div>
+                                <div class="card-body">
+                                    <section class="multiple-choices">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card">
                                                     <div class="row">
-                                                        <div class="col-12">
-                                                            <div class="card">
-                                                                <div class="row">
-                                                                    <div class="col-md-7">
-                                                                        @csrf
-                                                                        {{-- <?php $arr = array();
-                                                                        @foreach($tags as $tag)
-                                                                                        @foreach (App\Models\Tag::all() as $tag_get)
-                                                                                            @if($tag_get->tag_id==$tag->tag_id)
-                                                                                                <?php array_push($arr, $tag_get->name)?>
-                                                                                            @endif
-                                                                                        @endforeach
-                                                                                    @endforeach --}}
+                                                        <div class="col-md-7">
+                                                            @csrf
+                                                            <input name="tags" id="tags" data-role="tagsinput"
+                                                                class="@error('tags.*') is-invalid @enderror
+                                                                            @error('tags') is-invalid @enderror"
+                                                                value="{{implode (", ", $tags)}}">
 
-
-                                                                        <input name="tags" id="tags" data-role="tagsinput"
-                                                                            class="@error('tags.*') is-invalid @enderror
-                                                                            @error('tags') is-invalid @enderror" value=
-                                                                                {{-- <?php echo implode(",",$arr); ?> --}}
-                                                                                >
-
-                                                                        <div class="invalid-feedback">
-                                                                            <i class="bx bx-radio-circle"></i>
-                                                                            @error('tags.*')
-                                                                                {{ $message }}
-                                                                            @enderror
-                                                                            @error('tags')
-                                                                                {{ $message }}
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="invalid-feedback">
+                                                                <i class="bx bx-radio-circle"></i>
+                                                                @error('tags.*')
+                                                                    {{ $message }}
+                                                                @enderror
+                                                                @error('tags')
+                                                                    {{ $message }}
+                                                                @enderror
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                </section>
-                                                <!-- Multiple choices end -->
-
+                                                </div>
                                             </div>
                                         </div>
+
+                                    </section>
+                                    <!-- Multiple choices end -->
+
+                                </div>
+                            </div>
 
 
                             <button type="submit" name="form1" class="btn btn-success me-1 mb-1">Save changes</button>
@@ -250,7 +234,6 @@
                                                     disabled>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="squareText">Reservation Duration</label>
                                                 <input type="text" id="squareText" class="form-control square"
@@ -294,8 +277,18 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
+                            @csrf
                             <label for="formFileMultiple" class="form-label">Upload photos here</label>
-                            <input class="form-control" type="file" id="formFileMultiple" multiple>
+                            <form id="image-upload-form">
+                                <input class="form-control" type="file" id="upload_photo">
+                                <div class="invalid-feedback">
+                                    <i id="upload-photo-error" class="bx bx-radio-circle"></i>
+                                </div>
+
+                            </form>
+                            <div id="fileupload" class="mb-3"></div>
+                            <div class="user_id" value="{{ Auth::guard('user2')->user()->id }}"></div>
+                            <ul class="images"></ul>
                         </div>
                     </div>
                 </div>
@@ -331,61 +324,59 @@
                         <h4 class="card-title">Change Password</h4>
                     </div>
 
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
                                 <form method="POST" action="/profile" class="col-md-12">
-                                @csrf
-                                <div class="form-group">
-                                                <label for="basicInput">Old Password</label>
-                                                <input type="password" class="form-control form-control-l" id="password"
-                                                    name="password" placeholder="Password" required>
-                                                <div style="color:red">{{ $errors->first('password') }}</div>
-                                                @if (session()->has('error'))
-                                                    <div>
-                                                        <p style="color:red;">{{ session('error') }}</p>
-                                                    </div>
-                                                @endif
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="basicInput">Old Password</label>
+                                        <input type="password" class="form-control form-control-l" id="password"
+                                            name="password" placeholder="Password" required>
+                                        <div style="color:red">{{ $errors->first('password') }}</div>
+                                        @if (session()->has('error'))
+                                            <div>
+                                                <p style="color:red;">{{ session('error') }}</p>
                                             </div>
+                                        @endif
+                                    </div>
 
-                                            <div class="form-group">
-                                                <label for="basicInput">New Password</label>
-                                                <input type="password" class="form-control form-control-l"
-                                                    id="new-password" name="new-password" placeholder="Password"
-                                                    required>
-                                                <div style="color:red">{{ $errors->first('new-password') }}</div>
-                                            </div>
+                                    <div class="form-group">
+                                        <label for="basicInput">New Password</label>
+                                        <input type="password" class="form-control form-control-l" id="new-password"
+                                            name="new-password" placeholder="Password" required>
+                                        <div style="color:red">{{ $errors->first('new-password') }}</div>
+                                    </div>
 
-                                            <div class="form-group">
-                                                <label for="basicInput">Re-enter New Password</label>
-                                                <input type="password" class="form-control form-control-l"
-                                                    id="new-password_confirmation" name="new-password_confirmation"
-                                                    placeholder="Password" required>
-                                                <div style="color:red">{{ $errors->first('password_confirmation') }}
-                                                </div>
-                                            </div>
+                                    <div class="form-group">
+                                        <label for="basicInput">Re-enter New Password</label>
+                                        <input type="password" class="form-control form-control-l"
+                                            id="new-password_confirmation" name="new-password_confirmation"
+                                            placeholder="Password" required>
+                                        <div style="color:red">{{ $errors->first('password_confirmation') }}
+                                        </div>
+                                    </div>
 
-                                            {{-- Hidden id, to show each time which user to update --}}
-                                            <div class="form-group">
-                                                <input type="hidden" class="form-control" id="id" name="id"
-                                                    value="{{ Auth::guard('user2')->user()->id }}">
-                                            </div>
+                                    {{-- Hidden id, to show each time which user to update --}}
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="id" name="id"
+                                            value="{{ Auth::guard('user2')->user()->id }}">
+                                    </div>
 
-                                            <div class="form-group">
-                                                <input type="hidden" class="form-control" id="username"
-                                                    name="username"
-                                                    value="{{ Auth::guard('user2')->user()->username }}">
-                                            </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="username" name="username"
+                                            value="{{ Auth::guard('user2')->user()->username }}">
+                                    </div>
 
-                                            <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="submit" name="form2"
-                                                    class="btn btn-primary me-1 mb-1">Change</button>
-                                            </div>
-                                </div>
-                                </from>
+                                    <div class="col-sm-12 d-flex justify-content-end">
+                                        <button type="submit" name="form2"
+                                            class="btn btn-primary me-1 mb-1">Change</button>
+                                    </div>
 
+                                    </from>
                             </div>
                         </div>
+                    </div>
 
                 </div>
 
@@ -399,10 +390,17 @@
 
     </div>
 
+    {{-- Photo Popup Modal --}}
+    <div id="photo-popup" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+</body>
 
 </html>
 
-
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 {{-- Gia ta tags --}}
 <script src="../assets/js/typeahead.bundle.js"></script>
@@ -411,15 +409,21 @@
 <script src="../assets/vendors/choices.js/choices.min.js"></script>
 <script src="../assets/js/tags.js"></script>
 
+{{-- For flash messages --}}
+<script src="assets/vendors/toastify/toastify.js"></script>
+{{-- <script src="assets/js/extensions/toastify.js"></script> --}}
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
 
 <script src="../assets/vendors/choices.js/choices.min.js"></script>
+
+
+{{-- Photos Ajax Dependencies --}}
+<script src="../assets/js/fileupload.js"></script>
+
 <script src="../assets/js/main.js"></script>
 
-
-</body>
-
-</html>
+{{-- Include for flash messages --}}
+@include('components.toasts')
