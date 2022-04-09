@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\RegisterUser2;
 use App\Http\Controllers\User1Controller;
+use App\Http\Controllers\VerifyEmail;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SessionsController2;
 use App\Http\Controllers\PhotosController;
@@ -33,17 +34,17 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     })->name('first_page');
 
     Route::get('/user/{user}', function ($slug) {
-        //TODO:
-        //tuta prp nan /user/seven-seas gt meta isos exume thema me ta login j tuta
-        //epd bori na eshi logariasmo me onom "login"
-        //extos an kamume blacklist
-        //j gia to pukatw   route to idio
+        $user = User2::where('username', $slug)->first();
+
+        if (!$user) {
+            return redirect('/make-a-reservation');
+        }
         return view('www.selected-profile');
     });
 
-    Route::get('/user/{user}/book',[SessionsController::class, 'showBook']);
+    Route::get('/user/{user}/book', [SessionsController::class, 'showBook']);
 
-    Route::post('/user/{user}/book',[SessionsController::class, 'createBook']);
+    Route::post('/user/{user}/book', [SessionsController::class, 'createBook']);
 
 
 
@@ -55,8 +56,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/', function () {
             return view('www.index');
         });
-
-        Route::get('verify/{email}/{secret}/{?uer_type}','Auth\VerificationController@verifyEmail');
 
         Route::get('/login', [SessionsController::class, 'create']);
 
@@ -98,7 +97,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/my-reservations', function () {
             return view('www.reservations');
         });
-
     });
 });
 
@@ -106,7 +104,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 Route::domain('business.' . env('APP_URL'))->group(function () {
 
 
-    Route::middleware(['guest:user1'])->group(function () {
+    Route::middleware(['guest:user2'])->group(function () {
         Route::get('/login', [SessionsController2::class, 'create']);
         Route::post('/login', [SessionsController2::class, 'login']);
 
@@ -121,9 +119,15 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/signup', [RegisterUser2::class, 'view']);
         Route::post('/signup', [RegisterUser2::class, 'create']);
 
-        Route::get('/api/tags', function(){
+        Route::get('/api/tags', function () {
             $tag = Tag::all()->pluck('name')->toArray();
             return response($tag);
+        });
+
+        Route::get('verify/{email}/{secret}/', [VerifyEmail::class, 'verify']);
+
+        Route::get('/test', function () {
+            return view('business.emails.verify')->with('email', 'blabla');
         });
     });
 
@@ -162,14 +166,13 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
             return view('business.report-problem');
         });
 
-        Route::post('/report-problem',[issuesBusinessControler::class,'store']);
+        Route::post('/report-problem', [issuesBusinessControler::class, 'store']);
 
         Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
 
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
 
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
-
     });
 });
 
@@ -203,7 +206,11 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         });
 
         Route::get('/user/{user}', function ($slug) {
+            $user = User2::where('username', $slug)->first();
 
+            if (!$user) {
+                return redirect('/');
+            }
             return view('admin.manage-customer');
         });
 
@@ -216,7 +223,6 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
 
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
-
     });
 });
 
@@ -225,7 +231,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 //na ton kamnei redirect sto first page
 //to first page en dilomeno san name('first_page')
 //pio panw sto make-a-reservation route fenete
-Route::get('/', function(){
+Route::get('/', function () {
     return redirect()->route('first_page');
 });
 
@@ -242,4 +248,3 @@ Route::get('/', function(){
 
 //Gia otidipote allo na kamume
 //abort(404);
-
