@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User2;
 use App\Models\User2_Photo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterUser2 extends Controller
 {
@@ -30,8 +31,11 @@ class RegisterUser2 extends Controller
             'password_confirmation' => 'required', //only check, don't save
         ]);
 
+        //verification code
+        $request->merge(['verification_code' => substr(md5(rand()),0,7)]);
+
         //Then save the attributes of the record, because we don't want to include password confirmation
-        $validatedData = request()->validate(
+        $validatedData = $request->validate(
             [
                 'username' => 'required|max:50|min:3|unique:user2s',
                 'email' => 'required|max:50|unique:user2s|email',
@@ -59,7 +63,8 @@ class RegisterUser2 extends Controller
                 'lat'  => 'required|numeric|max:36',
 
                 'tags' => 'required',
-                'tags.*' => 'alpha|max:15'
+                'tags.*' => 'alpha|max:15',
+                'verification_code' => 'required'
             ],
             [
                 'postal.numeric' => 'The postal code must be a number.',
@@ -95,17 +100,17 @@ class RegisterUser2 extends Controller
         //Save the logo same logic as above
         User2_Photo::store_logo(request()->file('logo'),$user2->id);
 
-        //auth()->login($user2);
-        //ssession()->flash('success', 'Your account has been created');
-
         //TODO email verification
 
-        return redirect('/login')->with('success', "Your account has been created successfully!
-             Check your email for verification.");
+        Mail::to($user2->email)->queue(new \App\Mail\MailSender($user2->email, $user2->business_name, $user2->verification_code, 'business'));
+
+        return redirect('/login')->with('success', "Your account has been created successfully! Check your email for verification.");
 
 
         //The message is shown ugly, idk why
     }
+
+
 
     //Function gia xrisi mesa sto object pu kamni format to type (food coffe drinks)
     private function formatType(array $validatedData){
