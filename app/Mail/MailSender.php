@@ -22,7 +22,7 @@ class MailSender extends Mailable
     public function __construct($email, $name, $secret, $user)
     {
         $this->name = $name;
-        $this->link = $user . 'trapezaki.me' . '/verify/' . $email . '/' . $secret . '/';
+        $this->link = 'http://' . $user . '.trapezaki.me' . '/verify/' . $email . '/' . $secret . '/';
 
     }
 
