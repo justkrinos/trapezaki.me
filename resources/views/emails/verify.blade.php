@@ -149,7 +149,6 @@
                                     <td bgcolor="#ffffff" align="center" style="padding: 20px 30px 60px 30px;">
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                {{-- <td align="center" style="border-radius: 3px;" bgcolor="#1746e0"><a href="{{$link}}" target="_blank" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #1746e0; display: inline-block;">Verify Account</a></td> --}}
                                                 <a href="{{$link}}"
                                                     style="background-color: #1746e0; font-size: 18px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; text-decoration: none; padding: 14px 20px; color: #ffffff; border-radius: 5px; display: inline-block; mso-padding-alt: 0;">
                                                     <span style="mso-text-raise: 15pt;">Verify Email</span>
