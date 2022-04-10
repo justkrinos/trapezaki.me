@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@php
-    use App\Models\User2_Photo
-@endphp
-
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <title>Trapezaki - Pending Requests</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/vendors/iconly/bold.css">
+
+    {{-- Toast dependency --}}
+    <link rel="stylesheet" href="../assets/vendors/toastify/toastify.css">
 
     <!-- Datatable Css Include -->
     <link rel="stylesheet" href="../assets/vendors/simple-datatables/style.css">
@@ -27,7 +26,7 @@
 
 <body>
     <div id="app">
-        @include("admin.components.sidebar")
+        @include('admin.components.sidebar')
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -54,32 +53,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach (App\Models\User2::all() as $user)
-                                        @if ($user->status == 0)
-                                        <tr>
-                                            <td class="col-8 clicktoCust">
-                                                <a href="/user/{{$user->username}}">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">{{ $user->username }}</p>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                            <td class="clicktoCust">
-                                                <p class="mb-0" data-type="date" style="overflow: auto; height: 60px; width: 150px;" data-format="DD/MM/YYYY">{{ $user->created_at }}</p>
-                                            </td>
-                                            <td class="d-flex flex-nowrap">
-                                               
-                                                <a href="#" class="btn btn-outline-success">Accept</a>
-                                                <a href="#" class="btn btn-outline-danger">Decline</a>
-                                            </td>
+                                        @foreach ($users2 as $user)
 
-                                        </tr>
-                                        @endif
-                                    @endforeach
-                                       
+                                            <tr class="user" username="{{ $user->username }}">
+                                                <td class="col-8">
+                                                    <a href="/user/{{ $user->username }}">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar avatar-md">
+                                                                <img
+                                                                    src="../assets/images/uploads/{{ $user->logo() }}">
+                                                            </div>
+                                                            <p class="font-bold ms-3 mb-0">{{ $user->username }}</p>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <p class="mb-0" data-type="date"
+                                                        style="overflow: auto; height: 60px; width: 150px;"
+                                                        data-format="DD/MM/YYYY">{{ $user->created_at }}</p>
+                                                </td>
+                                                <td class="d-flex flex-nowrap">
+                                                        @csrf
+                                                        <button class="btn btn-outline-success accept">Accept</button>
+                                                        <button class="btn btn-outline-danger decline">Decline</button>
+                                                </td>
+
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -99,7 +100,7 @@
     <footer>
         <div class="footer clearfix mb-0 text-muted">
             <div class="float-start">
-                <p>2021 &copy; Mazer</p>
+                <p>2021 &copy; Trapezaki</p>
             </div>
         </div>
     </footer>
@@ -114,6 +115,9 @@
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
+
+{{-- Include for flash messages --}}
+<script src="../assets/vendors/toastify/toastify.js"></script>
 
 <script src="../assets/js/pending-req.js"></script>
 <script src="../assets/js/main.js"></script>

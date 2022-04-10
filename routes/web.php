@@ -11,6 +11,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SessionsController2;
 use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\ManageBusinessController;
+use App\Http\Controllers\PendingRequestsController;
 use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User2;
@@ -203,9 +204,8 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::post('/issues', [issueControler::class, 'flagIssue']);
 
 
-        Route::get('/pending-requests', function () {
-            return view('admin.pending-requests');
-        });
+        Route::get('/pending-requests', [PendingRequestsController::class, 'show']);
+        Route::post('/pending-requests', [PendingRequestsController::class, 'modify']);
 
         Route::get('/user/{user}', function ($slug) {
             $user = User2::where('username', $slug)->first();
