@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\RegisterUser2;
 use App\Http\Controllers\User1Controller;
-use App\Http\Controllers\VerifyEmail;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SessionsController2;
 use App\Http\Controllers\PhotosController;
@@ -34,7 +34,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.search');
     })->name('first_page');
 
-    Route::get('/user/{user}', function ($slug) {
+    Route::get('/user/{user2}', function ($slug) {
         $user = User2::where('username', $slug)->first();
 
         if (!$user) {
@@ -58,6 +58,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
             return view('www.index');
         });
 
+        Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser3']);
+
         Route::get('/login', [SessionsController::class, 'create']);
 
         Route::post('/login', [SessionsController::class, 'login']);
@@ -79,6 +81,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         //Should be able to handle guest
         //Route::post('/selected-profile', [RegisterUser3::class, 'createGuest']);
+
     });
 
 
@@ -125,11 +128,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
             return response($tag);
         });
 
-        Route::get('verify/{email}/{secret}/', [VerifyEmail::class, 'verify']);
+        Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser2']);
 
-        Route::get('/test', function () {
-            return view('business.emails.verify')->with('email', 'blabla');
-        });
     });
 
 
