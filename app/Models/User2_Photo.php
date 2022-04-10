@@ -50,9 +50,6 @@ class User2_Photo extends Model
         User2_Photo::create(['user2_id' => $userid,'photo_path'=> $imageName]);
     }
 
-    public static function getLogo(int $userid){
-        return User2_Photo::where('user2_id', $userid)->where('photo_path', 'like', 'logo%')->get()->first()->photo_path;
-    }
 
     public function user2(){
         return $this->belongsTo('App\Models\User2');
