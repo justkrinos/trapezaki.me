@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User2;
 
-class VerifyEmail extends Controller
+class EmailController extends Controller
 {
     public function verify($email,$secret){
         $user = User2::where('email',$email)->first();
