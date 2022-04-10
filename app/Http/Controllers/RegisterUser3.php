@@ -39,8 +39,12 @@ class RegisterUser3 extends Controller
             'full_name' => 'required|max:50|min:3',
             'email' => 'required|email|max:100|unique:user3s,email',
             'phone' => 'required|digits_between:8,13|numeric',
-            'password' => 'required|max:50|min:7|confirmed'
+            'password' => 'required|max:50|min:7|confirmed',
+            'verification_code' => 'required'
         ]);
+        //TODO:  //-na sasun ta messages p stelni error (eg. na men grafi full_name)
+                 //-to password confirmation error na fkennei sto password_confirmation field
+
         //Must remove from $attributes
 
 
@@ -51,11 +55,7 @@ class RegisterUser3 extends Controller
         $user = User3::create($attributes);
 
 
-        // $message='verify/'.\base64_encode($guest->email).'/'.\base64_encode($guest->verification_code);
-        //     //$message='verify/'.\base64_encode($this->email).'/'.\base64_encode($guest>verification_code).'/'.\base64_encode('user_type');
-        //       $subject = 'Email verification';
-        //       // Mail::to($guest->email)->queue(new \App\Mail\verification($subject,$message));
-        //        Mail::raw('Hello', function($message) {$message->to('as.efstathiou@edu.cut.ac.cy')->subject('test');});
+        Mail::to($user->email)->queue(new \App\Mail\MailVerify($user->email, $user->username, $user->verification_code, 'www'));
 
         //TODO: email verification
 

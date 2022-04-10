@@ -116,8 +116,13 @@ class SessionsController extends Controller
 
         //Check if credentials are ok
         if (!Auth::guard('user3')->attempt($attributes)) {
-            return view('www.login')->withErrors(['message' => 'Your provided credentials could not be verified.']);
+            return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);
         }
+
+        if(!Auth::guard('user3')->user()->is_verified){
+            auth('user3')->logout();
+            return back()->withErrors(['message' => 'Your account is not yet activated! Please check your email.']);
+        };
 
 
         //Continue to login

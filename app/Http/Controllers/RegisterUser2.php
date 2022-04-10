@@ -100,14 +100,11 @@ class RegisterUser2 extends Controller
         //Save the logo same logic as above
         User2_Photo::store_logo(request()->file('logo'),$user2->id);
 
-        //TODO email verification
 
-        Mail::to($user2->email)->queue(new \App\Mail\MailSender($user2->email, $user2->business_name, $user2->verification_code, 'business'));
+        Mail::to($user2->email)->queue(new \App\Mail\MailVerify($user2->email, $user2->business_name, $user2->verification_code, 'business'));
 
         return redirect('/login')->with('success', "Your account has been created successfully! Check your email for verification.");
 
-
-        //The message is shown ugly, idk why
     }
 
 
