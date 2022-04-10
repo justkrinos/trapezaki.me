@@ -35,4 +35,12 @@ class User2 extends Authenticatable implements MustVerifyEmail
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function photos(){
+        return $this->hasMany('App\Models\User2_Photo','user2_id','id')->where('photo_path', 'not like', 'logo%');
+    }
+
+    public function logo(){
+        return $this->hasMany('App\Models\User2_Photo','user2_id','id')->where('photo_path', 'like', 'logo%');
+    }
+
 }
