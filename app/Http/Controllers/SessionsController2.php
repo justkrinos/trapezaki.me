@@ -17,6 +17,7 @@ class SessionsController2 extends Controller
         if(request()->has('form1'))
         {
 
+
             $request['tags'] = $this->tagsToArray(request()['tags']);
 
             //User3 edit profile
@@ -30,9 +31,11 @@ class SessionsController2 extends Controller
                 'tags' => 'required',
                 'tags.*' => 'regex:/^[\pL\s\-]+$/u|max:15'
 
-            ],[
+            ],
+            [
                 'tags.*.regex' => 'Please only use aphabetic characters.'
             ]);
+
 
             $tags = $validatedData['tags'];
             unset($validatedData['tags']);
@@ -145,11 +148,26 @@ class SessionsController2 extends Controller
         ]);
 
 
+        //TODO: Gia to Keep me logged in, evre to section Remembering Users https://laravel.com/docs/7.x/authentication
+
+
 
         if (! Auth::guard('user2')->attempt($attributes)) //attempt to log the user in with the given data/credentials
         {
             return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);
         }
+
+        if(!Auth::guard('user2')->user()->is_verified){
+            auth('user2')->logout();
+            return back()->withErrors(['message' => 'Your account is not yet verified! Please check your email.']);
+        };
+
+        //TODO: na to kamume uncomment molis en etoimo to pending requests
+        // if(!Auth::guard('user2')->user()->status){
+        //     auth('user2')->logout();
+        //     return back()->withErrors(['message' => 'Your account activation is pending. Our team will contact you soon.']);
+        // };
+
 
         //To prevent session fixation (stealing session IDs)
         session()->regenerate();
