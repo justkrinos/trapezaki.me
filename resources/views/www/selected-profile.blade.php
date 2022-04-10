@@ -61,7 +61,7 @@ $user2= User2::where('username', $username)
                                 <div class="d-flex align-items-center">
                                     <div class="avatar avatar-xl">
 
-                                        <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user2->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}" alt="Face 1">
+                                        <img src="../assets/images/uploads/{{$user2->logo()->get()->first()->photo_path}}" alt="logo">
                                     </div>
                                     <div class="ms-3 name">
                                         <h2 class="font-bold text-nowrap">{{ $user2->business_name }}

@@ -31,7 +31,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <img src="/assets/images/Limassol.jpg" class="card-img-top img-fluid"
-                                        alt="singleminded">
+                                         >
                                     <div class="card-body">
                                         <h5 class="card-title">Limassol.</h5>
                                         <a href="/make-a-reservation" class="stretched-link"></a>
@@ -47,7 +47,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <img src="/assets/images/Nicosia.jpg" class="card-img-top img-fluid"
-                                        alt="singleminded">
+                                         >
                                     <div class="card-body">
                                         <h5 class="card-title">Nicosia.</h5>
                                         <a href="/make-a-reservation" class="stretched-link"></a>
@@ -63,7 +63,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <img src="/assets/images/Paphos.jpg" class="card-img-top img-fluid"
-                                        alt="singleminded">
+                                         >
                                     <div class="card-body">
                                         <h5 class="card-title">Paphos.</h5>
                                         <a href="/make-a-reservation" class="stretched-link"></a>
@@ -80,7 +80,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <img src="/assets/images/Larnaca.jpg" class="card-img-top img-fluid"
-                                        alt="singleminded">
+                                         >
                                     <div class="card-body">
                                         <h5 class="card-title">Larnaca.</h5>
                                         <a href="/make-a-reservation" class="stretched-link"></a>
@@ -96,7 +96,7 @@
                             <div class="card">
                                 <div class="card-content">
                                     <img src="/assets/images/Amoxostos.jpg" class="card-img-top img-fluid"
-                                        alt="singleminded">
+                                         >
                                     <div class="card-body">
                                         <h5 class="card-title">Famagusta.</h5>
                                         <a href="/make-a-reservation" class="stretched-link"></a>

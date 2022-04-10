@@ -72,7 +72,7 @@ $tags = User2::find($user_id)
                                         <div class="d-flex align-items-center conainer">
                                             <div class="avatar avatar-xl">
                                                 <img src="../assets/images/uploads/{{ User2_Photo::where('user2_id', $user_id)->where('photo_path', 'like', 'logo%')->get()->first()->photo_path }}"
-                                                    alt="Face 1">
+                                                    alt="logo">
                                             </div>
                                             <div class="ms-3 name container">
                                                 <h5 class="font-bold">{{ User2::find($user_id)->business_name }}
