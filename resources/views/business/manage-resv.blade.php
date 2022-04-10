@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/vendors/iconly/bold.css">
 
+
+    {{--Toast dependency--}}
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+
     <!-- Datatable Css Include -->
     <link rel="stylesheet" href="../assets/vendors/simple-datatables/style.css">
 
@@ -333,3 +337,8 @@
 <script src="../assets/js/manage-resv-datatable.js"></script>
 <script src="../assets/js/date-no-prev.js"></script>
 <script src="../assets/js/reservations.js"></script>
+
+{{--Toast dependencies--}}
+<script src="assets/vendors/toastify/toastify.js"></script>
+
+@include('components.toasts')

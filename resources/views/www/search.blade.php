@@ -10,7 +10,7 @@ use App\Models\User2_Photo;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trapezaki - Make a Reservation</title>
 
-    {{-- TODO: //-na sasei to toast p lalei welcome back
+    {{-- TODO:
               //-na sasei to logo na men en terastio
               //-na mpun default user2 prin kami search(exw etoimo view)
               //-se kathe card tu user2 na eshi j mia photo sta deksia mitsia (tin proti p briskis se sql query)
@@ -18,6 +18,9 @@ use App\Models\User2_Photo;
               //- to pagination sta datatable en dulefki me ta popup sto user3 js to user2
               //- opou eshi code messe view na mpei mono se controllers --}}
 
+
+    {{--Toast dependency--}}
+    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 
     <link rel="stylesheet" href="../assets/css/font.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
@@ -141,6 +144,9 @@ use App\Models\User2_Photo;
 
 {{-- En xriazete i main dame gt en mono gia to sidebar --}}
 <script src="../assets/js/main-nosidepop.js"></script>
+
+{{--Toast dependencies--}}
+<script src="assets/vendors/toastify/toastify.js"></script>
 
 @include('components.toasts')
 

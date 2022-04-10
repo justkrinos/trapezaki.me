@@ -172,7 +172,7 @@ class SessionsController2 extends Controller
         //To prevent session fixation (stealing session IDs)
         session()->regenerate();
 
-        return redirect('/dashboard')->withInput()->with('success','Welcome back!');
+        return redirect('/manage-reservations')->withInput()->with('success','Welcome back!');
 
     }
 
