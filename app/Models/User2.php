@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\File;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -39,8 +41,15 @@ class User2 extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\User2_Photo','user2_id','id')->where('photo_path', 'not like', 'logo%');
     }
 
+    public function deletePhotos(){
+        foreach($this->photos()->get() as $photo){
+            File::delete('assets/images/uploads/' . $photo->photo_path);
+            $photo->delete();
+        }
+    }
+
     public function logo(){
-        return $this->hasMany('App\Models\User2_Photo','user2_id','id')->where('photo_path', 'like', 'logo%');
+        return $this->hasMany('App\Models\User2_Photo','user2_id','id')->where('photo_path', 'like', 'logo%')->get()->first()->photo_path;
     }
 
 }
