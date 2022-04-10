@@ -1,4 +1,5 @@
 {{-- Evre random users p en verified j active --}}
+{{-- TODO: na allaksi tuto na erkete p ton controller --}}
 @php
 $users = App\Models\User2::inRandomOrder()
     ->limit(5)
@@ -25,7 +26,7 @@ $users = App\Models\User2::inRandomOrder()
                             </div>
                             <div class="col-12 carousel-inner">
                                 <img class="img-fluid w-100" style="height: 20rem; object-fit: cover;"
-                                    src="../assets/images/uploads/{{ $users[0]->photos()->inRandomOrder()->limit(1)->get()->first()->photo_path }}">
+                                    src="../assets/images/uploads/{{ $users[0]->photos()->get()->shuffle()->first()->photo_path }}">
                             </div>
                         </div>
                         <ul class="list-group list-group-flush">
@@ -46,7 +47,7 @@ $users = App\Models\User2::inRandomOrder()
                         <div class="card-content">
                             <div class="col-12 row-col-12">
                                 <img style="height: 20rem; object-fit: cover;"
-                                    src="../assets/images/uploads/{{ $users[1]->photos()->inRandomOrder()->limit(1)->get()->first()->photo_path }}"
+                                    src="../assets/images/uploads/{{ $users[1]->photos()->inRandomOrder()->get()->first()->photo_path }}"
                                     class="card-img-top   img-fluid">
                             </div>
                             <div class="card-body">

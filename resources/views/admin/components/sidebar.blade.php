@@ -6,7 +6,7 @@
                     <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
                             srcset=""></a>
                 </div>
-
+{{-- TODO: to logout button ennen toso emfanes, na sasei --}}
 
 
                 <div class="toggler">
