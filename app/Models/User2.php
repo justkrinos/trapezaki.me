@@ -12,8 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 
 //O user2 einai taggable (eshei tags)
 use Cviebrock\EloquentTaggable\Taggable;
+use PHPUnit\Framework\MockObject\Verifiable;
 
-class User2 extends Authenticatable
+class User2 extends Authenticatable implements MustVerifyEmail
 {
     // O user2 eshei tags (has-a relationship)
     use Taggable;
@@ -34,8 +35,4 @@ class User2 extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    // //for the relationship
-    // public function getTagsRelation(){
-    //     return $this->hasMany(related: 'App\User2_Tag', foreignKey:'taggable_id', localKey:'id');
-    // }
 }
