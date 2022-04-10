@@ -1,3 +1,7 @@
+@php
+    use App\Models\User2;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,6 +123,86 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+
+
+        <section class="section">
+            <div class="card">
+
+                <div class="card-content">
+                    <div class="card-body">
+                        <h3>Previous Problems</h3>
+                        <div class="row">
+                            <!-- Hoverable rows start -->
+                            <section class="section">
+                                <div class="row" id="table-hover-row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                <div class="card-body">
+                                                </div>
+                                                <!-- table hover -->
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover mb-0" id="probTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <!-- <th>ResNum</th> -->
+                                                                <th>Date</th>
+                                                                <th>Type</th>
+                                                                <th>Status</th>
+                                                                <!-- Analogws me ti ena epileksei na tu fkallei to analogo text -->
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                            $user2_id = Auth::guard('user2')->user()->id;
+                                                            $usernane = User2::find($user2_id)->username;
+                                                            ?>
+                                                            @foreach (App\Models\Issue::all() as $issue)
+                                                                @if ($issue->user2_id == $user2_id)
+                                                                    <tr>
+                                                                        <td class="date probPopup">
+                                                                            {{ $issue->created_at }}
+                                                                        </td>
+                                                                        <td class="type">{{ $issue->type }}
+                                                                        </td>
+                                                                        <td>
+                                                                            <span
+                                                                                class="status"><?php
+                                                                                if($issue->status==0) {echo "Pending.";}
+                                                                                else if($issue->status==1) {echo "<p style='color:green;'>Solved!</p>";}
+                                                                                else if($issue->status==2) {echo "<p style='color:red;'>Cannot be solved...</p>";}
+                                                                                ?></span>
+                                                                        </td>
+                                                                        <td class="problem-description" hidden>
+                                                                            {{ $issue->details }}</td>
+                                                                        <td class="problem-type" hidden>
+                                                                            {{ $issue->type }}</td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- Hoverable rows end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 

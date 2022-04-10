@@ -96,7 +96,7 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                         </div>
                         <div class="form-group col-12 justify-content-center mb-5">
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                                rows=" 4">{{ Auth::guard('user2')->user()->description }}</textarea>
+                                rows="4">{{ Auth::guard('user2')->user()->description }}</textarea>
                             <div class="invalid-feedback">
                                 @error('description')
                                     {{ $message }}
