@@ -36,8 +36,6 @@ class CreateUser2sTable extends Migration
             $table->tinyInteger('res_range')->nullable();
             $table->smallInteger('duration')->nullable();
 
-            $table->decimal('floor_width')->default('500.0');
-            $table->decimal('floor_length')->default('500.0');
             $table->text('description')->nullable();
 
             //testing
