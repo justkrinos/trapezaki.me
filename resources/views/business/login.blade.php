@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trapezaki - Business Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
+
     {{--Toast dependency--}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 
@@ -31,7 +31,7 @@
                     <form method="POST" action="/">
                     @csrf
 
-                    @error('message')   
+                    @error('message')
                     <input class="is-invalid text-center" hidden>
                         <div class="invalid-feedback">
                             <i class="bx bx-radio-circle"></i>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                         <div class="form-check form-check-lg d-flex align-items-end">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
+                            <input name="remember_token" class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
                             <label class="form-check-label text-gray-600" for="flexCheckDefault">
                                 Keep me logged in
                             </label>

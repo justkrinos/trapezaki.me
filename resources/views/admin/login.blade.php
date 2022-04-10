@@ -55,7 +55,7 @@
                             <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
 
                             {{--TODO: na dume an tha to kratisume to keep me logged in--}}
-                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                            <label name="remember_token" class="form-check-label text-gray-600" for="flexCheckDefault">
                                 Keep me logged in
                             </label>
                         </div>
