@@ -17,7 +17,6 @@ class CreateUser2PhotosTable extends Migration
             $table->id();
             $table->foreignId('user2_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('photo_path');
-
             $table->timestamps();
         });
     }

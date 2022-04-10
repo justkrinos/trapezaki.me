@@ -26,8 +26,8 @@ class CreateUser2sTable extends Migration
             $table->string('city');
             $table->string('address');
             $table->integer('postal');
-            $table->decimal('long');
-            $table->decimal('lat');
+            $table->double('long',20,15);
+            $table->double('lat',20,15);
 
             $table->string('type');
             $table->boolean('status')->default(false);
