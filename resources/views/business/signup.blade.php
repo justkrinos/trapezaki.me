@@ -17,6 +17,12 @@
     <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/app.css">
 
+    {{-- TODO:
+        //-ta tags en dulefkun se mobile
+        //-na fiei jino to komma sta tags j en spastiko
+
+     --}}
+
 </head>
 
 <body>
