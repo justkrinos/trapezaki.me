@@ -10,6 +10,7 @@ use App\Http\Controllers\VerifyEmail;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SessionsController2;
 use App\Http\Controllers\PhotosController;
+use App\Http\Controllers\ManageBusinessController;
 use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User2;
@@ -166,6 +167,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
             return view('business.report-problem');
         });
 
+
         Route::post('/report-problem', [issuesBusinessControler::class, 'store']);
 
         Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
@@ -217,6 +219,14 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::get('/edit-floorplan', function () {
             return view('admin.floorplan-editor');
         });
+
+        Route::get('/api/tags', function () {
+            $tag = Tag::all()->pluck('name')->toArray();
+            return response($tag);
+        });
+
+        //Edit User2
+        Route::post('/user/{user2}', [ManageBusinessController::class, 'edit']);
 
         Route::get('/logout', [User1Controller::class, 'logout']);
 
