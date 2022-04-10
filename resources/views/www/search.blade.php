@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-    use App\Models\User2_Photo;
+use App\Models\User2_Photo;
 ?>
 
 <head>
@@ -11,12 +11,12 @@
     <title>Trapezaki - Make a Reservation</title>
 
     {{-- TODO: //-na sasei to toast p lalei welcome back
-              //-na mpei ena logo kapou kati na fenete to trapezaki
+              //-na sasei to logo na men en terastio
               //-na mpun default user2 prin kami search(exw etoimo view)
               //-se kathe card tu user2 na eshi j mia photo sta deksia mitsia (tin proti p briskis se sql query)
               //-na valume kamia photo p piso na mennen etsi stegno
               //- to pagination sta datatable en dulefki me ta popup sto user3 js to user2
-              --}}
+              //- opou eshi code messe view na mpei mono se controllers --}}
 
 
     <link rel="stylesheet" href="../assets/css/font.css">
@@ -47,10 +47,13 @@
 
                                     <div class="page-title">
                                         <div class="row">
-                                            <div class="col-md-16 mb-1 justify-content-center">
+                                            <div class="col-md-12 mb-1 justify-content-center">
+
                                                 <div class="d-flex justify-content-center mb-5">
-                                                    <a href="/" class="d-flex justify-content-center"><img src="../assets/images/logo/logo_small.png"
-                                                            alt="Trapezaki" class="col-md-5"></a>
+                                                    <a class="d-flex justify-content-center">
+                                                        <img src="../assets/images/logo/logo_small.png" alt="Trapezaki"
+                                                            class="col-md-5 col-5">
+                                                    </a>
                                                 </div>
                                                 <h3 class="text-center">Make a Reservation</h3>
                                             </div>
@@ -70,21 +73,33 @@
                             </div>
 
 
+
+                            {{--tuto en gia na fkallei recommended magazia prin kamis search --}}
+                            @include('www.search.random')
+
+
+
+                            {{--TODO: na katalaveni an ekames search j na fefki ta exta
+                                      magazia j na su fkalli ta search results
+
                             <div class="row">
 
                                 <h3>Results</h3>
                                 <p class="text-subtitle text-muted">You searched for "bar" </p>
                             </div>
 
+                            --}}
 
-                            @foreach (App\Models\User2::all() as $user)
+
+                            {{-- @foreach (App\Models\User2::all() as $user)
                                 <div class="card">
                                     <div class="row-cols-1">
                                         <div class="card-header">
                                             <div class="d-flex align-items-center">
                                                 <div class="avatar avatar-xl me-4">
 
-                                                    <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
+                                                    <img
+                                                        src="../assets/images/uploads/{{ $user->logo()->photo_path }}">
                                                 </div>
                                                 <h4 class="card-title text-nowrap">{{ $user->business_name }}</h4>
                                                 <div class="container" style="text-align: end;">
@@ -102,7 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            @endforeach --}}
 
 
                         </div>
@@ -126,6 +141,7 @@
 
 {{-- En xriazete i main dame gt en mono gia to sidebar --}}
 <script src="../assets/js/main-nosidepop.js"></script>
+
 @include('components.toasts')
 
 </html>
