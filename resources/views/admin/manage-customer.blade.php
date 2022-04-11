@@ -23,28 +23,28 @@ $tags = User2::find($user_id)
     <title>Manage Customer</title>
 
     {{-- Include Choices CSS --}}
-    <link rel="stylesheet" href="../assets/vendors/choices.js/choices.min.css" />
+    <link rel="stylesheet" href="/assets/vendors/choices.js/choices.min.css" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
-    <link rel="stylesheet" href="../assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
 
     {{-- Gia ta tags --}}
-    <link rel="stylesheet" href="../assets/css/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap-tagsinput.css" />
 
-    <link rel="stylesheet" href="../assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
 
     {{-- Photos Ajax Dependencies --}}
-    <link rel="stylesheet" href="../assets/css/photo-upload.css">
+    <link rel="stylesheet" href="/assets/css/photo-upload.css">
 
     {{-- Toast dependency --}}
-    <link rel="stylesheet" href="../assets/vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
 
-    <link rel="shortcut icon" href="../assets/images/favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
 
 
 </head>
