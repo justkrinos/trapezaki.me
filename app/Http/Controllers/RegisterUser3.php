@@ -28,18 +28,20 @@ class RegisterUser3 extends Controller
 
         //extra validation for the password confirmation
         request()->validate([
-            'password' => 'required|max:50|min:7|confirmed',
-            'password_confirmation' => 'required'
+            'password' => 'required|max:50|min:7',
+            'password_confirmation' => 'required|same:password'
+        ],[
+            'password_confirmation.same' => 'Passwords do not match.'
         ]);
 
-        $request = request()->merge(['verification_code' => substr(md5(rand()),0,7)]);
+        $request = request()->merge(['verification_code' => substr(md5(rand()),0,25)]);
 
         $attributes = $request->validate([
             'username' =>  'required|max:50|min:3|unique:user3s,username',
             'full_name' => 'required|max:50|min:3',
             'email' => 'required|email|max:100|unique:user3s,email',
             'phone' => 'required|digits_between:8,13|numeric',
-            'password' => 'required|max:50|min:7|confirmed',
+            'password' => 'required|max:50|min:7',
             'verification_code' => 'required'
         ]);
         //TODO:  //-na sasun ta messages p stelni error (eg. na men grafi full_name)
