@@ -18,6 +18,16 @@ use App\Models\User2;
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" href="/assets/images/favicon.svg" type="image/x-icon">
 
+    {{-- TODO:  //-prepei na mpei sitemap sto bottom tu page gia na eshi:
+                                                        -about us
+                                                        -become a partner ston user3 j user2
+                                                        -ulla ta links p eshi idi to sidebar
+                                                        -copyright @ Trapezaki
+                //- to sitemap prp na en responsive mazi me to sidebar
+                //- to sitemap ennan ena bar p ena pianni ullo to length
+                    but ta contents prp nan justified center me to card
+        --}}
+
     {{-- Toast dependency --}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 </head>

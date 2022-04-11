@@ -11,12 +11,13 @@ use App\Models\User2_Photo;
     <title>Trapezaki - Make a Reservation</title>
 
     {{-- TODO:
-              //-na sasei to logo na men en terastio
-              //-na mpun default user2 prin kami search(exw etoimo view)
               //-se kathe card tu user2 na eshi j mia photo sta deksia mitsia (tin proti p briskis se sql query)
               //-na valume kamia photo p piso na mennen etsi stegno
               //- to pagination sta datatable en dulefki me ta popup sto user3 js to user2
-              //- opou eshi code messe view na mpei mono se controllers --}}
+              //- opou eshi code messe view na mpei mono se controllers
+              //-na sastun ta provlimata me to sidebar na megaloni j na men eshi x (en logo tu main.js)
+              --}}
+
 
 
     {{--Toast dependency--}}

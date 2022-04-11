@@ -1,80 +1,172 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>CodePen - Fabric.js Restaurant reservation system</title>
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.css'><link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trapezaki - Floor Plan Editor</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
+    <link rel="stylesheet" href="/assets/vendors/sweetalert2/sweetalert2.min.css">
+
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
 
 
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
+    <div id="app">
+        @include('admin.components.sidebar')
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+
+            </header>
+
+            <div class="page-heading">
+                <div class="page-title">
+
+                </div>
 
 
+                <div class="card">
+                    <div class="card-header">
+                        <div class="container-fluid text-center">
+                            <h3 class="mb-5">Floor Plan Editor</h3>
+                            <div class="form-group admin-menu justify-content-center">
 
-<div class="container-fluid text-center">
-  <div class="form-group admin-menu">
-    <div class="row">
-      <div class="col-sm-2 col-sm-offset-3 form-group">
-        <label>Width (px)</label>
-        <input type="number" id="width" class="form-control" value="812" />
-      </div>
-      <div class="col-sm-2 form-group">
-        <label>Height (px)</label>
-        <input type="number" id="height" class="form-control" value="812" />
-      </div>
-      <div class="col-sm-2 form-group">
-        <label>&nbsp;</label>
-        <br />
-        <button class="btn btn-primary" id="save">Save</button>
-      </div>
-    </div>
-    <div class="btn-group">
-      <button class="btn btn-primary rectangle">+ &#9647; Table</button>
-      <button class="btn btn-primary circle">+ &#9711; Table</button>
-      <button class="btn btn-primary triangle">+ &#9651; Table</button>
-      <button class="btn btn-primary chair">+ Chair</button>
-      <button class="btn btn-primary bar">+ Bar</button>
-      <button class="btn btn-default wall">+ Wall</button>
-      <button class="btn btn-danger remove">Remove</button>
-      <button class="btn btn-warning customer-mode">Customer mode</button>
-    </div>
-  </div>
-  
-  <div class="form-group customer-menu" style="display: none;">
-    <div class="btn-group">
-      <button class="btn btn-success submit">Submit reservation</button>
-      <button class="btn btn-warning admin-mode">Admin mode</button>
-    </div>
-    <br />
-    <br />
-    <div id="slider"></div>
-    <div id="slider-value"></div>
-  </div>
-  
-  <canvas id="canvas" width="812" height="812"></canvas>
-</div>
+                                <div class="btn-group mb-1">
+                                    <button class="btn btn-primary btn-sm rectangle text-nowrap">+ &#9647;
+                                        Table</button>
+                                    <button class="btn btn-primary btn-sm circle text-nowrap">+ &#9711; Table</button>
+                                    <button class="btn btn-primary btn-sm triangle" hidden>+ &#9651; Table</button>
+                                    <button class="btn btn-primary btn-sm chair text-nowrap" hidden>+ Chair</button>
+                                    <button class="btn btn-primary btn-sm bar" hidden>+ Bar</button>
+                                    <button class="btn btn-primary btn-sm wall text-nowrap">+ Wall</button>
+                                </div>
+                                <div class="btn-group mb-1">
+                                    <button class="btn btn-danger btn-sm remove text-nowrap">Remove Selection</button>
+                                    <button class="btn btn-info btn-sm clear text-nowrap">Clear All</button>
+                                </div>
+                                <div class="btn-group mb-1">
+                                    <button class="btn btn-warning btn-sm customer-mode text-nowrap">Customer mode</button>
+                                    <button class="btn btn-success btn-sm save" id="save">Save</button>
+                                </div>
+                                <div class="btn-group mb-1">
+                                    <button class="btn btn-secondary btn-sm export">Export</button>
+                                    <button class="btn btn-secondary btn-sm import">Import</button>
+                                </div>
+                            </div>
 
-<div class="modal fade" id="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <p id="modal-table-id"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-      </div>
+                            <div class="form-group customer-menu" style="display: none;">
+                                <div class="btn-group">
+                                    <button class="btn btn-warning btn-sm admin-mode">Admin mode</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fabric-canvas-wrapper">
+                            <canvas id="canvas" width="812" height="512"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal starts here-->
+            <div class="modal fade" id="resvModal" tabindex="-1" role="dialog" aria-labelledby="resvModalCenterTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
+                    role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resvModalCenterTitle">Book a Table
+                            </h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                x
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- body here-->
+                            <div class="card-body container-fluid">
+                                <div class="row justify-content-center">
+                                    <div class="col-sm-10">
+                                        <div class="flex-nowrap input-group col-md-5 mb-4">
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text" for="mydate">Date</label>
+                                                <input type="date" class="form-control popdate no-prev" style="min-width: 66px;"
+                                                    id="mydate">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-10">
+                                        <div class="input-group">
+                                            <label for="inputSlots">Availabiliy</label>
+                                            <div id="inputSlots" class="input-group col-md-5">
+                                                <span id="timeSlots" class="form-control row-cols-6">
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <span id="btnBook"></span>
+                            <button class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                <span class="d-sm-block" id="closeResvModal">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer>
+            </footer>
+        </div>
     </div>
-  </div>
-</div>
-<!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.11/fabric.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js" integrity="sha512-ZKqmaRVpwWCw7S7mEjC89jDdWRD/oMS0mlfH96mO0u3wrPYoN+lXmqvyptH4P9mY6zkoPTSy5U2SwKVXRY5tYQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="fabric-resv.js"></script>
-<script  src="resv-options.js"></script>
 
 </body>
+
+
+
+
 </html>
+
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src='/assets/js/fabric.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"
+    integrity="sha512-ZKqmaRVpwWCw7S7mEjC89jDdWRD/oMS0mlfH96mO0u3wrPYoN+lXmqvyptH4P9mY6zkoPTSy5U2SwKVXRY5tYQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="pinch-zoom-canvas.js"></script> -->
+
+<script src="/assets/js/date-findtime.js"></script>
+
+<script src="/assets/vendors/toastify/toastify.js"></script>
+
+<script src="/assets/js/user1-fabric-resv.js"></script>
+<script src="/assets/js/user1-resv-options.js"></script>
+
+<script src="/assets/js/date-no-prev.js"></script>
+
+
+<script src="/assets/js/popup-sweetalert2.js"></script>
+<script src="/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+<script src="/assets/js/main.js"></script>
