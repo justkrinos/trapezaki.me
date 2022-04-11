@@ -90,8 +90,8 @@ use App\Models\User2_Photo;
                                         <tbody>
 
                                             @foreach (Issue::all() as $issue)
-                                                <tr id={{ $issue->id }}>
-                                                    <td class="col-8 issueName">
+                                                <tr>
+                                                    <td id="issueName" class="col-8 issueName">
                                                         {{-- The popup opens with issues.js when class= issueName is cicked --}}
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar avatar-md">
@@ -102,13 +102,14 @@ use App\Models\User2_Photo;
                                                             </p>
                                                         </div>
                                                     </td>
-                                                    <td class="col-8 issueName">
+                                                    <td id="issueName" class="col-8 issueName">
                                                         <p class=" mb-0">{{ $issue->created_at }}</p>
                                                     </td>
                                                     {{-- To pass to JQuery --}}
                                                     <td class="issue-description" hidden>{{ $issue->details }}</td>
                                                     <td class="issue-business" hidden>{{ $username }}</td>
                                                     <td class="issue-type" hidden>{{ $issue->type }}</td>
+                                                    <td id="status" class="issue-status" hidden>{{ $issue->status }}</td>
                                                     <td class="d-flex flex-nowrap">
 
 
@@ -146,7 +147,6 @@ use App\Models\User2_Photo;
                             <h5 class="modal-title" id="issueModalCenterTitle">Issue Details
                             </h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                x
                             </button>
                         </div>
                         <div class="modal-body">

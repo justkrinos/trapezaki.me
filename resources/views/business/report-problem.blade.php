@@ -172,9 +172,9 @@
                                                                         <td class="date probPopup">
                                                                             {{ $issue->created_at }}
                                                                         </td>
-                                                                        <td class="type">{{ $issue->type }}
+                                                                        <td class="type probPopup">{{ $issue->type }}
                                                                         </td>
-                                                                        <td>
+                                                                        <td class="probPopup">
                                                                             <span
                                                                                 class="status"><?php
                                                                                 if($issue->status==0) {echo "Pending.";}
