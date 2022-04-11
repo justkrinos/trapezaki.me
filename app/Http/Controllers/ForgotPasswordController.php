@@ -22,7 +22,7 @@ class ForgotPasswordController extends Controller
 
         if($user){
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
-                 Mail::to($validatedData['email'])->queue(new \App\Mail\MailVerify($user->email, $user->username, $user->verification_code, 'www'));
+                 Mail::to($validatedData['email'])->queue(new \App\Mail\MailForgotPassword($user->email, $user->username, $user->verification_code, 'www'));
         }
 
         return redirect('/login')->with('success', 'An email with password recovery instructions was sent to your inbox!');
