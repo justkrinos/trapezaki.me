@@ -1,0 +1,45 @@
+//TODO
+
+
+//-ta user1-fabric-resv j ta user3-resv-options
+   na ginun combine en eshi logo na en ksexorista
+
+table capacity -> na eshi limit
+
+//PRP NA DW PWS NA LISW TO PROVLIMA AN SANTANOTHI TO CANVAS
+
+//MINISKI:
+//-na liturgi to resv me ajax
+
+
+//-na eshi maximum size to page (isws me container)
+
+//-na men borei na vali arnitiko capacity sto popup
+
+
+//-o arithmos ton atomwn en prp na fenete san epilogi tin ora p epilegis trapezi?
+
+
+
+  //TODO table id generation
+  // tin ora p enna ta vallw sto database enna thori jina p exun new_<id>
+  // j enna ta kamni insert, ta alla enna ta kamni update
+  // episis enna thori to number tou trapeziou an iparxi idi sto database
+  // so an exw kapio me number p iparxi idi j new id tote na kami update jino p iparxi
+  // prp me kapio tropo o admin na bori na allassi to number tu trapeziou
+
+//-na ginete apply i allagi tu trapeziou mono an den eshi reservation!!!
+
+//-na dokimasw na checkarw an eshi karekles panw to trapezi overlapp
+
+
+//aman svinnw to trapezi en tha diagrafete pu to db
+//enna diagrafete pu to view etsi wste na men xannunte ta resv??? na to skeftw
+
+//-na dimiourgite i kratisi j na dw pws ena piannw ta stoixeia
+//-ta tables na erkunte me api
+
+//-api routes
+
+
+//-to btn-google class na mpei sto bootstrap-icons.css sto project

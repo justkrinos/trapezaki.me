@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\issueControler;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\issuesBusinessControler;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FloorPlanController;
 use App\Http\Controllers\RegisterUser3;
 use App\Http\Controllers\RegisterUser2;
 use App\Http\Controllers\User1Controller;
@@ -46,9 +48,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.selected-profile');
     });
 
-    Route::get('/user/{user2}/book', [SessionsController::class, 'showBook']);
-
-    Route::post('/user/{user2}/book', [SessionsController::class, 'createBook']);
+    Route::get('/user/{user2}/book', [BookingController::class, 'showBook']);
+    Route::post('/user/{user2}/book', [BookingController::class, 'createBook']);
 
 
 
@@ -239,12 +240,13 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
         //Edit User2
         Route::post('/user/{user2}', [ManageBusinessController::class, 'edit']);
-
         Route::get('/logout', [User1Controller::class, 'logout']);
 
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
-
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
+
+        Route::get('/user/{user2}/floor-plan', [FloorPlanController::class, 'show']);
+
     });
 });
 

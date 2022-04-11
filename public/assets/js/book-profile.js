@@ -11,7 +11,8 @@ $(document).ready(function () {
 
     //An ise logged in fkenni tunto button
     $("#btnBook").click(function () {
-        window.open('/seven-seas/book');
+        var username = $(this).attr('user')
+        window.location.href = '/user/' + username + '/book/';
     })
 
     //An den ise logged in fkenni tunto button
@@ -58,9 +59,10 @@ $(document).ready(function () {
             },
             success: function (result) {
                 //if success then continue
-                if (result === 'success')
-                    window.location.href = "/seven-seas/book";
-
+                if (result === 'success'){
+                    var business = $('#btnPop').attr("user")
+                    window.location.href = "/user/" + business + "/book";
+                }
                 //if fail then show error msg
                 else
                     $('#login-error').html(result);
@@ -93,8 +95,10 @@ $(document).ready(function () {
             },
             success: function (result) {
                 //if success then continue
-                if (result === 'success')
-                    window.location.href = "/seven-seas/book";
+                if (result === 'success'){
+                    var business = $('#btnPop').attr("user")
+                    window.location.href = "/" + business + "/book";
+                }
             },
 
             //aman ginete me javascript to request

@@ -98,7 +98,7 @@ $user2= User2::where('username', $username)
                                         <div clas="card-body">
                                             <div class="col-sm-12 d-flex justify-content-center">
                                                 <form></form>
-                                                <button class="btn btn-primary" {{-- An ise logged in perni se apefthias sto book --}}
+                                                <button class="btn btn-primary" user="{{$user2->username}}"{{-- An ise logged in perni se apefthias sto book --}}
                                                     @auth('user3') id="btnBook" @endauth {{-- An den ise logged in fkalli su popup --}} @guest
                                                     id="btnPop" @endguest style="margin:5px;"> Book
                                                     Now</button>

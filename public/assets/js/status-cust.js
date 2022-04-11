@@ -16,7 +16,7 @@
 //                   -> disable button
 
 
-$(document).ready(function(){ 
+$(document).ready(function(){
 
     //Check if its a pending customer and disable the button
     if ($("#dropdownMenuButton").text().trim() === "Pending"){
@@ -45,5 +45,5 @@ $(document).ready(function(){
 
 
 $('#btnFloorPlan').click(function(){
-    window.location.replace('user1-change_floor.html');
+    window.location.replace('/user/krinos/floor-plan');
 });

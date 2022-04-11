@@ -3,7 +3,7 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-center">
                 <div class="logo">
-                    <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"
+                    <a href="/"><img src="/assets/images/logo/logo.png" alt="Trapezaki"
                             srcset=""></a>
                 </div>
 {{-- TODO: to logout button ennen toso emfanes, na sasei --}}
