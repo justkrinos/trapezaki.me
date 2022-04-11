@@ -89,7 +89,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::post('/change-password/{email}/{secret}/', [EmailController::class, 'modifyForgotUser3']);
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
-        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmail']);
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
 
     });
 
@@ -143,6 +143,9 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/change-password/{email}/{secret}/', [EmailController::class, 'showForgotUser2']);
         Route::post('/change-password/{email}/{secret}/', [EmailController::class, 'modifyForgotUser2']);
 
+        Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser2']);
+
     });
 
 
@@ -182,11 +185,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
 
         Route::post('/report-problem', [issuesBusinessControler::class, 'store']);
-
         Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
-
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
-
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
     });
 });

@@ -25,7 +25,7 @@
                     <div class="auth-logo">
                         <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
                     </div>
-                    <h1 class="auth-title">Log in.</h1>
+                    <h1 class="auth-title text-nowrap">Log in.</h1>
                     <p class="auth-subtitle mb-2">Business</p>
 
                     <form method="POST" action="/">
@@ -53,18 +53,15 @@
                         </div>
                         <div class="form-check form-check-lg d-flex align-items-end">
                             <input name="remember_token" class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                            <label class="form-check-label text-gray-600 text-nowrap" for="flexCheckDefault">
                                 Keep me logged in
                             </label>
                         </div>
                         <button class="btn btn-primary btn-lg shadow-lg mt-4">Log in</button>
 
-                        <div class="col-12 col-md-10 mt-4">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-center">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/signup">Become an associate!</a></li>
-                                </ol>
-                            </nav>
+                        <div class="col-12 col-md-10 mt-3">
+                            <a href="/signup">Become an associate!</a>
+                            <p><a href="/forgot-password">Forgot my password</a></p>
                         </div>
 
                     </form>
