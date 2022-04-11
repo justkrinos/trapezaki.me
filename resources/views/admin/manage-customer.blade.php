@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-use App\Models\User2_Photo;
-use App\Models\User2;
-$username = Request::segment(2);
-$user_id = DB::table('user2s')
-    ->where('username', $username)
-    ->first()->id;
-$user2 = User2::find($user_id);
-use App\Models\User2_Tag;
-use App\Models\Tag;
+@php
+    use App\Models\User2_Photo;
+    use App\Models\User2;
+    use App\Models\User2_Tag;
+    use App\Models\Tag;
 
-$tags = User2::find($user_id)
-    ->first()
-    ->tags->pluck('name')
-    ->toArray();
-?>
+    $user_id = $user2->id;
+    $tags = $user2
+        ->tags->pluck('name')
+        ->toArray();
+@endphp
 
 <head>
     <meta charset="UTF-8">
@@ -82,8 +77,8 @@ $tags = User2::find($user_id)
                                                 </h6>
                                             </div>
                                             <div class="dropdown">
-                                                <?php $status = $user2->status; ?>
-                                                <button class="btn btn-<?php if ($status == 1) {
+                                                
+                                                <button class="btn btn-<?php if ($user2->status == 1) {
                                                                             echo 'success';
                                                                         } else {
                                                                             echo 'danger';
@@ -92,7 +87,7 @@ $tags = User2::find($user_id)
                                                     aria-haspopup="true" aria-expanded="false">
                                                     <!-- Tuto na to allassei aftomata o server -->
 
-                                                    <?php if ($status == 1) {
+                                                    <?php if ($user2->status == 1) {
                                                         echo 'Active';
                                                     } else {
                                                         echo 'Disabled';
@@ -112,10 +107,7 @@ $tags = User2::find($user_id)
                         </div>
                     </div>
                 </div>
-
-                <?php $currentURL = Request::segment(count(request()->segments())) ?>
-
-                <form method="POST" action="/user/{{$currentURL}}" class="col-md-12">
+                <form method="POST" action="/user/{{$user2->username}}" class="col-md-12">
                     @csrf
                     <div class="card">
                         <div class="col-md-5">
@@ -231,7 +223,7 @@ $tags = User2::find($user_id)
 
             </div>
             </form>
-        <form method="POST" action="/user/{{$currentURL}}" class="col-md-12">
+        <form method="POST" action="/user/{{$user2->username}}" class="col-md-12">
             <section id="input-style">
                 <div class="row">
                     <div class="col-md-12">
@@ -256,6 +248,31 @@ $tags = User2::find($user_id)
                                     </div>
                                     <div class="col-sm-10">
                                         <label for="squareText">Last Reservation Hour</label>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-2">
+
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="basicSelect">
+                                                        <option>Monday</option>
+                                                        <option>Tuseday</option>
+                                                        <option>Wednesday</option>
+                                                        <option>Thursday</option>
+                                                        <option>Friday</option>
+                                                        <option>Saturday</option>
+                                                        <option>Sunday</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-2 mb-1">
+                                                <input type="text" id="squareText" class="form-control square"
+                                                    value="21:30">
+                                            </div>
+
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <label for="squareText">First Reservation Hour</label>
                                         <div class="row">
                                             <div class="col-md-3 mb-2">
 

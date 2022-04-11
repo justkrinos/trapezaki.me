@@ -213,7 +213,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
             if (!$user) {
                 return redirect('/');
             }
-            return view('admin.manage-customer');
+            return view('admin.manage-customer',['user2' => $user]);
         });
 
         Route::get('/edit-floorplan', function () {

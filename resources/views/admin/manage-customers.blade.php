@@ -96,22 +96,15 @@
                                                 </td>
                                                 <td>{{ $user->created_at }}</td>
                                                 <td class="text-center">
-                                                    <?php
-                                                        $status = $user->status;
-                                                        if($status==1)
-                                                        {
-                                                            echo "<span class=\"badge bg-success\">Active</span>";
-                                                        }
-                                                        else
-                                                        {
-                                                            echo "<span class=\"badge bg-secondary\">Disabled</span>";
-                                                        }
-                                                    ?>
-                                                    <span class="badge bg-success"></span>
+                                                    @if($user->status==1)
+                                                        <span class="badge bg-success">Active</span>
+                                                    @else
+                                                        <span class="badge bg-secondary">Disabled</span>
+                                                    @endif
                                                 </td>
                                             </tr>
-                                            @endif
-                                        @endforeach
+                                        @endif
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
