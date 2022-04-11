@@ -162,11 +162,10 @@ class SessionsController2 extends Controller
             return back()->withErrors(['message' => 'Your account is not yet verified! Please check your email.']);
         };
 
-        //TODO: na to kamume uncomment molis en etoimo to pending requests
-        // if(!Auth::guard('user2')->user()->status){
-        //     auth('user2')->logout();
-        //     return back()->withErrors(['message' => 'Your account activation is pending. Our team will contact you soon.']);
-        // };
+        if(!Auth::guard('user2')->user()->status){
+            auth('user2')->logout();
+            return back()->withErrors(['message' => 'Your account activation is pending. Our team will contact you soon.']);
+        };
 
 
         //To prevent session fixation (stealing session IDs)

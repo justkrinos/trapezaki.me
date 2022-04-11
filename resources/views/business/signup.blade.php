@@ -198,7 +198,7 @@
 
 
                                 <h5 class="h6 mb-2">Description</h5>
-                                {{-- Tuto itan gia na kamume pio advanced editor alla ennaxume themata me XSS --}}
+                                {{-- TODO: Tuto itan gia na kamume pio advanced editor alla ennaxume themata me XSS --}}
                                 {{-- <div class="col-mb-6 col-12 mb-5">
                                         <div id="snow">
                                             <p>Description goes here. </p>
