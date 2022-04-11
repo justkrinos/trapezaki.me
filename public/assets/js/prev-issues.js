@@ -4,7 +4,9 @@ modalpop();
 
 
 function modalpop(){
-$(".probPopup").click(function () {
+
+$("body").on("click", ".probPopup", function() {
+
     //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
     //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
 

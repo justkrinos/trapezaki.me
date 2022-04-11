@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
 
-    $(".issueName").click(function () {
+    $(document).on("click", ".issueName" , function() {
+
         //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
         //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
         $description = $(this).siblings(".issue-description").html();
@@ -14,7 +15,7 @@ $(document).ready(function () {
 
 
 
-        $("#issueModal").modal('show');
+        $("#issueModal").modal('toggle');
     })
 
     $("#issueBusiness").click(function () {
@@ -53,6 +54,7 @@ $(document).ready(function () {
         checkSol = document.getElementById("checkSolved");
         checkCant = document.getElementById("checkCant");
         checkNot = document.getElementById("checkNot");
+        console.log(checkSol);
 
         table = document.getElementById("issueTable");
         tr = table.getElementsByTagName("tr");
@@ -61,7 +63,7 @@ $(document).ready(function () {
 
         for (i = 0; i < tr.length; i++) {
             tdFilter = tr[i].getElementsByTagName("td")[0];
-            tdCheck = tr[i].getElementsByTagName("td")[2];
+            tdCheck = tr[i].getElementsByTagName("td")[6];
 
             //Start filtering the search box
             if (tdFilter) {
@@ -75,12 +77,15 @@ $(document).ready(function () {
 
             //Start filtering the check boxes
             if (checkCant.checked || checkSol.checked || checkNot.checked) {
+
                 if (tdCheck) {
-                    tdCheck = tdCheck.getElementsByTagName("a");
+
+                    tdCheck = tdCheck.getElementsByTagName("button");
+                    console.log(tdCheck[0]);
                     if (tr[i].style.display != "none") {
                         if (
-                            (tdCheck[1].classList.contains("active") && checkSol.checked) ||
-                            (tdCheck[0].classList.contains("active") && checkCant.checked) ||
+                            (tdCheck[0].classList.contains("active") && checkSol.checked) ||
+                            (tdCheck[1].classList.contains("active") && checkCant.checked) ||
                             ((!tdCheck[0].classList.contains("active") && !tdCheck[1].classList.contains("active")) && checkNot.checked)
                         )
                             tr[i].style.display = "";
@@ -98,7 +103,7 @@ $(document).ready(function () {
         checkCant = document.getElementById("checkCant");
         checkSol = document.getElementById("checkSolved");
         checkNot = document.getElementById("checkNot");
-
+        console.log(checkSol);
         if (checkCant.checked == true)
             checkCant.checked = false
         if (checkNot.checked == true)
