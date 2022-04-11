@@ -82,33 +82,35 @@
                                     </thead>
                                     <tbody>
                                     @foreach (App\Models\User2::all() as $user)
-                                        <tr>
-                                            <td class="col-8">
-                                                <a href="/user/{{$user->username}}">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
+                                        @if($user->status==1 || $user->status==2)
+                                            <tr>
+                                                <td class="col-8">
+                                                    <a href="/user/{{$user->username}}">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar avatar-md">
+                                                                <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
+                                                            </div>
+                                                            <p class="font-bold ms-3 mb-0 text-nowrap">{{ $user->username }}</p>
                                                         </div>
-                                                        <p class="font-bold ms-3 mb-0 text-nowrap">{{ $user->username }}</p>
-                                                    </div>
-                                                </a>
-                                            </td>
-                                            <td>{{ $user->created_at }}</td>
-                                            <td class="text-center">
-                                                <?php
-                                                    $status = $user->status;
-                                                    if($status==1)
-                                                    {
-                                                        echo "<span class=\"badge bg-success\">\"Active\"</span>";
-                                                    }
-                                                    else
-                                                    {
-                                                        echo "<span class=\"badge bg-secondary\">Disabled</span>";
-                                                    }
-                                                ?>
-                                                <span class="badge bg-success"></span>
-                                            </td>
-                                        </tr>
+                                                    </a>
+                                                </td>
+                                                <td>{{ $user->created_at }}</td>
+                                                <td class="text-center">
+                                                    <?php
+                                                        $status = $user->status;
+                                                        if($status==1)
+                                                        {
+                                                            echo "<span class=\"badge bg-success\">Active</span>";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo "<span class=\"badge bg-secondary\">Disabled</span>";
+                                                        }
+                                                    ?>
+                                                    <span class="badge bg-success"></span>
+                                                </td>
+                                            </tr>
+                                            @endif
                                         @endforeach
                                     </tbody>
                                 </table>

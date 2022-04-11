@@ -69,7 +69,7 @@ class ManageBusinessController extends Controller
             if($action === 'disable'){
     
                 if($user2){
-                    $user2->status = 0;
+                    $user2->status = 2;
                    /* $user2->deletePhotos();
                     $user2->detag();
                     $user2->delete();
