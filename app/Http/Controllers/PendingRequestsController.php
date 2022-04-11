@@ -45,7 +45,6 @@ class PendingRequestsController extends Controller
                 $user2->deletePhotos();
                 $user2->detag();
                 $user2->delete();
-                User2::truncate();
                 return 'success';
             }
         }

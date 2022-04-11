@@ -22,7 +22,8 @@ class MailForgotPassword extends Mailable
     public function __construct($email, $name, $secret, $user)
     {
         $this->name = $name;
-        $this->link = 'http://' . $user . '.trapezaki.me' . '/verify/' . $email . '/' . $secret . '/';
+        // TODO: change this to https when ssl works
+        $this->link = 'http://' . $user . '.trapezaki.me' . '/change-password/' . $email . '/' . $secret . '/';
 
     }
 
@@ -33,6 +34,6 @@ class MailForgotPassword extends Mailable
      */
     public function build()
     {
-        return $this->subject("Trapezaki Email Verification")->view('emails.verify');
+        return $this->subject("Trapezaki Forgot Password")->view('emails.forgot');
     }
 }
