@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function showBook()
+    public function showBook($username)
     {
-        //an ise logged in mpenni kanonika
-        if (Auth::check('user3'))
-            return view('www.book');
+        //TODO: en dulefki swsta tuto
+        $user = Auth::guard('user3')->user();
 
+        //an ise logged in mpenni kanonika
+        if ($user)
+            return view('www.book');
         //an ise guest mpenni kanonika (checkari p to session)
         else if (
             request()->session()->has('full_name')
@@ -23,7 +25,7 @@ class BookingController extends Controller
 
         //an den ise tpt kamnise redirect piso j fkalli su to login popup
         else
-            return redirect('/seven-seas#login');
+            return redirect('/user/' . $username. '#login');
     }
 
     public function createBook()
