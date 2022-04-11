@@ -23,7 +23,7 @@
             <div class="col-lg-6 col-13">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="/"><img class="" src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
+                        <a href="/"><img src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
                     </div>
                     <h2 class="auth-title text-nowrap">Log in.</h2>
 
@@ -59,7 +59,7 @@
                             <input class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
 
                             {{--TODO: na dume an tha to kratisume to keep me logged in--}}
-                            <label class="form-check-label text-gray-600" for="flexCheckDefault">
+                            <label class="form-check-label text-gray-600 text-nowrap" for="flexCheckDefault">
                                 Keep me logged in
                             </label>
                         </div>
