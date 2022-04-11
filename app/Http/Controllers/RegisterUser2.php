@@ -96,6 +96,7 @@ class RegisterUser2 extends Controller
         //Vallw ta tags mesto table mesw tou relationship me ton user2
         $user2->tag($tags);
 
+        // TODO na sasun tuta ta static methods ew na ginun eloquent relationships
         //Save the photos using a new method i created in the User2_Photo model
         User2_Photo::store_multiple(request()->file('photo'),$user2->id);
 

@@ -45,112 +45,114 @@ use App\Models\User2;
                         </div>
                     </div>
 
-
-                    <section class="section">
-                        <div class="container card">
-                            <div class="card-header">
-                                <h4 class="card-title">Account info</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row  d-flex justify-content-center">
-                                    <div class="col-md-4">
-                                        <form method="POST" action="/profile" class="col-md-12">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="basicInput">Username</label>
-                                                <input type="text" value="{{ Auth::guard('user3')->user()->username }}"
-                                                    class="form-control" id="username" name="username"
-                                                    readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="basicInput">Name</label>
-                                                <small class="text-muted"><i>(First and Last name)</i></small>
-                                                <input type="text" class="form-control" id="full_name"
-                                                    name="full_name"
-                                                    value="{{ Auth::guard('user3')->user()->full_name }}">
-                                                <div style="color:red">{{ $errors->first('full_name') }}</div>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="basicInput">Email</label>
-                                                <input type="text" class="form-control" id="email" name="email"
-                                                    value="{{ Auth::guard('user3')->user()->email }}" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="basicInput">Phone number</label>
-
-                                                <input type="text" class="form-control" id="phone" name="phone"
-                                                    value="{{ Auth::guard('user3')->user()->phone }}">
-                                                <div style="color:red">{{ $errors->first('phone') }}</div>
-                                            </div>
-
-                                            {{-- Hidden id, to show each time which user to update --}}
-                                            <div class="form-group">
-                                                <input type="hidden" class="form-control" id="id" name="id"
-                                                    value="{{ Auth::guard('user3')->user()->id }}">
-                                            </div>
-
-                                            <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="submit" name="form1"
-                                                    class="btn btn-primary me-1 mb-1">Save Changes</button>
-
-                                            </div>
-                                        </form>
-                                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <section class="section col-lg-12 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Account info</h4>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="container card">
-                            <div class="card-header">
-                                <h4 class="card-title">Change Password</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-4">
-                                        <form method="POST" action="/profile" class="col-md-12">
-                                            @csrf
-                                            <div class="form-group">
-                                                <label for="basicInput">Old Password</label>
-                                                <input type="password" class="form-control form-control-l" id="password"
-                                                    name="password" placeholder="Password" required>
-                                                <div style="color:red">{{ $errors->first('password') }}</div>
-                                                @if (session()->has('error'))
-                                                    <div>
-                                                        <p style="color:red;">{{ session('error') }}</p>
-                                                    </div>
-                                                @endif
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="basicInput">New Password</label>
-                                                <input type="password" class="form-control form-control-l"
-                                                    id="new-password" name="new-password" placeholder="Password"
-                                                    required>
-                                                <div style="color:red">{{ $errors->first('new-password') }}</div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="basicInput">Re-enter New Password</label>
-                                                <input type="password" class="form-control form-control-l"
-                                                    id="new-password_confirmation" name="new-password_confirmation"
-                                                    placeholder="Password" required>
-                                                <div style="color:red">{{ $errors->first('password_confirmation') }}
+                                <div class="card-body">
+                                    <div class="row  d-flex justify-content-center">
+                                        <div class="col-md-4">
+                                            <form method="POST" action="/profile">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="basicInput">Username</label>
+                                                    <input type="text"
+                                                        value="{{ Auth::guard('user3')->user()->username }}"
+                                                        class="form-control" id="username" name="username" readonly>
                                                 </div>
-                                            </div>
 
-                                            <div class="col-sm-12 d-flex justify-content-end">
-                                                <button type="submit" name="form2"
-                                                    class="btn btn-primary me-1 mb-1">Change</button>
-                                            </div>
-                                        </form>
+                                                <div class="form-group">
+                                                    <label for="basicInput">Name</label>
+                                                    <small class="text-muted"><i>(First and Last name)</i></small>
+                                                    <input type="text" class="form-control" id="full_name"
+                                                        name="full_name"
+                                                        value="{{ Auth::guard('user3')->user()->full_name }}">
+                                                    <div style="color:red">{{ $errors->first('full_name') }}</div>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="basicInput">Email</label>
+                                                    <input type="text" class="form-control" id="email" name="email"
+                                                        value="{{ Auth::guard('user3')->user()->email }}" readonly>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="basicInput">Phone number</label>
+
+                                                    <input type="text" class="form-control" id="phone" name="phone"
+                                                        value="{{ Auth::guard('user3')->user()->phone }}">
+                                                    <div style="color:red">{{ $errors->first('phone') }}</div>
+                                                </div>
+
+                                                {{-- Hidden id, to show each time which user to update --}}
+                                                <div class="form-group">
+                                                    <input type="hidden" class="form-control" id="id" name="id"
+                                                        value="{{ Auth::guard('user3')->user()->id }}">
+                                                </div>
+
+                                                <div class="col-sm-12 d-flex justify-content-end">
+                                                    <button type="submit" name="form1"
+                                                        class="btn btn-primary me-1 mb-1">Save Changes</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Change Password</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-md-4">
+                                            <form method="POST" action="/profile" class="col-md-12">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label for="basicInput">Old Password</label>
+                                                    <input type="password" class="form-control form-control-l"
+                                                        id="password" name="password" placeholder="Password" required>
+                                                    <div style="color:red">{{ $errors->first('password') }}</div>
+                                                    @if (session()->has('error'))
+                                                        <div>
+                                                            <p style="color:red;">{{ session('error') }}</p>
+                                                        </div>
+                                                    @endif
+                                                </div>
 
+                                                <div class="form-group">
+                                                    <label for="basicInput">New Password</label>
+                                                    <input type="password" class="form-control form-control-l"
+                                                        id="new-password" name="new-password" placeholder="Password"
+                                                        required>
+                                                    <div style="color:red">{{ $errors->first('new-password') }}</div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="basicInput">Re-enter New Password</label>
+                                                    <input type="password" class="form-control form-control-l"
+                                                        id="new-password_confirmation" name="new-password_confirmation"
+                                                        placeholder="Password" required>
+                                                    <div style="color:red">
+                                                        {{ $errors->first('password_confirmation') }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-12 d-flex justify-content-end">
+                                                    <button type="submit" name="form2"
+                                                        class="btn btn-primary me-1 mb-1">Change</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
 
             </div>

@@ -11,7 +11,6 @@ class MailForgotPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $name;
     public $link;
 
     /**
@@ -19,9 +18,8 @@ class MailForgotPassword extends Mailable
      *
      * @return void
      */
-    public function __construct($email, $name, $secret, $user)
+    public function __construct($email, $secret, $user)
     {
-        $this->name = $name;
         // TODO: change this to https when ssl works
         $this->link = 'http://' . $user . '.trapezaki.me' . '/change-password/' . $email . '/' . $secret . '/';
 

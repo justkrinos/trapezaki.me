@@ -30,56 +30,57 @@
             </div>
         </div>
 
-        <div class="container">
-            <section class="section">
-                <div class="card ">
-                    @include('components.back-button')
-                    <div class="card-header text-center justify-content-center">
-                        <div class="d-flex justify-content-center mb-5">
-                            <a class="d-flex justify-content-center">
-                                <img src="/assets/images/logo/logo_small.png" alt="Trapezaki"
-                                    class="col-md-5 col-5">
-                            </a>
+        <div class="container d-flex justify-content-center">
+            <div class="col-lg-6 col-10">
+                <section class="section">
+                    <div class="card ">
+                        @include('components.back-button')
+                        <div class="card-header text-center justify-content-center">
+                            <div class="d-flex justify-content-center mb-5">
+                                <a class="d-flex justify-content-center">
+                                    <img src="/assets/images/logo/logo_small.png" alt="Trapezaki" class="col-md-5 col-5">
+                                </a>
+                            </div>
+                            <h3 class="title">Forgot Password</h3>
                         </div>
-                        <h3 class="title">Forgot Password</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row d-flex justify-content-center">
-                            <form method="POST" action="?" class="col-md-6">
-                                {{-- To prevent csrf attacks --}}
-                                @csrf
+                        <div class="card-body">
+                            <div class="row d-flex justify-content-center">
+                                <form method="POST" action="?" class="col-md-6">
+                                    {{-- To prevent csrf attacks --}}
+                                    @csrf
 
 
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email"
-                                        class="form-control form-control-l
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email"
+                                            class="form-control form-control-l
                                             @error('email') is-invalid @enderror"
-                                        placeholder="example@domain.com" name="email" id="email"
-                                        required>
+                                            placeholder="example@domain.com" name="email" id="email" required>
 
-                                    {{-- This will be pulled everytime there's an error --}}
-                                    @error('email')
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                        {{-- This will be pulled everytime there's an error --}}
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
 
-                                </div>
+                                    </div>
 
-                                <div class="mt-3 d-flex justify-content-end">
-                                    <button type="submit" id="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                </div>
-                            </form>
-
-
+                                    <div class="mt-3 d-flex justify-content-end">
+                                        <button type="submit" id="submit"
+                                            class="btn btn-primary me-1 mb-1">Submit</button>
+                                    </div>
+                                </form>
 
 
+
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </div>
 
