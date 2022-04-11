@@ -70,8 +70,10 @@ class SessionsController2 extends Controller
             }
 
             $pass = request()->validate([
-                'new-password' => 'required|max:50|min:7|confirmed',
-                'new-password_confirmation' => 'required'
+                'new-password' => 'required|max:50|min:7',
+                'new-password_confirmation' => 'required|same:password'
+            ],[
+                'password_confirmation.same' => 'Passwords do not match.'
             ]);
 
             $old_pass = $_POST['password'];

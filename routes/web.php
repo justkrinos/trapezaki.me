@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\issueControler;
 use App\Http\Controllers\issuesBusinessControler;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ use App\Http\Controllers\ManageBusinessController;
 use App\Http\Controllers\PendingRequestsController;
 use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User3;
 use App\Models\User2;
 use App\Models\User1;
 
@@ -44,9 +46,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.selected-profile');
     });
 
-    Route::get('/user/{user}/book', [SessionsController::class, 'showBook']);
+    Route::get('/user/{user2}/book', [SessionsController::class, 'showBook']);
 
-    Route::post('/user/{user}/book', [SessionsController::class, 'createBook']);
+    Route::post('/user/{user2}/book', [SessionsController::class, 'createBook']);
 
 
 
@@ -58,8 +60,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/', function () {
             return view('www.index');
         });
-
-        Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser3']);
 
         Route::get('/login', [SessionsController::class, 'create']);
 
@@ -82,6 +82,14 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         //Should be able to handle guest
         //Route::post('/selected-profile', [RegisterUser3::class, 'createGuest']);
+
+        Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser3']);
+
+        Route::get('/change-password/{email}/{secret}/', [EmailController::class, 'showForgotUser3']);
+        Route::post('/change-password/{email}/{secret}/', [EmailController::class, 'modifyForgotUser3']);
+
+        Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmail']);
 
     });
 
@@ -124,12 +132,16 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/signup', [RegisterUser2::class, 'view']);
         Route::post('/signup', [RegisterUser2::class, 'create']);
 
+        // TODO: na pai sto api route na dulepsun jina
         Route::get('/api/tags', function () {
             $tag = Tag::all()->pluck('name')->toArray();
             return response($tag);
         });
 
         Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser2']);
+
+        Route::get('/change-password/{email}/{secret}/', [EmailController::class, 'showForgotUser2']);
+        Route::post('/change-password/{email}/{secret}/', [EmailController::class, 'modifyForgotUser2']);
 
     });
 
@@ -207,7 +219,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::get('/pending-requests', [PendingRequestsController::class, 'show']);
         Route::post('/pending-requests', [PendingRequestsController::class, 'modify']);
 
-        Route::get('/user/{user}', function ($slug) {
+        Route::get('/user/{user2}', function ($slug) {
             $user = User2::where('username', $slug)->first();
 
             if (!$user) {

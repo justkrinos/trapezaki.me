@@ -10,12 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     {{-- Gia ta tags --}}
-    <link rel="stylesheet" href="../assets/css/bootstrap-tagsinput.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap-tagsinput.css" />
 
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
 
-    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
 
     {{-- TODO:
         //-ta tags en dulefkun se mobile
@@ -36,13 +36,13 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-2 order-first">
-
                         </div>
                     </div>
                 </div>
 
                 <section class="section d-flex justify-content-center">
                     <div class="card col-md-12 col-12">
+                        @include('components.back-button')
                         <div class="card-header text-center justify-content-center">
                             <h3 class="title">Become an associate</h3>
                             <p class="breadcrumb-item">Already an associate? <a href="/login">Login</a></p>

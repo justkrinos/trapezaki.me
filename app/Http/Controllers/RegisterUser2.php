@@ -27,12 +27,14 @@ class RegisterUser2 extends Controller
 
         //First only validate password
         request()->validate([
-            'password' => 'required|max:50|min:7|confirmed',
-            'password_confirmation' => 'required', //only check, don't save
+            'password' => 'required|max:50|min:7',
+            'password_confirmation' => 'required|same:password', //only check, don't save
+        ],[
+            'password_confirmation.same' => 'Passwords do not match.'
         ]);
 
         //verification code
-        $request->merge(['verification_code' => substr(md5(rand()),0,7)]);
+        $request->merge(['verification_code' => substr(md5(rand()),0,25)]);
 
         //Then save the attributes of the record, because we don't want to include password confirmation
         $validatedData = $request->validate(

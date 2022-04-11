@@ -39,7 +39,7 @@ class CreateUser2sTable extends Migration
             $table->text('description')->nullable();
 
             //testing
-            $table->string('verification_code',100)->nullable();
+            $table->string('verification_code',25)->nullable();
             $table->integer('is_verified')->default('0');
             //
             $table->rememberToken();

@@ -138,7 +138,7 @@ $users = App\Models\User2::inRandomOrder()
                                     src="../assets/images/uploads/{{ $users[4]->photos()->inRandomOrder()->limit(1)->get()->first()->photo_path }}"
                                     style="height: 20rem; object-fit: cover;">
                             </div>
-                            <a href="/user/{{ $users[0]->username }}" class="stretched-link"></a>
+                            <a href="/user/{{ $users[4]->username }}" class="stretched-link"></a>
                         </div>
                     </div>
             @endif
