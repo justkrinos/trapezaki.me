@@ -35,6 +35,7 @@
         <div class="container">
             <section class="section">
                 <div class="card ">
+                    @include('components.back-button')
                     <div class="card-header text-center justify-content-center">
                         <h3 class="title">Sign up</h3>
                         <div class="breadcrumb-item">Already have an account? <a href="/login">Login</a></div>
@@ -153,7 +154,7 @@
                                 </div>
 
                                 <div class="mt-5 d-flex justify-content-end">
-                                    <button type="submit" id="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                    <button type="submit" id="submit" class="btn btn-primary me-1 mb-1">Sign Up</button>
                                 </div>
                             </form>
 
