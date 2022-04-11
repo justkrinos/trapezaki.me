@@ -25,7 +25,7 @@
                     <div class="auth-logo">
                         <a href="/"><img class="" src="../assets/images/logo/logo.png" alt="Trapezaki"></a>
                     </div>
-                    <h2 class="auth-title">Log in.</h2>
+                    <h2 class="auth-title text-nowrap">Log in.</h2>
 
 
                     <form method="POST" action="/login">
@@ -33,7 +33,7 @@
 
                         @error('message')
                         <input class="is-invalid text-center" hidden>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback mb-2">
                             <i class="bx bx-radio-circle"></i>
                             {{ $message }}
                         </div>
@@ -47,7 +47,7 @@
                         </div>
 
 
-                        <div class="form-group position-relative has-icon-left mb-4">
+                        <div class="form-group position-relative has-icon-left mb-3">
                             <input type="password" class="form-control form-control-xl" placeholder="Password" name="password" id="password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
@@ -67,12 +67,9 @@
                         <button class="btn btn-primary btn-lg shadow-lg mt-4">Log in</button>
 
 
-                        <div class="col-12 col-md-10 m-3">
-                            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-center">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">Don't have an account? <a href="/signup">Signup</a></li>
-                                </ol>
-                            </nav>
+                        <div class="col-12 col-md-10 mt-3">
+                                    <a>Don't have an account? <a href="/signup">Signup</a></a>
+                                    <p><a href="/forgot-password">Forgot my password</a></p>
                         </div>
 
 
