@@ -55,8 +55,13 @@ class RegisterUser3 extends Controller
         $user = User3::create($attributes);
 
 
-        Mail::to($user->email)->queue(new \App\Mail\MailVerify($user->email, $user->username, $user->verification_code, 'www'));
 
+        if(str_ends_with(env('APP_URL'),'.me')){
+            Mail::to($user->email)->queue(new \App\Mail\MailVerify($user->email, $user->username, $user->verification_code, 'www'));
+        }else if(str_ends_with(env('APP_URL'),'.test')){
+            $user->is_verified = 1;
+            $user->save();
+        }
         //TODO: email verification
 
 

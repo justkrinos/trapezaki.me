@@ -100,8 +100,13 @@ class RegisterUser2 extends Controller
         //Save the logo same logic as above
         User2_Photo::store_logo(request()->file('logo'),$user2->id);
 
+        if(str_ends_with(env('APP_URL'),'.me')){
+            Mail::to($user2->email)->queue(new \App\Mail\MailVerify($user2->email, $user2->business_name, $user2->verification_code, 'business'));
+        }else if(str_ends_with(env('APP_URL'),'.test')){
+            $user2->is_verified = 1;
+            $user2->save();
+        }
 
-        Mail::to($user2->email)->queue(new \App\Mail\MailVerify($user2->email, $user2->business_name, $user2->verification_code, 'business'));
 
         return redirect('/login')->with('success', "Your account has been created successfully! Check your email for verification.");
 
