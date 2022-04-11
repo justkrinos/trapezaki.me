@@ -77,7 +77,7 @@
                                                 </h6>
                                             </div>
                                             <div class="dropdown">
-                                                
+
                                                 <button class="btn btn-<?php if ($user2->status == 1) {
                                                                             echo 'success';
                                                                         } else {
@@ -131,11 +131,11 @@
                                     <label for="email">Email</label>
                                     <input type="text" id="email" class="form-control round"
                                         value="{{ $user2->email }}" disabled>
-                                        
+
                                     @if(!$user2->is_verified == 1)
                                         <p style="color:red">Not verified</p>
                                     @endif
-                                    
+
                                 </div>
 
                             </div>
@@ -269,7 +269,7 @@
                                             </div>
 
                                         </div>
-                                        
+
                                     </div>
                                     <div class="col-sm-10">
                                         <label for="squareText">First Reservation Hour</label>
@@ -450,27 +450,27 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQ
 </script>
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
-<script src="../assets/js/maps-script.js"></script>
+<script src="/assets/js/maps-script.js"></script>
 
 {{-- For flash messages --}}
-<script src="../assets/vendors/toastify/toastify.js"></script>
+<script src="/assets/vendors/toastify/toastify.js"></script>
 
 {{-- Gia ta tags --}}
-<script src="../assets/js/typeahead.bundle.js"></script>
-<script src="../assets/js/bloodhound.js"></script>
-<script src="../assets/js/bootstrap-tagsinput.js"></script>
-<script src="../assets/vendors/choices.js/choices.min.js"></script>
-<script src="../assets/js/tags.js"></script>
+<script src="/assets/js/typeahead.bundle.js"></script>
+<script src="/assets/js/bloodhound.js"></script>
+<script src="/assets/js/bootstrap-tagsinput.js"></script>
+<script src="/assets/vendors/choices.js/choices.min.js"></script>
+<script src="/assets/js/tags.js"></script>
 
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
-<script src="../assets/js/maps-script.js"></script>
+<script src="/assets/js/maps-script.js"></script>
 
 {{-- Photos Ajax Dependencies --}}
-<script src="../assets/js/fileupload.js"></script>
+<script src="/assets/js/fileupload.js"></script>
 
 {{-- Include for flash messages --}}
 @include('components.toasts')
 
 {{-- Ajax active disable dependency --}}
-<script src="../assets/js/active-disable.js"></script>
+<script src="/assets/js/active-disable.js"></script>
