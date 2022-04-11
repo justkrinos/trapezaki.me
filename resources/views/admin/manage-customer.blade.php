@@ -8,6 +8,7 @@ $username = Request::segment(2);
 $user_id = DB::table('user2s')
     ->where('username', $username)
     ->first()->id;
+$user2 = User2::find($user_id);
 use App\Models\User2_Tag;
 use App\Models\Tag;
 
@@ -75,18 +76,18 @@ $tags = User2::find($user_id)
                                                     alt="logo">
                                             </div>
                                             <div class="ms-3 name container">
-                                                <h5 class="font-bold">{{ User2::find($user_id)->business_name }}
+                                                <h5 class="font-bold">{{ $user2->business_name }}
                                                 </h5>
-                                                <h6 class="text-muted mb-0">{{ User2::find($user_id)->company_name }}
+                                                <h6 class="text-muted mb-0">{{ $user2->company_name }}
                                                 </h6>
                                             </div>
                                             <div class="dropdown">
-                                                <?php $status = User2::find($user_id)->status; ?>
+                                                <?php $status = $user2->status; ?>
                                                 <button class="btn btn-<?php if ($status == 1) {
-    echo 'success';
-} else {
-    echo 'danger';
-} ?> dropdown-toggle me-1"
+                                                                            echo 'success';
+                                                                        } else {
+                                                                            echo 'danger';
+                                                                        } ?> dropdown-toggle me-1"
                                                     type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
                                                     <!-- Tuto na to allassei aftomata o server -->
@@ -98,8 +99,8 @@ $tags = User2::find($user_id)
                                                     } ?>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a id="cust-active" class="dropdown-item">Active</a>
-                                                    <a id="cust-disabled" class="dropdown-item">Disabled</a>
+                                                    <a id="cust-active" class="dropdown-item" class="active">Active</a>
+                                                    <a id="cust-disabled" class="dropdown-item" class="disabled">Disabled</a>
                                                 </div>
                                             </div>
 
@@ -126,7 +127,7 @@ $tags = User2::find($user_id)
                         </div>
                         <div class="card-body">
                             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                                rows="4">{{ User2::find($user_id)->description }}</textarea>
+                                rows="4">{{ $user2->description }}</textarea>
                         </div>
                         <div class="card-header">
                             <h6 class="card-title">Business Information</h6>
@@ -137,7 +138,12 @@ $tags = User2::find($user_id)
                                 <div class="col-md-5">
                                     <label for="email">Email</label>
                                     <input type="text" id="email" class="form-control round"
-                                        value="{{ User2::find($user_id)->email }}" disabled>
+                                        value="{{ $user2->email }}" disabled>
+                                        
+                                    @if(!$user2->is_verified == 1)
+                                        <p style="color:red">Not verified</p>
+                                    @endif
+                                    
                                 </div>
 
                             </div>
@@ -448,3 +454,6 @@ src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locati
 
 {{-- Include for flash messages --}}
 @include('components.toasts')
+
+{{-- Ajax active disable dependency --}}
+<script src="../assets/js/active-disable.js"></script>

@@ -54,6 +54,40 @@ class ManageBusinessController extends Controller
         {
             //TODO
         }
+        else
+        {
+            $validatedData = request()->validate([
+                'username' => 'required',
+                'action'   => 'required|in:activate,disable'
+            ]);
+    
+            $username = $validatedData['username'];
+            $action   = $validatedData['action'];
+    
+            $user2 = User2::where('username',$username)->first();
+    
+            if($action === 'disable'){
+    
+                if($user2){
+                    $user2->status = 0;
+                   /* $user2->deletePhotos();
+                    $user2->detag();
+                    $user2->delete();
+                    User2::truncate();*/
+                    $user2->save();
+                    return 'success';
+                }
+    
+            }else if($action == 'activate'){
+    
+                if($user2){
+                    $user2->status = 1;
+                    $user2->save();
+                    return 'success';
+                }
+            }
+            return 'error';
+        }
     }
 
     private function formatType(array $validatedData){
