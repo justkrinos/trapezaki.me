@@ -76,7 +76,7 @@
                                                 <h6 class="text-muted mb-0">{{ $user2->company_name }}
                                                 </h6>
                                             </div>
-                                            <div class="dropdown">
+                                            <div class="changeStatus">
 
                                                 <button class="btn btn-<?php if ($user2->status == 1) {
                                                                             echo 'success';

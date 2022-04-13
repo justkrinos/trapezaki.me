@@ -54,7 +54,8 @@ class ManageBusinessController extends Controller
         {
             //TODO
         }
-        else
+        //An thelw na allaksw to status
+        else if(request()->has('action'))
         {
             $validatedData = request()->validate([
                 'username' => 'required',
