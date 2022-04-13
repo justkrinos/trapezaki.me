@@ -67,7 +67,7 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                                         <div class="d-flex align-items-center conainer">
                                             <div class="avatar avatar-xl">
 
-                                                <img src="../assets/images/uploads/{{ Auth::guard('user2')->user()->logo()->get()->first()->photo_path }}"
+                                                <img src="../assets/images/uploads/{{ Auth::guard('user2')->user()->logo() }}"
                                                     alt="logo">
                                             </div>
                                             <div class="ms-3 name container">

@@ -67,6 +67,7 @@
                                     <div class="card-body">
                                         <div class="d-flex align-items-center conainer">
                                             <div class="avatar avatar-xl">
+                                                {{-- TOOD: fix this me tes photos --}}
                                                 <img src="../assets/images/uploads/{{ User2_Photo::where('user2_id', $user_id)->where('photo_path', 'like', 'logo%')->get()->first()->photo_path }}"
                                                     alt="logo">
                                             </div>
@@ -112,7 +113,7 @@
                     <div class="card">
                         <div class="col-md-5">
                             <input type="hidden" id="id" name="id" class="form-control round"
-                                value="{{ $user_id }}">
+                                value="{{ $user2->id }}">
                         </div>
                         <div class="card-header">
                             <h4 class="card-title">Description</h4>
@@ -144,7 +145,7 @@
                                 <div class="col-md-2">
                                     <label for="phone">Phone Number</label>
                                     <input type="text" id="phone" class="form-control round"
-                                        value="{{ User2::find($user_id)->phone }}" disabled>
+                                        value="{{$user2->phone}}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -155,9 +156,8 @@
                         <div class="card-body">
                             <div class="form-check">
                                 <div class="checkbox">
-                                    @php $type = User2::find($user_id)->type; @endphp
                                     <input name="coffee" type="checkbox" id="checkbox1" class="form-check-input"
-                                    @php if (str_contains($type, 'coffee')) {
+                                    @php if (str_contains($user2->type, 'coffee')) {
                                             echo 'checked';
                                         }
                                     @endphp>
@@ -165,7 +165,7 @@
                                 </div>
                                 <div class="checkbox">
                                     <input name="food" type="checkbox" id="checkbox1" class="form-check-input"
-                                    @php if (str_contains($type, 'food')) {
+                                    @php if (str_contains($user2->type, 'food')) {
                                             echo 'checked';
                                         }
                                     @endphp>
@@ -173,7 +173,7 @@
                                 </div>
                                 <div class="checkbox">
                                     <input name="drinks" type="checkbox" id="checkbox1" class="form-check-input"
-                                    @php if (str_contains($type, 'drinks')) {
+                                    @php if (str_contains($user2->type, 'drinks')) {
                                             echo 'checked';
                                         }
                                     @endphp>
@@ -347,7 +347,7 @@
                     <h4 class="card-title">Floor Plan</h4>
                 </div>
                 <div class="card-body">
-                    <Button id="btnFloorPlan" class="btn btn-primary me-1 mb-1">Open Floor Plan Editor</Button>
+                    <button id="btnFloorPlan" username="{{$user2->username}}" class="btn btn-info me-1 mb-1">Open Floor Plan Editor</Button>
                 </div>
             </div>
 

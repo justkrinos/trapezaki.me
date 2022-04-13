@@ -92,7 +92,10 @@ class ManageBusinessController extends Controller
     }
 
     public function show(User2 $user2) {
-        return view('admin.manage-customer',['user2' => $user2]);
+        return view('admin.manage-customer',[
+            'user2' => $user2,
+            'tags'  => $user2->tags->pluck('name')->toArray()
+        ]);
     }
 
     private function formatType(array $validatedData){

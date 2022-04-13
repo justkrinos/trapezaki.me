@@ -13,7 +13,10 @@ class FloorPlanController extends Controller
     }
 
     function getFloorPlanJson(User2 $user2){
-        return $user2->floorPlan->json;
+        if($user2->floorPlan->json) //an den en ofkero stilto
+            return $user2->floorPlan->json;
+        else
+            return []; //aliws stile ofkero gia na kserei oti en null
     }
 
     function modify(User2 $user2){

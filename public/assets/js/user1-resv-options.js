@@ -172,7 +172,7 @@ $(document).ready(function () {
         dataType: "json",
 
         success: function (result) {
-            if (result) { //an den en null to floor plan
+            if (result.length != 0) { //an den en null to floor plan
                 floorplan = result
                 loadFloorPlan(result)//kame run to import function
             }

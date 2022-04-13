@@ -1,16 +1,6 @@
 initCanvas()
 // resizeCanvas()
-CustomerMode()
 
-$("#save").click(function () {
-  //Todo
-})
-
-$('.clear').click(function () {
-  canvas.clear();
-  initCanvas();
-  //WARNING Reservations ENA XATHUN
-})
 
 function loadFloorPlan(floorplan) {
     canvas.loadFromJSON(floorplan)
@@ -25,6 +15,7 @@ function loadFloorPlan(floorplan) {
     })
 
     canvas.renderAll();
+    CustomerMode()
 
     //na eshi kapia parameters kapio trapezi
     //analoga an eshi kratisi na men bori na taraksi nan locked
