@@ -60,14 +60,14 @@ class ManageBusinessController extends Controller
                 'username' => 'required',
                 'action'   => 'required|in:activate,disable'
             ]);
-    
+
             $username = $validatedData['username'];
             $action   = $validatedData['action'];
-    
+
             $user2 = User2::where('username',$username)->first();
-    
+
             if($action === 'disable'){
-    
+
                 if($user2){
                     $user2->status = 2;
                    /* $user2->deletePhotos();
@@ -77,9 +77,9 @@ class ManageBusinessController extends Controller
                     $user2->save();
                     return 'success';
                 }
-    
+
             }else if($action == 'activate'){
-    
+
                 if($user2){
                     $user2->status = 1;
                     $user2->save();
@@ -88,6 +88,10 @@ class ManageBusinessController extends Controller
             }
             return 'error';
         }
+    }
+
+    public function show(User2 $user2) {
+        return view('admin.manage-customer',['user2' => $user2]);
     }
 
     private function formatType(array $validatedData){

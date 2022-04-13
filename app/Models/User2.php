@@ -7,11 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\File;
-
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 //O user2 einai taggable (eshei tags)
 use Cviebrock\EloquentTaggable\Taggable;
 use PHPUnit\Framework\MockObject\Verifiable;
@@ -43,13 +40,19 @@ class User2 extends Authenticatable implements MustVerifyEmail
 
     public function deletePhotos(){
         foreach($this->photos()->get() as $photo){
-            File::delete('assets/images/uploads/' . $photo->photo_path);
-            $photo->delete();
+            File::delete('assets/images/uploads/' . $photo->photo_path); //delete file
+            $photo->delete(); //delete record in database
         }
     }
 
     public function logo(){
         return $this->hasMany('App\Models\User2_Photo','user2_id','id')->where('photo_path', 'like', 'logo%')->get()->first()->photo_path;
+    }
+
+    public function floorPlan(){
+        return $this->hasOne('App\Models\FloorPlan','id','id')->withDefault([
+            'json' => null
+        ]);
     }
 
 }

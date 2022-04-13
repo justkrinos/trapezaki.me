@@ -1,31 +1,37 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User3;
+use App\Models\User2;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function showBook($username)
+    public function showBook(User2 $user2)
     {
-        //TODO: en dulefki swsta tuto
         $user = Auth::guard('user3')->user();
 
         //an ise logged in mpenni kanonika
         if ($user)
-            return view('www.book');
+            return view('www.book', [
+                'user2' => $user2
+            ]);
         //an ise guest mpenni kanonika (checkari p to session)
         else if (
             request()->session()->has('full_name')
             && request()->session()->has('phone')
             && request()->session()->has('email')
         )
-            return view('www.book');
+            return view('www.book', [
+                'user2' => $user2
+            ]);
 
+        // TODO: en fkallei to popup
         //an den ise tpt kamnise redirect piso j fkalli su to login popup
         else
-            return redirect('/user/' . $username. '#login');
+            return redirect('/user/' . $user2->username . '#login');
     }
 
     public function createBook()
@@ -36,7 +42,7 @@ class BookingController extends Controller
             $phone = session()->get('phone');
             $email = session()->get('email');
 
-            session()->forget(['full_name','phone','email']);
+            session()->forget(['full_name', 'phone', 'email']);
 
 
             $request = request()->merge([
@@ -49,8 +55,7 @@ class BookingController extends Controller
 
                 //TODO enna prp na kataxorite j to guest account sto table (see code pukatw p en commented)
             ]);
-        }
-        else{
+        } else {
             //TODO get data from user account if logged in
         }
 
