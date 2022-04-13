@@ -37,6 +37,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app.css">
 
+    <link rel="shortcut icon" href="/assets/images/logo/logo_small.png" type="image/x-icon">
 
 </head>
 

@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app.css">
 
+    <link rel="shortcut icon" href="/assets/images/logo/logo_small.png" type="image/x-icon">
+
+
     {{-- TODO:
         //-ta tags en dulefkun se mobile
         //-na fiei jino to komma sta tags j en spastiko
