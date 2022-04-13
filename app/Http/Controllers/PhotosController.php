@@ -73,13 +73,18 @@ class PhotosController extends Controller
             
             $photo_path = $request['photo_path'];
 
+            //Can't delete last photo
+            if(User2_Photo::where('user2_id', $user2_id)->get()->count() == 2){ //==2 because 1 is for logo and 1 for the photo
+                return false;
+            }
+            else{
+                $deleted = User2_Photo::where('photo_path', $photo_path)->where('user2_id', $user2_id)->delete();
+
+                File::delete('assets/images/uploads/' . $photo_path);
+
+                return true;
+            }
             
-        
-            $deleted = User2_Photo::where('photo_path', $photo_path)->where('user2_id', $user2_id)->delete();
-
-            File::delete('assets/images/uploads/' . $photo_path);
-
-            return ['ok'];
         }
 
         else if(strcmp($request['action'],'modify')==0){

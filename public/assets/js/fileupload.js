@@ -15,11 +15,26 @@ $("ul.images").on("click", "li span.del", function () {
             action: "delete",
             photo_path: photo.attr("img"),
         },
-        dataType: "json", // added data type
+         // added data type
         success: function (data) {
-            photo.fadeOut(300, function () {
-                photo.remove();
-            });
+            console.log(data);
+            if(data)
+            {
+                photo.fadeOut(300, function () {
+                    photo.remove();
+                });
+            }
+            else{
+                Toastify({
+                    text: "You can't have less than one photo!",
+                    duration: 5000,
+                    close:true,
+                    gravity:"top",
+                    position: "right",
+                    backgroundColor: "#d10000",
+                }).showToast();
+            }
+            
         },
         error: function (data) {
             console.log(data.responseText);
