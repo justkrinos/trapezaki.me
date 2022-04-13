@@ -65,7 +65,7 @@ class RegisterUser2 extends Controller
                 'lat'  => 'required|numeric|max:36',
 
                 'tags' => 'required',
-                'tags.*' => 'alpha|max:15',
+                'tags.*' => 'regex:/^[\pL\s\-]+$/u|max:15',
                 'verification_code' => 'required'
             ],
             [
@@ -75,7 +75,9 @@ class RegisterUser2 extends Controller
                 'photo.required' => 'The photos field is required',
                 'photo.*.image' => 'The files must be images',
                 'photo.*.mimes' => 'The files must be images',
-                'photo.*.max'   => 'The maximum file size is 2048'
+                'photo.*.max'   => 'The maximum file size is 2048',
+                'tags.*.regex' => 'Please only use aphabetic characters.'
+
             ]
         );
 
@@ -95,6 +97,7 @@ class RegisterUser2 extends Controller
 
         //Vallw ta tags mesto table mesw tou relationship me ton user2
         $user2->tag($tags);
+        $user2->floorPlan->save();
 
         // TODO na sasun tuta ta static methods ew na ginun eloquent relationships
         //Save the photos using a new method i created in the User2_Photo model
