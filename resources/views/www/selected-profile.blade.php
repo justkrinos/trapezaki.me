@@ -195,7 +195,7 @@ $user2= User2::where('username', $username)
                                                 <input type="password" placeholder="Password" id="password"
                                                     class="form-control">
                                             </div>
-                                            <a href="/signup">Don't have an account? Signup</a>
+                                            <p>Don't have an account? <a href="/signup">Signup</a></p>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light-secondary"
@@ -292,6 +292,7 @@ console.log(photopaths)
 $("#gallery").nanogallery2({
   thumbnailHeight:  150,
   thumbnailWidth:   150,
+  {{-- /TODO: na sasei to base url --}}
   {{-- "itemsBaseURL": "http://nanogallery2.nanostudio.org/samples/", --}}
 
   thumbnailBorderVertical: 0,

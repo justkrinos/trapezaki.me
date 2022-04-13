@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
 
+
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="/assets/css/app.css">
@@ -42,9 +43,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="container-fluid text-center">
-                            <h3 class="mb-5">Floor Plan Editor</h3>
+                            <h3 class="mb-1">Floor Plan Editor</h3>
+                             <p class="mb-4">{{ $user2->business_name }}</p>
                             <div class="form-group admin-menu justify-content-center">
-
+                                @csrf
                                 <div class="btn-group mb-1">
                                     <button class="btn btn-primary btn-sm rectangle text-nowrap">+ &#9647;
                                         Table</button>
@@ -139,6 +141,8 @@
         </div>
     </div>
 
+    <span id="username" user="{{ $user2->username }}"></span>
+
 </body>
 
 
@@ -158,6 +162,7 @@
 
 <script src="/assets/js/date-findtime.js"></script>
 
+{{-- Include for flash messages --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
 
 <script src="/assets/js/user1-fabric-resv.js"></script>

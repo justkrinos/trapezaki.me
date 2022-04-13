@@ -19,6 +19,7 @@ Email: {{ session()->get('email')}}
 TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso sto make a reservation --}}
 
 {{-- TODO: na iparxei to navbar j to sidebar swsta --}}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,7 +56,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                 <div class="card">
 
                     <div class="card-header">
-                            @include('components.back-button')
+                        @include('components.back-button')
                         <div class="container-fluid text-center">
                             <h3 class="mb-4k mb-4">Select a Table</h3>
                             <div class="d-flex justify-content-center mb-2">
@@ -137,6 +138,8 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                     </div>
                 </div>
             </div>
+
+            <span id="username" user="{{ $user2->username }}"></span>
 
 
             <footer>

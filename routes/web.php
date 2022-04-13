@@ -33,23 +33,32 @@ use App\Models\User1;
 */
 
 
+/* ------------BINDINGS-------------- */
+
+//Bind a the wildcard {user2} to a username of user2
+//if it doesnt exist it will throw an 404 error
+//TODO: na to kamume se ulla ta wildcards etsi
+
+Route::bind('user2', function ($value) {
+    return User2::where('username', $value)->first();
+});
+
+/* -------------------------------- */
+
+
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/make-a-reservation', function () {
         return view('www.search');
     })->name('first_page');
 
-    Route::get('/user/{user2}', function ($slug) {
-        $user = User2::where('username', $slug)->first();
-
-        if (!$user) {
-            return redirect('/make-a-reservation');
-        }
+    Route::get('/user/{user2}', function (User2 $user2) {
         return view('www.selected-profile');
     });
 
     Route::get('/user/{user2}/book', [BookingController::class, 'showBook']);
     Route::post('/user/{user2}/book', [BookingController::class, 'createBook']);
+    Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
 
 
 
@@ -91,7 +100,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
-
     });
 
 
@@ -146,7 +154,6 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser2']);
-
     });
 
 
@@ -158,7 +165,6 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         });
 
         Route::get('/logout', [SessionsController2::class, 'destroy']);
-
         Route::post('/profile', [SessionsController2::class, 'edit']);
 
         Route::get('/edit-reservation', function () {
@@ -183,7 +189,6 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/report-problem', function () {
             return view('business.report-problem');
         });
-
 
         Route::post('/report-problem', [issuesBusinessControler::class, 'store']);
         Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
@@ -220,33 +225,26 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::get('/pending-requests', [PendingRequestsController::class, 'show']);
         Route::post('/pending-requests', [PendingRequestsController::class, 'modify']);
 
-        Route::get('/user/{user2}', function ($slug) {
-            $user = User2::where('username', $slug)->first();
+        Route::get('/user/{user2}', [ManageBusinessController::class, 'show']);
+        Route::post('/user/{user2}', [ManageBusinessController::class, 'edit']);
 
-            if (!$user) {
-                return redirect('/');
-            }
-            return view('admin.manage-customer',['user2' => $user]);
-        });
-
-        Route::get('/edit-floorplan', function () {
-            return view('admin.floorplan-editor');
-        });
 
         Route::get('/api/tags', function () {
             $tag = Tag::all()->pluck('name')->toArray();
             return response($tag);
         });
 
+
+        Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
+        Route::get('/user/{user2}/floor-plan', [FloorPlanController::class, 'show']);
+        Route::post('/user/{user2}/floor-plan', [FloorPlanController::class, 'modify']);
+
+
         //Edit User2
-        Route::post('/user/{user2}', [ManageBusinessController::class, 'edit']);
         Route::get('/logout', [User1Controller::class, 'logout']);
 
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
-
-        Route::get('/user/{user2}/floor-plan', [FloorPlanController::class, 'show']);
-
     });
 });
 

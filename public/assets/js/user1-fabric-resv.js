@@ -599,20 +599,6 @@ document.querySelectorAll('.remove')[0].addEventListener('click', function () {
   // }
 })
 
-document.querySelectorAll('.save')[0].addEventListener('click', function () {
-  Toastify({
-    text: "Your changes have been saved successfully!",
-    duration: 3000,
-    close: true,
-    backgroundColor: "#4fbe87",
-  }).showToast();
-  Toastify({
-    text: "But you have to make this work! TODO",
-    duration: 3000,
-    close: true,
-    backgroundColor: "#4fbe87",
-  }).showToast();
-})
 
 //Customer mode button listener
 document.querySelectorAll('.customer-mode')[0].addEventListener('click', function () {
