@@ -21,7 +21,7 @@ $(document).ready(function () {
 
     console.log(lastSegment);
 
-    $(document).on("click", ".dropdown", function (e) {
+    $(document).on("click", ".changeStatus", function (e) {
         e.preventDefault();
         //Get the last 2 segments of URL
         console.log($("button#dropdownMenuButton").get());
