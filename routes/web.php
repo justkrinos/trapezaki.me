@@ -68,7 +68,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::middleware(['guest:user3'])->group(function () {
         Route::get('/', function () {
-            return view('www.index');
+            return view('www.search');
         });
 
         Route::get('/login', [SessionsController::class, 'create']);

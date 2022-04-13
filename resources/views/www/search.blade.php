@@ -16,8 +16,10 @@ use App\Models\User2_Photo;
               //- to pagination sta datatable en dulefki me ta popup sto user3 js to user2
               //- opou eshi code messe view na mpei mono se controllers
               //-na sastun ta provlimata me to sidebar na megaloni j na men eshi x (en logo tu main.js)
-              --}}
 
+              //-na men to fkallei panta to modal na checkari an eksanaepelekses
+              //- na dume pos enna apothikefkete to city, ston user oksa sto session?
+              --}}
 
 
     {{--Toast dependency--}}
@@ -134,7 +136,11 @@ use App\Models\User2_Photo;
             </div>
         </div>
 
+        @include('www.components.choose-city')
+
+
 </body>
+
 
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -148,7 +154,25 @@ use App\Models\User2_Photo;
 
 {{--Toast dependencies--}}
 <script src="assets/vendors/toastify/toastify.js"></script>
-
 @include('components.toasts')
+
+
+<script>
+$(document).ready(function(){
+    $("#chooseCity").modal('show')
+})
+
+
+//NA KAMO TO MODAL NA EMFANIZETE GIA ARXI
+//J META NA METAFERO TO CHOOSE CITY MESA
+//OTAN TSILIETE TO CHOOSE CITY NA KLIEI TO MODAL
+//NA MEN ESHI KOUMPIA P KATW
+
+//TODOS SIMERA: na teliosi to popup
+//                na dw ta problimata me ta resv
+//                na dume ti provlimata exume me server na sasume me andrea
+//                na dw ti na pume tu pingu 1.ta buttons p en otinane
+//                                          2. ta trapezia j karekles
+</script>
 
 </html>

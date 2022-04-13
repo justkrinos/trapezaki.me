@@ -77,10 +77,9 @@
                         </div>
 
                         <div class="col-xl-2 col-md-5 col-sm-7">
-                            <div class="card">
+                            <div class="card bg-primary">
                                 <div class="card-content">
-                                    <img src="/assets/images/Larnaca.jpg" class="card-img-top img-fluid"
-                                         >
+                                    <img src="/assets/images/Larnaca.jpg" class="card-img-top img-fluid">
                                     <div class="card-body">
                                         <h5 class="card-title">Larnaca.</h5>
                                         <a href="/make-a-reservation" class="stretched-link"></a>
@@ -91,12 +90,11 @@
                                 </ul>
                             </div>
                         </div>
-
+-
                         <div class="col-xl-2 col-md-5 col-sm-7">
                             <div class="card">
                                 <div class="card-content">
-                                    <img src="/assets/images/Amoxostos.jpg" class="card-img-top img-fluid"
-                                         >
+                                    <img src="/assets/images/Amoxostos.jpg" class="card-img-top img-fluid">
                                     <div class="card-body">
                                         <h5 class="card-title">Famagusta.</h5>
                                         <a href="/make-a-reservation" class="stretched-link"></a>
