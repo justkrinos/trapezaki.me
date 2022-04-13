@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User3;
 use App\Models\User2;
 use App\Models\User1;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +58,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.selected-profile');
     });
 
+    Route::get('/user/{user2}/menu',[BookingController::class,'showMenu']);
     Route::get('/user/{user2}/book', [BookingController::class, 'showBook']);
     Route::post('/user/{user2}/book', [BookingController::class, 'createBook']);
     Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
@@ -194,6 +197,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
+
+        Route::get('/profile/menu', [SessionsController2::class, 'showMenu']);
     });
 });
 
@@ -234,6 +239,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
             return response($tag);
         });
 
+        Route::get('/user/{user2}/menu', [ManageBusinessController::class, 'getMenu']);
 
         Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
         Route::get('/user/{user2}/floor-plan', [FloorPlanController::class, 'show']);

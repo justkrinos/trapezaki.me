@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User3;
 use App\Models\User2;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -86,5 +88,14 @@ class BookingController extends Controller
         //TODO na dulepsi j na ginete i kratisi
 
         return request()->all();
+    }
+
+
+    public function showMenu(User2 $user2)
+    {
+        $file = File::get(public_path('assets/menus/') . $user2->menu);
+        $response = Response::make($file, 200);
+        $response->header('Content-Type', 'application/pdf');
+        return $response;
     }
 }

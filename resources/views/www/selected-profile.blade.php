@@ -102,8 +102,7 @@ $user2= User2::where('username', $username)
                                                     @auth('user3') id="btnBook" @endauth {{-- An den ise logged in fkalli su popup --}} @guest
                                                     id="btnPop" @endguest style="margin:5px;"> Book
                                                     Now</button>
-                                                <button class="btn btn-primary" style="margin:5px;"
-                                                    id="resvMenu">Menu</button>
+                                                <a class="btn btn-primary" href="/user/{{ $user2->username}}/menu"  target="_blank" style="margin:5px;" id="resvMenu">Menu</a>
                                                 </form>
                                             </div>
                                         </div>

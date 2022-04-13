@@ -127,7 +127,7 @@ class SessionsController extends Controller
 
         //Continue to login
         session()->regenerate();
-        return redirect('/make-a-reservation')->withInput()->with('success', 'Welcome back!');
+        return redirect('/make-a-reservation')->withInput()->with('success', 'Welcome!');
     }
 
     public function login_popup()

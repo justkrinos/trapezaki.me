@@ -52,6 +52,7 @@ class RegisterUser2 extends Controller
                 'photo' => 'required',
                 'photo.*' => 'image|mimes:jpg,png,jpeg,svg|max:2048',
                 'logo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
+                'menu' => "required|mimes:pdf|max:10000",
 
                 'address' => 'required|min:2',
                 'postal' => 'required|numeric|max:999999|min:1',
@@ -90,6 +91,11 @@ class RegisterUser2 extends Controller
         unset($validatedData['tags']);
         unset($validatedData['photo']);
         unset($validatedData['logo']);
+
+        $menuName = time() . uniqid() . '.' . request()->file('menu')->extension();
+        request()->file('menu')->move(public_path('assets/menus/'), $menuName);
+
+        $validatedData['menu'] = $menuName;
 
 
         //Create the account

@@ -245,12 +245,25 @@
                                     </div>
                                 </div>
 
-                                <div class="card-body mb-3">
+                                <div class="card-body">
                                     <div class="form-group col-md-5 col-12">
                                         <label for="logo" class="form-label">Add Logo</label>
                                         <input class="form-control @error('logo') is-invalid @enderror" type="file"
                                             id="logo" name="logo" required>
                                         @error('logo')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="card-body mb-3">
+                                    <div class="form-group col-md-5 col-12">
+                                        <label for="logo" class="form-label">Add Menu</label>
+                                        <input class="form-control @error('menu') is-invalid @enderror" type="file"
+                                            id="menu" name="menu" required>
+                                        @error('menu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>

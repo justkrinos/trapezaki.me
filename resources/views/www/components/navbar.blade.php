@@ -62,7 +62,7 @@
                             <div class="user-name text-end me-3">
                                 {{--Dame en dulefki epd prp nan signe upd--}}
                                 {{--Na fkallei log in or sign up an den en signed up allo page?--}}
-                                <h6 class="mb-0 text-blue">{{Auth::guard('user3')->user()->username}}</h6>
+                                <h6 class="mb-0 text-blue">{{Auth::guard('user3')->user()->username}}&nbsp&nbsp<i class="arrow down" ></i></h6>
                             </div>
                         </div>
                     </a>

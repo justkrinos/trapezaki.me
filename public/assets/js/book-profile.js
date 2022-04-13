@@ -20,11 +20,6 @@ $(document).ready(function () {
         $("#inlineForm").modal('show')
     })
 
-    $("#resvMenu").click(function () {
-        alert("TODO");
-        window.open("/TODO", '_blank').focus();
-    })
-
 
     //Verify login
     $(document).on('click', '#btnLogin', function (e) {

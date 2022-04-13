@@ -2,15 +2,13 @@
 <html lang="en">
 
 @php
-    use App\Models\User2_Photo;
-    use App\Models\User2;
-    use App\Models\User2_Tag;
-    use App\Models\Tag;
+use App\Models\User2_Photo;
+use App\Models\User2;
+use App\Models\User2_Tag;
+use App\Models\Tag;
 
-    $user_id = $user2->id;
-    $tags = $user2
-        ->tags->pluck('name')
-        ->toArray();
+$user_id = $user2->id;
+$tags = $user2->tags->pluck('name')->toArray();
 @endphp
 
 <head>
@@ -80,23 +78,28 @@
                                             <div class="changeStatus">
 
                                                 <button class="btn btn-<?php if ($user2->status == 1) {
-                                                                            echo 'success';
-                                                                        } else {
-                                                                            echo 'danger';
-                                                                        } ?> dropdown-toggle me-1"
+    echo 'success';
+} else {
+    echo 'danger';
+} ?> dropdown-toggle me-1"
                                                     type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
                                                     <!-- Tuto na to allassei aftomata o server -->
 
                                                     <?php if ($user2->status == 1) {
                                                         echo 'Active';
-                                                    } else {
+                                                    } elseif ($user2->status == 2) {
                                                         echo 'Disabled';
-                                                    } ?>
+                                                    } else {
+                                                        echo 'Pending';
+                                                    }
+                                                    ?>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a id="cust-active" class="dropdown-item" class="active">Active</a>
-                                                    <a id="cust-disabled" class="dropdown-item" class="disabled">Disabled</a>
+                                                    <a id="cust-active" class="dropdown-item"
+                                                        class="active">Active</a>
+                                                    <a id="cust-disabled" class="dropdown-item"
+                                                        class="disabled">Disabled</a>
                                                 </div>
                                             </div>
 
@@ -108,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="/user/{{$user2->username}}" class="col-md-12">
+                <form method="POST" action="/user/{{ $user2->username }}" class="col-md-12">
                     @csrf
                     <div class="card">
                         <div class="col-md-5">
@@ -133,7 +136,7 @@
                                     <input type="text" id="email" class="form-control round"
                                         value="{{ $user2->email }}" disabled>
 
-                                    @if(!$user2->is_verified == 1)
+                                    @if (!$user2->is_verified == 1)
                                         <p style="color:red">Not verified</p>
                                     @endif
 
@@ -145,7 +148,7 @@
                                 <div class="col-md-2">
                                     <label for="phone">Phone Number</label>
                                     <input type="text" id="phone" class="form-control round"
-                                        value="{{$user2->phone}}" disabled>
+                                        value="{{ $user2->phone }}" disabled>
                                 </div>
                             </div>
                         </div>
@@ -157,26 +160,17 @@
                             <div class="form-check">
                                 <div class="checkbox">
                                     <input name="coffee" type="checkbox" id="checkbox1" class="form-check-input"
-                                    @php if (str_contains($user2->type, 'coffee')) {
-                                            echo 'checked';
-                                        }
-                                    @endphp>
+                                        @if (str_contains($user2->type, 'coffee')) checked @endif>
                                     <label for="checkbox1">Coffee</label>
                                 </div>
                                 <div class="checkbox">
                                     <input name="food" type="checkbox" id="checkbox1" class="form-check-input"
-                                    @php if (str_contains($user2->type, 'food')) {
-                                            echo 'checked';
-                                        }
-                                    @endphp>
+                                        @if (str_contains($user2->type, 'food')) checked @endif>
                                     <label for="checkbox1">Food</label>
                                 </div>
                                 <div class="checkbox">
                                     <input name="drinks" type="checkbox" id="checkbox1" class="form-check-input"
-                                    @php if (str_contains($user2->type, 'drinks')) {
-                                            echo 'checked';
-                                        }
-                                    @endphp>
+                                        @if (str_contains($user2->type, 'drinks')) checked; @endif>
                                     <label for="checkbox1">Drinks</label>
                                 </div>
                             </div>
@@ -216,93 +210,96 @@
 
                             </section>
                             <!-- Multiple choices end -->
-                            <button type="submit" name="form1" class="btn btn-success me-1 mb-1">Save changes</button>
+                            <button type="submit" name="businessInfo" class="btn btn-success me-1 mb-1">Save
+                                changes</button>
                         </div>
 
                     </div>
 
             </div>
             </form>
-        <form method="POST" action="/user/{{$user2->username}}" class="col-md-12">
-            <section id="input-style">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Reservation Management(TODO)</h4>
-                            </div>
+            <form method="POST" action="/user/{{ $user2->username }}" class="col-md-12">
+                <section id="input-style">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Reservation Management(TODO)</h4>
+                                </div>
 
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="roundText">Reservation Range</label>
-                                            <input type="text" id="roundText" class="form-control round" value="30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="squareText">Reservation Duration</label>
-                                            <input type="text" id="squareText" class="form-control square" value="2:30">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <label for="squareText">Last Reservation Hour</label>
-                                        <div class="row">
-                                            <div class="col-md-3 mb-2">
-
-                                                <fieldset class="form-group">
-                                                    <select class="form-select" id="basicSelect">
-                                                        <option>Monday</option>
-                                                        <option>Tuseday</option>
-                                                        <option>Wednesday</option>
-                                                        <option>Thursday</option>
-                                                        <option>Friday</option>
-                                                        <option>Saturday</option>
-                                                        <option>Sunday</option>
-                                                    </select>
-                                                </fieldset>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="roundText">Reservation Range</label>
+                                                <input type="text" id="roundText" class="form-control round" value="30">
                                             </div>
-                                            <div class="col-md-2 mb-1">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="squareText">Reservation Duration</label>
                                                 <input type="text" id="squareText" class="form-control square"
-                                                    value="21:30">
+                                                    value="2:30">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <label for="squareText">Last Reservation Hour</label>
+                                            <div class="row">
+                                                <div class="col-md-3 mb-2">
+
+                                                    <fieldset class="form-group">
+                                                        <select class="form-select" id="basicSelect">
+                                                            <option>Monday</option>
+                                                            <option>Tuseday</option>
+                                                            <option>Wednesday</option>
+                                                            <option>Thursday</option>
+                                                            <option>Friday</option>
+                                                            <option>Saturday</option>
+                                                            <option>Sunday</option>
+                                                        </select>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-md-2 mb-1">
+                                                    <input type="text" id="squareText" class="form-control square"
+                                                        value="21:30">
+                                                </div>
+
                                             </div>
 
                                         </div>
+                                        <div class="col-sm-10">
+                                            <label for="squareText">First Reservation Hour</label>
+                                            <div class="row">
+                                                <div class="col-md-3 mb-2">
 
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <label for="squareText">First Reservation Hour</label>
-                                        <div class="row">
-                                            <div class="col-md-3 mb-2">
+                                                    <fieldset class="form-group">
+                                                        <select class="form-select" id="basicSelect">
+                                                            <option>Monday</option>
+                                                            <option>Tuseday</option>
+                                                            <option>Wednesday</option>
+                                                            <option>Thursday</option>
+                                                            <option>Friday</option>
+                                                            <option>Saturday</option>
+                                                            <option>Sunday</option>
+                                                        </select>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-md-2 mb-1">
+                                                    <input type="text" id="squareText" class="form-control square"
+                                                        value="21:30">
+                                                </div>
 
-                                                <fieldset class="form-group">
-                                                    <select class="form-select" id="basicSelect">
-                                                        <option>Monday</option>
-                                                        <option>Tuseday</option>
-                                                        <option>Wednesday</option>
-                                                        <option>Thursday</option>
-                                                        <option>Friday</option>
-                                                        <option>Saturday</option>
-                                                        <option>Sunday</option>
-                                                    </select>
-                                                </fieldset>
                                             </div>
-                                            <div class="col-md-2 mb-1">
-                                                <input type="text" id="squareText" class="form-control square"
-                                                    value="21:30">
-                                            </div>
-
+                                            <button type="submit" name="reservationSettings"
+                                                class="btn btn-success me-1 mb-1">Save changes</button>
                                         </div>
-                                        <button type="submit" name="form2" class="btn btn-success me-1 mb-1">Save changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </form>
+                </section>
+            </form>
             <div class="card">
 
             </div>
@@ -334,12 +331,28 @@
                 <div class="card-header">
                     <h4 class="card-title">Menu</h4>
                 </div>
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="formFile" class="form-label">Upload a menu here</label>
-                        <input class="form-control" type="file" id="formFile">
+                <form method="POST" action="/user/{{ $user2->username }}" class="col-md-12 " enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <div class="col-md-5">
+                            <input type="hidden" id="id" name="id" class="form-control round"
+                                value="{{ $user2->id }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload a menu here</label>
+                            <input class="form-control @error('menu') is-invalid @enderror" type="file" name="menu"
+                                id="formFile">
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i>
+                                @error('menu')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+                        <a href="/user/{{ $user2->username}}/menu" name="menuForm" class="btn btn-info me-1 mb-1" target="_blank">Open</a>
+                        <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload new</button>
                     </div>
-                </div>
+                </form>
             </div>
 
             <div class="card">
@@ -347,7 +360,8 @@
                     <h4 class="card-title">Floor Plan</h4>
                 </div>
                 <div class="card-body">
-                    <button id="btnFloorPlan" username="{{$user2->username}}" class="btn btn-info me-1 mb-1">Open Floor Plan Editor</Button>
+                    <button id="btnFloorPlan" username="{{ $user2->username }}" class="btn btn-info me-1 mb-1">Open
+                        Floor Plan Editor</Button>
                 </div>
             </div>
 
@@ -376,14 +390,16 @@
                                     <label class="col-form-label">Lat</label>
                                 </div>
                                 <div class="col-md-4 col-4">
-                                    <input type="text" id="lat" class="form-control" value="" name="lat" disabled>
+                                    <input type="text" id="lat" class="form-control" value="{{ $user2->lat }}"
+                                        name="lat" disabled>
                                 </div>
 
                                 <div class="col-sm-2 col-2">
                                     <label class="col-form-label">Long</label>
                                 </div>
                                 <div class="col-md-4 col-4">
-                                    <input type="text" id="long" class="form-control" value="" name="long" disabled>
+                                    <input type="text" id="long" class="form-control" value="{{ $user2->long }}"
+                                        name="long" disabled>
                                 </div>
 
                             </div>
@@ -392,21 +408,24 @@
                                 <label class="col-form-label">Address</label>
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" id="address" class="form-control" name="address" value="">
+                                <input type="text" id="address" class="form-control" name="address"
+                                    value="{{ $user2->address }}">
                             </div>
 
                             <div class="col-sm-4">
                                 <label class="col-form-label text-nowrap">Zip Code</label>
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" id="zip" class="form-control" name="zip" value="">
+                                <input type="text" id="zip" class="form-control" name="zip"
+                                    value="{{ $user2->postal }}">
                             </div>
 
                             <div class="col-sm-4">
                                 <label class="col-form-label">City</label>
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" id="city" class="form-control" value="" name="city">
+                                <input type="text" id="city" class="form-control" value="{{ $user2->city }}"
+                                    name="city">
                             </div>
 
                         </div>

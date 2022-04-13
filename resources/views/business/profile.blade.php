@@ -140,31 +140,24 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                                 <div class="form-check">
                                     <div class="checkbox">
                                         <input name="coffee" type="checkbox" id="checkbox1" class="form-check-input"
-                                            @php $type = Auth::guard('user2')->user()->type;
-
-                                            if (str_contains($type, 'coffee')) {
-                                                echo 'checked';
-                                            }
-                                            @endphp>
+                                            @if (str_contains(Auth::guard('user2')->user()->type, 'coffee')) {
+                                                checked
+                                            @endif>
                                         <label for="checkbox1">Coffee</label>
 
                                     </div>
                                     <div class="checkbox">
                                         <input type="checkbox" name="food" id="checkbox1" class="form-check-input"
-                                            @php
-                                            if (str_contains($type, 'food')) {
-                                                echo 'checked';
-                                            }
-                                            @endphp>
+                                            @if (str_contains(Auth::guard('user2')->user()->type, 'food'))
+                                                checked
+                                            @endif>
                                         <label for="checkbox1">Food</label>
                                     </div>
                                     <div class="checkbox">
                                         <input name="drinks" type="checkbox" id="checkbox1" class="form-check-input"
-                                            @php
-                                            if (str_contains($type, 'drinks')) {
-                                                echo 'checked';
-                                            }
-                                            @endphp>
+                                            @if (str_contains(Auth::guard('user2')->user()->type, 'drinks'))
+                                                checked
+                                            @endif>
                                         <label for="checkbox1">Drinks</label>
                                     </div>
                                 </div>
@@ -297,12 +290,24 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                     <div class="card-header">
                         <h4 class="card-title">Menu</h4>
                     </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload a menu here</label>
-                            <input class="form-control" type="file" id="formFile">
+                    <form method="POST" action="/profile" class="col-md-12 " enctype="multipart/form-data">
+                        @csrf
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload a menu here</label>
+                                <input class="form-control @error('menu') is-invalid @enderror" type="file" id="menu" name="menu"
+                                    id="formFile">
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('menu')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <a href="/profile/menu" name="menuForm" class="btn btn-info me-1 mb-1" target="_blank">Open</a>
+                            <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload new</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
 
@@ -312,8 +317,12 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                         <h4 class="card-title">Location</h4>
                     </div>
                     <div class="card-body">
-                        <iframe src="https://maps.google.com/maps?q=CUT%20cyprus&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                            frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                    <iframe src = "https://maps.google.com/maps?q={{Auth::guard('user2')->user()->lat}},{{Auth::guard('user2')->user()->long}}&hl=es;z=14&amp;output=embed"
+                                            frameborder="0" style="border:0; width: 100%; height: 290px;"
+                                             loading="lazy"
+                                             referrerpolicy="no-referrer-when-downgrade"
+                                            allowfullscreen>
+                                            </iframe>
                     </div>
                 </div>
 

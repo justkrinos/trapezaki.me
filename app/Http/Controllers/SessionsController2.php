@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User2;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+
+
 //For USER2
 class SessionsController2 extends Controller
 {
@@ -98,6 +101,35 @@ class SessionsController2 extends Controller
 
             return redirect('/profile')->with("success", "Your password has been updated");
         }
+        else if(request()->has('menuForm'))
+        {
+            $validatedData = request()->validate([
+                'menu' => "required|mimes:pdf|max:10000"
+            ]);
+
+            $id = Auth::guard('user2')->user()->id;
+            $oldMenu = Auth::guard('user2')->user()->menu;
+
+            $menuName = time() . strval($id) . uniqid() . '.' . request()->file('menu')->extension();
+            request()->file('menu')->move(public_path('assets/menus/'), $menuName);
+
+            File::delete('assets/menus/' . $oldMenu);
+
+
+            $user = User2::where("id", $id)->first();
+            $user->menu =$menuName;
+            $user->save();
+
+            return back()->with("success", "The Menu has been uploaded successfully");
+        }
+    }
+
+    public function showMenu(){
+        $menu = Auth::guard('user2')->user()->menu;
+        $file = File::get(public_path('assets/menus/') . $menu);
+        $response = Response::make($file, 200);
+        $response->header('Content-Type', 'application/pdf');
+        return $response;
     }
 
     //Function gia xrisi mesa sto object pu kamni format to type (food coffe drinks)
@@ -173,7 +205,7 @@ class SessionsController2 extends Controller
         //To prevent session fixation (stealing session IDs)
         session()->regenerate();
 
-        return redirect('/manage-reservations')->withInput()->with('success','Welcome back!');
+        return redirect('/manage-reservations')->withInput()->with('success','Welcome!');
 
     }
 

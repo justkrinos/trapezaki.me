@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User2;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+
 
 class ManageBusinessController extends Controller
 {
     public function edit(Request $request)
     {
-        if(request()->has('form1'))
+        if(request()->has('businessInfo'))
         {
 
             $request['tags'] = $this->tagsToArray(request()['tags']);
@@ -53,6 +56,24 @@ class ManageBusinessController extends Controller
         else if(request()->has('form2'))
         {
             //TODO
+        }
+        else if(request()->has('menuForm'))
+        {
+            $validatedData = request()->validate([
+                'id' => "required",
+                'menu' => "required|mimes:pdf|max:10000"
+            ]);
+
+
+            $menuName = time() . strval($validatedData['id']) . uniqid() . '.' . request()->file('menu')->extension();
+            request()->file('menu')->move(public_path('assets/menus/'), $menuName);
+
+            $user = User2::where("id", $validatedData['id'])->first();
+
+            $user->menu =$menuName;
+            $user->save();
+
+            return back()->with("success", "The Menu has been uploaded successfully");
         }
         //An thelw na allaksw to status
         else if(request()->has('action'))
@@ -138,5 +159,13 @@ class ManageBusinessController extends Controller
         //Stelnw pisw  to array p ekama
         //gia na to valw mesto request mou gia na ginei to validate
         return $tags;
+    }
+
+    public function getMenu(User2 $user2)
+    {
+        $file = File::get(public_path('assets/menus/') . $user2->menu);
+        $response = Response::make($file, 200);
+        $response->header('Content-Type', 'application/pdf');
+        return $response;
     }
 }

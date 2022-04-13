@@ -35,6 +35,7 @@ class CreateUser2sTable extends Migration
 
             $table->tinyInteger('res_range')->nullable();
             $table->smallInteger('duration')->nullable();
+            $table->string('menu');
 
             $table->text('description')->nullable();
 

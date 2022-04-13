@@ -4,7 +4,7 @@
         <div class="user-menu d-flex">
 
             <div class="user-name text-end me-3">
-                <h6 class="mb-0 text-blue">{{Auth::guard('user2')->user()->company_name;}}</h6>
+                <h6 class="mb-0 text-blue">{{Auth::guard('user2')->user()->business_name;}}&nbsp&nbsp<i class="arrow down" ></i></h6>
             </div>
 
         </div>

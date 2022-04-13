@@ -11,6 +11,20 @@
     line-height: .75
 }
 
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+    bottom: 2px
+  }
+
 .alert .alert-heading, .alert .alert-heading+p {
     margin-left: .4rem
 }
@@ -917,12 +931,12 @@
     padding: 2rem 2rem 1rem;
     font-size: 2rem;
     font-weight: 700;
-    margin-left: auto;  
-    margin-right: auto;  
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .sidebar-wrapper .sidebar-header img {
-    height: 9rem;   
+    height: 9rem;
 }
 
 .sidebar-wrapper .sidebar-toggler.x {

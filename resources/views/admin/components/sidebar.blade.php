@@ -3,10 +3,9 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-center">
                 <div class="logo">
-                    <a href="/"><img src="/assets/images/logo/logo.png" alt="Trapezaki"
-                            srcset=""></a>
+                    <a href="/"><img src="/assets/images/logo/logo.png" alt="Trapezaki" srcset=""></a>
                 </div>
-{{-- TODO: to logout button ennen toso emfanes, na sasei --}}
+                {{-- TODO: to logout button ennen toso emfanes, na sasei --}}
 
 
                 <div class="toggler">
@@ -16,37 +15,34 @@
         </div>
 
         <div class="sidebar-menu">
-            @include("admin.components.login-info")
+            @include('admin.components.login-info')
         </div>
 
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-title" style="font-weight: bold;  text-decoration: underline;">MENU</li>
 
-                <li class="sidebar-item
-                @if( request()->route()->uri === "manage-customers")
-                active
-                @endif
+                <li
+                    class="sidebar-item
+                @if (request()->route()->uri === 'manage-customers') active @endif
                 ">
                     <a href="/manage-customers" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Manage Customers</span>
                     </a>
                 </li>
-                <li class="sidebar-item
-                @if( request()->route()->uri === "pending-requests")
-                active
-                @endif
+                <li
+                    class="sidebar-item
+                @if (request()->route()->uri === 'pending-requests') active @endif
                 ">
                     <a href="/pending-requests" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Pending Requests</span>
                     </a>
                 </li>
-                <li class="sidebar-item
-                @if( request()->route()->uri === "issues")
-                active
-                @endif
+                <li
+                    class="sidebar-item
+                @if (request()->route()->uri === 'issues') active @endif
                 ">
                     <a href="/issues" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>

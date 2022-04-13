@@ -35,7 +35,7 @@ class User1Controller extends Controller
 
             //To prevent session fixation (stealing session IDs)
         session()->regenerate();
-        return redirect('/manage-customers')->withInput()->with('success','Welcome back!');
+        return redirect('/manage-customers')->withInput()->with('success','Welcome!');
 
 
     }
