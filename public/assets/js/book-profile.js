@@ -97,7 +97,7 @@ $(document).ready(function () {
                 //if success then continue
                 if (result === 'success'){
                     var business = $('#btnPop').attr("user")
-                    window.location.href = "/" + business + "/book";
+                    window.location.href = "/user/" + business + "/book";
                 }
             },
 
