@@ -54,7 +54,7 @@ class EmailController extends Controller
 
     private function verify($user, $secret)
     {
-        if (!$user || !strcmp($secret, $user->verification_code)) {
+        if (!$user || strcmp($secret, $user->verification_code)) {
             return abort(404);
         } else {
             $user->is_verified = 1;

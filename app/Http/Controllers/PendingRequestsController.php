@@ -44,6 +44,7 @@ class PendingRequestsController extends Controller
             if($user2){
                 $user2->deletePhotos();
                 $user2->floorPlan->delete();
+                $user2->deleteMenu();
                 $user2->detag();
                 $user2->delete();
                 return 'success';
