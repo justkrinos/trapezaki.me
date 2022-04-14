@@ -11,12 +11,14 @@ toast = Toastify({ // kamnw ena toast na exume gia meta
     backgroundColor: "#3cc2b4",
 })
 
+username = $('#username').attr('user')
 
 
 $('.clear').click(function () {
     canvas.clear();
     initCanvas();
-    //TODO: WARNING Reservations ENA XATHUN
+    //TODO: -WARNING Reservations ENA XATHUN
+    //      -j na men bori na to kamei an eshi locked trapezia
 })
 
 var floorplan
@@ -50,6 +52,17 @@ $('#save').click(function () {
         'isGroupped'
     ])
 
+    //Vale ulla ta table mesa se ena array
+    tablesArray = []
+
+    //Gia kathe table kame ena json object
+    floorplan.objects.forEach(object => {
+        tablesArray.push({
+            'table_no': object.number,
+            'capacity': parseInt(object.capacity)
+        })
+    })
+
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
@@ -60,16 +73,19 @@ $('#save').click(function () {
         url: "/user/" + username + "/floor-plan",
         method: 'post',
         data: {
-            'floorplan': JSON.stringify(floorplan)
+            'floorplan': JSON.stringify(floorplan),
+            'tables' : tablesArray
         },
 
         success: function (result) {
             toast.options.text = "Your changes have been saved successfully!"
             toast.showToast()
+            console.log(result)
         },
         error: function (err) {
             toast.options.text ='Oops! Something went wrong :('
             toast.showToast()
+            console.log(err);
         }
     });
     // console.log('export done')
@@ -78,7 +94,7 @@ $('#save').click(function () {
 $('.export').click(function(){
     toast.options.text = "File exported, check your downloads!"
     toast.showToast()
-   saveJSON(floorplan, 'floorplan.json')
+   downloadJSON(floorplan, 'floorplan.json')
 })
 
 
@@ -145,6 +161,7 @@ function recreateGrouppedObjects(obj, notpulled) {
     const g = new fabric.Group([o, t], {
         left: obj.left,
         top: obj.top,
+        capacity: obj.capacity,
         centeredRotation: obj.centeredRotation,
         snapAngle: obj.snapAngle,
         selectable: obj.selectable,
@@ -162,7 +179,7 @@ function recreateGrouppedObjects(obj, notpulled) {
 }
 
 
-username = $('#username').attr('user')
+
 
 $(document).ready(function () {
     //CODE TO GET THE FLOORPLAN FROM DATABASE
@@ -196,7 +213,7 @@ $(document).ready(function () {
 
 
 //download file
-function saveJSON(data, filename) {
+function downloadJSON(data, filename) {
 
     if (!data) {
         console.error('No data')

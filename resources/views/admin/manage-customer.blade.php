@@ -349,107 +349,105 @@ $tags = $user2->tags->pluck('name')->toArray();
                             <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload</button>
                             <a href="/user/{{ $user2->username }}/menu" name="menuForm"
                                 class="btn btn-info me-1 mb-1" target="_blank">Open</a>
-
                         </div>
                     </div>
-            </div>
-            </form>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Floor Plan</h4>
-            </div>
-            <div class="card-body">
-                <button id="btnFloorPlan" username="{{ $user2->username }}" class="btn btn-info me-1 mb-1">Open
-                    Floor Plan Editor</Button>
-            </div>
-        </div>
-
-
-        <div class="card" href="#location">
-            <div class="card-header">
-                <h4 class="card-title">Location</h4>
+                </form>
             </div>
 
-            <div class="card-body">
-                <div class="col-md-6 col-12 mb-1">
-                    <input type="text" id="location" class="form-control round" name="location">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Floor Plan</h4>
+                </div>
+                <div class="card-body">
+                    <button id="btnFloorPlan" username="{{ $user2->username }}" class="btn btn-info me-1 mb-1">Open
+                        Floor Plan Editor</Button>
+                </div>
+            </div>
+
+
+            <div class="card" href="#location">
+                <div class="card-header">
+                    <h4 class="card-title">Location</h4>
                 </div>
 
-
-
-                <div class="form-group row">
-                    <div class="col-md-6 col-12 mb-2">
-                        <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                <div class="card-body">
+                    <div class="col-md-6 col-12 mb-1">
+                        <input type="text" id="location" class="form-control round" name="location">
                     </div>
 
-                    <div class="col-md-6 col-12">
 
-                        <div class="row flex">
-                            <div class="col-sm-2 col-2">
-                                <label class="col-form-label">Lat</label>
+
+                    <div class="form-group row">
+                        <div class="col-md-6 col-12 mb-2">
+                            <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+
+                            <div class="row flex">
+                                <div class="col-sm-2 col-2">
+                                    <label class="col-form-label">Lat</label>
+                                </div>
+                                <div class="col-md-4 col-4">
+                                    <input type="text" id="lat" class="form-control" value="{{ $user2->lat }}"
+                                        name="lat" disabled>
+                                </div>
+
+                                <div class="col-sm-2 col-2">
+                                    <label class="col-form-label">Long</label>
+                                </div>
+                                <div class="col-md-4 col-4">
+                                    <input type="text" id="long" class="form-control" value="{{ $user2->long }}"
+                                        name="long" disabled>
+                                </div>
+
                             </div>
-                            <div class="col-md-4 col-4">
-                                <input type="text" id="lat" class="form-control" value="{{ $user2->lat }}"
-                                    name="lat" disabled>
+
+                            <div class="col-sm-4">
+                                <label class="col-form-label">Address</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" id="address" class="form-control" name="address"
+                                    value="{{ $user2->address }}">
                             </div>
 
-                            <div class="col-sm-2 col-2">
-                                <label class="col-form-label">Long</label>
+                            <div class="col-sm-4">
+                                <label class="col-form-label text-nowrap">Zip Code</label>
                             </div>
-                            <div class="col-md-4 col-4">
-                                <input type="text" id="long" class="form-control" value="{{ $user2->long }}"
-                                    name="long" disabled>
+                            <div class="col-lg-6">
+                                <input type="text" id="zip" class="form-control" name="zip"
+                                    value="{{ $user2->postal }}">
                             </div>
 
-                        </div>
+                            <div class="col-sm-4">
+                                <label class="col-form-label">City</label>
+                            </div>
+                            <div class="col-lg-6">
+                                <input type="text" id="city" class="form-control" value="{{ $user2->city }}"
+                                    name="city">
+                            </div>
 
-                        <div class="col-sm-4">
-                            <label class="col-form-label">Address</label>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="address" class="form-control" name="address"
-                                value="{{ $user2->address }}">
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label class="col-form-label text-nowrap">Zip Code</label>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="zip" class="form-control" name="zip"
-                                value="{{ $user2->postal }}">
-                        </div>
-
-                        <div class="col-sm-4">
-                            <label class="col-form-label">City</label>
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="text" id="city" class="form-control" value="{{ $user2->city }}"
-                                name="city">
                         </div>
 
                     </div>
+
+
 
                 </div>
 
-
-
             </div>
-
         </div>
-    </div>
 
-    <footer>
-        <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
-    </footer>
+        <footer>
+            <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
+        </footer>
 
 
-    {{-- Photo Popup Modal --}}
-    <div id="photo-popup" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-    </div>
+        {{-- Photo Popup Modal --}}
+        <div id="photo-popup" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+        </div>
     </div>
     </div>
 
