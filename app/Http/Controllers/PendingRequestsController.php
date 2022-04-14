@@ -34,7 +34,7 @@ class PendingRequestsController extends Controller
                 //TODO: approve mono an en filled ulla ta data!
                     //sto manage customers na dixnei j ta pending j ta disabled j ta approved
                     //sto manage customer na dulefki to koumpi approve alla na dixni j tus pending
-                $user2->status = 1;
+                $user2->status = 2; //default na en disabled (pending=0, active=1, disabled=2)
                 $user2->save();
                 return 'success';
             }
