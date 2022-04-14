@@ -80,3 +80,6 @@ $(document).ready(function () {
         }
     });
 });
+
+
+//TODO: na sasun ta console logs j na mpei oops something went wrong ama eshi prob

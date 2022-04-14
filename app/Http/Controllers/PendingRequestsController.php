@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\User2;
 
+// TODO: an en kapios disabled prp na borei na kamei log in alla na tu fkalli me kapio tropo na kserei oti en disabled
+
 class PendingRequestsController extends Controller
 {
     public function show() {

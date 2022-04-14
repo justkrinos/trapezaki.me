@@ -45,6 +45,10 @@ class User2 extends Authenticatable implements MustVerifyEmail
         }
     }
 
+    public function deleteMenu(){
+        File::delete('assets/images/uploads/' . $this->menu); //delete file
+    }
+
     public function logo(){
         return $this->hasMany('App\Models\User2_Photo','user2_id','id')->where('photo_path', 'like', 'logo%')->get()->first()->photo_path;
     }
