@@ -9,6 +9,7 @@ use App\Models\Tag;
 
 $user_id = $user2->id;
 $tags = $user2->tags->pluck('name')->toArray();
+
 @endphp
 
 <head>
@@ -66,8 +67,7 @@ $tags = $user2->tags->pluck('name')->toArray();
                                         <div class="d-flex align-items-center conainer">
                                             <div class="avatar avatar-xl">
                                                 {{-- TOOD: fix this me tes photos --}}
-                                                <img src="../assets/images/uploads/{{ User2_Photo::where('user2_id', $user_id)->where('photo_path', 'like', 'logo%')->get()->first()->photo_path }}"
-                                                    alt="logo">
+                                                <img src="../assets/images/uploads/{{ $user2->logo() }}" alt="logo">
                                             </div>
                                             <div class="ms-3 name container">
                                                 <h5 class="font-bold">{{ $user2->business_name }}
@@ -77,23 +77,20 @@ $tags = $user2->tags->pluck('name')->toArray();
                                             </div>
                                             <div class="changeStatus">
 
-                                                <button class="btn btn-<?php if ($user2->status == 1) {
-    echo 'success';
-} else {
-    echo 'danger';
-} ?> dropdown-toggle me-1"
+                                                <button
+                                                    class="btn
+                                                @if ($user2->status == 1) btn-success
+                                                @else
+                                                    btn-danger @endif dropdown-toggle me-1"
                                                     type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
                                                     aria-haspopup="true" aria-expanded="false">
-                                                    <!-- Tuto na to allassei aftomata o server -->
-
-                                                    <?php if ($user2->status == 1) {
-                                                        echo 'Active';
-                                                    } elseif ($user2->status == 2) {
-                                                        echo 'Disabled';
-                                                    } else {
-                                                        echo 'Pending';
-                                                    }
-                                                    ?>
+                                                    @if ($user2->status == 1)
+                                                        Active
+                                                    @elseif ($user2->status == 2)
+                                                        Disabled
+                                                    @else
+                                                        Pending
+                                                    @endif
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                     <a id="cust-active" class="dropdown-item"
@@ -317,7 +314,6 @@ $tags = $user2->tags->pluck('name')->toArray();
                             <div class="invalid-feedback">
                                 <i id="upload-photo-error" class="bx bx-radio-circle"></i>
                             </div>
-
                         </form>
                         <div id="fileupload" class="mb-3"></div>
                         <div class="user_id" value="{{ $user_id }}"></div>
@@ -331,124 +327,129 @@ $tags = $user2->tags->pluck('name')->toArray();
                 <div class="card-header">
                     <h4 class="card-title">Menu</h4>
                 </div>
-                <form method="POST" action="/user/{{ $user2->username }}" class="col-md-12 " enctype="multipart/form-data">
+                <form method="POST" action="/user/{{ $user2->username }}" class="col-md-12 "
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="col-md-5">
+                        <div>
+                            {{-- TODO: na mpei username kalitera anti id --}}
                             <input type="hidden" id="id" name="id" class="form-control round"
                                 value="{{ $user2->id }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload a menu here</label>
-                            <input class="form-control @error('menu') is-invalid @enderror" type="file" name="menu"
-                                id="formFile">
-                            <div class="invalid-feedback">
-                                <i class="bx bx-radio-circle"></i>
-                                @error('menu')
-                                    {{ $message }}
-                                @enderror
+                            <div class="mb-3 col-md-5">
+                                <label for="formFile" class="form-label">Upload a menu here</label>
+                                <input class="form-control @error('menu') is-invalid @enderror" type="file" name="menu"
+                                    id="formFile">
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('menu')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
+                            <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload</button>
+                            <a href="/user/{{ $user2->username }}/menu" name="menuForm"
+                                class="btn btn-info me-1 mb-1" target="_blank">Open</a>
+
                         </div>
-                        <a href="/user/{{ $user2->username}}/menu" name="menuForm" class="btn btn-info me-1 mb-1" target="_blank">Open</a>
-                        <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload new</button>
                     </div>
-                </form>
             </div>
+            </form>
+        </div>
 
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Floor Plan</h4>
-                </div>
-                <div class="card-body">
-                    <button id="btnFloorPlan" username="{{ $user2->username }}" class="btn btn-info me-1 mb-1">Open
-                        Floor Plan Editor</Button>
-                </div>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Floor Plan</h4>
             </div>
-
-
-            <div class="card" href="#location">
-                <div class="card-header">
-                    <h4 class="card-title">Location</h4>
-                </div>
-
-                <div class="card-body">
-                    <div class="col-md-6 col-12 mb-1">
-                        <input type="text" id="location" class="form-control round" name="location">
-                    </div>
-
-
-
-                    <div class="form-group row">
-                        <div class="col-md-6 col-12 mb-2">
-                            <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
-                        </div>
-
-                        <div class="col-md-6 col-12">
-
-                            <div class="row flex">
-                                <div class="col-sm-2 col-2">
-                                    <label class="col-form-label">Lat</label>
-                                </div>
-                                <div class="col-md-4 col-4">
-                                    <input type="text" id="lat" class="form-control" value="{{ $user2->lat }}"
-                                        name="lat" disabled>
-                                </div>
-
-                                <div class="col-sm-2 col-2">
-                                    <label class="col-form-label">Long</label>
-                                </div>
-                                <div class="col-md-4 col-4">
-                                    <input type="text" id="long" class="form-control" value="{{ $user2->long }}"
-                                        name="long" disabled>
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label class="col-form-label">Address</label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" id="address" class="form-control" name="address"
-                                    value="{{ $user2->address }}">
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label class="col-form-label text-nowrap">Zip Code</label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" id="zip" class="form-control" name="zip"
-                                    value="{{ $user2->postal }}">
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label class="col-form-label">City</label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" id="city" class="form-control" value="{{ $user2->city }}"
-                                    name="city">
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-
+            <div class="card-body">
+                <button id="btnFloorPlan" username="{{ $user2->username }}" class="btn btn-info me-1 mb-1">Open
+                    Floor Plan Editor</Button>
             </div>
         </div>
 
-        <footer>
-            <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
-        </footer>
+
+        <div class="card" href="#location">
+            <div class="card-header">
+                <h4 class="card-title">Location</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="col-md-6 col-12 mb-1">
+                    <input type="text" id="location" class="form-control round" name="location">
+                </div>
 
 
-        {{-- Photo Popup Modal --}}
-        <div id="photo-popup" class="modal">
-            <span class="close">&times;</span>
-            <img class="modal-content" id="img01">
+
+                <div class="form-group row">
+                    <div class="col-md-6 col-12 mb-2">
+                        <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                    </div>
+
+                    <div class="col-md-6 col-12">
+
+                        <div class="row flex">
+                            <div class="col-sm-2 col-2">
+                                <label class="col-form-label">Lat</label>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <input type="text" id="lat" class="form-control" value="{{ $user2->lat }}"
+                                    name="lat" disabled>
+                            </div>
+
+                            <div class="col-sm-2 col-2">
+                                <label class="col-form-label">Long</label>
+                            </div>
+                            <div class="col-md-4 col-4">
+                                <input type="text" id="long" class="form-control" value="{{ $user2->long }}"
+                                    name="long" disabled>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="col-form-label">Address</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="address" class="form-control" name="address"
+                                value="{{ $user2->address }}">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="col-form-label text-nowrap">Zip Code</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="zip" class="form-control" name="zip"
+                                value="{{ $user2->postal }}">
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="col-form-label">City</label>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" id="city" class="form-control" value="{{ $user2->city }}"
+                                name="city">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
         </div>
+    </div>
+
+    <footer>
+        <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
+    </footer>
+
+
+    {{-- Photo Popup Modal --}}
+    <div id="photo-popup" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
     </div>
     </div>
 
