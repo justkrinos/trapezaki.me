@@ -167,7 +167,7 @@ $tags = $user2->tags->pluck('name')->toArray();
                                 </div>
                                 <div class="checkbox">
                                     <input name="drinks" type="checkbox" id="checkbox1" class="form-check-input"
-                                        @if (str_contains($user2->type, 'drinks')) checked; @endif>
+                                        @if (str_contains($user2->type, 'drinks')) checked @endif>
                                     <label for="checkbox1">Drinks</label>
                                 </div>
                             </div>

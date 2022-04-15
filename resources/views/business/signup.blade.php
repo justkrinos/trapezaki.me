@@ -396,7 +396,6 @@
                                     <div class="col-md-6 col-12">
                                         <div class="card-header">
                                             <h6 class="h6">Tags</h6>
-                                            <label for="tags">Use , to seperate them e.g souvlakia, beer, ...</label>
                                         </div>
                                         <div class="card-body">
                                             <section class="multiple-choices">
@@ -404,9 +403,9 @@
                                                     <div class="col-12">
                                                         <div class="card">
                                                             <div class="row">
-                                                                <div class="col-md-7">
+                                                                <div class="col-md-7 col-8">
                                                                     @csrf
-                                                                    <input name="tags" id="tags" data-role="tagsinput"
+                                                                    <input name="tags" id="tags" data-role="tagsinput" placeholder="e.g souvlakia, beer, ..."
                                                                         class="@error('tags.*') is-invalid @enderror
                                                                         @error('tags') is-invalid @enderror">
 

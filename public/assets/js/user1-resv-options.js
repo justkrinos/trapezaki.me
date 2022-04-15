@@ -58,7 +58,7 @@ $('#save').click(function () {
     //Gia kathe table kame ena json object
     floorplan.objects.forEach(object => {
         tablesArray.push({
-            'id'      : 2,
+            'id'      : object.id,
             'table_no': object.number,
             'capacity': parseInt(object.capacity)
         })
@@ -75,7 +75,8 @@ $('#save').click(function () {
         method: 'post',
         data: {
             'floorplan': JSON.stringify(floorplan),
-            'tables' : tablesArray
+            'tables'   : tablesArray,
+            'save'     : true
         },
 
         success: function (result) {
@@ -84,9 +85,15 @@ $('#save').click(function () {
             console.log(result)
         },
         error: function (err) {
+         if(err.responseJSON.errors != undefined && err.responseJSON.errors.hasOwnProperty('tables')){
+                toast.options.text ='You must have at least one table!'
+                toast.showToast()
+        }else{
             toast.options.text ='Oops! Something went wrong :('
             toast.showToast()
-            console.log(err);
+        }
+        console.log(err)
+
         }
     });
     // console.log('export done')
