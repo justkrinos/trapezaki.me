@@ -260,7 +260,7 @@
 
                                 <div class="card-body mb-3">
                                     <div class="form-group col-md-5 col-12">
-                                        <label for="logo" class="form-label">Add Menu</label>
+                                        <label for="logo" class="form-label">Add Menu (.pdf)</label>
                                         <input class="form-control @error('menu') is-invalid @enderror" type="file"
                                             id="menu" name="menu" required>
                                         @error('menu')
@@ -396,6 +396,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="card-header">
                                             <h6 class="h6">Tags</h6>
+                                            <label for="tags">Use , to seperate them e.g souvlakia, beer, ...</label>
                                         </div>
                                         <div class="card-body">
                                             <section class="multiple-choices">
