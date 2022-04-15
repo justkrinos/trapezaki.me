@@ -58,6 +58,7 @@ $('#save').click(function () {
     //Gia kathe table kame ena json object
     floorplan.objects.forEach(object => {
         tablesArray.push({
+            'id'      : 2,
             'table_no': object.number,
             'capacity': parseInt(object.capacity)
         })

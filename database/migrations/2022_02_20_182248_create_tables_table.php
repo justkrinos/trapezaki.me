@@ -14,14 +14,14 @@ class CreateTablesTable extends Migration
     public function up()
     {
         Schema::create('tables', function (Blueprint $table) {
-            $table->foreignId('object_t_id')
-                ->unique()
+            $table->id();
+            $table->foreignId('user2_id')
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->smallInteger('table_no');
             $table->smallInteger('capacity');
-            
+
             $table->timestamps();
         });
     }

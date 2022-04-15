@@ -16,13 +16,13 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('pax');
-            $table->foreignId('object_t_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('table_id');//->constrained();//->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
             $table->time('time');
             $table->text('details');
             $table->smallInteger('attended');
             $table->foreignId('user3_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            
+
             $table->timestamps();
         });
     }

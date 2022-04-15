@@ -29,7 +29,7 @@ class FloorPlanController extends Controller
             'floorplan' => 'required',
             'tables'    => 'required|array|min:1',
             'tables.*'  => 'required',
-            // 'tables.*.id' => 'required|string', //TODO na men en string
+            'tables.*.id' => 'required|string', //TODO na men en string
             'tables.*.table_no' => 'required|numeric|min:1',
             'tables.*.capacity' =>   'required|numeric|min:2'
 
@@ -39,7 +39,12 @@ class FloorPlanController extends Controller
         $user2->floorPlan->json = $validatedData['floorplan'];
         $user2->floorPlan->save();
 
-         $user2->tables()->createMany($validatedData['tables']);
+        //BTW STA TABLES PU EN THA EXUN ID J ENNA PIASUN ID PRP NA TO KAMW
+        //MESA STON CONTROLLER NA TA DIA STO JSON FLOOR PLAN NA TA KAMI SAVE STO DB
+        //J MOLIS KAMW SAVE NA KAMNW REINITIALIZE TO FLOORPLAN STO VIEW GIA NA MPENNUN TA IDS
+
+
+        return $user2->tables()->updateOrCreateMany(['id'],$validatedData['tables']);
         //TODO: table number prp nan unique gia kathe user
         //TODO: jina p en exun ID mesto json na tus valw ta id tous afou ta dimiourgiso
 
