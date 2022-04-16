@@ -69,6 +69,8 @@
                                     <button class="btn btn-outline-secondary btn-sm export">Export</button>
                                     <button class="btn btn-outline-secondary btn-sm import">Import</button>
                                 </div>
+                                <pre id="contents"></pre>
+                                {{-- <input type="file" id="jsonUpload" hidden> --}}
                             </div>
 
                             <div class="form-group customer-menu" style="display: none;">
@@ -143,7 +145,6 @@
     </div>
 
     <span id="username" user="{{ $user2->username }}"></span>
-
 </body>
 
 

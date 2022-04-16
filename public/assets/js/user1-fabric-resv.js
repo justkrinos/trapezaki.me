@@ -240,7 +240,7 @@ function generateId() {
 }
 
 //Functions for adding elements
-function addRect(left, top, width, height, number) {
+function addRect(left, top, width, height, number, capacity) {
   const id = generateId()
   const o = new fabric.Rect({
     width: width,
@@ -257,9 +257,9 @@ function addRect(left, top, width, height, number) {
   })
 
   // num = NextTableNo()
-  const t = new fabric.IText(number.toString(), {
+  const t = new fabric.IText("No."+number.toString()+"\n Capacity: "+capacity.toString(), {
     fontFamily: 'Calibri',
-    fontSize: 14,
+    fontSize: 9,
     fill: '#fff',
     textAlign: 'center',
     originX: 'center',
@@ -282,7 +282,7 @@ function addRect(left, top, width, height, number) {
   canvas.add(g)
   return g
 }
-function addCircle(left, top, radius, number) {
+function addCircle(left, top, radius, number, capacity) {
   const id = generateId()
   const o = new fabric.Circle({
     radius: radius,
@@ -296,7 +296,7 @@ function addCircle(left, top, radius, number) {
   })
 
   // num = NextTableNo()
-  const t = new fabric.IText(number.toString(), {
+  const t = new fabric.IText("No."+number.toString()+"\n Capacity: "+capacity.toString(), {
     fontFamily: 'Calibri',
     fontSize: 14,
     fill: '#fff',
