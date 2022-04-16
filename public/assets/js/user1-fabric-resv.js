@@ -235,6 +235,7 @@ function NextTableNo() {
 
 
 //Function to generate an element ID, this might change when db is done
+//???
 function generateId() {
   return Math.random().toString(36).substr(2, 8)
 }
@@ -593,7 +594,7 @@ document.querySelectorAll('.remove')[0].addEventListener('click', function () {
       text: "You must select something to remove!",
       duration: 3000,
       close: true,
-      backgroundColor: "#4fbe87",
+      backgroundColor: "#b30511",
     }).showToast();
   }
   // }
