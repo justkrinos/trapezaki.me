@@ -49,31 +49,31 @@
                             <div class="form-group admin-menu justify-content-center">
                                 @csrf
                                 <div class="btn-group mb-1">
-                                    <button class="btn btn-primary btn-sm rectangle text-nowrap">+ &#9647;
+                                    <button class="btn btn-outline-primary btn-sm rectangle text-nowrap">+ &#9647;
                                         Table</button>
-                                    <button class="btn btn-primary btn-sm circle text-nowrap">+ &#9711; Table</button>
-                                    <button class="btn btn-primary btn-sm triangle" hidden>+ &#9651; Table</button>
-                                    <button class="btn btn-primary btn-sm chair text-nowrap" hidden>+ Chair</button>
-                                    <button class="btn btn-primary btn-sm bar" hidden>+ Bar</button>
-                                    <button class="btn btn-primary btn-sm wall text-nowrap">+ Wall</button>
+                                    <button class="btn btn-outline-primary btn-sm circle text-nowrap">+ &#9711; Table</button>
+                                    <button class="btn btn-outline-primary btn-sm triangle" hidden>+ &#9651; Table</button>
+                                    <button class="btn btn-outline-primary btn-sm chair text-nowrap" hidden>+ Chair</button>
+                                    <button class="btn btn-outline-primary btn-sm bar" hidden>+ Bar</button>
+                                    <button class="btn btn-outline-primary btn-sm wall text-nowrap">+ &#9646; Wall</button>
                                 </div>
                                 <div class="btn-group mb-1">
-                                    <button class="btn btn-danger btn-sm remove text-nowrap">Remove Selection</button>
-                                    <button class="btn btn-info btn-sm clear text-nowrap">Clear All</button>
+                                    <button class="btn btn-outline-danger btn-sm remove text-nowrap">@include('admin.components.delete-icon')</button>
+                                    <button class="btn btn-outline-danger btn-sm clear text-nowrap">Clear All</button>
                                 </div>
                                 <div class="btn-group mb-1">
-                                    <button class="btn btn-warning btn-sm customer-mode text-nowrap">Customer mode</button>
-                                    <button class="btn btn-success btn-sm save" id="save">Save</button>
+                                    <button class="btn btn-outline-warning btn-sm customer-mode text-nowrap">Customer mode</button>
+                                    <button class="btn btn-outline-success btn-sm save" id="save">Save</button>
                                 </div>
                                 <div class="btn-group mb-1">
-                                    <button class="btn btn-secondary btn-sm export">Export</button>
-                                    <button class="btn btn-secondary btn-sm import">Import</button>
+                                    <button class="btn btn-outline-secondary btn-sm export">Export</button>
+                                    <button class="btn btn-outline-secondary btn-sm import">Import</button>
                                 </div>
                             </div>
 
                             <div class="form-group customer-menu" style="display: none;">
                                 <div class="btn-group">
-                                    <button class="btn btn-warning btn-sm admin-mode">Admin mode</button>
+                                    <button class="btn btn-outline-warning btn-sm admin-mode">Admin mode</button>
                                 </div>
                             </div>
                         </div>

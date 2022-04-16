@@ -49,7 +49,9 @@ $('#save').click(function () {
         'number',
         'prototype',
         'visualType',
-        'isGroupped'
+        'isGroupped',
+        'scaleX',
+        'scaleY'
     ])
 
     //Vale ulla ta table mesa se ena array
@@ -57,11 +59,13 @@ $('#save').click(function () {
 
     //Gia kathe table kame ena json object
     floorplan.objects.forEach(object => {
+        if(object.visualType == "table"){
         tablesArray.push({
-            'id'      : object.id,
+            'id': object.id,
             'table_no': object.number,
             'capacity': parseInt(object.capacity)
         })
+        }
     })
 
     $.ajaxSetup({
@@ -75,34 +79,34 @@ $('#save').click(function () {
         method: 'post',
         data: {
             'floorplan': JSON.stringify(floorplan),
-            'tables'   : tablesArray,
-            'save'     : true
+            'tables': tablesArray,
+            'save': true
         },
 
         success: function (result) {
             toast.options.text = "Your changes have been saved successfully!"
             toast.showToast()
-            console.log(result)
+            // console.log(result)
         },
         error: function (err) {
-         if(err.responseJSON.errors != undefined && err.responseJSON.errors.hasOwnProperty('tables')){
-                toast.options.text ='You must have at least one table!'
+            if (err.responseJSON.errors != undefined && err.responseJSON.errors.hasOwnProperty('tables')) {
+                toast.options.text = 'You must have at least one table!'
                 toast.showToast()
-        }else{
-            toast.options.text ='Oops! Something went wrong :('
-            toast.showToast()
-        }
-        console.log(err)
+            } else {
+                toast.options.text = 'Oops! Something went wrong :('
+                toast.showToast()
+            }
+            console.log(err)
 
         }
     });
     // console.log('export done')
 })
 
-$('.export').click(function(){
+$('.export').click(function () {
     toast.options.text = "File exported, check your downloads!"
     toast.showToast()
-   downloadJSON(floorplan, 'floorplan.json')
+    downloadJSON(floorplan, 'floorplan.json')
 })
 
 
@@ -119,6 +123,7 @@ function loadFloorPlan(floorplan) {
         floorplan.objects.forEach(notpulled => {
             if (notpulled.id === obj.id && obj.id !== undefined) {
                 recreateGrouppedObjects(obj, notpulled)
+                // console.log(notpulled.objects[0])
             }
         })
     })
@@ -143,19 +148,36 @@ function loadFloorPlan(floorplan) {
 function recreateGrouppedObjects(obj, notpulled) {
 
     //Create the items using the old data
-    const o = new fabric.Rect({
-        width: notpulled.objects[0].width,
-        height: notpulled.objects[0].height,
-        fill: notpulled.objects[0].fill,
-        stroke: notpulled.objects[0].stroke,
-        strokeWidth: notpulled.objects[0].strokeWidth,
-        shadow: notpulled.objects[0].shadow,
-        originX: notpulled.objects[0].originX,
-        originY: notpulled.objects[0].originY,
-        centeredRotation: notpulled.objects[0].centeredRotation,
-        snapAngle: notpulled.objects[0].snapAngle,
-        selectable: notpulled.objects[0].selectable
-    })
+    var o
+
+    if (obj.type == "rect") {
+
+        o = new fabric.Rect({
+            width: notpulled.objects[0].width,
+            height: notpulled.objects[0].height,
+            fill: notpulled.objects[0].fill,
+            stroke: notpulled.objects[0].stroke,
+            strokeWidth: notpulled.objects[0].strokeWidth,
+            shadow: notpulled.objects[0].shadow,
+            originX: notpulled.objects[0].originX,
+            originY: notpulled.objects[0].originY,
+            centeredRotation: notpulled.objects[0].centeredRotation,
+            snapAngle: notpulled.objects[0].snapAngle,
+            selectable: notpulled.objects[0].selectable
+        })
+
+    } else if (obj.type == "circle") {
+        o = new fabric.Circle({
+            radius: notpulled.objects[0].radius,
+            fill: notpulled.objects[0].fill,
+            stroke: notpulled.objects[0].stroke,
+            strokeWidth: notpulled.objects[0].strokeWidth,
+            shadow: notpulled.objects[0].shadow,
+            originX: notpulled.objects[0].originX,
+            originY: notpulled.objects[0].originY,
+            centeredRotation: notpulled.objects[0].centeredRotation
+        })
+    }
 
     const t = new fabric.IText(notpulled.number.toString(), {
         fontFamily: notpulled.objects[1].fontFamily,
@@ -177,7 +199,9 @@ function recreateGrouppedObjects(obj, notpulled) {
         visualType: obj.visualType,
         number: notpulled.number,
         id: obj.id,
-        isGroupped: true
+        isGroupped: true,
+        scaleX: notpulled.scaleX,
+        scaleY: notpulled.scaleY
     })
 
     //Remove the black object that was pulled

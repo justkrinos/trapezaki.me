@@ -49,6 +49,8 @@ function initCanvas() {
   canvas = new fabric.Canvas('canvas')
   number = 1
   canvas.backgroundColor = backgroundColor
+  canvas.uniScaleTransform = true
+  canvas.uniformScaling = false
   // canvas.allow
   // canvas.allowTouchScrolling = false;
   canvas.selection = false;
@@ -59,9 +61,6 @@ function initCanvas() {
   canvas.on({
 
     'mouse:wheel': function (opt) {
-      if (opt.ctrlKey) {
-        alert('zooming');
-      }
       var delta = opt.e.deltaY;
       var zoom = canvas.getZoom();
       zoom *= 0.999 ** delta;
@@ -106,7 +105,6 @@ function initCanvas() {
     'selection:updated': function (o) {
       pausePanning = true;
       if (!adminMode) {
-        //console.log(o.selected[0]);
         $('#resvModal').modal('show');
         findTimeSlots();
       }
@@ -158,6 +156,7 @@ function initCanvas() {
           e.target.strokeWidth = e.target.strokeWidthUnscaled / e.target.scaleY
         }
       }
+      e.target.scaleY = e.target.scaleX
     },
     'object:moving': function (e) {
       snapToGrid(e.target)
@@ -265,6 +264,7 @@ function addRect(left, top, width, height, number) {
     originX: 'center',
     originY: 'center'
   })
+
   const g = new fabric.Group([o, t], {
     left: left,
     top: top,
