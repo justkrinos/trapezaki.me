@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@php
+    use App\Models\Reservation;
+    use App\Models\User3;
+    use App\Models\Table;
+@endphp
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,64 +89,39 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr class="resvPopup">
-                                                                <td id="resNum" hidden>24</td>
-                                                                <!-- Reservation number should be included but hidden gia na liturgisi me to modal -->
-                                                                <td class="time">18:00</td>
-                                                                <td class="text-bold-500">Santiago Alonso</td>
-                                                                <td>
-                                                                    <span class="people">3</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="attendance">0</span>
-                                                                </td>
-                                                                <td>#5</td>
-
-                                                            </tr>
-                                                            <tr class="resvPopup">
-                                                                <td class="time">20:00</td>
-                                                                <td class="text-bold-500">O Jiris M</td>
-                                                                <td>
-                                                                    <span class="people">3</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="attendance">0</span>
-                                                                </td>
-                                                                <td>#5</td>
-                                                            </tr>
-                                                            <tr class="resvPopup">
-                                                                <td class="time">18:14</td>
-                                                                <td class="text-bold-500">Kostis Palamas</td>
-                                                                <td>
-                                                                    <span class="people">3</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="attendance">0</span>
-                                                                </td>
-                                                                <td>#5</td>
-                                                            </tr>
-                                                            <tr class="resvPopup">
-                                                                <td class="time">12:00</td>
-                                                                <td class="text-bold-500">Nicholas Nichola</td>
-                                                                <td>
-                                                                    <span class="people">3</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="attendance">0</span>
-                                                                </td>
-                                                                <td>#5</td>
-                                                            </tr>
-                                                            <tr class="resvPopup">
-                                                                <td class="time">22:00</td>
-                                                                <td class="text-bold-500">Andreas Efstathiou</td>
-                                                                <td>
-                                                                    <span class="people">3</span>
-                                                                </td>
-                                                                <td>
-                                                                    <span class="attendance">0</span>
-                                                                </td>
-                                                                <td>#5</td>
-                                                            </tr>
+                                                            <input id="currentDate" type="hidden" value="">
+                                                            @foreach (App\Models\Reservation::all() as $reservation)
+                                                                {{--@if($reservation->date == )--}}
+                                                                <tr class="resvPopup">
+                                                                    <td id="resNum" hidden>{{ $reservation->id }}</td>
+                                                                    <!-- Reservation number should be included but hidden gia na liturgisi me to modal -->
+                                                                    <td class="time">{{ substr($reservation->time, 0, -3) }}</td>
+                                                                    <td class="customerName" class="text-bold-500" >{{ User3::find($reservation->user3_id)->full_name }}</td>
+                                                                    <td>
+                                                                        <span class="people">{{$reservation->pax}}</span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <span class="attendance">{{$reservation->attended}}</span>
+                                                                    </td>
+                                                                    <td>{{Table::find($reservation->table_id)->table_no}}</td>
+                                                                    <td class="details" hidden>
+                                                                        {{ $reservation->details }}
+                                                                    </td>
+                                                                    <td class="res_id" hidden>
+                                                                        {{ $reservation->id }}
+                                                                    </td>
+                                                                    <td class="table_no" hidden>
+                                                                        {{ Table::find($reservation->table_id)->table_no }}
+                                                                    </td>
+                                                                    <td class="phone" hidden>
+                                                                        {{ User3::find($reservation->user3_id)->phone }}
+                                                                    </td>
+                                                                    <td class="people" hidden>
+                                                                        {{ $reservation->pax }}
+                                                                    </td>
+                                                                </tr>
+                                                                {{--@endif--}}
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -180,7 +161,7 @@
                                                             <label class="input-group-text"
                                                                 for="issueBusiness">Reservation No.</label>
                                                             <label type="text" class="form-control"
-                                                                id="issueBusiness">35234</label>
+                                                                id="myresvBusiness">35234</label>
                                                         </div>
                                                     </div>
 
@@ -189,7 +170,7 @@
                                                             <label class="input-group-text"
                                                                 for="issueBusiness">Name</label>
                                                             <label type="text" class="form-control"
-                                                                id="issueBusiness">Efstathios Andreou</label>
+                                                                id="customerName">Efstathios Andreou</label>
                                                         </div>
                                                     </div>
 
@@ -198,7 +179,7 @@
                                                             <label class="input-group-text" for="issueBusiness">Phone
                                                                 Number</label>
                                                             <label type="text" class="form-control"
-                                                                id="issueBusiness">99081329</label>
+                                                                id="phone">99081329</label>
                                                         </div>
                                                     </div>
 
@@ -208,7 +189,7 @@
                                                                 for="issueType">Table</label>
                                                             <div class="col-4">
                                                                 <label type="text" class="form-control"
-                                                                    id="issueType">4</label>
+                                                                    id="myresvType">4</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,7 +201,7 @@
                                                                 <input type="number" id="attendance" min="0" max="4"
                                                                     class="form-control" value="0">
                                                             </div>
-                                                            <span class="input-group-text">/4</span>
+                                                            <span class="input-group-text" id="people">/4</span>
                                                         </div>
                                                     </div>
 
@@ -230,7 +211,7 @@
                                                                 <label class="input-group-text"
                                                                     for="issueImportance">Time</label>
                                                                 <label type="text" class="form-control"
-                                                                    id="issueImportance">18:00</label>
+                                                                    id="myresvTime">18:00</label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -239,7 +220,7 @@
                                                     <br>
                                                     <div class="card">
                                                         <h7 class="" for="issueTextArea">Description</h7>
-                                                        <label class="form-control" id="issueTextArea">The description
+                                                        <label class="form-control" id="myresvTextArea">The description
                                                             will be
                                                             written here and might be a long one but it doenst matter
                                                             because the lines can wrap and the modal can scroll down as
@@ -342,3 +323,6 @@
 <script src="assets/vendors/toastify/toastify.js"></script>
 
 @include('components.toasts')
+
+{{-- modal dependencies --}}
+<script src=../assets/js/manage-reservations-modal.js></script>

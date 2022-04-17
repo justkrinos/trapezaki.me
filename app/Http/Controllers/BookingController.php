@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use App\Models\Reservation;
 
 class BookingController extends Controller
 {
@@ -44,7 +45,7 @@ class BookingController extends Controller
             $phone = session()->get('phone');
             $email = session()->get('email');
 
-            session()->forget(['full_name', 'phone', 'email']);
+            // session()->forget(['full_name', 'phone', 'email']);
 
 
             $request = request()->merge([
@@ -59,10 +60,31 @@ class BookingController extends Controller
             ]);
 
         } else {
-            //TODO get data from user account if logged in
+            $user = Auth::guard('user3')->user();
+            $request = request()-> merge([
+                'user3_id' => $user->id,
+                'attended' => 0
+            ]);
+
+            $validatedData = $request->validate([
+                'date'=> 'required|date',
+                'time'=> 'required',
+                'table_id'=> 'required|numeric',
+                'details'=> 'string|max:200',
+                'user3_id' => "required",
+                'pax'=> 'required|numeric',
+                'attended' => 'required'
+            ]);
+
+            // return $validatedData;
+            
+            
+
+            $reservation = Reservation::create($validatedData);
+
+            return 'success';
         }
-
-
+    }
         //TODO na to kamume na dulefki
         //try{
         // $attributes = $request->validate(
@@ -87,9 +109,6 @@ class BookingController extends Controller
         //User3::create($attributes);
 
         //TODO na dulepsi j na ginete i kratisi
-
-        return request()->all();
-    }
 
 
     public function showMenu(User2 $user2)

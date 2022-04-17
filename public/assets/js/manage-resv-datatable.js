@@ -21,7 +21,7 @@ dataTable.on('datatable.sort', function(column, direction) {
     colorizeTable()
 
     //Epd an to valume poupote allou en tha kamnei meta pu sort
-    $(".resvPopup").click(function () { $("#issueModal").modal('show')})
+    $(document).on("click", ".resvPopup", () => { modalpop(); })
 });
 
 }

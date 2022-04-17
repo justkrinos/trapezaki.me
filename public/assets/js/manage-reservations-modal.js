@@ -1,0 +1,42 @@
+var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    $("#currentDate").html = date;
+    $("#mydate").change(function(){
+        date = $("#mydate").val();
+        console.log(date);
+    })
+
+    modalpop();
+
+
+function modalpop(){
+
+$("body").on("click", ".resvPopup", function() {
+    //alert();
+    //console.log($(".details").html())
+    //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
+    //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
+
+    $resv_details = $(this).children(".details").html();
+    $resv_id = $(this).children(".res_id").html();
+    $resv_table = $(this).children(".table_no").html();
+    $time = $(this).children(".time").html();
+    $customerName = $(this).children(".customerName").html();
+    $phone = $(this).children(".phone").html();
+    $people = $(this).children().children(".people").html();
+
+    $("#myresvTextArea").html($resv_details);
+    $("#myresvBusiness").html($resv_id);
+    $("#myresvType").html($resv_table);
+    $("#myresvTime").html($time);
+    $("#customerName").html($customerName);
+    $("#phone").html($phone);
+    $("#people").html("/"+$people);
+
+    $("#myresvModal").modal('show');
+
+})
+
+}
+
+
