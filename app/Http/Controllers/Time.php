@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-//Function to create time in minutes
+//Function to create time in minutes and string
 class Time extends Controller
 {
-    private int $time;
+    private int $intTime;
+    private string $strTime;
 
     public function __construct(string $t){
         $this->setTime($t);
@@ -14,13 +15,20 @@ class Time extends Controller
     public function setTime(string $t){
         $arr = explode(":",$t,2);
         if (count($arr) == 2){
-            $this->time = $arr[0]*60 + $arr[1];
+            $this->intTime = $arr[0]*60 + $arr[1];
+            $this->strTime = $t;
         }else{
-            $this->time = 0;
+            $this->intTime = 0;
+            $this->strTime= "";
         }
     }
 
     public function get(){
-        return $this->time;
+        return $this->intTime;
+    }
+
+    public function __toString()
+    {
+        return $this->strTime;
     }
 }
