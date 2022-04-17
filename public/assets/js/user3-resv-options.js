@@ -27,8 +27,6 @@ function loadFloorPlan(floorplan) {
     //      j to query na ginete mazi me tin imerominia
     //      nan dropdown 2 mexri 16
 
-    //- to date mesto modal na fiei
-
     //- mesto modal an en guest na dinxi ta stoixeia tu
     //    an den en guest na men ta dixnei
     //- na dixnei episis to description gia tin kratisi
@@ -51,15 +49,6 @@ function loadFloorPlan(floorplan) {
     //- j na kammei redirect se ena page pu na eshi reservation number
     //      j na lalei success j check your inbox
 
-
-
-
-
-
-
-    //TODO
-    //na men mporeis na epilekseis toixo gia kratisi
-    //ta kiklika trapezia na fenunte kiklika
 
     //TODO
     //na eshi kapia parameters kapio trapezi

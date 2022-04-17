@@ -31,10 +31,15 @@ class CreateUser2sTable extends Migration
 
             $table->string('type');
             $table->boolean('status')->default(false);
-            $table->timestamp('member_since')->nullable();
+            //Tuto iparxei sto created_at
+            //$table->timestamp('member_since')->nullable();
 
-            $table->tinyInteger('res_range')->nullable();
-            $table->smallInteger('duration')->nullable();
+
+            //TODO na men eshi default, na en nullable
+            //j na prp na ta allassei o admin
+            //note: to 90 simenei 1:30 wra
+            $table->tinyInteger('res_range')->default(30);///->nullable();
+            $table->smallInteger('duration')->default(90);//->nullable();
             $table->string('menu');
 
             $table->text('description')->nullable();
