@@ -14,11 +14,11 @@ class CreateDailySettingsTable extends Migration
     public function up()
     {
         Schema::create('daily_settings', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user2_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->tinyInteger('day_id');
             $table->smallInteger('time_min');
             $table->smallInteger('time_max');
-
             $table->timestamps();
         });
     }

@@ -63,4 +63,8 @@ class User2 extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\Table','user2_id','id');
     }
 
+    public function dailySetting(){
+        return $this->hasMany('App\Models\Daily_Setting');
+    }
+
 }
