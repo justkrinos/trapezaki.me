@@ -15,7 +15,7 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->foreignId('reservation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->decimal('rating');
+            $table->integer('rating');
 
             $table->timestamps();
         });
