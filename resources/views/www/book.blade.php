@@ -112,8 +112,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                         <div class="input-group">
                                             <label for="inputSlots">Availabiliy</label>
                                             <div id="inputSlots" class="input-group col-md-5">
-                                                <span id="timeSlots" class="form-control row-cols-6">
-                                                </span>
+                                                <span id="timeSlots" class="form-control row-cols-6"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -147,49 +146,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
 
 </html>
 
-<script> 
-    var book = document.getElementById("btnBook");
-    book.addEventListener('click', bookTable);
 
-    function bookTable()
-    {
-        alert();
-        var date = document.getElementById("mydate").value;
-        var time = document.getElementById("timeSlots").value;
-        var url = window.location.pathname;
-        var user = url.replace('/user/', '');
-        user = user.replace('/book/', '');
-        console.log(user);
-        console.log(canvas.getObjects.selected);
-        var table = document.getElementById("table").innerHTML;
-        var data = {
-            "date": date,
-            "time": time,
-            "user": user,
-            "table": table
-        };
-        console.log(data);
-        $.ajax({
-            type: "POST",
-            url: "/book",
-            data: data,
-            success: function(data) {
-                console.log(data);
-                if(data.status == "success")
-                {
-                    toastr.success(data.message);
-                    setTimeout(function(){
-                        window.location.href = "/";
-                    }, 2000);
-                }
-                else
-                {
-                    toastr.error(data.message);
-                }
-            }
-        });
-    }
-</script>
 
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

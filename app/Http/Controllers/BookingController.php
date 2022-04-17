@@ -57,6 +57,7 @@ class BookingController extends Controller
 
                 //TODO enna prp na kataxorite j to guest account sto table (see code pukatw p en commented)
             ]);
+
         } else {
             //TODO get data from user account if logged in
         }

@@ -139,5 +139,52 @@ $(document).ready(function () {
 
 })
 
+var book = document.getElementById("btnBook");
+book.addEventListener('click', bookTable);
 
+function bookTable()
+{
+    alert();
+    var date = document.getElementById("resv-date").value;
+    var time = document.getElementById("timeSlots").value;
+    var url = window.location.pathname;
+    var user = url.replace('/user/', '');
+    user = user.replace('/book/', '');
+    console.log(date)
+    console.log(user);
+    
+
+    var table = canvas.getActiveObject().id
+    console.log(table)
+    
+    var user3_id = document.getElementById("user3_id").innerHTML;
+    console.log(user3_id);
+    var data = {
+        "date": date,
+        "time": time,
+        "user": user,
+        "table": table,
+        "user3_id": user3_id,
+    };
+    console.log(data);
+    $.ajax({
+        type: "POST",
+        url: "/book",
+        data: data,
+        success: function(data) {
+            console.log(data);
+            if(data.status == "success")
+            {
+                toastr.success(data.message);
+                setTimeout(function(){
+                    window.location.href = "/";
+                }, 2000);
+            }
+            else
+            {
+                toastr.error(data.message);
+            }
+        }
+    });
+}
 
