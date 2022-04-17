@@ -22,7 +22,7 @@ $("#rateConfirm").click(function(){
     //TODO: checkdb first if its okay
 
     //Replace button with text "Rating added"
-    raterow.html("Rating added")
+    raterow.html("Completed")
 
     //Update the notification
     notification_update()
@@ -32,6 +32,12 @@ $("#rateConfirm").click(function(){
 })
 
 $(".resvPopup").click(function(){
+
+    $("#myresvNumber").html($(this).children(".resvID").html())
+    $("#myresvTable").html($(this).children(".resvTable").html())
+    $("#myresvPeople").html($(this).children(".resvPeople").html())
+    $("#myresvTime").html($(this).children(".resvTime").html())
+    $("#myresvDetails").html($(this).children(".resvDetails").html())
     $("#myresvModal").modal('show');
 })
 
@@ -58,13 +64,13 @@ function notification_update(){
         //Else turn to hidden
         $("#notification").hide()
     }
-    
+
 
 }
 
 //Rater spawn
 var rater = window.raterJs({
-    element: document.querySelector("#rating"), 
+    element: document.querySelector("#rating"),
     starSize: 42,
     rateCallback:function rateCallback(rating, done) {
         //This will be called when the rating is set
@@ -88,3 +94,36 @@ $("#rateConfirm").click(function(){
 $("#small").on('hidden.bs.modal', function(){
     rater.clear()
 })
+
+
+//TODO na ginete sort p tin arxi by date
+//j na liturgi to sorting tu date p to datatable
+let upcomingTable = document.querySelector('#upcomingTable');
+let dataTableUp = new simpleDatatables.DataTable(upcomingTable, {
+    searchable: false,
+    layout: {
+        top: "",
+    },
+    columns: [
+        {
+            select: 3,
+            type: "datetime",
+            format: "DD-MM-YYYY"
+        }
+    ]
+});
+
+let pasttable = document.querySelector('#pastTable');
+let dataTablePast = new simpleDatatables.DataTable(pasttable, {
+    searchable: false,
+    layout: {
+        top: "",
+    },
+    columns: [
+        {
+            select: 1,
+            type: "date",
+            format: "DD-MM-YYYY"
+        }
+    ]
+});
