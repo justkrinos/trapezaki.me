@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+@php
+    use App\Models\Reservation;
+    use App\Models\User2;
+    use App\Models\Table;
+@endphp
 
 <head>
     <meta charset="UTF-8">
@@ -90,47 +95,29 @@
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <tr class="resvPopup">
-                                                                                            <td>Bordello</td>
-                                                                                            <!-- Reservation number should be included but hidden gia na liturgisi me to modal -->
-                                                                                            <td class="time">18:00</td>
-                                                                                            <td><span
-                                                                                                    class="people">3</span>
-                                                                                            </td>
-                                                                                            <td>5/10/2022</td>
-                                                                                        </tr>
-                                                                                        <tr class="resvPopup">
-                                                                                            <td>Gwnia</td>
-                                                                                            <td class="time">20:00</td>
-                                                                                            <td> <span
-                                                                                                    class="people">10</span>
-                                                                                            </td>
-                                                                                            <td>13/3/2022</td>
-                                                                                        </tr>
-                                                                                        <tr class="resvPopup">
-                                                                                            <td>Sherlock's Home</td>
-                                                                                            <td class="time">18:14</td>
-                                                                                            <td> <span
-                                                                                                    class="people">5</span>
-                                                                                            </td>
-                                                                                            <td>25/3/2022</td>
-                                                                                        </tr>
-                                                                                        <tr class="resvPopup">
-                                                                                            <td>Pralina</td>
-                                                                                            <td class="time">16:00</td>
-                                                                                            <td> <span
-                                                                                                    class="people">4</span>
-                                                                                            </td>
-                                                                                            <td>3/1/2022</td>
-                                                                                        </tr>
-                                                                                        <tr class="resvPopup">
-                                                                                            <td>Theoria kai Praxi</td>
-                                                                                            <td class="time">22:00</td>
-                                                                                            <td> <span
-                                                                                                    class="people">5</span>
-                                                                                            </td>
-                                                                                            <td>19/1/2022</td>
-                                                                                        </tr>
+                                                                                        @foreach (App\Models\Reservation::all() as $reservation)
+                                                                                            @if($reservation->user3_id == Auth::guard('user3')->user()->id)
+                                                                                               
+                                                                                                <tr class="resvPopup">
+                                                                                                    <td>{{User2::find(Table::find($reservation->table_id)->user2_id)->business_name}}</td>
+                                                                                                    <td class="timeSlot">{{substr($reservation->time, 0, -3)}}</td>
+                                                                                                    <td>{{$reservation->pax}}</td>
+                                                                                                    <td>{{$reservation->date}}</td>
+                                                                                                    <td class="details" hidden>
+                                                                                                        {{ $reservation->details }}
+                                                                                                    </td>
+                                                                                                    <td class="res_id" hidden>
+                                                                                                        {{ $reservation->id }}
+                                                                                                    </td>
+                                                                                                    <td class="table_no" hidden>
+                                                                                                        {{ Table::find($reservation->table_id)->table_no }}
+                                                                                                    </td>
+                                                                                                    
+                                                                                                </tr>
+                                                                                            
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                        
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
@@ -300,7 +287,7 @@
                                                 <div class="input-group mb-4">
                                                     <label class="input-group-text" for="myresvImportance">Time</label>
                                                     <label type="text" class="form-control"
-                                                        id="myresvImportance">18:00</label>
+                                                        id="myresvTime">18:00</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -384,8 +371,13 @@
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 <script src="../assets/js/date-no-prev.js"></script>
 
+{{-- Reservation Modal Dependency --}}
+<script src="../assets/js/reservation_modal.js"></script>
+
 <!-- Rater Plugin -->
 <script src="../assets/vendors/rater-js/rater-js.js"></script>
 <script src="../assets/js/my-resv.js"></script>
 
 <script src="../assets/js/main-nosidepop.js"></script>
+
+

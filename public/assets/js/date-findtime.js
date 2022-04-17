@@ -26,7 +26,7 @@ function setTimeSlots($timeslots) {
         $timeslots.forEach($time => {
             //Create an element for each time slot
             $("#timeSlots").append(
-                "<input type=\"radio\" class=\"btn-check justify-content-center\" name=\"options\" id=\""
+                "<input type=\"radio\" onClick=\"getTime(this)\" class=\"btn-check justify-content-center\" name=\"options\" id=\""
                 + $time
                 + "\" autocomplete=\"off\"/><label class=\"btn btn-sm btn-outline-info m-1\" for=\""
                 + $time + "\">"
@@ -43,6 +43,12 @@ function setTimeSlots($timeslots) {
     }
 }
 
+function getTime(element)
+{
+    var a = element;
+    a.setAttribute("sel", "selected");
+}
+
 
 //FOR LATER USE ON SUBMITTING
 
@@ -56,3 +62,4 @@ function setTimeSlots($timeslots) {
 //     }
 //     document.querySelectorAll('#modal-table-id')[0].innerHTML = modalText
 //   })
+

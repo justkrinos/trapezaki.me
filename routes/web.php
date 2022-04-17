@@ -103,6 +103,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
+
     });
 
 

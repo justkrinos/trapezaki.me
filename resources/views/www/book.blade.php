@@ -39,6 +39,9 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
 
     <link rel="shortcut icon" href="/assets/images/logo/logo_small.png" type="image/x-icon">
 
+    {{-- Fancy input number dependency --}}
+    <link rel="stylesheet" href="/assets/css/input-number.css">
+
 </head>
 
 <body>
@@ -59,6 +62,8 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                     <div class="card-header">
                         @include('components.back-button')
                         <div class="container-fluid text-center">
+                            <h2>Notes</h2>
+                            <p>->Aman kamw select table je fiw pu to model, to sigkekrimeno enen selectable mexri na kamw select allo</p>
                             <h3 class="mb-4k mb-4">Select a Table</h3>
                             <div class="d-flex justify-content-center mb-2">
                                 <div class="col-md-6">
@@ -66,10 +71,22 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                         <div class="input-group col-sm-3">
                                             <button class="prev-day btn btn-outline-secondary btn-google"><i
                                                     class="bi bi-chevron-left" aria-hidden='true'></i></button>
-                                            <input type="date" class="form-control no-prev date-slide"
+                                            <input type="date" class="form-control no-prev date-slide @error('date') is-invalid @enderror" name="txtDate"
                                                 style="min-width: 66px;" id="resv-date">
+                                                <div class="invalid-feedback">
+                                                    @error('description')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </div>
                                             <button class='next-day btn btn-outline-secondary btn-google'><i
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>
+                                        </div>
+                                        <div class="input-group col-sm-3">
+                                            <h3 class="col-md-4">People</h3>
+                                            <div class="quantity">
+                                                
+                                                <input type="number" min="2" max="16" step="1" value="2" id="pax">
+                                              </div>
                                         </div>
                                     </div>
                                 </div>
@@ -107,12 +124,22 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                             <!-- body here-->
                             <div class="card-body container-fluid">
                                 <div class="row justify-content-center">
-
                                     <div class="col-md-10">
                                         <div class="input-group">
+                                            @csrf
                                             <label for="inputSlots">Availabiliy</label>
                                             <div id="inputSlots" class="input-group col-md-5">
                                                 <span id="timeSlots" class="form-control row-cols-6"></span>
+                                            </div>
+                                            <label class="mb-2" for="description">Description</label>
+                                            <div class="form-group col-12 justify-content-center mb-5">
+                                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}"
+                                                    rows="3" placeholder="To drink, to eat etc..."></textarea>
+                                                 <div class="invalid-feedback">
+                                                        @error('description')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
@@ -140,14 +167,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
     </div>
 
 </body>
-
-
-
-
 </html>
-
-
-
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
@@ -159,7 +179,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="/assets/js/date-findtime.js"></script>
 
+{{--Toast dependencies--}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
+<script src="/assets/js/extensions/toastify.js"></script>
+
+@include("components.toasts");
 
 <script src="/assets/js/user3-fabric-resv.js"></script>
 <script src="/assets/js/user3-resv-options.js"></script>
@@ -168,3 +192,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/assets/js/reservation-date.js"></script>
 
 <script src="/assets/js/main-noside.js"></script>
+
+{{-- Fancy input number dependency --}}
+<script src="/assets/js/input-number.js"></script>

@@ -139,51 +139,74 @@ $(document).ready(function () {
 
 })
 
+
 var book = document.getElementById("btnBook");
 book.addEventListener('click', bookTable);
 
 function bookTable()
 {
-    alert();
-    var date = document.getElementById("resv-date").value;
-    var time = document.getElementById("timeSlots").value;
+    var date = $("#resv-date")[0].value; 
+    var timeSlot = $('input[sel="selected"]').attr('id');
     var url = window.location.pathname;
-    var user = url.replace('/user/', '');
-    user = user.replace('/book/', '');
-    console.log(date)
-    console.log(user);
-    
-
+    url = url.replace("/user/", "");
+    url = url.replace("/book", "");
+    var username = url;
     var table = canvas.getActiveObject().id
-    console.log(table)
-    
-    var user3_id = document.getElementById("user3_id").innerHTML;
-    console.log(user3_id);
+    var description = document.getElementById("description").value;
+    var pax = document.getElementById("pax").value;
     var data = {
         "date": date,
-        "time": time,
-        "user": user,
-        "table": table,
-        "user3_id": user3_id,
+        "time": timeSlot,
+        "table_id": table,
+        "details": description,
+        "pax": pax
     };
     console.log(data);
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        }
+      });
+
     $.ajax({
         type: "POST",
-        url: "/book",
+        url: "/user/" + username + "book",
         data: data,
-        success: function(data) {
-            console.log(data);
-            if(data.status == "success")
-            {
-                toastr.success(data.message);
-                setTimeout(function(){
-                    window.location.href = "/";
-                }, 2000);
-            }
-            else
-            {
-                toastr.error(data.message);
-            }
+        success: function(success) {
+            console.log(success);
+            Toastify({ //an exw error fkale toast
+                text: 'Your reservation has been booked!',
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#3cc2b4",
+            }).showToast();
+        },
+        error: function(error) {
+            console.log(error);
+            Toastify({ //an exw error fkale toast
+                text: 'Oops! Something went wrong :(',
+                duration: 5000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#ba0b0b",
+            }).showToast();
+        
+            // if(success == "success")
+            // {
+            //     toast.success(data.message);
+            //     setTimeout(function(){
+            //         window.location.href = "/";
+            //     }, 2000);
+            // }
+            // else
+            // {
+            //     console.log("lathos");
+            //     toast.error(data.message);
+            // }
         }
     });
 }
