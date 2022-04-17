@@ -41,6 +41,7 @@ class FloorPlanController extends Controller
         $user2->floorPlan->json = $validatedData['floorplan'];
         $user2->floorPlan->save();
 
+        //TODO
         //STA TABLES PU EN THA EXUN ID J ENNA PIASUN ID PRP NA TO KAMW
         //MESA STON CONTROLLER NA TA DIA STO JSON FLOOR PLAN NA TA KAMI SAVE STO DB
         //J MOLIS KAMW SAVE NA KAMNW REINITIALIZE TO FLOORPLAN STO VIEW GIA NA MPENNUN TA IDS
