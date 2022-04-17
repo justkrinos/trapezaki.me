@@ -27,4 +27,8 @@ class User3 extends Authenticatable implements MustVerifyEmail
     public function setPasswordAttribute($password){
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function reservations(){
+        return $this->hasMany('App\Models\Reservation');
+    }
 }
