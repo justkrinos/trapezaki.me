@@ -23,7 +23,8 @@
     {{-- TODO:
         //-ta tags en dulefkun se mobile
         //-na fiei jino to komma sta tags j en spastiko
-
+        //- to location aman en kami signup j epistrepsei fkallei to sti thalassa
+        //- ta tags aman en mitsia kamni overflow to placeholder
      --}}
 
 </head>

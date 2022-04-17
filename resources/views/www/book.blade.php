@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{{-- TODO kapu to exume misokamoumeno tunto page but en to girepsa
+{{--
 TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
 TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
 
@@ -106,15 +106,6 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                             <!-- body here-->
                             <div class="card-body container-fluid">
                                 <div class="row justify-content-center">
-                                    <div class="col-sm-10">
-                                        <div class="flex-nowrap input-group col-md-5 mb-4">
-                                            <div class="input-group mb-3">
-                                                <label class="input-group-text" for="mydate">Date</label>
-                                                <input type="date" class="form-control popdate no-prev"
-                                                    style="min-width: 66px;" id="mydate">
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="col-md-10">
                                         <div class="input-group">

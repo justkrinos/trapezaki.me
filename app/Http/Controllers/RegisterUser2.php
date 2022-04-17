@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User2;
 use App\Models\User2_Photo;
+use App\Http\Controllers\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,7 +21,6 @@ class RegisterUser2 extends Controller
 
     public function create(Request $request)
     {
-
         //Split the tags (comma separated) into an array
         //using this object's private function
         $request['tags'] = $this->tagsToArray($request['tags']);
@@ -104,6 +104,21 @@ class RegisterUser2 extends Controller
         //Vallw ta tags mesto table mesw tou relationship me ton user2
         $user2->tag($tags);
         $user2->floorPlan->save();
+
+        //Create the default daily settings
+        //TODO tuta en prp nan default alla nan null
+        //j na prp na tu ta vali o admin gia na fiei pu pending
+        $maxTime = new Time("22:00");
+        $minTime = new Time("08:00");
+
+        for($day=1; $day<8; $day++){
+            $user2->dailySetting()->create([
+                'day_id' => $day,
+                'time_min' => $minTime->get(),
+                'time_max' => $maxTime->get()
+            ]);
+        }
+
 
         // TODO na sasun tuta ta static methods ew na ginun eloquent relationships
         //Save the photos using a new method i created in the User2_Photo model
