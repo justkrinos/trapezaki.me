@@ -17,9 +17,6 @@ function loadFloorPlan(floorplan) {
     canvas.renderAll();
     CustomerMode()
 
-<<<<<<< HEAD
-
-=======
     //TI PREPEI NA KAMUME
     //- sto book molis valis imerominia tha kamni
     //      kochina ta trapezia p en full j kanonika ta alla
@@ -31,7 +28,7 @@ function loadFloorPlan(floorplan) {
     //      nan dropdown 2 mexri 16
 
     //- to date mesto modal na fiei
-    
+
     //- mesto modal an en guest na dinxi ta stoixeia tu
     //    an den en guest na men ta dixnei
     //- na dixnei episis to description gia tin kratisi
@@ -63,9 +60,8 @@ function loadFloorPlan(floorplan) {
     //TODO
     //na men mporeis na epilekseis toixo gia kratisi
     //ta kiklika trapezia na fenunte kiklika
-    
+
     //TODO
->>>>>>> be521c0332158c0de34a2b7b03392b515cb043e5
     //na eshi kapia parameters kapio trapezi
     //analoga an eshi kratisi na men bori na taraksi nan locked
     //na checkari o server prin ta vali mesa an e taraksan
