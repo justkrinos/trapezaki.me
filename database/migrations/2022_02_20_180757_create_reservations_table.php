@@ -18,9 +18,9 @@ class CreateReservationsTable extends Migration
             $table->smallInteger('pax');
             $table->foreignId('table_id');//->constrained();//->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
-            $table->time('time');
+            $table->integer('time'); //integer gia na mporw efkola na to sigkrinw
             $table->text('details');
-            $table->smallInteger('attended');
+            $table->smallInteger('attended')->default(0);
             $table->foreignId('user3_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
