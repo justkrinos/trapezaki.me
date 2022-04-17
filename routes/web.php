@@ -15,6 +15,7 @@ use App\Http\Controllers\SessionsController2;
 use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\ManageBusinessController;
 use App\Http\Controllers\PendingRequestsController;
+use App\Http\Controllers\MyReservationsController;
 use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User3;
@@ -120,9 +121,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         Route::post('/profile', [SessionsController::class, 'edit']);
 
-        Route::get('/my-reservations', function () {
-            return view('www.reservations');
-        });
+        Route::get('/my-reservations', [MyReservationsController::class,'show']);
     });
 });
 

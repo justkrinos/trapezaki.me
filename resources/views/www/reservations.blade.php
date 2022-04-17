@@ -17,6 +17,9 @@
 
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
 
+    {{-- Datatable Css Include --}}
+    <link rel="stylesheet" href="/assets/vendors/simple-datatables/style.css">
+
     <!-- Rater Stylesheet-->
     <link rel="stylesheet" href="/assets/vendors/rater-js/style.css">
 
@@ -28,7 +31,7 @@
 
 <body>
     <div id="app">
-    {{-- TODO: na mpoun popups gia ta ratings
+    {{-- TODO: na mpoun numbers gia ta ratings pending
     j pano sto username j sta list items tu
     j sto sidebar dipla gia ulla ta pages--}}
 
@@ -53,11 +56,7 @@
                                 <section class="section">
                                     <div class="row" id="table-hover-row">
                                         <div class="col-12">
-                                            <div class="card">
-                                                <div class="card-content">
-
                                                     <section class="section">
-
                                                         <div class="row">
                                                             <div class="card">
                                                                 <div class="card-body">
@@ -84,17 +83,17 @@
 
                                                                             <!-- table hover -->
                                                                             <div class="table-responsive">
-                                                                                <table class="table table-hover mb-0">
+                                                                                <table id="upcomingTable" class="table table-hover mb-0">
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th>Place</th>
                                                                                             <th>Time</th>
-                                                                                            <th>People</th>
                                                                                             <th>Date</th>
-                                                                                            <!-- Analogws me ti ena epileksei na tu fkallei to analogo text -->
+                                                                                            <th>People</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
+<<<<<<< HEAD
                                                                                         @foreach (App\Models\Reservation::all() as $reservation)
                                                                                             @if($reservation->user3_id == Auth::guard('user3')->user()->id)
                                                                                                
@@ -118,6 +117,19 @@
                                                                                             @endif
                                                                                         @endforeach
                                                                                         
+=======
+                                                                                    @foreach($upcomingReservations as $reservation)
+                                                                                        <tr class="resvPopup">
+                                                                                            <td class="resvID" hidden>{{$reservation->id}}</td>
+                                                                                            <td>{{ $reservation->user2->business_name }}</td>
+                                                                                            <td class="resvTime">{{$reservation->time}}</td>
+                                                                                            <td>{{$reservation->date}}</td>
+                                                                                            <td><span class="resvPeople">{{$reservation->pax}}</span></td>
+                                                                                            <td class="resvDetails" hidden>{{$reservation->details}}</td>
+                                                                                            <td class="resvTable" hidden>{{$reservation->table_id}}</td>
+                                                                                        </tr>
+                                                                                    @endforeach
+>>>>>>> 73615a1b69dfdca65a01c822d4edf01f1665779e
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
@@ -130,61 +142,40 @@
 
                                                                             <!-- table hover -->
                                                                             <div class="table-responsive">
-                                                                                <table class="table table-hover mb-0">
+                                                                                <table id="pastTable" class="table table-hover mb-0">
                                                                                     <thead>
                                                                                         <tr>
                                                                                             <th>Place</th>
                                                                                             <th>Date</th>
-                                                                                            <th>Rating</th>
+                                                                                            <th>Status</th>
                                                                                         </tr>
                                                                                     </thead>
                                                                                     <tbody>
-                                                                                        <tr id="8">
-                                                                                            <td>Bordello</td>
-                                                                                            <td>5/10/2022</td>
+                                                                                    @foreach($pastReservations as $reservation)
+                                                                                        <tr>
+                                                                                            <td>{{$reservation->user2->business_name}}</td>
+                                                                                            <td>{{$reservation->date}}</td>
                                                                                             <td>
+                                                                                            {{-- TODO: na checkarunte j ta cancellations --}}
+                                                                                            {{-- An den en cancelled j an den eshi rating tote vartu button --}}
+                                                                                            @if(!$reservation->rating && !$reservation->cancelled)
                                                                                                 <div
                                                                                                     class="col-md-5 col-12">
                                                                                                     <button
                                                                                                         class="btn text-nowrap btn-outline-info btn-sm btn-block rate">Rate
                                                                                                         Now!</button>
                                                                                                 </div>
+                                                                                            {{-- An en cancelled vartu oti en cancelled gt en prp na kami rate --}}
+                                                                                            @elseif($reservation->cancelled)
+                                                                                                Cancelled
+
+                                                                                            {{-- Aliws eshei rating ara ok --}}
+                                                                                            @else
+                                                                                                Completed
+                                                                                            @endif
                                                                                             </td>
                                                                                         </tr>
-                                                                                        <tr id="7">
-                                                                                            <td>Gwnia</td>
-                                                                                            <td>13/3/2022</td>
-                                                                                            <td>
-                                                                                                <div
-                                                                                                    class="col-md-5 col-12">
-                                                                                                    <button
-                                                                                                        class="btn text-nowrap btn-outline-info btn-sm btn-block rate">Rate
-                                                                                                        Now!</button>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        <tr id="6">
-                                                                                            <td>Sherlock's Home</td>
-                                                                                            <td>25/3/2022</td>
-                                                                                            <td>Rating added</td>
-                                                                                        </tr>
-                                                                                        <tr class="resvPopup">
-                                                                                            <td>Pralina</td>
-                                                                                            <td>3/1/2022</td>
-                                                                                            <td>Rating added</td>
-                                                                                        </tr>
-                                                                                        <tr id="5">
-                                                                                            <td>Theoria kai Praxi</td>
-                                                                                            <td>19/1/2022</td>
-                                                                                            <td>
-                                                                                                <div
-                                                                                                    class="col-md-5 col-12">
-                                                                                                    <button
-                                                                                                        class="btn text-nowrap btn-outline-info btn-sm btn-block rate">Rate
-                                                                                                        Now!</button>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                        </tr>
+                                                                                    @endforeach
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
@@ -237,6 +228,7 @@
                 </div>
                 <!-- rating modal end-->
 
+<<<<<<< HEAD
 
                 <!-- Reservation modal starts here-->
                 <div class="modal fade" id="myresvModal" tabindex="-1" role="dialog"
@@ -329,6 +321,9 @@
                     </div>
                 </div>
                 <!-- Reservation Modal Ends Here-->
+=======
+                @include('www.components.resv-modal')
+>>>>>>> 73615a1b69dfdca65a01c822d4edf01f1665779e
 
                 <!-- Confirmation modal starts here-->
                 <div class="modal fade text-left" id="confirmModal" tabindex="-1" role="dialog" data-bs-backdrop="false"
@@ -366,10 +361,14 @@
 
 </html>
 
+ {{-- Datatable Js Include  --}}
+<script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
+
+
+
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
-<script src="../assets/js/date-no-prev.js"></script>
 
 {{-- Reservation Modal Dependency --}}
 <script src="../assets/js/reservation_modal.js"></script>
