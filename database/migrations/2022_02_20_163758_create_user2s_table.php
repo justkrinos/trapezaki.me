@@ -31,7 +31,7 @@ class CreateUser2sTable extends Migration
 
             $table->string('type');
             $table->boolean('status')->default(false);
-            //Tuto iparxei sto created_at
+            //Tuto iparxei sto created_at TODO na allaksei sta docs
             //$table->timestamp('member_since')->nullable();
 
 
