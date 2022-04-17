@@ -107,19 +107,19 @@ function initCanvas() {
   canvas.on({
     'selection:created': function (o) {
       pausePanning = true;
-      if(!adminMode){
+      if(!adminMode && o.selected[0].visualType == "table"){
         $('#resvModal').modal('show');
         findTimeSlots();
         pausePanning=false;
       }
-      
+
     },
     'selection:cleared': function () {
       pausePanning = false;
     },
     'selection:updated': function (o) {
       pausePanning = true;
-      if(!adminMode){
+      if(!adminMode && o.selected[0].visualType == "table"){
         //console.log(o.selected[0]);
         $('#resvModal').modal('show');
         findTimeSlots();
@@ -180,21 +180,21 @@ function initCanvas() {
 
   function resizeCanvas() {
     const outerCanvasContainer = $('.fabric-canvas-wrapper')[0];
-    
+
     const ratio = canvas.getWidth() / canvas.getHeight();
     const containerWidth   = outerCanvasContainer.clientWidth;
     const containerHeight  = outerCanvasContainer.clientHeight;
-  
+
     const scale = containerWidth / canvas.getWidth();
     const zoom  = canvas.getZoom() * scale;
     canvas.setDimensions({width: containerWidth, height: containerWidth / ratio});
     canvas.setViewportTransform([zoom, 0, 0, zoom, 0, 0]);
   }
-  
-  
+
+
   $(window).resize(resizeCanvas);
-  
-  
+
+
   resizeCanvas();
 
 }
@@ -220,7 +220,7 @@ function NextTableNo() {
   let newtable = new Array
 
   //Get table elements from canvas
-  canvas.getObjects("table").filter(obj => obj.type === 'table').forEach(obj => {
+  canvas.getObjects("table").filter(obj => obj.visualType === 'table').forEach(obj => {
     newtable.push(obj.number);
   })
 
@@ -482,7 +482,7 @@ function addWall(left, top, width, height) {
     originY: 'top',
     centeredRotation: true,
     snapAngle: 45,
-    selectable: true,
+    selectable: false,
     type: 'wall',
     id: generateId()
   })
@@ -553,13 +553,17 @@ function CustomerMode() {
     o.lockScalingY = true
     o.lockRotation = true
 
-    if (o.type === 'chair' || o.type === 'bar' || o.type === 'wall' || o.type === 'entrance'
-      || o.type === 'exit') {
+    if (o.visualType === 'chair' || o.visualType === 'bar' || o.visualType === 'wall' || o.visualType === 'entrance'
+      || o.visualType === 'exit') {
       o.selectable = false
+      o.hoverCursor = 'auto'
+    }else{
+      o.hoverCursor = 'pointer'
     }
+
     o.borderColor = '#38A62E'
     o.borderScaleFactor = 2.5
-    o.hoverCursor = ''
+
   })
   canvas.selection = false
   canvas.hoverCursor = 'pointer'

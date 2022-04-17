@@ -17,6 +17,7 @@ function loadFloorPlan(floorplan) {
     canvas.renderAll();
     CustomerMode()
 
+
     //na eshi kapia parameters kapio trapezi
     //analoga an eshi kratisi na men bori na taraksi nan locked
     //na checkari o server prin ta vali mesa an e taraksan
