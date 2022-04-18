@@ -45,19 +45,51 @@ class BookingController extends Controller
             $phone = session()->get('phone');
             $email = session()->get('email');
 
+
+            //TODO: na gini uncomment tuto
             // session()->forget(['full_name', 'phone', 'email']);
 
 
-            $request = request()->merge([
+            $request = request()-> merge([
                 'guest' => 1,
                 'username'  => "guest-" . mt_rand(1000000000, 9999999999) . strval(User3::max('id') + 1),
                 'password'  => bcrypt(uniqid() . strval(mt_rand(1000000, 9999999)) . uniqid()),
                 'full_name' => $fullname,
                 'phone'     => $phone,
                 'email'     => $email,
-
-                //TODO enna prp na kataxorite j to guest account sto table (see code pukatw p en commented)
             ]);
+
+            $attributes = $request->validate([
+                'full_name' => 'required|max:50|min:3',
+                'phone' => 'required|digits_between:8,13|numeric',
+                'email' => 'required|email|max:100',
+                'guest' => 'required',
+                'username' => 'required',
+                'password' => 'required'
+            ]);
+
+            $guest = User3::where('email',$attributes['email'])->where('guest',1)->first();
+
+            //Check an iparxi idi guest me tuto to email j kame update ta data tou if yes
+            if($guest){
+                $guest->update($attributes);
+            }else{
+                $guest = User3::create($attributes);
+            }
+            
+
+            $validatedData = $request->validate([
+                'date'=> 'required|date',
+                'time'=> 'required',
+                'table_id'=> 'required|numeric',
+                'details'=> 'string|max:200',
+                'pax'=> 'required|numeric'
+            ]);
+
+            $reservation = $guest->reservations()->create($validatedData);
+            // $reservation['guest'] = 1;
+
+            return $reservation;
 
         } else {
             $user = Auth::guard('user3')->user();
@@ -78,12 +110,44 @@ class BookingController extends Controller
 
             // return $validatedData;
             
-            
+            unset($validatedData['user3_username']);
 
             $reservation = Reservation::create($validatedData);
-
-            return 'success';
+            
+            return $reservation;
         }
+    }
+
+    public function createBookUser2()
+    {
+        $user2 = Auth::guard('user2')->user();
+        //get data from the request if not logged in
+        //return (request());
+        
+            $request = request()-> merge([
+                'attended' => 0
+            ]);
+            
+           
+            $validatedData = $request->validate([
+                'user3_username' => 'required|max:50|min:3|exists:user3s,username',//
+                'date'=> 'required|date',
+                'time'=> 'required',
+                'table_id'=> 'required|numeric',
+                'details'=> 'string|max:200',
+                'pax'=> 'required|numeric',
+                'attended' => 'required'
+            ]);
+            
+
+            // return $validatedData;
+            $user3_id = User3::where('username', $validatedData['user3_username'])->first()->id;
+            $validatedData['user3_id'] = $user3_id;
+            unset($validatedData['user3_username']);
+            $reservation = Reservation::create($validatedData);
+            
+            return $reservation;
+        
     }
         //TODO na to kamume na dulefki
         //try{
