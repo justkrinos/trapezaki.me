@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 
 
-        $("#issueModal").modal('toggle');
+        $("#issueModal").modal('view');
     })
 
     $("#issueBusiness").click(function () {

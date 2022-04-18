@@ -6,14 +6,17 @@ function rand(min, max) { // min and max included
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+var timeSlots
+
 //Function to find time slots
 function findTimeSlots() {
+    getTimeSlots()
     //TODO fetch available time for date $('input[type=date]').val()
     $dummyData = { time: [rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00',] };
     // $dummyData = { time: []};
     $("#timeSlots").fadeOut('fast').promise().done(function () {
         $("#timeSlots").empty();
-        setTimeSlots($dummyData.time);
+        setTimeSlots(timeSlots);
         $("#timeSlots").fadeIn('slow')
     })
 
@@ -63,3 +66,42 @@ function getTime(element)
 //     document.querySelectorAll('#modal-table-id')[0].innerHTML = modalText
 //   })
 
+
+
+function getTimeSlots(){
+    table_id = canvas.getActiveObject().id
+    date = $("#resv-date")[0].value;
+    var data = {
+        "date": date,
+        "table_id": table_id,
+    };
+    console.log(data);
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        }
+      });
+
+    $.ajax({
+        type: "GET",
+        url: "/api/" + username + "/time-slots",
+        data: {
+            'table_id': table_id,
+            'date': date
+        },
+        success: function(success) {
+            timeSlots = success
+        },
+        error: function(error) {
+            console.log(error);
+            Toastify({ //an exw error fkale toast
+                text: 'Oops! Something went wrong :(',
+                duration: 5000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#ba0b0b",
+            }).showToast();
+        }
+    });
+}

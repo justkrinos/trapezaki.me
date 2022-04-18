@@ -2,28 +2,28 @@
 // https://github.com/fiduswriter/Simple-DataTables/wiki/
 
 function data_resv(){
-let table = document.querySelector('#resTable');
-let dataTable = new simpleDatatables.DataTable(table, {
-    searchable: false,
-    layout: {
-        top: "",
-    },
-    columns: [
-        {
-            select: 1,
-            type: "date",
-            format: "DD/MM/YYYY"
-        }
-    ]
-});
+    let table = document.querySelector('#resTable');
+    let dataTable = new simpleDatatables.DataTable(table, {
+        searchable: false,
+        layout: {
+            top: "",
+        },
+        columns: [
+            {
+                select: 1,
+                type: "date",
+                format: "DD/MM/YYYY"
+            }
+        ]
+    });
 
-dataTable.on('datatable.sort', function(column, direction) {
-    colorizeTable()
+    dataTable.on('datatable.sort', function(column, direction) {
+        colorizeTable()
+    });
 
-    //Epd an to valume poupote allou en tha kamnei meta pu sort
-    $(document).on("click", ".resvPopup", () => { modalpop(); })
-});
-
+    dataTable.on('datatable.page', function(column, direction) {
+        colorizeTable()
+    });
 }
 
 
@@ -32,6 +32,7 @@ dataTable.on('datatable.sort', function(column, direction) {
 function colorizeTable() {
 
     //TODO: Remove any previous formatting
+
     $("tr").each(function () {
         $(this).removeClass("table-info")
         $(this).removeClass("table-danger")

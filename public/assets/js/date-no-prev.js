@@ -14,5 +14,5 @@ $(function(){
     $('#mydate').val(maxDate);
 
     var today = new Date().toISOString().split('T')[0];
-    document.getElementsByName("txtDate")[0].setAttribute('min', today);
+    document.getElementsByName("date")[0].setAttribute('min', today);
 });
