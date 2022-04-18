@@ -52,10 +52,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mb-4">
-                                <div class="input-group mb-3">
-                                    <label class="input-group-text" for="mydate">Date</label>
-                                    <input type="date" class="form-control" style="min-width: 66px;" id="mydate">
-                                </div>
+                                <form method="POST" action="/manage-reservations" id="dateInput">
+                                    @csrf
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="mydate">Date</label>
+                                        <input type="date" class="form-control" style="min-width: 66px;" name="date" id="mydate" value="{{$date}}">
+                                    </div>
+                                </form>
                             </div>
 
                             <div class="mb-1">
@@ -91,36 +94,36 @@
                                                         <tbody>
                                                             <input id="currentDate" type="hidden" value="">
                                                             @foreach (App\Models\Reservation::all() as $reservation)
-                                                                {{--@if($reservation->date == )--}}
-                                                                <tr class="resvPopup">
-                                                                    <td id="resNum" hidden>{{ $reservation->id }}</td>
-                                                                    <!-- Reservation number should be included but hidden gia na liturgisi me to modal -->
-                                                                    <td class="time">{{ substr($reservation->time, 0, -3) }}</td>
-                                                                    <td class="customerName" class="text-bold-500" >{{ User3::find($reservation->user3_id)->full_name }}</td>
-                                                                    <td>
-                                                                        <span class="people">{{$reservation->pax}}</span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <span class="attendance">{{$reservation->attended}}</span>
-                                                                    </td>
-                                                                    <td>{{Table::find($reservation->table_id)->table_no}}</td>
-                                                                    <td class="details" hidden>
-                                                                        {{ $reservation->details }}
-                                                                    </td>
-                                                                    <td class="res_id" hidden>
-                                                                        {{ $reservation->id }}
-                                                                    </td>
-                                                                    <td class="table_no" hidden>
-                                                                        {{ Table::find($reservation->table_id)->table_no }}
-                                                                    </td>
-                                                                    <td class="phone" hidden>
-                                                                        {{ User3::find($reservation->user3_id)->phone }}
-                                                                    </td>
-                                                                    <td class="people" hidden>
-                                                                        {{ $reservation->pax }}
-                                                                    </td>
-                                                                </tr>
-                                                                {{--@endif--}}
+                                                                @if($reservation->date == $date)
+                                                                    <tr class="resvPopup">
+                                                                        <td id="resNum" hidden>{{ $reservation->id }}</td>
+                                                                        <!-- Reservation number should be included but hidden gia na liturgisi me to modal -->
+                                                                        <td class="time">{{ $reservation->time }}</td>
+                                                                        <td class="customerName" class="text-bold-500" >{{ User3::find($reservation->user3_id)->full_name }}</td>
+                                                                        <td>
+                                                                            <span class="people">{{$reservation->pax}}</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="attendance">{{$reservation->attended}}</span>
+                                                                        </td>
+                                                                        <td>{{Table::find($reservation->table_id)->table_no}}</td>
+                                                                        <td class="details" hidden>
+                                                                            {{ $reservation->details }}
+                                                                        </td>
+                                                                        <td class="res_id" hidden>
+                                                                            {{ $reservation->id }}
+                                                                        </td>
+                                                                        <td class="table_no" hidden>
+                                                                            {{ Table::find($reservation->table_id)->table_no }}
+                                                                        </td>
+                                                                        <td class="phone" hidden>
+                                                                            {{ User3::find($reservation->user3_id)->phone }}
+                                                                        </td>
+                                                                        <td class="people" hidden>
+                                                                            {{ $reservation->pax }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>
@@ -135,12 +138,13 @@
                                 <form>
                                     <input type="button" id="newRes" class="btn btn-primary" value="Add Reservation" />
                                 </form>
+                                
                             </div>
 
 
 
                             <!-- Reservation modal starts here-->
-                            <div class="modal fade" id="issueModal" tabindex="-1" role="dialog"
+                            <div class="modal fade" id="resvPopup" tabindex="-1" role="dialog"
                                 aria-labelledby="issueModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
                                     role="document">

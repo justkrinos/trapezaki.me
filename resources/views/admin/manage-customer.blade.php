@@ -12,6 +12,9 @@ $tags = $user2->tags->pluck('name')->toArray();
 
 @endphp
 
+{{-- TODO: to reservation duration na piennei ana  misawra alliws enna santanosi ta reservations
+            duration min misi wra j max 5 --}}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

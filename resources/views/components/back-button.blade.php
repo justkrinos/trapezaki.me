@@ -17,3 +17,6 @@
         window.location.href = back;
     })
 </script>
+
+
+{{-- TODO: en dulefki polla kala  px. ama kamis refresh --}}
