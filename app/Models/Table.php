@@ -17,6 +17,6 @@ class Table extends Model
     }
 
     public function reservations(){
-        return $this->hasMany('App\Models\Reservtion');
+        return $this->hasMany('App\Models\Reservation');
     }
 }
