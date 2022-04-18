@@ -19,6 +19,7 @@ class issuesBusinessControler extends Controller
         $issues = Issue::all();
 
         /*
+        TODO
         Ta issues epistrefontai ola
         Prepei na kanume query
         na epistrefontai mono ta issues pou kataxwrise o sigkekrimenos xristis
