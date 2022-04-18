@@ -16,6 +16,8 @@ use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\ManageBusinessController;
 use App\Http\Controllers\PendingRequestsController;
 use App\Http\Controllers\MyReservationsController;
+use App\Http\Controllers\ManageReservationsController;
+use App\Http\Controllers\TimeSlotController;
 use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User3;
@@ -23,17 +25,9 @@ use App\Models\User2;
 use App\Models\User1;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use App\Models\Reservation;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 
 /* ------------BINDINGS-------------- */
@@ -45,6 +39,20 @@ use Illuminate\Support\Facades\Response;
 Route::bind('user2', function ($value) {
     return User2::where('username', $value)->first();
 });
+
+// Route::bind('user3', function ($value) {
+//     return User3::where('id', $value)->where('guest',0)->first();
+// });
+
+Route::bind('guest', function ($value) {
+    return User3::where('id', $value)->where('guest',1)->first();
+});
+
+// Route::bind('reservation', function ($value) {
+//     return Reservation::where('id', $value)->first();
+// });
+
+
 
 /* -------------------------------- */
 
@@ -58,6 +66,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::get('/user/{user2}', function (User2 $user2) {
         return view('www.selected-profile');
     });
+
+    Route::get('/api/{user2}/time-slots',[TimeSlotController::class,'getTimeSlots']);
 
     Route::get('/user/{user2}/menu',[BookingController::class,'showMenu']);
     Route::get('/user/{user2}/book', [BookingController::class, 'showBook']);
@@ -105,6 +115,10 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
 
+        Route::get('/reservation/{guest}/{reservation}', function(User3 $guest, Reservation $reservation){
+            return view('www.successfully-booked', ['user3' => $guest, 'reservation' => $reservation]);
+        });
+
     });
 
 
@@ -119,9 +133,16 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
             return view('www.profile');
         });
 
+        //TODO en dulefki to route dunno why
+        //TODO: na stelnei email sto reservation
+        //Route::get('/reservation/{user3_id}/{reservation}', [MyReservationsController::class, 'show']);
+        Route::get('/reservation/{user3}/{reservation}', function(User3 $user3, Reservation $reservation){
+            return view('www.successfully-booked', ['user' => $user3, 'reservation' => $reservation]);
+        });
         Route::post('/profile', [SessionsController::class, 'edit']);
 
         Route::get('/my-reservations', [MyReservationsController::class,'show']);
+        Route::post('/my-reservations', [MyReservationsController::class,'modify']);
     });
 });
 
@@ -157,6 +178,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser2']);
+
+        
     });
 
 
@@ -198,12 +221,20 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
 
+        Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
+        Route::post('/manage-reservations', [ManageReservationsController::class, 'dailyReservations']);
+        Route::get('/api/floor-plan', [FloorPlanController::class, 'getFloorPlanJsonU2']);
+
         Route::get('/profile/menu', [SessionsController2::class, 'showMenu']);
+
+        //Book as user2
+        Route::post('/add-reservation', [BookingController::class, 'createBookUser2']);
     });
 });
 
 
 Route::domain('admin.' . env('APP_URL'))->group(function () {
+
 
     Route::middleware(['guest:user1'])->group(function () {
         Route::get('/login', [User1Controller::class, 'create']);

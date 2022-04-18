@@ -136,7 +136,7 @@ use App\Models\User2_Photo;
             </div>
         </div>
 
-        @include('www.components.choose-city')
+        @if(!Auth::guard('user3')->user()) @include('www.components.choose-city') @endif
 
 
 </body>

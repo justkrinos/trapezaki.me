@@ -68,7 +68,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                             <div class="d-flex justify-content-center mb-2">
                                 <div class="col-md-6">
                                     <div class="flex-nowrap">
-                                        <div class="input-group col-sm-3">
+                                        <div class="input-group col-sm-3 mb-3">
                                             <button class="prev-day btn btn-outline-secondary btn-google"><i
                                                     class="bi bi-chevron-left" aria-hidden='true'></i></button>
                                             <input type="date" class="form-control no-prev date-slide @error('date') is-invalid @enderror" name="txtDate"
@@ -81,7 +81,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                             <button class='next-day btn btn-outline-secondary btn-google'><i
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>
                                         </div>
-                                        <div class="input-group col-sm-3">
+                                        <div class="input-group col-sm-3 mb-3">
                                             <h3 class="col-md-4">People</h3>
                                             <div class="quantity">
                                                 
