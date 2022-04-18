@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User2;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FloorPlanController extends Controller
 {
@@ -17,6 +18,15 @@ class FloorPlanController extends Controller
 
     function getFloorPlanJson(User2 $user2)
     {
+        if ($user2->floorPlan->json) //an den en ofkero stilto
+            return $user2->floorPlan->json;
+        else
+            return []; //aliws stile ofkero gia na kserei oti en null
+    }
+
+    function getFloorPlanJsonU2()
+    {
+        $user2 = Auth::guard('user2')->user();
         if ($user2->floorPlan->json) //an den en ofkero stilto
             return $user2->floorPlan->json;
         else
