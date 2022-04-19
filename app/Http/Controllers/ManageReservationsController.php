@@ -34,22 +34,26 @@ class ManageReservationsController extends Controller
         }
         elseif(request()->has('reservation_id')){
             $validatedData = request()->validate([
-                'reason' => 'required',
-                'reservation_id' =>  'required|numeric'
+                'reason'         => 'required',
+                'reservation_id' =>  'required|numeric',
             ]);
 
-            return $validatedData;
-            //get the authenticated user
+            //get the authenticated user and reservation
             $user2 = Auth::guard('user2')->user();
+            $reservation = Reservation::find($validatedData['reservation_id']);
 
-            //an iparxei to reservation ston current user
-            if ($user2->reservations->find($validatedData['reservation_id'])) {
+            //make sure its on a table that its owned by the u2
+            if($reservation->table->user2_id  == $user2->id){
                 Cancellation::create($validatedData);
                 return back()->with('success', 'The reservation has been cancelled!');
             }
+
             //back to the page p itan prin
             return back()->with('success', 'Oops! Something went wrong');
 
+            // TODO: an to reservation en cancelled, tote na men eshi epilogi cancel
+            //       na men afinei 2o cancellation (primary key to reservation_id sto cancellations)
+            //       na ginei j sto rating tuto
         }
     }
 }
