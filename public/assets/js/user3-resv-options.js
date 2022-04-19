@@ -27,11 +27,14 @@ function loadFloorPlan(floorplan) {
     canvas.renderAll();
     CustomerMode()
 
+    //TODO
     //TI PREPEI NA KAMUME
     //- sto book molis valis imerominia tha kamni
     //      kochina ta trapezia p en full j kanonika ta alla
     //      ta kochina trapezia en prp nan clickable
     //      or aman ginun klick na fkallei table is full for this date
+
+    // -an eperase i mera or wra na men fkallei to analogo time slot
 
     //- pu katw p tin imerominia na eshi j arithmo atomwn
     //      j to query na ginete mazi me tin imerominia
@@ -50,13 +53,8 @@ function loadFloorPlan(floorplan) {
 
     //- molis gini to reservation stelnei email ta details tu
 
-    //- molis patite to book tha piannei:
-    //          - resv date and time
-    //          - resv table
-    //          - user2 (ena ton kserei pu to wildcard)
-    //          - user3 p to auth or guest p to session
-    //- na stelnei email ta stoixeia tu resrvation
-    //- j na kammei redirect se ena page pu na eshi reservation number
+    //- molis patite to book tha:
+    //-  kammei redirect se ena page pu na eshi reservation number
     //      j na lalei success j check your inbox
 
 
@@ -155,9 +153,9 @@ book.addEventListener('click', bookTable);
 
 function bookTable()
 {
-    var date = $("#resv-date")[0].value; 
+    var date = $("#resv-date")[0].value;
     var timeSlot = $('input[sel="selected"]').attr('id');
-    var username = $("#username").attr('user')
+    var username = $('#username').attr('user');
     var table = canvas.getActiveObject().id
     var description = document.getElementById("description").value;
     var pax = document.getElementById("pax").value;
@@ -168,7 +166,6 @@ function bookTable()
         "details": description,
         "pax": pax
     };
-    console.log(data);
 
     $.ajaxSetup({
         headers: {

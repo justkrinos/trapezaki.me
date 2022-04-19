@@ -84,7 +84,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                         <div class="input-group col-sm-3 mb-3">
                                             <h3 class="col-md-4">People</h3>
                                             <div class="quantity">
-                                                
+
                                                 <input type="number" min="2" max="16" step="1" value="2" id="pax">
                                               </div>
                                         </div>
@@ -158,7 +158,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                 </div>
             </div>
 
-            <span id="username" user="{{ $user2->username }}"></span>
+            <span id="username" user="{{$user2->username}}"></span>
 
 
             <footer>

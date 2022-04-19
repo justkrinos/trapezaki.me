@@ -179,7 +179,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser2']);
 
-        
+
     });
 
 
@@ -195,10 +195,6 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/edit-reservation', function () {
             return view('business.edit-resv');
-        });
-
-        Route::get('/manage-reservations', function () {
-            return view('business.manage-resv');
         });
 
         Route::get('/dashboard', function () {
@@ -222,7 +218,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
 
         Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
-        Route::post('/manage-reservations', [ManageReservationsController::class, 'dailyReservations']);
+        Route::post('/manage-reservations', [ManageReservationsController::class, 'modify']);
         Route::get('/api/floor-plan', [FloorPlanController::class, 'getFloorPlanJsonU2']);
 
         Route::get('/profile/menu', [SessionsController2::class, 'showMenu']);

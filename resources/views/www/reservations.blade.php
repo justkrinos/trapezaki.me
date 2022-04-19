@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-@php
-    use App\Models\Reservation;
-    use App\Models\User2;
-    use App\Models\Table;
-@endphp
+
+{{-- TODO: ama kamneis sort en fkennun ta popup --}}
 
 <head>
     <meta charset="UTF-8">
@@ -181,7 +178,6 @@
                 @include('www.components.resv-modal')
                 @include('www.components.cancel-resv-modal')
 
-
             </div>
         </div>
 
@@ -191,8 +187,6 @@
 
  {{-- Datatable Js Include  --}}
 <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
-
-
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>

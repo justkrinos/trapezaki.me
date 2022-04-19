@@ -27,19 +27,30 @@ $("#rateConfirm").click(function(){
     //Get the row id that is selected (useful for db)
     //raterow.parent().attr("id")
 })
-$(document).on("click", ".resvPopup" , function() {
 
-    $("#myresvNumber").html($(this).children(".resvID").html())
+
+//If a row is clicked
+$(".resvPopup").click(function(){
+    id = $(this).children(".resvID").html()
+
+    //Give the details to the modal
+    $("#myresvNumber").html(id)
     $("#myresvTable").html($(this).children(".resvTable").html())
     $("#myresvPeople").html($(this).children(".resvPeople2").html())
     console.log($(this).children(".resvTable").html())
     $("#myresvTime").html($(this).children(".resvTime").html())
     $("#myresvDetails").html($(this).children(".resvDetails").html())
+
+    //Give the id to the cancel modal
+    $("#FormCancel").append("<input name=\"reservation_id\" value=\"" +id + "\" hidden>")
+
+    //Show the modal
     $("#myresvModal").modal('show');
 })
 
+//If cancel modal is clicked, show it
 $("#modCancel").click(function(){
-    $("#confirmModal").modal('show')    
+    $("#confirmModal").modal('show')
 })
 
 $("#submitCancel").click(function(e){
@@ -48,13 +59,13 @@ $("#submitCancel").click(function(e){
     // console.log($('#myresvNumber').html())
     id = $('#myresvNumber').html();
     $('#FormCancel').append("<input type='hidden' name='reservation_id' value='"+id+"' />");
-    $('#FormCancel').append("<input type='hidden' name='cancel'/>");    
+    $('#FormCancel').append("<input type='hidden' name='cancel'/>");
     if($('#cancellationReason').val()){
         $("#confirmModal").modal('hide');
         $('#FormCancel').trigger('submit');
     }
-    
-    
+
+
 })
 
 })
@@ -162,8 +173,8 @@ function pushRating(rating){
         success: function (data) {
             if(data == 'success'){
             //Replace button with text "Rating added"
-            raterow.html("Completed")    
-            notification_update() 
+            raterow.html("Completed")
+            notification_update()
             }
         },
         error: function (data) {

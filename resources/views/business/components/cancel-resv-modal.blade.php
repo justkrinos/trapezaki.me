@@ -8,7 +8,7 @@
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="/my-reservations" method="POST" id="FormCancel">
+            <form action="/manage-reservations" method="POST" id="FormCancel">
             @csrf
             <div class="modal-body">
                 <label class="mb-2" for="cancellationReason">Please enter a cancellation reason:</label>
@@ -20,7 +20,7 @@
                 <button type="button" class="btn btn-light-secondary btn-sm" data-bs-dismiss="modal">
                     <span class="d-sm-block">Close</span>
                 </button>
-                <button type="submit" name="cancelResv" value="ok" id="submitCancel" class="btn btn-primary ml-1 btn-sm" id="confirmed">
+                <button type="submit" name="cancelResv" id="submitCancel" class="btn btn-primary ml-1 btn-sm" id="confirmed">
                     <span class="d-sm-block">Submit</span>
                 </button>
             </div>

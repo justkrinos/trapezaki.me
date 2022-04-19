@@ -112,7 +112,7 @@ class RegisterUser2 extends Controller
         $minTime = new Time("08:00");
 
         for($day=1; $day<8; $day++){
-            $user2->dailySetting()->create([
+            $user2->dailySettings()->create([
                 'day_id' => $day,
                 'time_min' => $minTime->get(),
                 'time_max' => $maxTime->get()

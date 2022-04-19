@@ -28,33 +28,31 @@ class RegisterUser3 extends Controller
 
         //extra validation for the password confirmation
         request()->validate([
-            'password' => 'required|max:50|min:7',
-            'password_confirmation' => 'required|same:password'
+            'password'                   => 'required|max:50|min:7',
+            'password_confirmation'      => 'required|same:password'
         ],[
             'password_confirmation.same' => 'Passwords do not match.'
         ]);
 
-        $request = request()->merge(['verification_code' => substr(md5(rand()),0,25)]);
+        $request = request()->merge([
+            'verification_code' => substr(md5(rand()),0,25),
+            'guest'             => 0
+        ]);
 
         $attributes = $request->validate([
-            'username' =>  'required|max:50|min:3|unique:user3s,username',
-            'full_name' => 'required|max:50|min:3',
-            'email' => 'required|email|max:100|unique:user3s,email',
-            'phone' => 'required|digits_between:8,13|numeric',
-            'password' => 'required|max:50|min:7',
-            'verification_code' => 'required'
+            'username'          => 'required|max:50|min:3|unique:user3s,username',
+            'full_name'         => 'required|max:50|min:3',
+            'email'             => 'required|email|max:100|unique:user3s,email,NULL,id,guest,0',
+            'phone'             => 'required|digits_between:8,13|numeric',
+            'password'          => 'required|max:50|min:7',
+            'verification_code' => 'required',
+            'guest'             =>  'required'
         ]);
         //TODO:  //-na sasun ta messages p stelni error (eg. na men grafi full_name)
-                 //-to password confirmation error na fkennei sto password_confirmation field
-
-        //Must remove from $attributes
-
 
 
         //Make the account and add to db
-
-
-        $user = User3::create($attributes);
+        $user = User3::updateOrCreate(['email' => $attributes['email'], 'guest' => 1],$attributes);
 
 
 

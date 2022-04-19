@@ -69,6 +69,13 @@
                                 <label for="formFileMultiple" class="form-label">*Arr = Arrived</label>
                             </div>
 
+                            {{--TODO:
+                                //-na kamume legend dame me circle xromata pu na eksigun to kathe xroma
+                                eg. (kuklos kokkino) Not Attended
+                                //- na dixnume kapos j ta cancelled reservations
+                                //- na mporei na kamnei search reservations me cancelled j not attended klp
+                            --}}
+
                             <!-- Hoverable rows start -->
                             <section class="section">
                                 <div class="row" id="table-hover-row">
@@ -82,17 +89,17 @@
                                                     <table class="table table-hover mb-0" id="resTable">
                                                         <thead>
                                                             <tr>
-                                                                <!-- <th>ResNum</th> -->
                                                                 <th>Time</th>
                                                                 <th>Name</th>
                                                                 <th>Res.</th>
                                                                 <th>Arr.</th>
                                                                 <th>Table</th>
-                                                                <!-- Analogws me ti ena epileksei na tu fkallei to analogo text -->
+                                                                {{-- <!-- Analogws me ti ena epileksei na tu fkallei to analogo text --> --}}
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <input id="currentDate" type="hidden" value="">
+                                                            {{--TODO na erkunte pu to view tuta--}}
                                                             @foreach (App\Models\Reservation::all() as $reservation)
                                                                 @if($reservation->date == $date)
                                                                     <tr class="resvPopup">
@@ -133,167 +140,18 @@
                                     </div>
                                 </div>
                             </section>
-                            <!-- Hoverable rows end -->
+                            {{-- <!-- Hoverable rows end --> --}}
+
+                            {{-- TODO: nan apla button oi forma tuto katw --}}
                             <div class="col-sm-12 d-flex justify-content-start form-group">
                                 <form>
                                     <input type="button" id="newRes" class="btn btn-primary" value="Add Reservation" />
                                 </form>
-                                
+
                             </div>
 
-
-
-                            <!-- Reservation modal starts here-->
-                            <div class="modal fade" id="resvPopup" tabindex="-1" role="dialog"
-                                aria-labelledby="issueModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable"
-                                    role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="issueModalCenterTitle">Reservation Details
-                                            </h5>
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">x
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <!-- body here-->
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-10">
-                                                        <div class="flex-nowrap input-group col-md-5 mb-4">
-                                                            <label class="input-group-text"
-                                                                for="issueBusiness">Reservation No.</label>
-                                                            <label type="text" class="form-control"
-                                                                id="myresvBusiness">35234</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-10">
-                                                        <div class="flex-nowrap input-group col-md-5 mb-4">
-                                                            <label class="input-group-text"
-                                                                for="issueBusiness">Name</label>
-                                                            <label type="text" class="form-control"
-                                                                id="customerName">Efstathios Andreou</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-10">
-                                                        <div class="flex-nowrap input-group col-md-5 mb-4">
-                                                            <label class="input-group-text" for="issueBusiness">Phone
-                                                                Number</label>
-                                                            <label type="text" class="form-control"
-                                                                id="phone">99081329</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-5">
-                                                        <div class="d-flex input-group col-md-3 mb-3">
-                                                            <label class="input-group-text"
-                                                                for="issueType">Table</label>
-                                                            <div class="col-4">
-                                                                <label type="text" class="form-control"
-                                                                    id="myresvType">4</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-6 mb-1">
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text">People</span>
-                                                            <div class="col-4">
-                                                                <input type="number" id="attendance" min="0" max="4"
-                                                                    class="form-control" value="0">
-                                                            </div>
-                                                            <span class="input-group-text" id="people">/4</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-sm-12">
-                                                        <div class="col-md-4 mb-4">
-                                                            <div class="input-group mb-4">
-                                                                <label class="input-group-text"
-                                                                    for="issueImportance">Time</label>
-                                                                <label type="text" class="form-control"
-                                                                    id="myresvTime">18:00</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <br>
-                                                    <br>
-                                                    <div class="card">
-                                                        <h7 class="" for="issueTextArea">Description</h7>
-                                                        <label class="form-control" id="myresvTextArea">The description
-                                                            will be
-                                                            written here and might be a long one but it doenst matter
-                                                            because the lines can wrap and the modal can scroll down as
-                                                            much
-                                                            as you want so that you can see the details written by the
-                                                            customer.</label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer justify-content-start">
-                                            <div class="d-flex col-12">
-
-                                                <div class="col-5">
-                                                    <button type="button" id="modResv" class="btn btn-light-secondary">
-                                                        <span class="d-block d-sm-block">Modify</span>
-                                                    </button>
-                                                    <button type="button" id="modCancel" class="btn btn-light-secondary">
-                                                        <span class="d-block d-sm-block">Cancel</span>
-                                                    </button>
-                                                </div>
-
-                                                <div class="d-flex justify-content-end col-7">
-                                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                                                        <span class="d-block d-sm-block">Close</span>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Reservation Modal Ends Here-->
-
-
-                            <!-- Confirmation modal starts here-->
-                            <div class="modal fade text-left" id="confirmModal" tabindex="-1" role="dialog"
-                                data-bs-backdrop="false" aria-labelledby="myModalLabel19" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm"
-                                    role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-primary">
-                                            <h4 class="modal-title white" id="myModalLabel19">Warning</h4>
-                                            <button type="button" class="close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                                <i data-feather="x"></i>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to cancel the reservation?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-light-secondary btn-sm"
-                                                data-bs-dismiss="modal">
-                                                <span class="d-sm-block">Close</span>
-                                            </button>
-                                            <button type="button" class="btn btn-primary ml-1 btn-sm" id="confirmed"
-                                                data-bs-dismiss="modal">
-                                                <span class="d-sm-block">Yes</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Confirmation modal ends here -->
-
+                            @include('business.components.resv-modal')
+                            @include('business.components.cancel-resv-modal')
 
                     </div>
                 </div>
