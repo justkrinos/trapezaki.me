@@ -128,7 +128,11 @@
                                                                                     </thead>
                                                                                     <tbody>
                                                                                     @foreach($pastReservations as $reservation)
-                                                                                        <tr>
+                                                                                        <tr class="resvPopup">
+                                                                                            <td class="resvID" hidden>{{$reservation->id}}</td>
+                                                                                            <td class="resvDetails" hidden>{{$reservation->details}}</td>
+                                                                                            <td class="resvTable" hidden>{{$reservation->table_id}}</td>
+                                                                                            <td class="resvTime" hidden>{{$reservation->time}}</td>
                                                                                             <td>{{$reservation->user2->business_name}}</td>
                                                                                             <td>{{$reservation->date}}</td>
                                                                                             <td>

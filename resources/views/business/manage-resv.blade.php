@@ -51,22 +51,14 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-6">
                                 <form method="POST" action="/manage-reservations" id="dateInput">
                                     @csrf
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <label class="input-group-text" for="mydate">Date</label>
                                         <input type="date" class="form-control" style="min-width: 66px;" name="date" id="mydate" value="{{$date}}">
                                     </div>
                                 </form>
-                            </div>
-
-                            <div class="mb-1">
-                                <label for="formFileMultiple" class="form-label">*Res = Reserved</label>
-                            </div>
-
-                            <div class="mb-1">
-                                <label for="formFileMultiple" class="form-label">*Arr = Arrived</label>
                             </div>
 
                             {{--TODO:
@@ -84,15 +76,14 @@
                                             <div class="card-content">
                                                 <div class="card-body">
                                                 </div>
-                                                <!-- table hover -->
+                                                {{-- <!-- table hover --> --}}
                                                 <div class="table-responsive">
                                                     <table class="table table-hover mb-0" id="resTable">
                                                         <thead>
                                                             <tr>
                                                                 <th>Time</th>
                                                                 <th>Name</th>
-                                                                <th>Res.</th>
-                                                                <th>Arr.</th>
+                                                                <th>People</th>
                                                                 <th>Table</th>
                                                                 {{-- <!-- Analogws me ti ena epileksei na tu fkallei to analogo text --> --}}
                                                             </tr>
@@ -103,17 +94,12 @@
                                                             @foreach (App\Models\Reservation::all() as $reservation)
                                                                 @if($reservation->date == $date)
                                                                     <tr class="resvPopup">
-                                                                        <td id="resNum" hidden>{{ $reservation->id }}</td>
-                                                                        <!-- Reservation number should be included but hidden gia na liturgisi me to modal -->
                                                                         <td class="time">{{ $reservation->time }}</td>
                                                                         <td class="customerName" class="text-bold-500" >{{ User3::find($reservation->user3_id)->full_name }}</td>
                                                                         <td>
-                                                                            <span class="people">{{$reservation->pax}}</span>
+                                                                            <span class="attendance">{{$reservation->attended}}</span>/<span class="people">{{$reservation->pax}}</span>
                                                                         </td>
-                                                                        <td>
-                                                                            <span class="attendance">{{$reservation->attended}}</span>
-                                                                        </td>
-                                                                        <td>{{Table::find($reservation->table_id)->table_no}}</td>
+                                                                        <td>{{$reservation->table->table_no}}</td>
                                                                         <td class="details" hidden>
                                                                             {{ $reservation->details }}
                                                                         </td>
@@ -128,6 +114,13 @@
                                                                         </td>
                                                                         <td class="people" hidden>
                                                                             {{ $reservation->pax }}
+                                                                        </td>
+                                                                        <td id="resNum" hidden>{{ $reservation->id }}</td>
+                                                                        <td hidden>
+                                                                            <span class="cancelled">@if($reservation->cancelled) 1 @else 0 @endif</span>
+                                                                        </td>
+                                                                        <td hidden>
+                                                                            @if($reservation->cancelled)<span class="reason">{{$reservation->cancelled->reason}}</span>@endif
                                                                         </td>
                                                                     </tr>
                                                                 @endif
@@ -178,13 +171,12 @@
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="../assets/js/manage-resv-datatable.js"></script>
-<script src="../assets/js/date-no-prev.js"></script>
 <script src="../assets/js/reservations.js"></script>
 
 {{--Toast dependencies--}}
 <script src="assets/vendors/toastify/toastify.js"></script>
-
 @include('components.toasts')
 
 {{-- modal dependencies --}}
 <script src=../assets/js/manage-reservations-modal.js></script>
+

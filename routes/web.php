@@ -115,7 +115,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
 
-        Route::get('/reservation/{guest}/{reservation}', function(User3 $guest, Reservation $reservation){
+        Route::get('/reservation/{guest}/{reservation}', function($guest, $reservation){
             return view('www.successfully-booked', ['user3' => $guest, 'reservation' => $reservation]);
         });
 
@@ -136,8 +136,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         //TODO en dulefki to route dunno why
         //TODO: na stelnei email sto reservation
         //Route::get('/reservation/{user3_id}/{reservation}', [MyReservationsController::class, 'show']);
-        Route::get('/reservation/{user3}/{reservation}', function(User3 $user3, Reservation $reservation){
-            return view('www.successfully-booked', ['user' => $user3, 'reservation' => $reservation]);
+        Route::get('/reservation/{user3_id}/{reservation_id}', function($user3, $reservation){
+            return view('www.successfully-booked', ['user3' => $user3, 'reservation' => $reservation]);
         });
         Route::post('/profile', [SessionsController::class, 'edit']);
 
@@ -178,7 +178,6 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser2']);
-
 
     });
 
@@ -225,6 +224,12 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         //Book as user2
         Route::post('/add-reservation', [BookingController::class, 'createBookUser2']);
+
+        //Get timeSlots
+        Route::get('/api/{user2}/time-slots',[TimeSlotController::class,'getTimeSlots']);
+
+        Route::post('/api/apply-attendance', [ManageReservationsController::class, 'changeAttendance']);
+
     });
 });
 

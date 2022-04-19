@@ -1,31 +1,37 @@
 //When date is changed, update time slots
+
+//getTimeSlots()
+
+var timeSlots = []
 $('input[type=date].popdate').on('change', findTimeSlots)
+
 
 //JUST TO MAKE RANDOM TIMES DELETE LATER
 function rand(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-var timeSlots
 
 //Function to find time slots
 function findTimeSlots() {
-    getTimeSlots()
     //TODO fetch available time for date $('input[type=date]').val()
-    $dummyData = { time: [rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00',] };
+   // $dummyData = { time: [rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00',] };
     // $dummyData = { time: []};
     $("#timeSlots").fadeOut('fast').promise().done(function () {
+        console.log(timeSlots)
         $("#timeSlots").empty();
-        setTimeSlots(timeSlots);
+        getTimeSlots() //Ajax call, edw mesa kaleite kai to setTimeSlots
+        //getTimeSlots(timeSlots);
         $("#timeSlots").fadeIn('slow')
     })
-
 }
 
 
 function setTimeSlots($timeslots) {
     //If we have time slots
-    if (!$timeslots.empty) {
+    console.log($timeslots)
+    console.log($timeslots.length)
+    if (!$timeslots.length == 0) {
         $timeslots.forEach($time => {
             //Create an element for each time slot
             $("#timeSlots").append(
@@ -91,6 +97,8 @@ function getTimeSlots(){
         },
         success: function(success) {
             timeSlots = success
+            //TODO NA FIGEI APO EDW
+            setTimeSlots(timeSlots); //eprepe na ferw edw to call sto setTimeSlots gia na fkei pu tin 1i fora
         },
         error: function(error) {
             console.log(error);

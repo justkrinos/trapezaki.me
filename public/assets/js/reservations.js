@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     data_resv()
 
     $(".resvPopup").click(function () {

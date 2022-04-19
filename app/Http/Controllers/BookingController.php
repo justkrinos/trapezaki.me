@@ -78,6 +78,7 @@ class BookingController extends Controller
             }
             
 
+            //TODO: opu eshi validation numeric na to kamume nan min:0 j na valume max an xriazete (px. pax <=16)
             $validatedData = $request->validate([
                 'date'=> 'required|date',
                 'time'=> 'required',
@@ -121,9 +122,65 @@ class BookingController extends Controller
     public function createBookUser2()
     {
         $user2 = Auth::guard('user2')->user();
-        //get data from the request if not logged in
-        //return (request());
-        
+        if(request()->has("guest"))
+        {
+            $request = request()->merge([
+                'guest' => 1,
+                'username' => "guest-" . mt_rand(1000000000, 9999999999) . strval(User3::max('id') + 1),
+                'password' => bcrypt(uniqid() . strval(mt_rand(1000000, 9999999)) . uniqid())
+            ]);
+    
+    
+            //try{
+            $attributes = $request->validate(
+                [
+                    'full_name' => 'required|max:50|min:3',
+                    'phone' => 'required|digits_between:8,13|numeric',
+                    'email' => 'required|email|max:100|unique:user3s,email',
+                    'guest' => 'required',
+                    'username' => 'required',
+                    'password' => 'required',
+                    'date'=> 'required|date',
+                    'time'=> 'required',
+                    'table_id'=> 'required|numeric',
+                    'details'=> 'required|string|max:200',
+                    'pax'=> 'required|numeric'
+                ],
+                [
+                    'email.unique' => 'An account already exists with this email. You can just log in. :)'
+                ]
+            );
+            $guest = User3::where('email',$attributes['email'])->where('guest',1)->first();
+
+            
+            //Check an iparxi idi guest me tuto to email j kame update ta data tou if yes
+            if($guest){
+                $guest->update($attributes);
+            }else{
+                $guest = User3::create($attributes);
+            }
+            $guest_id = $guest->id;
+
+            $request = request()-> merge([
+                'attended' => 0
+            ]);
+           
+            $validatedData = $request->validate([
+                'date'=> 'required',
+                'time'=> 'required',
+                'table_id'=> 'required',
+                'details'=> 'required',
+                'pax'=> 'required',
+                'attended' => 'required'
+            ]);
+
+            $validatedData['user3_id'] = $guest_id;
+            $reservation = Reservation::create($validatedData);
+            
+            return $reservation;
+        }
+        else
+        {
             $request = request()-> merge([
                 'attended' => 0
             ]);
@@ -134,7 +191,7 @@ class BookingController extends Controller
                 'date'=> 'required|date',
                 'time'=> 'required',
                 'table_id'=> 'required|numeric',
-                'details'=> 'string|max:200',
+                'details'=> 'required|string|max:200',
                 'pax'=> 'required|numeric',
                 'attended' => 'required'
             ]);
@@ -147,6 +204,11 @@ class BookingController extends Controller
             $reservation = Reservation::create($validatedData);
             
             return $reservation;
+        }
+        //get data from the request if not logged in
+        //return (request());
+        
+            
         
     }
         //TODO na to kamume na dulefki

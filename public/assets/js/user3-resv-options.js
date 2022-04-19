@@ -178,7 +178,8 @@ function bookTable()
         url: "/user/" + username + "/book",
         data: data,
         success: function(success) {
-            window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
+            console.log(success);
+            //window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
         },
         error: function(error) {
             console.log(error);

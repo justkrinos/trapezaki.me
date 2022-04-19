@@ -39,12 +39,13 @@ class TimeSlotController extends Controller
 
         $reservations = $user2->tables()->where('id',$table)->first()->reservations->where('date',$validatedData['date']);
         
-         foreach($reservations as $reservation)
-         {
+        
+        foreach($reservations as $reservation)
+        {
             // $reservation  = $reservations[1];
             $resvTime = (new Time($reservation->time))->get();
-            $index = array_search($resvTime, $timeSlots,true);
-            if($index != false)
+            $index = array_search($resvTime, $timeSlots);
+            if($index !== false)
                 for($i=$index; $i<($duration + $index); $i++){
                     if(array_key_exists($i,$timeSlots))
                         unset($timeSlots[$i]);

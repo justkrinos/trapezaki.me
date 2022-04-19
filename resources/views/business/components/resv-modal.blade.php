@@ -10,7 +10,14 @@
             </div>
             <div class="modal-body">
                 <div class="card-body">
-                    <div class="row">
+                    <div id="modalContent" class="row">
+                        <div class="col-sm-7">
+                            <div class="flex-nowrap input-group col-md-5 mb-4">
+                                <label class="input-group-text" for="issueBusiness">Status</label>
+                                <label id="status" class="d-flex form-control justify-content-begin align-items-center">@include('business.components.circle-icon')&nbsp;<div id="statusText" class="text-secondary">Canceled</div></label>
+                            </div>
+                        </div>
+                        
                         <div class="col-sm-10">
                             <div class="flex-nowrap input-group col-md-5 mb-4">
                                 <label class="input-group-text" for="issueBusiness">Reservation No.</label>
@@ -46,7 +53,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">People</span>
                                 <div class="col-4">
-                                    <input type="number" id="attendance" min="0" max="4" class="form-control"
+                                    <input type="number" id="attendance" min="0" max="16" class="form-control"
                                         value="0">
                                 </div>
                                 <span class="input-group-text" id="people">/4</span>
@@ -62,17 +69,9 @@
                             </div>
                         </div>
 
-                        <br>
-                        <br>
                         <div class="card">
                             <h6 class="" for="issueTextArea">Description</h6>
-                            <label class="form-control" id="myresvTextArea">The description
-                                will be
-                                written here and might be a long one but it doenst matter
-                                because the lines can wrap and the modal can scroll down as
-                                much
-                                as you want so that you can see the details written by the
-                                customer.</label>
+                            <label class="form-control" id="myresvTextArea"></label>
                         </div>
 
                     </div>
