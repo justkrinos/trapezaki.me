@@ -1,7 +1,6 @@
+var resv_id, raterow;
+
 $(document).ready(function () {
-
-
-var raterow;
 
 //Update notifications
 notification_update()
@@ -13,16 +12,14 @@ $(".rate").click(function (e) {
     $("#small").modal('show')
 
     //Get the element clicked
+    resv_id = $(this).parents("div").attr("resv")
     raterow = $(this).parents("td")
 })
 
 
+
 //When user confirms rating
 $("#rateConfirm").click(function(){
-    //TODO: checkdb first if its okay
-
-    //Replace button with text "Rating added"
-    raterow.html("Completed")
 
     //Update the notification
     notification_update()
@@ -30,19 +27,34 @@ $("#rateConfirm").click(function(){
     //Get the row id that is selected (useful for db)
     //raterow.parent().attr("id")
 })
-
-$(".resvPopup").click(function(){
+$(document).on("click", ".resvPopup" , function() {
 
     $("#myresvNumber").html($(this).children(".resvID").html())
     $("#myresvTable").html($(this).children(".resvTable").html())
-    $("#myresvPeople").html($(this).children(".resvPeople").html())
+    $("#myresvPeople").html($(this).children(".resvPeople2").html())
+    console.log($(this).children(".resvTable").html())
     $("#myresvTime").html($(this).children(".resvTime").html())
     $("#myresvDetails").html($(this).children(".resvDetails").html())
     $("#myresvModal").modal('show');
 })
 
 $("#modCancel").click(function(){
-    $("#confirmModal").modal('show');
+    $("#confirmModal").modal('show')    
+})
+
+$("#submitCancel").click(function(e){
+    e.preventDefault();
+    // console.log($('#cancellationReason').val())
+    // console.log($('#myresvNumber').html())
+    id = $('#myresvNumber').html();
+    $('#FormCancel').append("<input type='hidden' name='reservation_id' value='"+id+"' />");
+    $('#FormCancel').append("<input type='hidden' name='cancel'/>");    
+    if($('#cancellationReason').val()){
+        $("#confirmModal").modal('hide');
+        $('#FormCancel').trigger('submit');
+    }
+    
+    
 })
 
 })
@@ -85,7 +97,7 @@ $("#rateConfirm").click(function(){
     //TODO: send to db
 
     //This will return the rating submitted
-    rater.getRating()
+    pushRating(rater.getRating())
 
 })
 
@@ -127,3 +139,43 @@ let dataTablePast = new simpleDatatables.DataTable(pasttable, {
         }
     ]
 });
+
+
+function pushRating(rating){
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        }
+      });
+
+
+    $.ajax({
+        url: "/my-reservations",
+        type: "post",
+        data: {
+            'reservation_id': resv_id,
+            'rate': null,
+            'rating': rating,
+        },
+         // added data type
+        success: function (data) {
+            if(data == 'success'){
+            //Replace button with text "Rating added"
+            raterow.html("Completed")    
+            notification_update() 
+            }
+        },
+        error: function (data) {
+            console.log(data)
+            Toastify({
+                text: "Oops! Something went wrong",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#3cc2b4",
+            }).showToast();
+        },
+    });
+}

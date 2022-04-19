@@ -125,7 +125,7 @@ username = $('#username').attr('user')
 $(document).ready(function () {
     //CODE TO GET THE FLOORPLAN FROM DATABASE
     $.ajax({
-        url: "/api/" + username + "/floor-plan",
+        url: "/api/floor-plan",
         method: 'get',
         dataType: "json",
 
@@ -157,14 +157,15 @@ function bookTable()
 {
     var date = $("#resv-date")[0].value; 
     var timeSlot = $('input[sel="selected"]').attr('id');
-    var username = $("#username").attr('user')
     var table = canvas.getActiveObject().id
     var description = document.getElementById("description").value;
     var pax = document.getElementById("pax").value;
+    var user3_username = document.getElementById("user3_username").value;
     var data = {
         "date": date,
         "time": timeSlot,
         "table_id": table,
+        "user3_username": user3_username,
         "details": description,
         "pax": pax
     };
@@ -178,25 +179,41 @@ function bookTable()
 
     $.ajax({
         type: "POST",
-        url: "/user/" + username + "/book",
+        url: "/add-reservation",
         data: data,
         success: function(success) {
-            window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
-        },
-        error: function(error) {
-            console.log(error);
+            console.log(success.user3_id);
+            console.log(success.id);
+            //window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
+            $("#resvModal").modal('hide');
             Toastify({ //an exw error fkale toast
-                text: 'Oops! Something went wrong :(',
-                duration: 5000,
+                text: 'Your reservation has been booked!',
+                duration: 3000,
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#ba0b0b",
+                backgroundColor: "#3cc2b4",
             }).showToast();
+        },
+        error: function(error) {
+            console.log(error);
+
+            $(".invalid-feedback").html("User doesn't exist");
+            $("#user3_username").addClass("is-invalid")
+        
+            // if(success == "success")
+            // {
+            //     toast.success(data.message);
+            //     setTimeout(function(){
+            //         window.location.href = "/";
+            //     }, 2000);
+            // }
+            // else
+            // {
+            //     console.log("lathos");
+            //     toast.error(data.message);
+            // }
         }
     });
 }
 
-
-//TODO: opou iparxei console.log na ta fiume  molis teliwsei i ilopoiisi
-//TODO: na checkarume se kathe selida to console na men eshi errors

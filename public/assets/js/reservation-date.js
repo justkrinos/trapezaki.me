@@ -1,4 +1,3 @@
-
 //Forward-backward  buttons
 $(function () {
     $('.next-day').on('click', function () {
