@@ -60,10 +60,9 @@ Route::bind('guest', function ($value) {
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
-<<<<<<< HEAD
-  
-=======
-    Route::get('/make-a-reservation', function () {
+    Route::get('/make-a-reservation', [SearchController::class, 'index'])->name('first_page');
+
+    /*Route::get('/make-a-reservation', function () {
         $showCityPop = true;
 
         //na dulefki j gia guest j gia user 3 gt en geniko tuto
@@ -73,8 +72,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         return view('www.search', [
             'showCityPop' => $showCityPop
         ]);
-    })->name('first_page');
->>>>>>> 88b6d78824bf91ba51dfd0d2c4cef4262b983cdf
+    })->name('first_page');*/
 
     Route::get('/user/{user2}', function (User2 $user2) {
         return view('www.selected-profile');
