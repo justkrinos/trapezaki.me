@@ -18,6 +18,7 @@ use App\Http\Controllers\PendingRequestsController;
 use App\Http\Controllers\MyReservationsController;
 use App\Http\Controllers\ManageReservationsController;
 use App\Http\Controllers\TimeSlotController;
+use App\Http\Controllers\SearchController;
 use Cviebrock\EloquentTaggable\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User3;
@@ -59,9 +60,11 @@ Route::bind('guest', function ($value) {
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
-    Route::get('/make-a-reservation', function () {
+    Route::get('/make-a-reservation', [SearchController::class, 'index'])->name('first_page');
+
+    /*Route::get('/make-a-reservation', function () {
         return view('www.search');
-    })->name('first_page');
+    })->name('first_page');*/
 
     Route::get('/user/{user2}', function (User2 $user2) {
         return view('www.selected-profile');
