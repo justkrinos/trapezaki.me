@@ -45,7 +45,7 @@ Route::bind('user2', function ($value) {
 // });
 
 Route::bind('guest', function ($value) {
-    return User3::where('id', $value)->where('guest',1)->first();
+    return User3::where('id', $value)->where('guest', 1)->first();
 });
 
 // Route::bind('reservation', function ($value) {
@@ -60,16 +60,24 @@ Route::bind('guest', function ($value) {
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/make-a-reservation', function () {
-        return view('www.search');
+        $showCityPop = true;
+
+        //na dulefki j gia guest j gia user 3 gt en geniko tuto
+        if (Auth::check('user3') && Auth::guard('user3')->user()->city) {
+            $showCityPop = false;
+        }
+        return view('www.search', [
+            'showCityPop' => $showCityPop
+        ]);
     })->name('first_page');
 
     Route::get('/user/{user2}', function (User2 $user2) {
         return view('www.selected-profile');
     });
 
-    Route::get('/api/{user2}/time-slots',[TimeSlotController::class,'getTimeSlots']);
+    Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
 
-    Route::get('/user/{user2}/menu',[BookingController::class,'showMenu']);
+    Route::get('/user/{user2}/menu', [BookingController::class, 'showMenu']);
     Route::get('/user/{user2}/book', [BookingController::class, 'showBook']);
     Route::post('/user/{user2}/book', [BookingController::class, 'createBook']);
     Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
@@ -81,8 +89,15 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
 
     Route::middleware(['guest:user3'])->group(function () {
+
         Route::get('/', function () {
-            return view('www.search');
+            $showCityPop = true;
+            if (session()->has('showCityPop')) {
+                $showCityPop = false;
+            }
+            return view('www.search', [
+                'showCityPop' => $showCityPop
+            ]);
         });
 
         Route::get('/login', [SessionsController::class, 'create']);
@@ -115,10 +130,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
 
-        Route::get('/reservation/{guest}/{reservation}', function($guest, $reservation){
+        Route::get('/reservation/{guest}/{reservation}', function ($guest, $reservation) {
             return view('www.successfully-booked', ['user3' => $guest, 'reservation' => $reservation]);
         });
-
     });
 
 
@@ -136,13 +150,13 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         //TODO en dulefki to route dunno why
         //TODO: na stelnei email sto reservation
         //Route::get('/reservation/{user3_id}/{reservation}', [MyReservationsController::class, 'show']);
-        Route::get('/reservation/{user3_id}/{reservation_id}', function($user3, $reservation){
+        Route::get('/reservation/{user3_id}/{reservation_id}', function ($user3, $reservation) {
             return view('www.successfully-booked', ['user3' => $user3, 'reservation' => $reservation]);
         });
         Route::post('/profile', [SessionsController::class, 'edit']);
 
-        Route::get('/my-reservations', [MyReservationsController::class,'show']);
-        Route::post('/my-reservations', [MyReservationsController::class,'modify']);
+        Route::get('/my-reservations', [MyReservationsController::class, 'show']);
+        Route::post('/my-reservations', [MyReservationsController::class, 'modify']);
     });
 });
 
@@ -178,7 +192,6 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser2']);
-
     });
 
 
@@ -226,10 +239,9 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/add-reservation', [BookingController::class, 'createBookUser2']);
 
         //Get timeSlots
-        Route::get('/api/{user2}/time-slots',[TimeSlotController::class,'getTimeSlots']);
+        Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
 
         Route::post('/api/apply-attendance', [ManageReservationsController::class, 'changeAttendance']);
-
     });
 });
 
