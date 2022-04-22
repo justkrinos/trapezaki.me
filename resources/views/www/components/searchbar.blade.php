@@ -1,3 +1,8 @@
+@php
+    $city = "Limassol"
+    //TODO: na fiei tuto j na sasei
+@endphp
+
 <section class="section">
     <div class="card">
         <form method="GET" action="#">
@@ -61,7 +66,7 @@
                                 <option @if($city == "Paphos") selected @endif>Paphos</option>
                                 <option @if($city == "Larnaca") selected @endif>Larnaca</option>
                                 <option @if($city == "Nicosia") selected @endif>Nicosia</option>
-                                <option @if($city == "Famagusta") selected @endif>Famagusta</option>
+                                <option {@if($city == "Famagusta") selected @endif}>Famagusta</option>
                             </select>
                         </fieldset>
                     </div>

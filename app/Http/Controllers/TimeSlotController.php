@@ -57,6 +57,8 @@ class TimeSlotController extends Controller
 
         //round se misawra ta reservation settings gia na fkennun ta time slots
         $min->round30();
+
+        //TODO: nan rounddown gia to max j roundup gia to min
         $max->round30();
 
 

@@ -133,9 +133,10 @@ use App\Models\User2_Photo;
             </div>
         </div>
 
-        @if ($showCityPop)
+{{-- TODO: na dulefki opos edulefke --}}
+        {{-- @if ($showCityPop)
             @include('www.components.choose-city')
-        @endif
+        @endif --}}
 
 
 </body>
