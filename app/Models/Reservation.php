@@ -41,6 +41,7 @@ class Reservation extends Model
         return $this->hasOne('App\Models\Rating');
     }
 
+    //TODO:
     //Otan erkete to time nan se format dd/mm/yyyy
     //doesnt work epd en to dexete etsi to carbon
     // public function getDateAttribute( $value ) {

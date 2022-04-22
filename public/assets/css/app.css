@@ -11,6 +11,14 @@
     line-height: .75
 }
 
+/* [1] The container */
+.hover-zoom {
+    transition: transform 0.2s ease;
+  }
+.hover-zoom:hover {
+    transform: scale(1.1);
+  }
+
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);

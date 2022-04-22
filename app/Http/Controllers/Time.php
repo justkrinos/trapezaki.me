@@ -19,12 +19,12 @@ class Time extends Controller
         $obj->setHour(intdiv($t, 60));
         $obj->setMinutes($t - $obj->getHour()*60);
 
-        $time = Carbon::now();
+        $time = Carbon::now('Europe/Athens');
         $time->setHour(intdiv($t, 60));
         $time->setMinutes($t - $obj->getHour()*60);
 
         $obj->setTimeInt($t);
-        
+
         $obj->setStrTime($time->format('H:i'));
 
         return $obj;
@@ -50,7 +50,7 @@ class Time extends Controller
         }else{
             $this->intHour = 0;
         }
-        
+
     }
 
     public function setMinutes(int $m){
@@ -66,7 +66,7 @@ class Time extends Controller
     }
 
     public function setStrTime(string $t){
-        $this->strTime = $t;        
+        $this->strTime = $t;
     }
 
     public function get(){
@@ -85,12 +85,12 @@ class Time extends Controller
             $this->intMin = 30;
         }
 
-        $time = Carbon::now();
+        $time = Carbon::now('Europe/Athens');
         $time->setHour($this->intHour);
         $time->setMinutes($this->intMin);
 
         $this->setTimeInt($this->intMin + $this->intHour*60);
-        
+
         $this->setStrTime($time->format('H:i'));
 
         return $this;

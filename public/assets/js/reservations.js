@@ -23,7 +23,8 @@ $(document).ready(function () {
 
     //On click sto modify reservvation tu modal
     $("#modResv").click(function () {
-        window.location.href = "/edit-reservation";
+        //change location to the edit page
+        window.location.href = "/edit-reservation/?id=" + parseInt($('#myresvBusiness').html());
     })
 
     //Redirect when add a reservation is clicked

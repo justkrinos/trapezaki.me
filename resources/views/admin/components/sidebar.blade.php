@@ -35,6 +35,8 @@
                     class="sidebar-item
                 @if (request()->route()->uri === 'pending-requests') active @endif
                 ">
+
+                {{-- TODO: na eshi ena arithmo opos eshi to rate now --}}
                     <a href="/pending-requests" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Pending Requests</span>

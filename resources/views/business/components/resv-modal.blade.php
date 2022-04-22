@@ -17,7 +17,7 @@
                                 <label id="status" class="d-flex form-control justify-content-begin align-items-center">@include('business.components.circle-icon')&nbsp;<div id="statusText" class="text-secondary">Canceled</div></label>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-10">
                             <div class="flex-nowrap input-group col-md-5 mb-4">
                                 <label class="input-group-text" for="issueBusiness">Reservation No.</label>

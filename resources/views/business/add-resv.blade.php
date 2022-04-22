@@ -83,26 +83,10 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>
                                         </div>
 
-                                        {{-- TODO: na apofasisume an tha iparxei or not j na to kamume wraio na fenete --}}
-                                        <input type="number" id="pax" min="2" max="16" class="form-control" value="2" hidden>
-                                        {{-- <div class="col-sm-6 mb-1">
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text">People</span>
-                                                <div class="col-4">
-                                                    <input type="number" id="pax" min="2" max="16"
-                                                        class="form-control" value="2">
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="form-group customer-menu" style="display: none;">
-                                <div class="btn-group">
-                                    <button class="btn btn-warning btn-sm admin-mode">Admin mode</button>
-                                </div>
-                            </div>
                         </div>
                         {{-- Floor Plan --}}
                         <div class="fabric-canvas-wrapper">
@@ -146,6 +130,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="/assets/js/user2-fabric-resv.js"></script>
 <script src="/assets/js/user2-resv-options.js"></script>
+<script src="/assets/js/user2-book-modal.js"></script>
 
 <script src="/assets/js/date-no-prev.js"></script>
 <script src="/assets/js/reservation-date.js"></script>

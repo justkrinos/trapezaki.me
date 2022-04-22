@@ -1,28 +1,29 @@
 <section class="section">
     <div class="card">
         <form method="GET" action="#">
-            <div class="card-header bg-primary">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" id="search" name="search" placeholder="Find restaurants, bar, cafe..."
-                        aria-describedby="button-addon2">
-                    <button type="submit" class="btn btn-outline-white bg-info" type="button" id="button-addon2">Search</button>
+        <div class="card-header bg-primary">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
+                <input type="text" class="form-control" placeholder="Find restaurants, bar, cafe..."
+                    aria-describedby="button-addon2">
+                <button class="btn btn-outline-white bg-info" type="submit" id="button-addon2">Search</button>
+            </div>
+            {{-- TODO: na mpun ulla ta options prin to koumpi tu search --}}
+            <div class="card-content bg-primary">
+                <div class="d-flex justify-content-center">
+                    <div class="form-check form-check-inline form-switch">
+                        <input class="form-check-input bg-info" type="checkbox" id="switchCheck">
+                        <label class="form-check-label text-white" for="switchCheck"> Food</label>
+                    </div>
+                    <div class="form-check form-check-inline form-switch">
+                        <input class="form-check-input bg-info" type="checkbox" id="switchCheck">
+                        <label class="form-check-label text-white" for="switchCheck"> Coffee</label>
+                    </div>
+                    <div class="form-check form-check-inline form-switch">
+                        <input class="form-check-input bg-info" type="checkbox" id="switchCheck">
+                        <label class="form-check-label text-white" for="switchCheck"> Drinks</label>
+                    </div>
                 </div>
-                {{-- TODO: na mpun ulla ta options prin to koumpi tu search? --}}
-                <div class="card-content bg-primary">
-                    <div class="d-flex justify-content-center" id="type" name="type">
-                        <div class="form-check form-check-inline form-switch">
-                            <input class="form-check-input bg-info" type="checkbox" id="food" name="food">
-                            <label class="form-check-label text-white" for="switchCheck"> Food</label>
-                        </div>
-                        <div class="form-check form-check-inline form-switch">
-                            <input class="form-check-input bg-info" type="checkbox" id="coffee" name="coffee">
-                            <label class="form-check-label text-white" for="switchCheck"> Coffee</label>
-                        </div>
-                        <div class="form-check form-check-inline form-switch">
-                            <input class="form-check-input bg-info" type="checkbox" id="drinks" name="drinks">
-                            <label class="form-check-label text-white" for="switchCheck"> Drinks</label>
-                        </div>
                     </div>
                     <div class="d-flex row justify-content-center">
                         <div class="col-md-4 row-col-4 mb-3">
@@ -52,18 +53,17 @@
                             </fieldset>
                         </div>
 
-                        <div class="col-md-3 mb-2">
-                            <h6 class="text-white">City</h6>
-                            <fieldset class="form-group">
-                                <select class="form-select" name="city" id="basicSelect">
-                                    <option>Limassol</option>
-                                    <option>Paphos</option>
-                                    <option>Larnaca</option>
-                                    <option>Nicosia</option>
-                                    <option>Famagusta</option>
-                                </select>
-                            </fieldset>
-                        </div>
+                    <div class="col-md-3 mb-2">
+                        <h6 class="text-white">City</h6>
+                        <fieldset class="form-group">
+                            <select class="form-select" id="citySelect">
+                                <option @if($city == "Limassol") selected @endif>Limassol</option>
+                                <option @if($city == "Paphos") selected @endif>Paphos</option>
+                                <option @if($city == "Larnaca") selected @endif>Larnaca</option>
+                                <option @if($city == "Nicosia") selected @endif>Nicosia</option>
+                                <option @if($city == "Famagusta") selected @endif>Famagusta</option>
+                            </select>
+                        </fieldset>
                     </div>
                 </div>
             </div>

@@ -118,7 +118,7 @@
                                         <div class="input-group">
                                             <label for="inputSlots">Availabiliy</label>
                                             <div id="inputSlots" class="input-group col-md-5">
-                                                <span id="timeSlots" class="form-control row-cols-6">
+                                                <span id="timeSlots" class="form-control">
                                                 </span>
                                             </div>
                                         </div>

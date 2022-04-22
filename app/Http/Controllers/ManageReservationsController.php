@@ -69,13 +69,13 @@ class ManageReservationsController extends Controller
         $reservation = Reservation::find($validatedData['reservation_id']);
 
         $resvDate = Carbon::parse($reservation->date)->endOfDay();
-        $todayDate = Carbon::now()->endOfDay();
+        $todayDate = Carbon::now('Europe/Athens')->endOfDay();
 
         //make sure its on a table that its owned by the u2
         //make sure to attendance ennen megalitero tu arithmou twn atomwn
         //make sure oti to reservation ennen cancelled
         //make sure oti mono ta simerina reservations borei na allaksei
-        if($reservation->table->user2_id  == $user2->id 
+        if($reservation->table->user2_id  == $user2->id
             && $validatedData['attendance'] <= $reservation->pax
             && !$reservation->cancelled
             && $resvDate->eq($todayDate)

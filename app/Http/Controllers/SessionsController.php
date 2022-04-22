@@ -21,6 +21,8 @@ class SessionsController extends Controller
         //-Se tuntes formes na sasun ta error messages
         //-Na ginunte kochina ta input boxes j na mpenni to error me to class tou pukatw
         //-Ta error messages kapies fores ennen sta sosta field na sasun
+        //- nan descriptive to kateh form se tuto j sta alla has() se alla controllers
+        //              dld na mennen 'form1' alla kapio name
 
         //Both change password and edit profile are here
         if(request()->has('form1'))
@@ -126,7 +128,9 @@ class SessionsController extends Controller
 
 
         //Continue to login
+        session()->forget('city'); // gia na fiei to city an iparxei
         session()->regenerate();
+
         return redirect('/make-a-reservation')->withInput()->with('success', 'Welcome!');
     }
 
@@ -139,12 +143,14 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
+
         //Check if credentials ar ok
         if (!Auth::guard('user3')->attempt($attributes)) {
             return 'Your provided credentials could not be verified.';
         }
 
         //Continue to login
+        session()->forget('city');
         session()->regenerate();
         return 'success';
     }
@@ -192,6 +198,24 @@ class SessionsController extends Controller
         ]);
 
         return "success";
+    }
+
+
+    public function changeCity(){
+        $validatedData = request()->validate([
+            'city' => "required|in:Limassol,Larnaca,Paphos,Famagusta,Nicosia"
+        ]);
+
+        $user3 = Auth::guard('user3')->user();
+
+        if($user3){
+            $user3->city = $validatedData['city'];
+            $user3->save();
+        }else{
+            session([ 'city' => $validatedData['city']]);
+        }
+
+        return 'success';
     }
 
 }

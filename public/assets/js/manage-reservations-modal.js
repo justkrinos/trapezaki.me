@@ -5,13 +5,12 @@ $(document).ready(function () {
         date = $("#mydate").val();
         $("#dateInput").trigger("submit");
     });
-    
+
     var unchanged_attendance =0
-    
+
     modalpop();
-    
+
     if (sessionStorage.getItem("success")) {
-        console.log("empike")
         Toastify({
             text: sessionStorage.getItem("success"),
             duration: 3000,
@@ -23,7 +22,7 @@ $(document).ready(function () {
         sessionStorage.removeItem("success");
     }
 
-    
+
 })
 
 
@@ -110,7 +109,7 @@ function modalpop() {
         //If date ennen simera na men bori na kami modify or cancel
         //j na men bori na kami modify to attendance
         //same gia cancelled
-        if (now.valueOf() != date.valueOf() || cancelled) {
+        if (now.valueOf() > date.valueOf() || cancelled) {
             $("#modCancel").hide();
             $("#modResv").hide();
             $("#attendance").prop("disabled", true).attr("type","text").addClass("bg-white")

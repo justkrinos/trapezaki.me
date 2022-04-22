@@ -133,11 +133,11 @@ $('.import').click(function(func){
                             object.id = id
                             loadFloorPlan(jsonContents) //kamnei kathe lio floorplan
                         })
-                        
+
                     }
                 })
-                
-                              
+
+
                 document.body.removeChild(fileInput)
             }
             reader.readAsText(file)
@@ -172,7 +172,7 @@ function giveId(capacity, table_no, shape) {
         },
         success: function (tableID) {
             return resolve(tableID)
-            
+
         },
         error: function (err) {
             Toastify({
@@ -285,7 +285,8 @@ function recreateGrouppedObjects(obj, notpulled) {
         id: obj.id,
         isGroupped: true,
         scaleX: notpulled.scaleX,
-        scaleY: notpulled.scaleY
+        scaleY: notpulled.scaleY,
+        capacity: notpulled.capacity
     })
 
     //Remove the black object that was pulled

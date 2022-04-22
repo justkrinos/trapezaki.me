@@ -276,7 +276,8 @@ function addRect(left, top, width, height, number, capacity) {
     visualType: 'table',
     id: id,
     number: number,
-    isGroupped: true
+    isGroupped: true,
+    capacity: capacity
   })
 
   canvas.add(g)
@@ -314,7 +315,8 @@ function addCircle(left, top, radius, number, capacity) {
     visualType: 'table',
     id: id,
     number: number,
-    isGroupped: true
+    isGroupped: true,
+    capacity: capacity
   })
   canvas.add(g)
   return g

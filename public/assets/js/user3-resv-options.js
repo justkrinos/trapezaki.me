@@ -109,7 +109,8 @@ function recreateGrouppedObjects(obj, notpulled) {
         visualType: obj.visualType,
         number: notpulled.number,
         id: obj.id,
-        isGroupped: true
+        isGroupped: true,
+        capacity: notpulled.capacity
     })
 
     //Remove the black object that was pulled
@@ -179,7 +180,7 @@ function bookTable()
         data: data,
         success: function(success) {
             console.log(success);
-            //window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
+            window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
         },
         error: function(error) {
             console.log(error);

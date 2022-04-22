@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User3;
 use App\Models\User2;
+use App\Models\Table;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -76,7 +77,7 @@ class BookingController extends Controller
             }else{
                 $guest = User3::create($attributes);
             }
-            
+
 
             //TODO: opu eshi validation numeric na to kamume nan min:0 j na valume max an xriazete (px. pax <=16)
             $validatedData = $request->validate([
@@ -110,11 +111,11 @@ class BookingController extends Controller
             ]);
 
             // return $validatedData;
-            
+
             unset($validatedData['user3_username']);
 
             $reservation = Reservation::create($validatedData);
-            
+
             return $reservation;
         }
     }
@@ -129,8 +130,8 @@ class BookingController extends Controller
                 'username' => "guest-" . mt_rand(1000000000, 9999999999) . strval(User3::max('id') + 1),
                 'password' => bcrypt(uniqid() . strval(mt_rand(1000000, 9999999)) . uniqid())
             ]);
-    
-    
+
+
             //try{
             $attributes = $request->validate(
                 [
@@ -139,44 +140,40 @@ class BookingController extends Controller
                     'email' => 'required|email|max:100|unique:user3s,email',
                     'guest' => 'required',
                     'username' => 'required',
-                    'password' => 'required',
-                    'date'=> 'required|date',
-                    'time'=> 'required',
-                    'table_id'=> 'required|numeric',
-                    'details'=> 'required|string|max:200',
-                    'pax'=> 'required|numeric'
+                    'password' => 'required'
                 ],
                 [
-                    'email.unique' => 'An account already exists with this email. You can just log in. :)'
+                    'email.unique' => 'An account already exists with this email.'
                 ]
             );
+
+            $request = request()-> merge([
+                'attended' => 0
+            ]);
+
+            $validatedData = $request->validate([
+                'date'=> 'required|date|after:yesterday',
+                'time'=> 'required',
+                'table_id'=> 'required|numeric',
+                'details'=> 'required|string|max:200',
+                'pax'=> 'required|numeric',
+                'attended' => 'required'
+            ]);
+
             $guest = User3::where('email',$attributes['email'])->where('guest',1)->first();
 
-            
             //Check an iparxi idi guest me tuto to email j kame update ta data tou if yes
             if($guest){
                 $guest->update($attributes);
             }else{
                 $guest = User3::create($attributes);
             }
-            $guest_id = $guest->id;
 
-            $request = request()-> merge([
-                'attended' => 0
-            ]);
-           
-            $validatedData = $request->validate([
-                'date'=> 'required',
-                'time'=> 'required',
-                'table_id'=> 'required',
-                'details'=> 'required',
-                'pax'=> 'required',
-                'attended' => 'required'
-            ]);
 
-            $validatedData['user3_id'] = $guest_id;
+            $validatedData['user3_id'] = $guest->id;
             $reservation = Reservation::create($validatedData);
-            
+
+            //TODO: na men kamnei return to reservation
             return $reservation;
         }
         else
@@ -184,32 +181,32 @@ class BookingController extends Controller
             $request = request()-> merge([
                 'attended' => 0
             ]);
-            
-           
+
+
             $validatedData = $request->validate([
                 'user3_username' => 'required|max:50|min:3|exists:user3s,username',//
-                'date'=> 'required|date',
+                'date'=> 'required|date|after:yesterday',
                 'time'=> 'required',
                 'table_id'=> 'required|numeric',
                 'details'=> 'required|string|max:200',
                 'pax'=> 'required|numeric',
                 'attended' => 'required'
             ]);
-            
+
 
             // return $validatedData;
             $user3_id = User3::where('username', $validatedData['user3_username'])->first()->id;
             $validatedData['user3_id'] = $user3_id;
             unset($validatedData['user3_username']);
             $reservation = Reservation::create($validatedData);
-            
+
             return $reservation;
         }
         //get data from the request if not logged in
         //return (request());
-        
-            
-        
+
+
+
     }
         //TODO na to kamume na dulefki
         //try{
@@ -243,5 +240,70 @@ class BookingController extends Controller
         $response = Response::make($file, 200);
         $response->header('Content-Type', 'application/pdf');
         return $response;
+    }
+
+    public function showEditResv(){
+            $validated  = request()->validate([
+                'id' => 'required|numeric|exists:reservations,id',
+            ]);
+
+            $user2 = Auth::guard('user2')->user();
+            $reservation = Reservation::where('id', $validated['id'])->first();
+
+            //check if the authorised user 2 has that table where the reservation is placed
+            if($user2->tables()->where('id',$reservation->table_id)->exists()){
+                return view('business.edit-resv',[
+                    'reservation' => $reservation,
+                    'user3'        => $reservation->user3
+                ]);
+            }
+
+            return back();
+    }
+
+    public function editResv(){
+        $validatedData = request()->validate([
+            'date'=> 'required|date|after:yesterday',
+            'time'=> 'required', //TODO: validate this
+            'table_id'=> 'numeric',
+            'id' => 'required|exists:reservations,id',
+            'details'=> 'required|string|max:200',
+            'pax'=> 'required|numeric|min:2|max:16',
+        ],[
+            'pax.required' => 'The people field is required.'
+        ]);
+
+        //check if the reservation is owned by the business
+        $reservation = Reservation::find($validatedData['id']);
+
+        $currentTableOwnerId = $reservation->table->user2->id;
+        $currentUserId = Auth::guard('user2')->user()->id;
+
+        //dont continue if reservsation is not owned by auth user
+        if($currentTableOwnerId != $currentUserId)
+            return response()->json([], 422);
+
+        //check an eshi table j an en diko tu to table allios go back
+        $selectedTable = 0;
+        if(array_key_exists('table_id',$validatedData)){
+            $selectedTable = Table::find($validatedData['table_id']);
+            if($selectedTable->user2->id != $currentUserId)
+                return response()->json([],422);
+        }
+
+        //an exw selected table tote piannw to capacity tu jinu
+        //an den exw tote piannw to p to table tu arxiku reservation
+        $tableCapacity = $selectedTable ? $selectedTable->capacity : $reservation->table->capacity;
+
+        //an to pax den en mesa sta apodekta oria tote stile ton pisw
+        if($validatedData['pax'] < 2 || $validatedData['pax'] > $tableCapacity){
+            return response()->json([],422);
+        }
+
+        //update the reservations details
+        $reservation->update($validatedData);
+
+        return 'success';
+
     }
 }

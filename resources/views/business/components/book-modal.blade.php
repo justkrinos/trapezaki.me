@@ -31,7 +31,7 @@
                                     </div>
                                     <label for="inputSlots">Availabiliy</label>
                                     <div id="inputSlots" class="input-group col-md-5">
-                                        <span id="timeSlots" class="form-control row-cols-6"></span>
+                                        <span id="timeSlots" class="form-control"></span>
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>
@@ -74,7 +74,7 @@
                                     </div>
                                     <label for="inputSlots">Availabiliy</label>
                                     <div id="inputSlots" class="input-group col-md-5">
-                                        <span id="timeSlots2" class="form-control row-cols-6"></span>
+                                        <span id="timeSlots2" class="form-control"></span>
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>

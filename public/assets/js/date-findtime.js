@@ -1,27 +1,17 @@
-//When date is changed, update time slots
 
 //getTimeSlots()
 
+//if we are modifying then we have an old date to select
+
+
 var timeSlots = []
-$('input[type=date].popdate').on('change', findTimeSlots)
-
-
-//JUST TO MAKE RANDOM TIMES DELETE LATER
-function rand(min, max) { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min)
-}
 
 
 //Function to find time slots
 function findTimeSlots() {
-    //TODO fetch available time for date $('input[type=date]').val()
-   // $dummyData = { time: [rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00', rand(0, 24) + ':00',] };
-    // $dummyData = { time: []};
     $("#timeSlots").fadeOut('fast').promise().done(function () {
-        console.log(timeSlots)
         $("#timeSlots").empty();
         getTimeSlots() //Ajax call, edw mesa kaleite kai to setTimeSlots
-        //getTimeSlots(timeSlots);
         $("#timeSlots").fadeIn('slow')
     })
 }
@@ -29,9 +19,7 @@ function findTimeSlots() {
 
 function setTimeSlots($timeslots) {
     //If we have time slots
-    console.log($timeslots)
-    console.log($timeslots.length)
-    if (!$timeslots.length == 0) {
+    if ($timeslots.length) {
         $timeslots.forEach($time => {
             //Create an element for each time slot
             $("#timeSlots").append(
@@ -42,8 +30,13 @@ function setTimeSlots($timeslots) {
                 + $time + "</labell>"
             )
         })
-        //Create a book button
-        $('#btnBook').html("<button type=\"button\" class=\"btn btn-primary\"><span class=\"d-sm-block\">Book Now</span></button>")
+
+        //if we are on the modification page
+        if (("#reservation_id").length) {
+            $('#btnBook').html("<button type=\"button\" class=\"btn btn-primary\"><span class=\"d-sm-block\">Apply</span></button>")
+        } else
+            //Create a book button
+            $('#btnBook').html("<button type=\"button\" class=\"btn btn-primary\"><span class=\"d-sm-block\">Book Now</span></button>")
     }
     else {
         //No availability, delete book button if exists
@@ -52,12 +45,10 @@ function setTimeSlots($timeslots) {
     }
 }
 
-function getTime(element)
-{
+function getTime(element) {
     var a = element;
     a.setAttribute("sel", "selected");
 }
-
 
 //FOR LATER USE ON SUBMITTING
 
@@ -74,34 +65,41 @@ function getTime(element)
 
 
 
-function getTimeSlots(){
-    table_id = canvas.getActiveObject().id
+function getTimeSlots(table) {
+    if (table == undefined) {
+        table_id = canvas.getActiveObject().id
+    }
+    else
+        table_id = table
+
     date = $("#resv-date")[0].value;
     var data = {
         "date": date,
         "table_id": table_id,
     };
-    console.log(data);
     $.ajaxSetup({
         headers: {
-          'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
         }
-      });
+    });
+
+    if (("#reservation_id").length) {
+        content = { 'table_id': table_id, 'date': date, 'id': $("#reservation_id").val() }
+    } else {
+        content = { 'table_id': table_id, 'date': date }
+    }
 
     $.ajax({
         type: "GET",
         url: "/api/" + username + "/time-slots",
-        data: {
-            'table_id': table_id,
-            'date': date
-        },
-        success: function(success) {
-            timeSlots = success
+        data: content,
+        success: function (timeSlots) {
             //TODO NA FIGEI APO EDW
             setTimeSlots(timeSlots); //eprepe na ferw edw to call sto setTimeSlots gia na fkei pu tin 1i fora
         },
-        error: function(error) {
-            console.log(error);
+
+        //TODO toast error colors nan idio se ulla
+        error: function (error) {
             Toastify({ //an exw error fkale toast
                 text: 'Oops! Something went wrong :(',
                 duration: 5000,

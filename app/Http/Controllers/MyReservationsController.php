@@ -28,7 +28,7 @@ class MyReservationsController extends Controller
 
             //Get date and time twra
             $nowDate = Carbon::now()->setTime(0, 0, 0);
-            $nowTime = new Time(Carbon::now()->format('H:i'));
+            $nowTime = new Time(Carbon::now('Europe/Athens')->format('H:i'));
 
             //Check an eperase i wra/mera tu resv j varto sto analogo table
             if ($date->lt($nowDate) || $reservation->cancelled)

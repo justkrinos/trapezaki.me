@@ -18,11 +18,10 @@ use App\Models\User2_Photo;
               //-na sastun ta provlimata me to sidebar na megaloni j na men eshi x (en logo tu main.js)
 
               //-na men to fkallei panta to modal na checkari an eksanaepelekses
-              //- na dume pos enna apothikefkete to city, ston user oksa sto session?
-              --}}
+              //- na dume pos enna apothikefkete to city, ston user oksa sto session? --}}
 
 
-    {{--Toast dependency--}}
+    {{-- Toast dependency --}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 
     <link rel="stylesheet" href="/assets/css/font.css">
@@ -80,21 +79,19 @@ use App\Models\User2_Photo;
 
 
 
-                            {{--tuto en gia na fkallei recommended magazia prin kamis search --}}
+                            {{-- tuto en gia na fkallei recommended magazia prin kamis search --}}
                             @include('www.search.random')
 
 
 
-                            {{--TODO: na katalaveni an ekames search j na fefki ta exta
+                            {{-- TODO: na katalaveni an ekames search j na fefki ta exta
                                       magazia j na su fkalli ta search results
 
                             <div class="row">
 
                                 <h3>Results</h3>
                                 <p class="text-subtitle text-muted">You searched for "bar" </p>
-                            </div>
-
-                            --}}
+                            </div> --}}
 
 
                             {{-- @foreach (App\Models\User2::all() as $user)
@@ -136,7 +133,9 @@ use App\Models\User2_Photo;
             </div>
         </div>
 
-        @if($showCityPop) @include('www.components.choose-city') @endif
+        @if ($showCityPop)
+            @include('www.components.choose-city')
+        @endif
 
 
 </body>
@@ -152,27 +151,61 @@ use App\Models\User2_Photo;
 {{-- En xriazete i main dame gt en mono gia to sidebar --}}
 <script src="../assets/js/main-nosidepop.js"></script>
 
-{{--Toast dependencies--}}
+{{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 @include('components.toasts')
 
-
 <script>
-$(document).ready(function(){
-    $("#chooseCity").modal('show')
-})
+    $(document).ready(function() {
+        $("#chooseCity").modal('show')
+    })
 
+    $(".city-option").click(function() {
+        option = $(this).attr("id")
+        switch (option) {
+            case 'Limassol':
+                $("#citySelect").prop('selectedIndex', 0);
+                break;
+            case 'Paphos':
+                $("#citySelect").prop('selectedIndex', 1);
+                break;
+            case 'Larnaca':
+                $("#citySelect").prop('selectedIndex', 2);
+                break;
+            case 'Nicosia':
+                $("#citySelect").prop('selectedIndex', 3);
+                break;
+            case 'Famagusta':
+                $("#citySelect").prop('selectedIndex', 4);
+                break;
+        }
 
-//NA KAMO TO MODAL NA EMFANIZETE GIA ARXI
-//J META NA METAFERO TO CHOOSE CITY MESA
-//OTAN TSILIETE TO CHOOSE CITY NA KLIEI TO MODAL
-//NA MEN ESHI KOUMPIA P KATW
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
+            },
+        });
 
-//TODOS SIMERA: na teliosi to popup
-//                na dw ta problimata me ta resv
-//                na dume ti provlimata exume me server na sasume me andrea
-//                na dw ti na pume tu pingu 1.ta buttons p en otinane
-//                                          2. ta trapezia j karekles
+        $.ajax({
+            url: "/api/change-city",
+            method: "post",
+            data: {
+                'city': option
+            },
+            success: function(result) {
+                console.log("success")
+                console.log(result);
+            },
+            error: function(error){
+                console.log("error")
+                console.log(error)
+            }
+        });
+    })
 </script>
 
+
 </html>
+
+
+{{-- //TODO: otan ginei to search  na apothikefkete kathe fora to city --}}

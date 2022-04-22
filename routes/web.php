@@ -62,15 +62,22 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/make-a-reservation', [SearchController::class, 'index'])->name('first_page');
 
+    //TODO: tuto edulefke
     /*Route::get('/make-a-reservation', function () {
         $showCityPop = true;
+        $city = "";
 
         //na dulefki j gia guest j gia user 3 gt en geniko tuto
         if (Auth::check('user3') && Auth::guard('user3')->user()->city) {
             $showCityPop = false;
+            $city = Auth::guard('user3')->user()->city;
+        } elseif(session()->has('city')){
+            $showCityPop = false;
+            $city = session()->get('city');
         }
         return view('www.search', [
-            'showCityPop' => $showCityPop
+            'showCityPop' => $showCityPop,
+            'city'        => $city
         ]);
     })->name('first_page');*/
 
@@ -85,7 +92,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::post('/user/{user2}/book', [BookingController::class, 'createBook']);
     Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
 
-
+    Route::post('/api/change-city',[SessionsController::class,'changeCity']);
 
     // ^ Tuta  panw en eksw pu to middleware
     //   epd boris na to dis ite ise logged in ite oi
@@ -93,13 +100,17 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::middleware(['guest:user3'])->group(function () {
 
+        //TODO na mpei se controller
         Route::get('/', function () {
             $showCityPop = true;
-            if (session()->has('showCityPop')) {
+            $city = "";
+            if (session()->has('city')) {
                 $showCityPop = false;
+                $city = session()->get('city');
             }
             return view('www.search', [
-                'showCityPop' => $showCityPop
+                'showCityPop' => $showCityPop,
+                'city'        => $city
             ]);
         });
 
@@ -208,9 +219,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/logout', [SessionsController2::class, 'destroy']);
         Route::post('/profile', [SessionsController2::class, 'edit']);
 
-        Route::get('/edit-reservation', function () {
-            return view('business.edit-resv');
-        });
+        Route::get('/edit-reservation', [BookingController::class,'showEditResv']);
+        Route::post('/edit-reservation',[BookingController::class,'editResv']);
 
         Route::get('/dashboard', function () {
             return view('business.dashboard');

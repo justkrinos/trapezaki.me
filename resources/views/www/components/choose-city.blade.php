@@ -10,10 +10,11 @@
 
                      <!-- Basic card section start -->
                      <section id="content-types">
-                         <div class="d-flex row justify-content-center">
-                             <div class="col-xl-2 col-md-3 col-sm-5">
+                        @csrf
+                         <div class="d-flex row justify-content-center col-12">
+                             <div class="col-lg-4 col-4 hover-zoom">
                                  <div class="card bg-light">
-                                     <a href="#" data-bs-dismiss="modal">
+                                     <a href="#" id="Limassol" class="city-option" data-bs-dismiss="modal">
                                          <div class="card-content">
                                              <img src="/assets/images/Limassol.jpg" class="card-img-top img-fluid">
                                              <div class=" text-center">
@@ -28,9 +29,9 @@
                                  </div>
                              </div>
 
-                             <div class="col-xl-2 col-md-3 col-sm-5">
+                             <div class=" col-lg-4 col-4  hover-zoom">
                                  <div class="card bg-light">
-                                     <a href="#" data-bs-dismiss="modal">
+                                     <a href="#" id="Nicosia" class="city-option" data-bs-dismiss="modal">
                                          <div class="card-content">
                                              <img src="/assets/images/Nicosia.jpg" class="card-img-top img-fluid">
                                              <div class="text-center">
@@ -44,9 +45,9 @@
                                  </div>
                              </div>
 
-                             <div class="col-xl-2 col-md-3 col-sm-5">
+                             <div class=" col-lg-4 col-4  hover-zoom">
                                  <div class="card bg-light">
-                                     <a href="#" data-bs-dismiss="modal">
+                                     <a href="#" id="Paphos" class="city-option" data-bs-dismiss="modal">
                                          <div class="card-content">
                                              <img src="/assets/images/Paphos.jpg" class="card-img-top img-fluid">
                                              <div class=" text-center">
@@ -54,15 +55,15 @@
                                              </div>
                                          </div>
                                          <ul class="list-group list-group-flush">
-                                             <li class="list-group-item bg-light">The best city.</li>
+                                             <li class="list-group-item bg-light">The best city of all.</li>
                                          </ul>
                                      </a>
                                  </div>
                              </div>
 
-                             <div class="col-xl-2 col-md-3 col-sm-5" >
+                             <div class=" col-lg-4 col-4  hover-zoom" >
                                  <div class="card bg-light">
-                                     <a href="#" data-bs-dismiss="modal">
+                                     <a href="#" id="Larnaca" class="city-option" data-bs-dismiss="modal">
                                          <div class="card-content">
                                              <img src="/assets/images/Larnaca.jpg" class="card-img-top img-fluid">
                                              <div class=" text-center">
@@ -77,9 +78,9 @@
                                  </div>
                              </div>
 
-                             <div class="col-xl-2 col-md-3 col-sm-5">
+                             <div class=" col-lg-4 col-4  hover-zoom">
                                  <div class="card bg-light">
-                                     <a href="#" data-bs-dismiss="modal">
+                                     <a href="#" id="Famagusta" class="city-option" data-bs-dismiss="modal">
                                          <div class="card-content">
                                              <img src="/assets/images/Amoxostos.jpg" class="card-img-top img-fluid">
                                              <div class="text-center">
