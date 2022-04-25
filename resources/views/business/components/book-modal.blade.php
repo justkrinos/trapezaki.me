@@ -35,8 +35,29 @@
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>
-                                    <label class="mb-2" for="description">Description</label>
+                                    <div class="col-md-6 col-md-2">
+                                        <label for="pax">People:</label>
+                                        <select name="pax" id="pax">
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                        </select>
+                                    </div>
+                                    
+                                   
                                     <div class="form-group col-12 justify-content-center mb-5">
+                                        <label class="mb-2" for="description">Description</label>
                                         <textarea class="form-control" id="description" name="description"
                                              rows="3" placeholder="To drink, to eat etc..."></textarea>
                                         <div class="invalid-feedback">
@@ -78,8 +99,29 @@
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>
-                                    <label class="mb-2" for="description">Description</label>
+                                    <div class="col-md-6 col-md-2">
+                                        <label for="pax">People:</label>
+                                        <select name="pax" id="guest_pax">
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                        </select>
+                                    </div>
+                                    
                                     <div class="form-group col-12 justify-content-center mb-5">
+                                        <label class="mb-2" for="description">Description</label>
                                         <textarea class="form-control" id="description_guest" name="description"
                                          rows="3" placeholder="To drink, to eat etc..."></textarea>
                                         <div class="invalid-feedback">

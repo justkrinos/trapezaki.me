@@ -62,8 +62,6 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                     <div class="card-header">
                         @include('components.back-button')
                         <div class="container-fluid text-center">
-                            <h2>Notes</h2>
-                            <p>->Aman kamw select table je fiw pu to model, to sigkekrimeno enen selectable mexri na kamw select allo</p>
                             <h3 class="mb-4k mb-4">Select a Table</h3>
                             <div class="d-flex justify-content-center mb-2">
                                 <div class="col-md-6">
@@ -81,13 +79,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                             <button class='next-day btn btn-outline-secondary btn-google'><i
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>
                                         </div>
-                                        <div class="input-group col-sm-3 mb-3">
-                                            <h3 class="col-md-4">People</h3>
-                                            <div class="quantity">
-
-                                                <input type="number" min="2" max="16" step="1" value="2" id="pax">
-                                              </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

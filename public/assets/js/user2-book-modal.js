@@ -85,6 +85,7 @@ function bookTable() {
         var guest_email = document.getElementById("email").value;
         var guest_phone = document.getElementById("phone").value;
         var description = document.getElementById("description_guest").value;
+        var guest_pax = document.getElementById("guest_pax").value;
         var data = {
             guest: 1,
             date: date,
@@ -94,7 +95,7 @@ function bookTable() {
             email: guest_email,
             phone: guest_phone,
             details: description,
-            pax: pax,
+            pax: guest_pax,
         };
         console.log(data);
 
