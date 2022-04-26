@@ -1,5 +1,6 @@
 @php
 $city = 'Limassol';
+$city = request("city");
 //TODO: na fiei tuto j na sasei
 @endphp
 
@@ -10,7 +11,7 @@ $city = 'Limassol';
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                     <input type="text" class="form-control" placeholder="Find restaurants, bar, cafe..."
-                        name="search" aria-describedby="button-addon2">
+                        name="search" aria-describedby="button-addon2" value="{{ request("search") }}">
                     <button class="btn btn-outline-white bg-info" type="submit"
                         id="button-addon2">Search</button>
                 </div>
@@ -40,22 +41,22 @@ $city = 'Limassol';
                     <div class="col-md-2 mb-2">
                         <h6 class="text-white">People </h6>
                         <fieldset class="form-group">
-                            <select class="form-select" name="people" id="basicSelect">
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                                <option>13</option>
-                                <option>14</option>
-                                <option>15</option>
-                                <option>16</option>
+                            <select class="form-select" name="people" id="basicSelect" value="{{ request("people") }}">
+                                <option @if (request("people")=="2") selected @endif>2</option>
+                                <option @if (request("people")=="3") selected @endif>3</option>
+                                <option @if (request("people")=="4") selected @endif>4</option>
+                                <option @if (request("people")=="5") selected @endif>5</option>
+                                <option @if (request("people")=="6") selected @endif>6</option>
+                                <option @if (request("people")=="7") selected @endif>7</option>
+                                <option @if (request("people")=="8") selected @endif>8</option>
+                                <option @if (request("people")=="9") selected @endif>9</option>
+                                <option @if (request("people")=="10") selected @endif>10</option>
+                                <option @if (request("people")=="11") selected @endif>11</option>
+                                <option @if (request("people")=="12") selected @endif>12</option>
+                                <option @if (request("people")=="13") selected @endif>13</option>
+                                <option @if (request("people")=="14") selected @endif>14</option>
+                                <option @if (request("people")=="15") selected @endif>15</option>
+                                <option @if (request("people")=="16") selected @endif>16</option>
                             </select>
                         </fieldset>
                     </div>
@@ -63,12 +64,12 @@ $city = 'Limassol';
                     <div class="col-md-3 mb-2">
                         <h6 class="text-white">City</h6>
                         <fieldset class="form-group">
-                            <select class="form-select" id="citySelect" name="city">
+                            <select class="form-select" id="citySelect" name="city" value="{{ request("city") }}">
                                 <option @if ($city == 'Limassol') selected @endif>Limassol</option>
                                 <option @if ($city == 'Paphos') selected @endif>Paphos</option>
                                 <option @if ($city == 'Larnaca') selected @endif>Larnaca</option>
                                 <option @if ($city == 'Nicosia') selected @endif>Nicosia</option>
-                                <option {@if ($city == 'Famagusta') selected @endif}>Famagusta</option>
+                                <option @if ($city == 'Famagusta') selected @endif>Famagusta</option>
                             </select>
                         </fieldset>
                     </div>
