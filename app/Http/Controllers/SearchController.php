@@ -11,7 +11,7 @@ class SearchController extends Controller
     public function index()
     {
         $businesses = User2::latest();
-        //An ginei search
+        //An ginei search   
         if(request("search"))
         {
             //Checking type
@@ -34,9 +34,11 @@ class SearchController extends Controller
 
             
 
-
+            //city, name, description
             $businesses
-                ->where('city', 'like', request("city")) //strict city check
+                ->where('city', 'like', request("city")); //strict city check
+                
+            $businesses
                 ->where('business_name', 'like', '%' . request('search') . '%') //relaxed name check
                 ->orWhere('description', 'like', '%' . request('search') . '%') //relaxed description check
                 ;/*->get()
@@ -47,19 +49,43 @@ class SearchController extends Controller
             //query to get tables for the filtered users
             $tables = Table::select("user2_id")
                 ->where("capacity", ">=", request("people"))
-                ->whereIn("user2_id", $businesses->pluck("id"))->get()->all();
+                ->whereIn("user2_id", $businesses->pluck("id"))->get();
+
+            $subset = $tables->map(function ($table) {
+                return $table->only(['user2_id']);
+            });
+
+            //dd($subset);
             
-            foreach($tables as $table){
-                //I will show these businesses, because they have tables with capacity equal or greater than the requested people
-                dd($businesses->where("id", $table->user2_id)->get());
-            }
-            /*    $qualified = array();
-            foreach($businesses->get()->all() as $business)
+            //dd($businesses->get()->all());
+            //$businesses->where("id", 2);
+            //dd($businesses->get()->all());
+            $i=0;
+            foreach($subset as $sub)
             {
-                array_push($qualified, $business->tables->where('capacity', '>=', request("people")));
+                //dd($businesses->get()->all());
+                if($i==0)
+                {
+                    $businesses->where("id", $sub);
+                }
+                else
+                {
+                    $businesses->orWhere("id", $sub);
+                }
+                $i++;
+                //dd($businesses->get()->all());
             }
-            dd($qualified);*/
+            $businesses
+                ->limit(5)
+                ->where('is_verified', 1)
+                ->where('status', 1);
+            //$businesses->where("id", 2);
             
+            //dd($businesses->get()->all());
+            
+            return view('www.search',[
+                'businesses' => $businesses->get()
+            ]);
         }
         return view('www.search');
     }
