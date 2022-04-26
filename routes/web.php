@@ -138,6 +138,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser3']);
 
+        //TODO: na ginun bind ta secret me u2 j u3
         Route::get('/change-password/{email}/{secret}/', [EmailController::class, 'showForgotUser3']);
         Route::post('/change-password/{email}/{secret}/', [EmailController::class, 'modifyForgotUser3']);
 

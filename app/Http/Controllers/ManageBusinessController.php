@@ -53,9 +53,10 @@ class ManageBusinessController extends Controller
 
             return redirect('/user/' . $username)->with("success", "Your changes have been applied successfully!");
         }
-        else if(request()->has('form2'))
+        else if(request()->has('reservationSettings'))
         {
-            //TODO
+
+            return request()->all();
         }
         else if(request()->has('menuForm'))
         {

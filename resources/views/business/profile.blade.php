@@ -134,7 +134,7 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                             </div>
 
                             <div class="card-header">
-                                <h4 class="card-title">Type</h4>
+                                <h4 class="card-title">Services</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-check">

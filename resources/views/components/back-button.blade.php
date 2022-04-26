@@ -11,14 +11,16 @@
 
 
 <script>
-    //TODO: na mpennei to back location mesto local storage
-    //      an to referrer ennen to idio me to current value tu back sto storage
-    //      tote na allassei alios na miniski to idio
-    //      window.location.href = to value sto storage
 
-    var back = document.referrer; //vale sot variable back to proigumeno url
-    //Go back button an patisi to button me id btnBack, na paei sto url p lalei to variable back
+
+    //An den iparxi variable back, j an den ekama refresh tin selida
+    //tote kame set to back variable me tin proigumeni selida p itan o user
+    if(!sessionStorage.getItem("back") || sessionStorage.getItem("back") != document.referrer){
+        sessionStorage.setItem("back", document.referrer);
+    }
+
+    //Go back button an patisi to button me id btnBack, na paei sto proigumeno url
     document.getElementById('btnBack').addEventListener('click', function() {
-        window.location.href = back;
+        window.location.href = sessionStorage.getItem("back");
     })
 </script>
