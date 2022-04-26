@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@php
+    use App\Models\Table;
+@endphp
+
 {{--
 TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
 TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
@@ -91,9 +95,13 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                             </div>
                         </div>
                         {{-- Floor Plan --}}
-                        <div class="fabric-canvas-wrapper">
-                            <canvas id="canvas" width="812" height="512"></canvas>
-                        </div>
+                        @if(Table::where("user2_id",$user2->id)->first())
+                            <div class="fabric-canvas-wrapper">
+                                <canvas id="canvas" width="812" height="512"></canvas>
+                            </div>
+                        @else
+                            <h1 style="color:red">No Floor Plan</h1>
+                        @endif
 
                     </div>
                 </div>
