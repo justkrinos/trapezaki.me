@@ -22,6 +22,7 @@
     <link rel="shortcut icon" href="/assets/images/logo/logo_small.png" type="image/x-icon">
 </head>
 
+{{-- TODO: member since na men eshi time --}}
 
 <html lang="en">
 
