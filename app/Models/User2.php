@@ -67,4 +67,8 @@ class User2 extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\Daily_Setting');
     }
 
+    public function getDueDateAttribute($value) {
+        return $value->format('Y-m-d');
+    }
+
 }

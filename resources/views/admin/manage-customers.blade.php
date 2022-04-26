@@ -22,8 +22,6 @@
     <link rel="shortcut icon" href="/assets/images/logo/logo_small.png" type="image/x-icon">
 </head>
 
-{{-- TODO: member since na men eshi time --}}
-
 <html lang="en">
 
 
@@ -95,7 +93,7 @@
                                                         </div>
                                                     </a>
                                                 </td>
-                                                <td>{{ $user->created_at }}</td>
+                                                <td>{{ $user->getDueDateAttribute($user->created_at) }}</td>
                                                 <td class="text-center">
                                                     @if($user->status==1)
                                                         <span class="badge bg-success">Active</span>
