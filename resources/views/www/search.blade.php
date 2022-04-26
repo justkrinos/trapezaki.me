@@ -80,9 +80,7 @@ use App\Models\User2_Photo;
 
 
                             {{-- tuto en gia na fkallei recommended magazia prin kamis search --}}
-                            @php
-                                $businesses="";
-                            @endphp
+                            
                             @include('www.search.random')
 
 

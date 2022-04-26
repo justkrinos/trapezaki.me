@@ -12,106 +12,114 @@ class SearchController extends Controller
     {
         $businesses = User2::latest();
         //An ginei search   
-        
-        //Checking type
-        //ddd(request()->all());
-        $type = "";
-        $city="";
-        $search="";
-        
-        if(request("food"))
-        {
-            //$businesses = $businesses->where("type", "like", "%food%");
-            $type = "food";
-        }
-        if(request("coffee"))
-        {
-            //$businesses = $businesses->where("type", "like","%coffee%");
-            $type = "coffee";
-        }
-        if(request("drinks"))
-        {
-            //$businesses = $businesses->where("type", "like", "%drinks%");
-            $type = "drinks";
-        }
-
-        //dd($businesses);
-
-        /*$businesses
-                ->where('city', 'like', request("city")); //strict city check*/
-        $city = request("city");
-
-        //Checking date
-        //TODO
-
-        $tables = Table::select("user2_id")
-                ->where("capacity", ">=", request("people"))
-                ->whereIn("user2_id", $businesses->pluck("id"))->get();
-
-            $subset = $tables->map(function ($table) {
-                return $table->only(['user2_id']);
-            });
-
-            
-            //dd($subset);
-            //dd($businesses->get()->all());
-            //$businesses->where("id", 2);
-            //dd($businesses->get()->all());
-            
-            if(count($subset)==0){
-                return view('www.search',[
-                    'businesses' => ""
-                ]);
-            }
-
-            $i=0;
-            foreach($subset as $sub)
-            {
-                //dd($businesses->get()->all());
-                if($i==0)
-                {
-                    $businesses->where("id", $sub);
-                }
-                else
-                {
-                    $businesses->orWhere("id", $sub);
-                }
-                $i++;
-                //dd($businesses->get()->all());
-            }
-            //dd($businesses->get()->all());
-            
-
         if(request("search"))
         {
-            $search = request("search");
-            //$businesses
-              //  ->where('business_name', 'like', '%' . request('search') . '%') //relaxed name check
-                //->orWhere('description', 'like', '%' . request('search') . '%') //relaxed description check
-               // ;/*->get()
-                  //  ->tables
-                  //      ->where('capacity', '>=', request("people"));*/
+            //Checking type
+            //ddd(request("button-search"));
+            $type = "";
+            $city = "";
+            $search = "";
             
-            //dd($businesses->get());
-        }
-        //dd($businesses->get()->all());
-        $businesses
-                ->where('is_verified', 1)
-                ->where('status', 1)
-                ->where('city', 'like', '%' . $city . '%') //strict city check
-                ->where('type', 'like', '%' . $type . '%') //strict type check
-                ->where(function($query){
-                    $query->where('business_name', 'like', '%' . request('search') . '%') //relaxed name check
-                          ->orWhere('description', 'like', '%' . request('search') . '%') //relaxed description check
-                          ->limit(5);
+            if(request("food"))
+            {
+                //$businesses = $businesses->where("type", "like", "%food%");
+                $type = "food";
+            }
+            if(request("coffee"))
+            {
+                //$businesses = $businesses->where("type", "like","%coffee%");
+                $type = "coffee";
+            }
+            if(request("drinks"))
+            {
+                //$businesses = $businesses->where("type", "like", "%drinks%");
+                $type = "drinks";
+            }
+
+            //dd($businesses);
+
+            /*$businesses
+                    ->where('city', 'like', request("city")); //strict city check*/
+            $city = request("city");
+
+            //Checking date
+            //TODO
+
+            $tables = Table::select("user2_id")
+                    ->where("capacity", ">=", request("people"))
+                    ->whereIn("user2_id", $businesses->pluck("id"))->get();
+
+                $subset = $tables->map(function ($table) {
+                    return $table->only(['user2_id']);
                 });
-        //dd($businesses->get()->all());
+
+                
+                //dd($subset);
+                //dd($businesses->get()->all());
+                //$businesses->where("id", 2);
+                //dd($businesses->get()->all());
+                
+                //dd(count($subset));
+
+                if(count($subset)==0){
+                    return view('www.search',[
+                        'businesses' => ""
+                    ]);
+                }
+
+                $i=0;
+                foreach($subset as $sub)
+                {
+               
+                    if($i=0){
+                        $businesses = $businesses->where("id", $sub);
+                    }
+                    else{
+                        $businesses = $businesses->orWhere("id", $sub);
+                    }
+                    $i++;
+                    
+                    //dd($businesses->get()->all());
+                }
+                //dd($businesses->get());
+                
+                $search = request("search");
+                //$businesses
+                //  ->where('business_name', 'like', '%' . request('search') . '%') //relaxed name check
+                    //->orWhere('description', 'like', '%' . request('search') . '%') //relaxed description check
+                // ;/*->get()
+                    //  ->tables
+                    //      ->where('capacity', '>=', request("people"));*/
+                
+            //dd($businesses->get());
+
+            $businesses->where(function($query){
+                $query->where('city', request("city")); 
+            });
+                
+
+            //dd($businesses);
+
+            $businesses
+            ->where('is_verified', 1)
+            ->where('status', 1)
+            ->where('city', 'like', '%' . $city . '%') //strict city check
+            ->where('type', 'like', '%' . $type . '%') //strict type check
+            ->where(function($query){
+                $query->where('business_name', 'like', '%' . request('search') . '%') //relaxed name check
+                    ->orWhere('description', 'like', '%' . request('search') . '%') //relaxed description check
+                    ->limit(5);
+            });
+            //dd($businesses->get()->all());
+        }
+        
             //$businesses->where("id", 2);
             
-            //dd($businesses->get()->all());
+        //dd($businesses->get());
 
         return view('www.search',[
-            'businesses' => $businesses->get()
+            'businesses' => $businesses->get(),
+            'everything' => User2::all()
         ]);
     }
 }

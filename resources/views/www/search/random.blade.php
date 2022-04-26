@@ -2,15 +2,7 @@
 {{-- TODO: na allaksi tuto na erkete p ton controller --}}
 @php
     use App\Models\User2;
-
-    if($businesses=="")
-    {
-        $businesses = User2::inRandomOrder()
-        ->limit(5)
-        ->where('is_verified', 1)
-        ->where('status', 1)
-        ->get();
-    }
+    //dd($businesses);
 @endphp
 
 @if ($businesses) {{-- An iparxun users --}}

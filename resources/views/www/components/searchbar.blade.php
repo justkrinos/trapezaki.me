@@ -13,7 +13,7 @@ $city = request("city");
                     <input type="text" class="form-control" placeholder="Find restaurants, bar, cafe..."
                         name="search" aria-describedby="button-addon2" value="{{ request("search") }}">
                     <button class="btn btn-outline-white bg-info" type="submit"
-                        id="button-addon2">Search</button>
+                        id="button-search">Search</button>
                 </div>
                 {{-- TODO: na mpun ulla ta options prin to koumpi tu search --}}
                 <div class="card-content bg-primary">
