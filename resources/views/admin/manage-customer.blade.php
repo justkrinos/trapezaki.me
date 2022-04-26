@@ -221,27 +221,37 @@ $tags = $user2->tags->pluck('name')->toArray();
             <section id="resManagement">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card" >
+                        <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Reservation Management</h4>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
-                                    {{-- TODO: na ginun ulla etsi (na epistrefei sto anchor tag tu me to #) --}}
-                                    <form method="POST" action="/user/{{ $user2->username }}#resManagement" class="col-md-12">
+                                    {{-- TODO: na ginun ulla etsi (na epistrefei sto anchor tag tu me to #) \
+                                                //-na sasun ta resizing na en kala se tuto
+                                    --}}
+                                    <form method="POST" action="/user/{{ $user2->username }}#resManagement" class="d-flex row ">
                                         @csrf
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-5 col-4">
                                             <div class="form-group">
-                                                <label for="roundText">Reservation Range</label>
-                                                <input type="text" id="roundText" name="res_range" class="form-control round" value="30">
+                                                <label for="range">Reservation Range</label>
+                                                <div class="input-group">
+                                                    <input type="number" id="range" name="res_range"
+                                                        class="form-control round" min="1" max="60" value="{{$user2->res_range}}">
+                                                    <label class="input-group-text" for="range">days</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6 col-5">
                                             <div class="form-group">
-                                                <label for="squareText">Reservation Duration</label>
-                                                <input type="text" id="resv-duration" name="duration" class="form-control square"
-                                                    value="2:30">
+                                                <label for="resv-duration">Reservation Duration</label>
+                                                <div class="input-group">
+                                                {{-- TODO: na grafti sta eggrafa oti to minimum duration en 30 --}}
+                                                <input type="number" min="30" id="resv-duration" name="duration"
+                                                    class="form-control square" value="{{$user2->duration}}">
+                                                <label class="input-group-text" for="range">minutes</label>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -456,4 +466,5 @@ src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locati
 <script src="/assets/js/active-disable.js"></script>
 
 
-{{-- for reservation hours --}}
+{{-- for reservation settings --}}
+<script src="/assets/js/reservation-settings.js"></script>

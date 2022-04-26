@@ -37,6 +37,10 @@
     margin-left: .4rem
 }
 
+.hidden-setting {
+    display: none !important;
+}
+
 .alert-primary {
     background-color: #435ebe;
     color: #fff
@@ -1573,3 +1577,4 @@ p {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}

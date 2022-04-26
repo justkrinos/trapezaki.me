@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Response;
 
 class ManageBusinessController extends Controller
 {
-    public function edit(Request $request)
+    public function edit(Request $request, User2 $user2)
     {
         if(request()->has('businessInfo'))
         {
@@ -56,7 +56,54 @@ class ManageBusinessController extends Controller
         else if(request()->has('reservationSettings'))
         {
 
-            return request()->all();
+            //TODO: -to reservation range na ginete validate se mod 30
+            //      -na erkunte pisw errors (ena gia oulla alla perigrafiko)
+            $validatedData = request()->validate([
+                'res_range' => 'required|numeric',
+                'duration'  => 'required|numeric',
+                'min-1'     => 'required|date_format:H:i',
+                'min-2'     => 'required|date_format:H:i',
+                'min-3'     => 'required|date_format:H:i',
+                'min-4'     => 'required|date_format:H:i',
+                'min-5'     => 'required|date_format:H:i',
+                'min-6'     => 'required|date_format:H:i',
+                'min-7'     => 'required|date_format:H:i',
+                'max-1'     => 'required|date_format:H:i',
+                'max-2'     => 'required|date_format:H:i',
+                'max-3'     => 'required|date_format:H:i',
+                'max-4'     => 'required|date_format:H:i',
+                'max-5'     => 'required|date_format:H:i',
+                'max-6'     => 'required|date_format:H:i',
+                'max-7'     => 'required|date_format:H:i',
+            ]);
+
+            //Apply duration and reservation settings changes
+            $user2->duration  = $validatedData['duration'];
+            $user2->res_range = $validatedData['res_range'];
+            $user2->save();
+
+            //get user day settings
+            $userSettings = $user2->dailySettings;
+
+            //for each day
+            for($day=1; $day<8; $day++){
+                //get the setting
+                $daySetting = $userSettings->where('day_id', $day)->first();
+
+                //get min max as time objects
+                $min = new Time($validatedData['min-' . $day]);
+                $max = new Time($validatedData['max-' . $day]);
+
+                //save min max as integers
+                $daySetting->time_min = $min->get();
+                $daySetting->time_max = $max->get();
+                $daySetting->save();
+
+            }
+
+            return back()->with('success', 'The Reservation Management has been updated successfully');
+
+
         }
         else if(request()->has('menuForm'))
         {
@@ -114,9 +161,18 @@ class ManageBusinessController extends Controller
     }
 
     public function show(User2 $user2) {
+        $newDailySettings = [];
+        foreach ($user2->dailySettings as $setting){
+            $minTime = Time::createFromInt($setting->time_min)->getStr();
+            $maxTime = Time::createFromInt($setting->time_max)->getStr();
+            array_push($newDailySettings,array('day' => $setting->day_id, 'min' => $minTime, 'max' => $maxTime));
+        }
+
+
         return view('admin.manage-customer',[
             'user2' => $user2,
-            'tags'  => $user2->tags->pluck('name')->toArray()
+            'tags'  => $user2->tags->pluck('name')->toArray(),
+            'settings' => $newDailySettings
         ]);
     }
 
