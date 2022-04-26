@@ -154,7 +154,7 @@ $tags = $user2->tags->pluck('name')->toArray();
                         </div>
 
                         <div class="card-header">
-                            <h4 class="card-title">Type</h4>
+                            <h4 class="card-title">Services</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-check">
@@ -218,88 +218,47 @@ $tags = $user2->tags->pluck('name')->toArray();
 
             </div>
             </form>
-            <form method="POST" action="/user/{{ $user2->username }}" class="col-md-12">
-                <section id="input-style">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Reservation Management(TODO)</h4>
-                                </div>
+            <section id="resManagement">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" >
+                            <div class="card-header">
+                                <h4 class="card-title">Reservation Management</h4>
+                            </div>
 
-                                <div class="card-body">
-                                    <div class="row">
+                            <div class="card-body">
+                                <div class="row">
+                                    {{-- TODO: na ginun ulla etsi (na epistrefei sto anchor tag tu me to #) --}}
+                                    <form method="POST" action="/user/{{ $user2->username }}#resManagement" class="col-md-12">
+                                        @csrf
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="roundText">Reservation Range</label>
-                                                <input type="text" id="roundText" class="form-control round" value="30">
+                                                <input type="text" id="roundText" name="res_range" class="form-control round" value="30">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="squareText">Reservation Duration</label>
-                                                <input type="text" id="squareText" class="form-control square"
+                                                <input type="text" id="resv-duration" name="duration" class="form-control square"
                                                     value="2:30">
                                             </div>
                                         </div>
-                                        <div class="col-sm-10">
-                                            <label for="squareText">Last Reservation Hour</label>
-                                            <div class="row">
-                                                <div class="col-md-3 mb-2">
 
-                                                    <fieldset class="form-group">
-                                                        <select class="form-select" id="basicSelect">
-                                                            <option>Monday</option>
-                                                            <option>Tuseday</option>
-                                                            <option>Wednesday</option>
-                                                            <option>Thursday</option>
-                                                            <option>Friday</option>
-                                                            <option>Saturday</option>
-                                                            <option>Sunday</option>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-md-2 mb-1">
-                                                    <input type="text" id="squareText" class="form-control square"
-                                                        value="21:30">
-                                                </div>
+                                        @include('admin.components.reservation-hours')
 
-                                            </div>
-
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <label for="squareText">First Reservation Hour</label>
-                                            <div class="row">
-                                                <div class="col-md-3 mb-2">
-
-                                                    <fieldset class="form-group">
-                                                        <select class="form-select" id="basicSelect">
-                                                            <option>Monday</option>
-                                                            <option>Tuseday</option>
-                                                            <option>Wednesday</option>
-                                                            <option>Thursday</option>
-                                                            <option>Friday</option>
-                                                            <option>Saturday</option>
-                                                            <option>Sunday</option>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-md-2 mb-1">
-                                                    <input type="text" id="squareText" class="form-control square"
-                                                        value="21:30">
-                                                </div>
-
-                                            </div>
+                                        <div class="col-sm-6">
                                             <button type="submit" name="reservationSettings"
                                                 class="btn btn-success me-1 mb-1">Save changes</button>
                                         </div>
-                                    </div>
+
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </form>
+                </div>
+            </section>
             <div class="card">
 
             </div>
@@ -495,3 +454,6 @@ src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locati
 
 {{-- Ajax active disable dependency --}}
 <script src="/assets/js/active-disable.js"></script>
+
+
+{{-- for reservation hours --}}
