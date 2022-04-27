@@ -18,7 +18,9 @@ use App\Models\User2_Photo;
               //-na sastun ta provlimata me to sidebar na megaloni j na men eshi x (en logo tu main.js)
 
               //-na men to fkallei panta to modal na checkari an eksanaepelekses
-              //- na dume pos enna apothikefkete to city, ston user oksa sto session? --}}
+              //- na dume pos enna apothikefkete to city, ston user oksa sto session?
+              //- pagination
+    --}}
 
 
     {{-- Toast dependency --}}
@@ -87,7 +89,7 @@ use App\Models\User2_Photo;
                             @endif
 
 
-                           
+
                             {{-- TODO: na katalaveni an ekames search j na fefki ta exta
                                       magazia j na su fkalli ta search results --}}
 

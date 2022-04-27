@@ -20,7 +20,8 @@ $user2= User2::where('username', $username)
             //- to book na pai se selida p kamnei book
             //- Na sasun oi santanoshies me tin php
             //- To modal na mpi sta components alla na dw an dulefki prota
-            //- TO BACK EN DULEFKI
+            //- todo ta photos se mobile mode ennen orizontia
+
 --}}
 
 <head>
