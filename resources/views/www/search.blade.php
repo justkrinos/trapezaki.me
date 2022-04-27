@@ -80,48 +80,17 @@ use App\Models\User2_Photo;
 
 
                             {{-- tuto en gia na fkallei recommended magazia prin kamis search --}}
+                            @isset($businesses)
+                                @include ('www.search.search-results')
+                            @else
+                                @include('www.search.random')
+                            @endif
 
-                            @include('www.search.random')
 
-
-
+                           
                             {{-- TODO: na katalaveni an ekames search j na fefki ta exta
-                                      magazia j na su fkalli ta search results
+                                      magazia j na su fkalli ta search results --}}
 
-                            <div class="row">
-
-                                <h3>Results</h3>
-                                <p class="text-subtitle text-muted">You searched for "bar" </p>
-                            </div> --}}
-
-
-                            {{-- @foreach (App\Models\User2::all() as $user)
-                                <div class="card">
-                                    <div class="row-cols-1">
-                                        <div class="card-header">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar avatar-xl me-4">
-
-                                                    <img
-                                                        src="../assets/images/uploads/{{ $user->logo()->photo_path }}">
-                                                </div>
-                                                <h4 class="card-title text-nowrap">{{ $user->business_name }}</h4>
-                                                <div class="container" style="text-align: end;">
-                                                    <div class="text-danger">5 chairs left</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex card-body te">
-                                            <p class="text-muted">
-                                                {{ $user->description }}
-                                            </p>
-                                            <p class="font-bold">
-                                                {{ str_replace(':', ', ', ucfirst($user->type)) }}</p>
-                                            <a href="/user/{{ $user->username }}" class="stretched-link"></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach --}}
 
 
                         </div>
@@ -161,6 +130,7 @@ use App\Models\User2_Photo;
 @include('components.toasts')
 
 <script>
+    //TODO na mpeoi se js file
     $(document).ready(function() {
         $("#chooseCity").modal('show')
     })

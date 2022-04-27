@@ -35,7 +35,7 @@ $city = request("city");
                 <div class="d-flex row justify-content-center">
                     <div class="col-md-4 row-col-4 mb-3">
                         <h6 class="text-white">Date</h6>
-                        <input type="date" name="date" id="mydate" class="form-control">
+                        <input type="date" name="date" id="mydate" class="form-control" value="{{ request("date") }}">
                     </div>
 
                     <div class="col-md-2 mb-2">

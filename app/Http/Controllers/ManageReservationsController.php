@@ -86,7 +86,7 @@ class ManageReservationsController extends Controller
         }
 
         //back to the page p itan prin
-        return response()->json([],422);
+        return response()->json(['success'],422);
 
         // TODO: an to reservation en cancelled, tote na men eshi epilogi cancel
         //       na men afinei 2o cancellation (primary key to reservation_id sto cancellations)

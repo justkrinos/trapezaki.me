@@ -18,6 +18,7 @@ class ManageBusinessController extends Controller
             $request['tags'] = $this->tagsToArray(request()['tags']);
 
             //User3 edit profile
+            //TODO na exei error an den epilekses kanena type
             $validatedData = $request->validate([
                 'id' => 'required',
                 'description' => 'required|max:1000',

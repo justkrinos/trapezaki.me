@@ -11,7 +11,11 @@ $(function(){
     
     var maxDate = year + '-' + month + '-' + day;
     $('#mydate').attr('min', maxDate);
-    $('#mydate').val(maxDate);
+
+    if(!$("#mydate").val()){
+        $('#mydate').val(maxDate);
+    }
+    
 
     var today = new Date().toISOString().split('T')[0];
     document.getElementsByName("date")[0].setAttribute('min', today);

@@ -189,4 +189,4 @@ use App\Models\Table;
 @include('components.toasts')
 
 {{-- modal dependencies --}}
-<script src="/assets/js/manage-reservations-modal.js></script>
+<script src="/assets/js/manage-reservations-modal.js"></script>

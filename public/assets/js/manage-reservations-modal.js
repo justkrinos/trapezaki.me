@@ -7,7 +7,6 @@ $(document).ready(function () {
     });
 
     var unchanged_attendance =0
-
     modalpop();
 
     if (sessionStorage.getItem("success")) {
@@ -54,6 +53,7 @@ function setStatus(that){
 //Event on modal closed na stelnei sto ajax to number an allakse
 $('#resvPopup').on('hidden.bs.modal', function () {
     //get the attended number from modal and row
+
     modal_attendance = $("#attendance").val()
 
     //get the reservation id
@@ -71,7 +71,7 @@ $('#resvPopup').on('hidden.bs.modal', function () {
 //Function to pop the modal
 function modalpop() {
     $(document).on("click", ".resvPopup", function () {
-        //alert();
+        
         //console.log($(".details").html())
         //TODO
         //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora

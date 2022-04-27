@@ -12,6 +12,7 @@ function findTimeSlots() {
     $("#timeSlots").fadeOut('fast').promise().done(function () {
         $("#timeSlots").empty();
         getTimeSlots() //Ajax call, edw mesa kaleite kai to setTimeSlots
+        setPeople();
         $("#timeSlots").fadeIn('slow')
     })
 }
@@ -63,7 +64,12 @@ function getTime(element) {
 //     document.querySelectorAll('#modal-table-id')[0].innerHTML = modalText
 //   })
 
-
+function setPeople()
+{
+    $("#pax").empty()
+    for (i = 2; i <= canvas.getActiveObject().capacity; i++)
+        $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
+}
 
 function getTimeSlots(table) {
     if (table == undefined) {
