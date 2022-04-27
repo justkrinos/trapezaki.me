@@ -71,4 +71,32 @@ class User2 extends Authenticatable implements MustVerifyEmail
         return $value->format('Y-m-d');
     }
 
+    //Todo: na to grapsume tuto se kathe eggrafo j ulla gia ta models
+    public static function convertType(array $validatedData){
+        //Kamni ta tis morfis coffee:food:drinks gia osa iparxun
+        //etsi wste na borume na ta kamume extract later
+
+        $stringToMake = ""; //to string pu ena stilume pisw
+        $dataToChange = ['coffee','food','drinks']; //jina p ena checkarume
+
+
+
+        foreach ($dataToChange as $type) { //gia kathe ena p jina p ena checkarume
+            if (array_key_exists($type,$validatedData)){ //an iparxi
+                if (empty($stringToMake))
+                    $stringToMake .= $type; //men tu valis : an akoma en ofkero
+                else
+                    $stringToMake .= ':' . $type; //vartu : afu empike idi ena mesto array
+            }
+            //diagrafw ta data pu mesa gt thelw mono to (type => food:coffee klp)
+            unset($validatedData[$type]);
+        }
+
+        //vallw tu to string p ekama p en ulla mesa
+        $validatedData['type'] = $stringToMake;
+
+        //diw to pisw sto function pu to kalese
+        return $validatedData;
+    }
+
 }
