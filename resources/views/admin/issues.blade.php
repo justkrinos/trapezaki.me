@@ -91,7 +91,7 @@ use App\Models\User2_Photo;
 
                                             @foreach (Issue::all() as $issue)
                                                 <tr>
-                                                    <td id="issueName" class="col-8 issueName">
+                                                    <td class="issueName" class="col-8 issueName">
                                                         {{-- The popup opens with issues.js when class= issueName is cicked --}}
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar avatar-md">
@@ -102,7 +102,7 @@ use App\Models\User2_Photo;
                                                             </p>
                                                         </div>
                                                     </td>
-                                                    <td id="issueName" class="col-8 issueName">
+                                                    <td class="issueName" class="col-8 issueName">
                                                         <p class=" mb-0">{{ $issue->created_at }}</p>
                                                     </td>
                                                     {{-- To pass to JQuery --}}

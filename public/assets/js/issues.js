@@ -1,8 +1,6 @@
 $(document).ready(function () {
 
-
     $(document).on("click", ".issueName" , function() {
-
         //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
         //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
         $description = $(this).siblings(".issue-description").html();
@@ -12,10 +10,8 @@ $(document).ready(function () {
         $("#issueTextArea").html($description);
         $("#issueBusiness").html($issuer);
         $("#issueType").html($type);
-
-
-
-        $("#issueModal").modal('view');
+        
+        $("#issueModal").modal('show');
     })
 
     $("#issueBusiness").click(function () {
