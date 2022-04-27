@@ -8,9 +8,9 @@
 */
 
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\issueController;
+use App\Http\Controllers\IssuesU1Controller;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\issuesBusinessController;
+use App\Http\Controllers\IssuesU2Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FloorPlanController;
 use App\Http\Controllers\RegisterU3Controller;
@@ -25,9 +25,10 @@ use App\Http\Controllers\PendingRequestsController;
 use App\Http\Controllers\MyReservationsController;
 use App\Http\Controllers\ManageReservationsController;
 use App\Http\Controllers\TimeSlotController;
+use App\Http\Controllers\ProfileU2Controller;
 use App\Http\Controllers\ProfileU3Controller;
 use App\Http\Controllers\SearchController;
-use Cviebrock\EloquentTaggable\Models\Tag;
+use App\Http\Controllers\TagsApiController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User3;
 use App\Models\User2;
@@ -154,9 +155,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailU3']);
 
-        Route::get('/reservation/{guest}/{reservation}', function ($guest, $reservation) {
-            return view('www.successfully-booked', ['user3' => $guest, 'reservation' => $reservation]);
-        });
+        Route::get('/reservation/{guest}/{reservation}', [ReservationController::class,'showSuccessU3']);
     });
 
 
@@ -170,9 +169,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         //TODO en dulefki to route dunno why
         //TODO: na stelnei email sto reservation
         //Route::get('/reservation/{user3_id}/{reservation}', [MyReservationsController::class, 'show']);
-        Route::get('/reservation/{user3_id}/{reservation_id}', function ($user3, $reservation) {
-            return view('www.successfully-booked', ['user3' => $user3, 'reservation' => $reservation]);
-        });
+        Route::get('/reservation/{user3_id}/{reservation_id}', [ReservationController::class,'showSuccessU3']);
         Route::post('/profile', [ProfileU3Controller::class, 'modify']);
 
         Route::get('/my-reservations', [MyReservationsController::class, 'show']);
@@ -200,10 +197,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/signup', [RegisterU2Controller::class, 'create']);
 
         // TODO: na pai sto api route na dulepsun jina
-        Route::get('/api/tags', function () {
-            $tag = Tag::all()->pluck('name')->toArray();
-            return response($tag);
-        });
+        Route::get('/api/tags', [TagsApiController::class,'show']);
 
         Route::get('verify/{email}/{secret}/', [VerifyEmailController::class, 'verifyUser2']);
 
@@ -233,12 +227,9 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
         Route::get('/profile', [ProfileU2Controller::class, 'show']);
 
-        Route::get('/report-problem', function () {
-            return view('business.report-problem');
-        });
+        Route::get('/report-problem', [IssuesU2Controller::class, 'show']);
+        Route::post('/report-problem', [IssuesU2Controller::class, 'store']);
 
-        Route::post('/report-problem', [issuesBusinessController::class, 'store']);
-        Route::get('/list-problems', [issuesBusinessController::class, 'show']);
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
 
@@ -275,11 +266,9 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
     Route::middleware(['auth:user1'])->group(function () {
 
         Route::get('/manage-customers', [ManageBusinessController::class, 'showAll']);
-        Route::get('/issues', function () {
-            return view('admin.issues');
-        });
 
-        Route::post('/issues', [issueController::class, 'flagIssue']);
+        Route::get('/issues', [IssuesU1Controller::class, 'show']);
+        Route::post('/issues', [IssuesU1Controller::class, 'flagIssue']);
 
 
         Route::get('/pending-requests', [PendingRequestsController::class, 'show']);
@@ -289,10 +278,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         Route::post('/user/{user2}', [ManageBusinessController::class, 'modify']);
 
 
-        Route::get('/api/tags', function () {
-            $tag = Tag::all()->pluck('name')->toArray();
-            return response($tag);
-        });
+        Route::get('/api/tags', [TagsApiController::class, 'show']);
 
         Route::get('/user/{user2}/menu', [MenuController::class, 'show']);
 

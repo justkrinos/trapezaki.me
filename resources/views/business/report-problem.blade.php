@@ -72,6 +72,7 @@
         </div>
     </div>
 
+    {{-- TODO: to modal na mpi component --}}
     <!-- Modal starts here-->
     <div class="modal fade" id="probModal" tabindex="-1" role="dialog" aria-labelledby="probModalCenterTitle"
         aria-hidden="true">
@@ -137,6 +138,7 @@
         <section class="section">
             <div class="card">
 
+                {{-- TODO: tuta na ginun me view j sto date na fiei to time j na ginunte sort--}}
                 <div class="card-content">
                     <div class="card-body">
                         <h3>Previous Problems</h3>

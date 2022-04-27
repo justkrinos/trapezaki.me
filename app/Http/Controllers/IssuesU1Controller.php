@@ -9,19 +9,12 @@ use App\Models\Issue;
 use Illuminate\Support\Facades\DB;
 
 // create one class for controller
-class issueController extends Controller
+class IssuesU1Controller extends Controller
 {
-    //TODO: see if we need it
-    public function index()
-    {
-        $issues = Issue::latest()->paginate(5);
-
-        return view('admin.issues', compact('issues'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-
-        $users = DB::table('users')->select('id', 'name', 'email')->get();
-        return view('some-view')->with('users', $users);
+    public function show() {
+        return view('admin.issues');
     }
+
 
     public function flagIssue()
     {

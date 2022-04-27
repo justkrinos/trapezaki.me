@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
-use issueController;
+use IssuesU1Controller;
 
 class Issue extends Model
 {

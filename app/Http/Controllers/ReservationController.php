@@ -38,6 +38,13 @@ class ReservationController extends Controller
             return redirect('/user/' . $user2->username . '#login');
     }
 
+    public function showSuccessU3($user3, $reservation) {
+        return view('www.successfully-booked', [
+            'user3' => $user3,
+            'reservation' => $reservation
+        ]);
+    }
+
     public function createResvU3()
     {
         //get data from the request if not logged in

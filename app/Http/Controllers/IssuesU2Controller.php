@@ -7,22 +7,11 @@ use App\Models\Issue;
 use Illuminate\Support\Facades\Auth;
 
 
-class issuesBusinessController extends Controller
+class IssuesU2Controller extends Controller
 {
 
-    public function index()
-    {
-        $issues = Issue::all();
-
-        /*
-        TODO
-        Ta issues epistrefontai ola
-        Prepei na kanume query
-        na epistrefontai mono ta issues pou kataxwrise o sigkekrimenos xristis
-        */
-
-        return view('business.list-problems')
-            ->with('issues', $issues);
+    function show() {
+        return view('business.report-problem');
     }
 
 
@@ -44,11 +33,6 @@ class issuesBusinessController extends Controller
         Issue::create($attribute);
 
         return view('business.report-problem');
-    }
-
-    public function show(Issue $issue)
-    {
-        return view('business.list-problems', compact('issue'));
     }
 
 }

@@ -9,6 +9,9 @@ use App\Models\User2_Photo;
 $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
 ?>
 
+
+{{-- TODO: na sistaristei to profile o tropos p fenete nan omorfo j to idio j ston admin --}}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
