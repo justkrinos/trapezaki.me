@@ -11,7 +11,7 @@ use App\Models\Reservation;
 class TimeSlotController extends Controller
 {
 
-    //TODO: mesa sto booking controller prp na checkarume an
+    //TODO: mesa sto reservation controller prp na checkarume an
     //to epilegmeno time slot en mesa sta available time slots me tinidia logiki opos dame\
     //BUT an en modify prp na men lamvani ipopsi to idio
 

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 //A class to make the registration of user3
-class RegisterUser3 extends Controller
+class RegisterU3Controller extends Controller
 {
     //private $guest;
 

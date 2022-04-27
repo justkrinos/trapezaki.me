@@ -24,6 +24,7 @@ class ManageReservationsController extends Controller
         //     na ginun ksexorista private functions
         //     j na eshi ena p ena ta dromologei
         //     apla gia na men en terastia
+        // or to date na ginei ajax
         if (request()->has('date')) {
             $attribute = request()->validate([
                 'date' => 'required|date',
@@ -33,6 +34,7 @@ class ManageReservationsController extends Controller
                 'date' => $attribute['date'],
             ]);
         }
+
         elseif(request()->has('reservation_id')){
             $validatedData = request()->validate([
                 'reason'         => 'required',

@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 
-class BookingController extends Controller
+class ReservationController extends Controller
 {
-    public function showBook(User2 $user2)
+    public function showResvU3(User2 $user2)
     {
         $user = Auth::guard('user3')->user();
 
@@ -38,7 +38,7 @@ class BookingController extends Controller
             return redirect('/user/' . $user2->username . '#login');
     }
 
-    public function createBook()
+    public function createResvU3()
     {
         //get data from the request if not logged in
         if (!Auth::check('user3')) {
@@ -120,7 +120,7 @@ class BookingController extends Controller
         }
     }
 
-    public function createBookUser2()
+    public function createResvU2()
     {
         $user2 = Auth::guard('user2')->user();
         if(request()->has("guest"))
@@ -132,7 +132,6 @@ class BookingController extends Controller
             ]);
 
 
-            //try{
             $attributes = $request->validate(
                 [
                     'full_name' => 'required|max:50|min:3',
@@ -208,39 +207,6 @@ class BookingController extends Controller
 
 
     }
-        //TODO na to kamume na dulefki
-        //try{
-        // $attributes = $request->validate(
-        //     [
-        //         'full_name' => 'required|max:50|min:3',
-        //         'phone' => 'required|digits_between:8,13|numeric',
-        //         'email' => 'required|email|max:100|unique:user3s,email',
-        //         'guest' => 'required',
-        //         'username' => 'required',
-        //         'password' => 'required'
-        //     ],
-        //     [
-        //         'email.unique' => 'The mail already exists, so you already have an account.'
-        //     ]
-        // );
-
-        // } catch (\Illuminate\Validation\ValidationException $e ) {
-        //     return \response($e->errors(),400);
-        // }
-
-        //TODO: make the account otan ena dulefki tuto (gia ton guest)
-        //User3::create($attributes);
-
-        //TODO na dulepsi j na ginete i kratisi
-
-
-    public function showMenu(User2 $user2)
-    {
-        $file = File::get(public_path('assets/menus/') . $user2->menu);
-        $response = Response::make($file, 200);
-        $response->header('Content-Type', 'application/pdf');
-        return $response;
-    }
 
     public function showEditResv(){
             $validated  = request()->validate([
@@ -261,7 +227,11 @@ class BookingController extends Controller
             return back();
     }
 
-    public function editResv(){
+    public function showAddResv(){
+        return view('business.add-resv');
+    }
+
+    public function editResvU2(){
         $validatedData = request()->validate([
             'date'=> 'required|date|after:yesterday',
             'time'=> 'required', //TODO: validate this

@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 class PhotosController extends Controller
 {
 
+    //Extra resizing functionality that was never used
+    //It is kept here for future use
     public function store_resize(Request $request)
     {
 
@@ -69,8 +71,8 @@ class PhotosController extends Controller
             $request =  request()->validate([
                 'photo_path' => 'required'
             ]);
-        
-            
+
+
             $photo_path = $request['photo_path'];
 
             //Can't delete last photo
@@ -84,7 +86,7 @@ class PhotosController extends Controller
 
                 return true;
             }
-            
+
         }
 
         else if(strcmp($request['action'],'modify')==0){
@@ -93,10 +95,10 @@ class PhotosController extends Controller
             ]);
 
             User2_Photo::store_one(request()->file('photo'),$user2_id);
-    
-            return ['ok'];   
+
+            return ['ok'];
         }
-        
+
     }
 
 

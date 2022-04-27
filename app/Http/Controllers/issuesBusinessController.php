@@ -7,13 +7,9 @@ use App\Models\Issue;
 use Illuminate\Support\Facades\Auth;
 
 
-class issuesBusinessControler extends Controller
+class issuesBusinessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
 
-    //We will see if we need it
     public function index()
     {
         $issues = Issue::all();
@@ -29,9 +25,7 @@ class issuesBusinessControler extends Controller
             ->with('issues', $issues);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store()
     {
         $request = request()->merge([
@@ -51,10 +45,6 @@ class issuesBusinessControler extends Controller
 
         return view('business.report-problem');
     }
-
-    /**
-     * Display the specified resource.
-     */
 
     public function show(Issue $issue)
     {

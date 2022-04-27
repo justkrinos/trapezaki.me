@@ -8,25 +8,10 @@ use Illuminate\Http\Request;
 use App\Models\Issue;
 use Illuminate\Support\Facades\DB;
 
-// create one class for controler
-class issueControler extends Controller
+// create one class for controller
+class issueController extends Controller
 {
-
-
-    // // create one function for creative record(render)
-    // public function create()
-    // {
-    //     // EPISTREFEI TA APOTELESMATA
-    //     return view(issues.blade.php ); /// NA TO KSANADO
-    // };
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    //We will see if we need it
+    //TODO: see if we need it
     public function index()
     {
         $issues = Issue::latest()->paginate(5);
@@ -60,11 +45,4 @@ class issueControler extends Controller
         return view('admin.issues');
     }
 
-    public function destroy($id)
-    {
-        $issue = Issue::findOrFail($id);
-        $issue->delete();
-
-        return redirect()->route('admin.index');
-    }
 }
