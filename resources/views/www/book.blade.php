@@ -2,11 +2,10 @@
 <html lang="en">
 
 @php
-    use App\Models\Table;
+use App\Models\Table;
 @endphp
 
-{{--
-TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
+{{-- TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
 TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
 
 Name: {{ session()->get('full_name')}}
@@ -27,7 +26,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trapezaki - Floor Plan Editor</title>
+    <title>Trapezaki - Select a Table</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -56,10 +55,6 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
         </header>
         <div class="container">
             <div class="page-heading">
-                <div class="page-title">
-
-                </div>
-
 
                 <div class="card">
 
@@ -73,17 +68,18 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                         <div class="input-group col-sm-3 mb-3">
                                             <button class="prev-day btn btn-outline-secondary btn-google"><i
                                                     class="bi bi-chevron-left" aria-hidden='true'></i></button>
-                                            <input type="date" class="form-control no-prev date-slide @error('date') is-invalid @enderror" name="txtDate"
-                                                style="min-width: 66px;" id="resv-date">
-                                                <div class="invalid-feedback">
-                                                    @error('description')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </div>
+                                            <input type="date"
+                                                class="form-control no-prev date-slide @error('date') is-invalid @enderror"
+                                                name="txtDate" style="min-width: 66px;" id="resv-date">
+                                            <div class="invalid-feedback">
+                                                @error('description')
+                                                    {{ $message }}
+                                                @enderror
+                                            </div>
                                             <button class='next-day btn btn-outline-secondary btn-google'><i
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +91,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                             </div>
                         </div>
                         {{-- Floor Plan --}}
-                        @if(Table::where("user2_id",$user2->id)->first())
+                        @if (Table::where('user2_id', $user2->id)->first())
                             <div class="fabric-canvas-wrapper">
                                 <canvas id="canvas" width="812" height="512"></canvas>
                             </div>
@@ -110,15 +106,15 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
             <!-- Modal starts here-->
             @include('www.components.book-modal')
 
-            <span id="username" user="{{$user2->username}}"></span>
+            <span id="username" user="{{ $user2->username }}"></span>
 
 
-            <footer>
-            </footer>
+
         </div>
     </div>
-
+    @include('www.components.footer')
 </body>
+
 </html>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -131,11 +127,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="/assets/js/date-findtime.js"></script>
 
-{{--Toast dependencies--}}
+{{-- Toast dependencies --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
 <script src="/assets/js/extensions/toastify.js"></script>
 
-@include("components.toasts");
+@include('components.toasts')
 
 <script src="/assets/js/user3-fabric-resv.js"></script>
 <script src="/assets/js/user3-resv-options.js"></script>

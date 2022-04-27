@@ -6,7 +6,10 @@ use App\Models\User2_Tag;
 use App\Models\Tag;
 use App\Models\User2_Photo;
 
-$tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
+$tags = Auth::guard('user2')
+    ->user()
+    ->tags->pluck('name')
+    ->toArray();
 ?>
 
 <head>
@@ -141,23 +144,18 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                                     <div class="checkbox">
                                         <input name="coffee" type="checkbox" id="checkbox1" class="form-check-input"
                                             @if (str_contains(Auth::guard('user2')->user()->type, 'coffee')) {
-                                                checked
-                                            @endif>
+                                                checked @endif>
                                         <label for="checkbox1">Coffee</label>
 
                                     </div>
                                     <div class="checkbox">
                                         <input type="checkbox" name="food" id="checkbox1" class="form-check-input"
-                                            @if (str_contains(Auth::guard('user2')->user()->type, 'food'))
-                                                checked
-                                            @endif>
+                                            @if (str_contains(Auth::guard('user2')->user()->type, 'food')) checked @endif>
                                         <label for="checkbox1">Food</label>
                                     </div>
                                     <div class="checkbox">
                                         <input name="drinks" type="checkbox" id="checkbox1" class="form-check-input"
-                                            @if (str_contains(Auth::guard('user2')->user()->type, 'drinks'))
-                                                checked
-                                            @endif>
+                                            @if (str_contains(Auth::guard('user2')->user()->type, 'drinks')) checked @endif>
                                         <label for="checkbox1">Drinks</label>
                                     </div>
                                 </div>
@@ -177,7 +175,7 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                                                             <input name="tags" id="tags" data-role="tagsinput"
                                                                 class="@error('tags.*') is-invalid @enderror
                                                                             @error('tags') is-invalid @enderror"
-                                                                value="{{implode (", ", $tags)}}">
+                                                                value="{{ implode(', ', $tags) }}">
 
                                                             <div class="invalid-feedback">
                                                                 <i class="bx bx-radio-circle"></i>
@@ -227,176 +225,165 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
                                                     disabled>
                                             </div>
                                         </div>
-                                            <div class="form-group">
-                                                <label for="squareText">Reservation Duration</label>
+                                        <div class="form-group">
+                                            <label for="squareText">Reservation Duration</label>
+                                            <input type="text" id="squareText" class="form-control square" value="2:30"
+                                                disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <label for="basicSelect">Last Reservation Hour</label>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-2">
+
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="basicSelect">
+                                                        <option>Monday</option>
+                                                        <option>Tuseday</option>
+                                                        <option>Wednesday</option>
+                                                        <option>Thursday</option>
+                                                        <option>Friday</option>
+                                                        <option>Saturday</option>
+                                                        <option>Sunday</option>
+                                                    </select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-2 mb-1">
                                                 <input type="text" id="squareText" class="form-control square"
-                                                    value="2:30" disabled>
+                                                    value="21:30" disabled>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            <label for="basicSelect">Last Reservation Hour</label>
-                                            <div class="row">
-                                                <div class="col-md-3 mb-2">
 
-                                                    <fieldset class="form-group">
-                                                        <select class="form-select" id="basicSelect">
-                                                            <option>Monday</option>
-                                                            <option>Tuseday</option>
-                                                            <option>Wednesday</option>
-                                                            <option>Thursday</option>
-                                                            <option>Friday</option>
-                                                            <option>Saturday</option>
-                                                            <option>Sunday</option>
-                                                        </select>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-md-2 mb-1">
-                                                    <input type="text" id="squareText" class="form-control square"
-                                                        value="21:30" disabled>
-                                                </div>
-
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+            </div>
+            </section>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Photos</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            @csrf
-                            <label for="formFileMultiple" class="form-label">Upload photos here</label>
-                            <form id="image-upload-form">
-                                <input class="form-control" type="file" id="upload_photo">
-                                <div class="invalid-feedback">
-                                    <i id="upload-photo-error" class="bx bx-radio-circle"></i>
-                                </div>
-
-                            </form>
-                            <div id="fileupload" class="mb-3"></div>
-                            <div class="user_id" value="{{ Auth::guard('user2')->user()->id }}"></div>
-                            <ul class="images"></ul>
-                        </div>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Photos</h4>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Menu</h4>
-                    </div>
-                    <form method="POST" action="/profile" class="col-md-12 " enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="mb-3">
                         @csrf
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload a menu here</label>
-                                <input class="form-control @error('menu') is-invalid @enderror" type="file" id="menu" name="menu"
-                                    id="formFile">
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    @error('menu')
-                                        {{ $message }}
-                                    @enderror
-                                </div>
+                        <label for="formFileMultiple" class="form-label">Upload photos here</label>
+                        <form id="image-upload-form">
+                            <input class="form-control" type="file" id="upload_photo">
+                            <div class="invalid-feedback">
+                                <i id="upload-photo-error" class="bx bx-radio-circle"></i>
                             </div>
-                            <a href="/profile/menu" name="menuForm" class="btn btn-info me-1 mb-1" target="_blank">Open</a>
-                            <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload new</button>
-                        </div>
-                    </form>
-                </div>
 
-
-                <!-- Location Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Location</h4>
-                    </div>
-                    <div class="card-body">
-                    <iframe src = "https://maps.google.com/maps?q={{Auth::guard('user2')->user()->lat}},{{Auth::guard('user2')->user()->long}}&hl=es;z=14&amp;output=embed"
-                                            frameborder="0" style="border:0; width: 100%; height: 290px;"
-                                             loading="lazy"
-                                             referrerpolicy="no-referrer-when-downgrade"
-                                            allowfullscreen>
-                                            </iframe>
+                        </form>
+                        <div id="fileupload" class="mb-3"></div>
+                        <div class="user_id" value="{{ Auth::guard('user2')->user()->id }}"></div>
+                        <ul class="images"></ul>
                     </div>
                 </div>
-
-                <br>
-                <br>
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Change Password</h4>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <form method="POST" action="/profile" class="col-md-12">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="basicInput">Old Password</label>
-                                        <input type="password" class="form-control form-control-l" id="password"
-                                            name="password" placeholder="Password" required>
-                                        <div style="color:red">{{ $errors->first('password') }}</div>
-                                        @if (session()->has('error'))
-                                            <div>
-                                                <p style="color:red;">{{ session('error') }}</p>
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="basicInput">New Password</label>
-                                        <input type="password" class="form-control form-control-l" id="new-password"
-                                            name="new-password" placeholder="Password" required>
-                                        <div style="color:red">{{ $errors->first('new-password') }}</div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="basicInput">Re-enter New Password</label>
-                                        <input type="password" class="form-control form-control-l"
-                                            id="new-password_confirmation" name="new-password_confirmation"
-                                            placeholder="Password" required>
-                                        <div style="color:red">{{ $errors->first('password_confirmation') }}
-                                        </div>
-                                    </div>
-
-                                    {{-- Hidden id, to show each time which user to update --}}
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" id="id" name="id"
-                                            value="{{ Auth::guard('user2')->user()->id }}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" id="username" name="username"
-                                            value="{{ Auth::guard('user2')->user()->username }}">
-                                    </div>
-
-                                    <div class="col-sm-12 d-flex justify-content-end">
-                                        <button type="submit" name="form2"
-                                            class="btn btn-primary me-1 mb-1">Change</button>
-                                    </div>
-
-                                    </from>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
             </div>
 
-            <footer>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Menu</h4>
+                </div>
+                <form method="POST" action="/profile" class="col-md-12 " enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload a menu here</label>
+                            <input class="form-control @error('menu') is-invalid @enderror" type="file" id="menu"
+                                name="menu" id="formFile">
+                            <div class="invalid-feedback">
+                                <i class="bx bx-radio-circle"></i>
+                                @error('menu')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+                        <a href="/profile/menu" name="menuForm" class="btn btn-info me-1 mb-1" target="_blank">Open</a>
+                        <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload new</button>
+                    </div>
+                </form>
+            </div>
 
-            </footer>
+
+            <!-- Location Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Location</h4>
+                </div>
+                <div class="card-body">
+                    <iframe
+                        src="https://maps.google.com/maps?q={{ Auth::guard('user2')->user()->lat }},{{ Auth::guard('user2')->user()->long }}&hl=es;z=14&amp;output=embed"
+                        frameborder="0" style="border:0; width: 100%; height: 290px;" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Change Password</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form method="POST" action="/profile" class="col-md-12">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="basicInput">Old Password</label>
+                                    <input type="password" class="form-control form-control-l" id="password"
+                                        name="password" placeholder="Password" required>
+                                    <div style="color:red">{{ $errors->first('password') }}</div>
+                                    @if (session()->has('error'))
+                                        <div>
+                                            <p style="color:red;">{{ session('error') }}</p>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="basicInput">New Password</label>
+                                    <input type="password" class="form-control form-control-l" id="new-password"
+                                        name="new-password" placeholder="Password" required>
+                                    <div style="color:red">{{ $errors->first('new-password') }}</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="basicInput">Re-enter New Password</label>
+                                    <input type="password" class="form-control form-control-l"
+                                        id="new-password_confirmation" name="new-password_confirmation"
+                                        placeholder="Password" required>
+                                    <div style="color:red">{{ $errors->first('password_confirmation') }}
+                                    </div>
+                                </div>
+
+                                {{-- Hidden id, to show each time which user to update --}}
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="id" name="id"
+                                        value="{{ Auth::guard('user2')->user()->id }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="username" name="username"
+                                        value="{{ Auth::guard('user2')->user()->username }}">
+                                </div>
+
+                                <div class="col-sm-12 d-flex justify-content-end">
+                                    <button type="submit" name="form2"
+                                        class="btn btn-primary me-1 mb-1">Change</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
     </div>
 
     {{-- Photo Popup Modal --}}
@@ -405,6 +392,7 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
         <img class="modal-content" id="img01">
     </div>
 
+    @include('business.components.footer')
 </body>
 
 </html>
@@ -412,25 +400,22 @@ $tags = Auth::guard('user2')->user()->tags->pluck('name')->toArray();
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 {{-- Gia ta tags --}}
-<script src="../assets/js/typeahead.bundle.js"></script>
-<script src="../assets/js/bloodhound.js"></script>
-<script src="../assets/js/bootstrap-tagsinput.js"></script>
-<script src="../assets/vendors/choices.js/choices.min.js"></script>
-<script src="../assets/js/tags.js"></script>
+<script src="/assets/js/typeahead.bundle.js"></script>
+<script src="/assets/js/bloodhound.js"></script>
+<script src="/assets/js/bootstrap-tagsinput.js"></script>
+<script src="/assets/vendors/choices.js/choices.min.js"></script>
+<script src="/assets/js/tags.js"></script>
 
 {{-- For flash messages --}}
-<script src="assets/vendors/toastify/toastify.js"></script>
-{{-- <script src="assets/js/extensions/toastify.js"></script> --}}
+<script src="/assets/vendors/toastify/toastify.js"></script>
 
-<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-
-<script src="../assets/vendors/choices.js/choices.min.js"></script>
-
+<script src="/assets/vendors/choices.js/choices.min.js"></script>
 
 {{-- Photos Ajax Dependencies --}}
-<script src="../assets/js/fileupload.js"></script>
+<script src="/assets/js/fileupload.js"></script>
 
 <script src="../assets/js/main.js"></script>
 

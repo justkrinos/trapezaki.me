@@ -2,9 +2,9 @@
 <html lang="en">
 
 @php
-    use App\Models\Reservation;
-    use App\Models\User3;
-    use App\Models\Table;
+use App\Models\Reservation;
+use App\Models\User3;
+use App\Models\Table;
 @endphp
 
 <head>
@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
 
 
-    {{--Toast dependency--}}
-    <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
+    {{-- Toast dependency --}}
+    <link rel="stylesheet" href="/assets/vendors/toastify/toastify.css">
 
     <!-- Datatable Css Include -->
     <link rel="stylesheet" href="/assets/vendors/simple-datatables/style.css">
@@ -32,7 +32,7 @@
 
 <body>
     <div id="app">
-        {{--Include the sidebar from /business/components--}}
+        {{-- Include the sidebar from /business/components --}}
         @include('business.components.sidebar')
 
 
@@ -56,17 +56,17 @@
                                     @csrf
                                     <div class="input-group">
                                         <label class="input-group-text" for="mydate">Date</label>
-                                        <input type="date" class="form-control" style="min-width: 66px;" name="date" id="mydate" value="{{$date}}">
+                                        <input type="date" class="form-control" style="min-width: 66px;" name="date"
+                                            id="mydate" value="{{ $date }}">
                                     </div>
                                 </form>
                             </div>
 
-                            {{--TODO:
+                            {{-- TODO:
                                 //-na kamume legend dame me circle xromata pu na eksigun to kathe xroma
                                 eg. (kuklos kokkino) Not Attended
                                 //- na dixnume kapos j ta cancelled reservations
-                                //- na mporei na kamnei search reservations me cancelled j not attended klp
-                            --}}
+                                //- na mporei na kamnei search reservations me cancelled j not attended klp --}}
 
                             <!-- Hoverable rows start -->
                             <section class="section">
@@ -90,16 +90,22 @@
                                                         </thead>
                                                         <tbody>
                                                             <input id="currentDate" type="hidden" value="">
-                                                            {{--TODO na erkunte pu to view tuta--}}
+                                                            {{-- TODO na erkunte pu to view tuta --}}
                                                             @foreach (App\Models\Reservation::all() as $reservation)
-                                                                @if($reservation->date == $date)
+                                                                @if ($reservation->date == $date)
                                                                     <tr class="resvPopup">
-                                                                        <td class="time">{{ $reservation->time }}</td>
-                                                                        <td class="customerName" class="text-bold-500" >{{ User3::find($reservation->user3_id)->full_name }}</td>
-                                                                        <td>
-                                                                            <span class="attendance">{{$reservation->attended}}</span>/<span class="people">{{$reservation->pax}}</span>
+                                                                        <td class="time">
+                                                                            {{ $reservation->time }}</td>
+                                                                        <td class="customerName"
+                                                                            class="text-bold-500">
+                                                                            {{ User3::find($reservation->user3_id)->full_name }}
                                                                         </td>
-                                                                        <td>{{$reservation->table->table_no}}</td>
+                                                                        <td>
+                                                                            <span
+                                                                                class="attendance">{{ $reservation->attended }}</span>/<span
+                                                                                class="people">{{ $reservation->pax }}</span>
+                                                                        </td>
+                                                                        <td>{{ $reservation->table->table_no }}</td>
                                                                         <td class="details" hidden>
                                                                             {{ $reservation->details }}
                                                                         </td>
@@ -115,12 +121,22 @@
                                                                         <td class="people" hidden>
                                                                             {{ $reservation->pax }}
                                                                         </td>
-                                                                        <td id="resNum" hidden>{{ $reservation->id }}</td>
-                                                                        <td hidden>
-                                                                            <span class="cancelled">@if($reservation->cancelled) 1 @else 0 @endif</span>
+                                                                        <td id="resNum" hidden>{{ $reservation->id }}
                                                                         </td>
                                                                         <td hidden>
-                                                                            @if($reservation->cancelled)<span class="reason">{{$reservation->cancelled->reason}}</span>@endif
+                                                                            <span class="cancelled">
+                                                                                @if ($reservation->cancelled)
+                                                                                    1
+                                                                                @else
+                                                                                    0
+                                                                                @endif
+                                                                            </span>
+                                                                        </td>
+                                                                        <td hidden>
+                                                                            @if ($reservation->cancelled)
+                                                                                <span
+                                                                                    class="reason">{{ $reservation->cancelled->reason }}</span>
+                                                                            @endif
                                                                         </td>
                                                                     </tr>
                                                                 @endif
@@ -146,37 +162,31 @@
                             @include('business.components.resv-modal')
                             @include('business.components.cancel-resv-modal')
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-        <footer>
-
-        </footer>
     </div>
-    </div>
+    @include('business.components.footer')
 </body>
 
 </html>
 
 <!-- Datatable Js Include -->
-<script src="../assets/vendors/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
 
-<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/main.js"></script>
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
 
-<script src="../assets/js/manage-resv-datatable.js"></script>
-<script src="../assets/js/reservations.js"></script>
+<script src="/assets/js/manage-resv-datatable.js"></script>
+<script src="/assets/js/reservations.js"></script>
 
-{{--Toast dependencies--}}
+{{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 @include('components.toasts')
 
 {{-- modal dependencies --}}
-<script src=../assets/js/manage-reservations-modal.js></script>
-
+<script src="/assets/js/manage-reservations-modal.js></script>

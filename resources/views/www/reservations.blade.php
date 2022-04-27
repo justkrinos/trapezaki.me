@@ -185,6 +185,8 @@
             </div>
         </div>
 
+        @include('www.components.footer')
+
 </body>
 
 </html>

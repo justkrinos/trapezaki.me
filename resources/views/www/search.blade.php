@@ -80,7 +80,7 @@ use App\Models\User2_Photo;
 
 
                             {{-- tuto en gia na fkallei recommended magazia prin kamis search --}}
-                            
+
                             @include('www.search.random')
 
 
@@ -133,6 +133,9 @@ use App\Models\User2_Photo;
                 </div>
             </div>
         </div>
+
+        @include('www.components.footer')
+
 
 {{-- TODO: na dulefki opos edulefke --}}
         {{-- @if ($showCityPop)

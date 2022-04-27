@@ -111,3 +111,9 @@ function getTimeSlots(table) {
         }
     });
 }
+
+
+
+if($('#footer').length){
+    $('#footer').attr('id','')
+}

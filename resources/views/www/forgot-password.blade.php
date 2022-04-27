@@ -87,21 +87,19 @@
 
     </div>
 
-    <footer>
 
-    </footer>
-
-
-    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
-    <script src="../assets/js/register.js"></script>
-    <script src="../assets/js/main-noside.js"></script>
-
-    {{-- Include for flash messages --}}
-    <script src="../assets/vendors/toastify/toastify.js"></script>
-    @include('components.toasts')
+    @include('www.components.footer')
 
 </body>
 
 </html>
+
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+<script src="../assets/js/register.js"></script>
+<script src="../assets/js/main-noside.js"></script>
+
+{{-- Include for flash messages --}}
+<script src="../assets/vendors/toastify/toastify.js"></script>
+@include('components.toasts')

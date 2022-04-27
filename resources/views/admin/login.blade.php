@@ -76,7 +76,7 @@
 
     </div>
 </body>
-@include('components.toasts');
+@include('components.toasts')
 </html>
 
 

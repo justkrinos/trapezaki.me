@@ -157,10 +157,6 @@
                                     <button type="submit" id="submit" class="btn btn-primary me-1 mb-1">Sign Up</button>
                                 </div>
                             </form>
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -171,9 +167,7 @@
 
     </div>
 
-    <footer>
-
-    </footer>
+    @include('www.components.footer')
 
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

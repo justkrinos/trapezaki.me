@@ -14,26 +14,40 @@
 /* [1] The container */
 .hover-zoom {
     transition: transform 0.2s ease;
-  }
+}
+
 .hover-zoom:hover {
     transform: scale(1.1);
-  }
+}
+
+
+body > div > footer {
+    position: sticky;
+    top: 100vh;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-  }
+}
 
-  .arrow {
+.arrow {
     border: solid black;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
     position: relative;
     bottom: 2px
-  }
+}
 
-.alert .alert-heading, .alert .alert-heading+p {
+.alert .alert-heading,
+.alert .alert-heading+p {
     margin-left: .4rem
 }
 
@@ -163,7 +177,8 @@
     font-size: .875rem
 }
 
-.avatar .avatar-content i, .avatar .avatar-content svg {
+.avatar .avatar-content i,
+.avatar .avatar-content svg {
     color: #fff;
     font-size: 1rem;
     height: 1rem
@@ -185,25 +200,29 @@
     right: 0
 }
 
-.avatar.avatar-sm .avatar-content, .avatar.avatar-sm img {
+.avatar.avatar-sm .avatar-content,
+.avatar.avatar-sm img {
     width: 24px;
     height: 24px;
     font-size: .8rem
 }
 
-.avatar.avatar-md .avatar-content, .avatar.avatar-md img {
+.avatar.avatar-md .avatar-content,
+.avatar.avatar-md img {
     width: 32px;
     height: 32px;
     font-size: .8rem
 }
 
-.avatar.avatar-lg .avatar-content, .avatar.avatar-lg img {
+.avatar.avatar-lg .avatar-content,
+.avatar.avatar-lg img {
     width: 48px;
     height: 48px;
     font-size: 1.2rem
 }
 
-.avatar.avatar-xl .avatar-content, .avatar.avatar-xl img {
+.avatar.avatar-xl .avatar-content,
+.avatar.avatar-xl img {
     width: 60px;
     height: 60px;
     font-size: 1.4rem
@@ -219,7 +238,8 @@
     color: #fff
 }
 
-.btn i, .btn svg {
+.btn i,
+.btn svg {
     width: 16px;
     height: 16px
 }
@@ -281,7 +301,12 @@
     color: #00474d
 }
 
-.btn.btn-danger, .btn.btn-info, .btn.btn-primary, .btn.btn-secondary, .btn.btn-success, .btn.btn-warning {
+.btn.btn-danger,
+.btn.btn-info,
+.btn.btn-primary,
+.btn.btn-secondary,
+.btn.btn-success,
+.btn.btn-warning {
     color: #fff
 }
 
@@ -434,7 +459,8 @@
     margin-bottom: .5rem
 }
 
-.pricing ul li i, .pricing ul li svg {
+.pricing ul li i,
+.pricing ul li svg {
     width: 1rem;
     color: #198754;
     font-size: 1rem;
@@ -447,7 +473,8 @@
     padding-bottom: 20px
 }
 
-.pricing .card-highlighted .card-body, .pricing .card-highlighted .card-header {
+.pricing .card-highlighted .card-body,
+.pricing .card-highlighted .card-header {
     background-color: #435ebe;
     color: #fff
 }
@@ -456,7 +483,8 @@
     color: #fff
 }
 
-.pricing .card-highlighted ul li i, .pricing .card-highlighted ul li svg {
+.pricing .card-highlighted ul li i,
+.pricing .card-highlighted ul li svg {
     color: #479f76
 }
 
@@ -483,7 +511,8 @@
     background-color: #fff
 }
 
-.divider .divider-text:after, .divider .divider-text:before {
+.divider .divider-text:after,
+.divider .divider-text:before {
     content: "";
     position: absolute;
     top: 50%;
@@ -562,11 +591,13 @@
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
-.form-group.with-title .form-control, .form-group.with-title dataTable-input {
+.form-group.with-title .form-control,
+.form-group.with-title dataTable-input {
     padding-top: 2rem
 }
 
-.form-group.with-title .form-control:focus~label, .form-group.with-title dataTable-input:focus~label {
+.form-group.with-title .form-control:focus~label,
+.form-group.with-title dataTable-input:focus~label {
     border-left: 1px solid #435ebe;
     border-top: 1px solid #435ebe;
     border-right: 1px solid #435ebe
@@ -588,7 +619,8 @@
     right: 0
 }
 
-.form-group[class*=has-icon-] .form-control:focus~.form-control-icon i, .form-group[class*=has-icon-] .form-control:focus~.form-control-icon svg {
+.form-group[class*=has-icon-] .form-control:focus~.form-control-icon i,
+.form-group[class*=has-icon-] .form-control:focus~.form-control-icon svg {
     color: #5a8dee
 }
 
@@ -611,13 +643,15 @@
     padding: 0 .6rem
 }
 
-.form-group[class*=has-icon-] .form-control-icon i, .form-group[class*=has-icon-] .form-control-icon svg {
+.form-group[class*=has-icon-] .form-control-icon i,
+.form-group[class*=has-icon-] .form-control-icon svg {
     width: 1.2rem;
     color: #6c757d;
     font-size: 1.2rem
 }
 
-.form-group[class*=has-icon-] .form-control-icon i:before, .form-group[class*=has-icon-] .form-control-icon svg:before {
+.form-group[class*=has-icon-] .form-control-icon i:before,
+.form-group[class*=has-icon-] .form-control-icon svg:before {
     vertical-align: sub
 }
 
@@ -897,7 +931,8 @@
     background: #dee2e6
 }
 
-.modal .modal-header i, .modal .modal-header svg {
+.modal .modal-header i,
+.modal .modal-header svg {
     font-size: 12px;
     height: 12px;
     width: 12px
@@ -985,7 +1020,8 @@
     color: #25396f
 }
 
-.sidebar-wrapper .menu .sidebar-link i, .sidebar-wrapper .menu .sidebar-link svg {
+.sidebar-wrapper .menu .sidebar-link i,
+.sidebar-wrapper .menu .sidebar-link svg {
     color: #7c8db5
 }
 
@@ -1020,7 +1056,8 @@
     color: #fff
 }
 
-.sidebar-wrapper .menu .sidebar-item.active .sidebar-link i, .sidebar-wrapper .menu .sidebar-item.active .sidebar-link svg {
+.sidebar-wrapper .menu .sidebar-item.active .sidebar-link i,
+.sidebar-wrapper .menu .sidebar-item.active .sidebar-link svg {
     fill: #fff;
     color: #fff
 }
@@ -1079,7 +1116,8 @@
     box-shadow: 0 2px 10px rgba(67, 94, 190, .5)
 }
 
-.nav-tabs, .nav-tabs .nav-link {
+.nav-tabs,
+.nav-tabs .nav-link {
     border: none
 }
 
@@ -1209,7 +1247,8 @@
     color: #000
 }
 
-.page-item i, .page-item svg {
+.page-item i,
+.page-item svg {
     font-size: 13px;
     width: 13px;
     height: 13px
@@ -1231,19 +1270,33 @@
     margin-left: .4rem
 }
 
-.dataTable-table td, .dataTable-table thead th, .table td, .table thead th {
+.dataTable-table td,
+.dataTable-table thead th,
+.table td,
+.table thead th {
     vertical-align: middle
 }
 
-.dataTable-table:not(.table-borderless) thead th, .table:not(.table-borderless) thead th {
+.dataTable-table:not(.table-borderless) thead th,
+.table:not(.table-borderless) thead th {
     border-bottom: 1px solid #dedede !important
 }
 
-.table-md.dataTable-table tr td, .table-md.dataTable-table tr th, .table-sm.dataTable-table tr td, .table-sm.dataTable-table tr th, .table.table-md tr td, .table.table-md tr th, .table.table-sm tr td, .table.table-sm tr th {
+.table-md.dataTable-table tr td,
+.table-md.dataTable-table tr th,
+.table-sm.dataTable-table tr td,
+.table-sm.dataTable-table tr th,
+.table.table-md tr td,
+.table.table-md tr th,
+.table.table-sm tr td,
+.table.table-sm tr th {
     padding: 1rem
 }
 
-.table-lg.dataTable-table tr td, .table-lg.dataTable-table tr th, .table.table-lg tr td, .table.table-lg tr th {
+.table-lg.dataTable-table tr td,
+.table-lg.dataTable-table tr th,
+.table.table-lg tr td,
+.table.table-lg tr th {
     padding: 1.3rem
 }
 
@@ -1452,7 +1505,8 @@ a {
     margin-top: 3rem
 }
 
-.mb-10, .my-10 {
+.mb-10,
+.my-10 {
     margin-bottom: 3rem
 }
 
@@ -1460,7 +1514,8 @@ a {
     margin-top: 3rem
 }
 
-.mb-24, .my-24 {
+.mb-24,
+.my-24 {
     margin-bottom: 6rem
 }
 

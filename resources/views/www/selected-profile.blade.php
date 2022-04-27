@@ -257,7 +257,7 @@ $user2= User2::where('username', $username)
                     </div>
                 </div>
             </div>
-
+            @include('www.components.footer')
 </body>
 
 </html>

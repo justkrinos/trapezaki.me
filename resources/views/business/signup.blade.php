@@ -446,20 +446,21 @@
         </div>
     </div>
 
+    @include('business.components.footer')
 
 </body>
 
 
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
-<script src="../assets/js/register.js"> </script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/register.js"> </script>
 
 {{-- Gia ta tags --}}
-<script src="../assets/js/typeahead.bundle.js"></script>
-<script src="../assets/js/bloodhound.js"></script>
-<script src="../assets/js/bootstrap-tagsinput.js"></script>
-<script src="../assets/vendors/choices.js/choices.min.js"></script>
-<script src="../assets/js/tags.js"></script>
+<script src="/assets/js/typeahead.bundle.js"></script>
+<script src="/assets/js/bloodhound.js"></script>
+<script src="/assets/js/bootstrap-tagsinput.js"></script>
+<script src="/assets/vendors/choices.js/choices.min.js"></script>
+<script src="/assets/js/tags.js"></script>
 
 
 {{-- Maps Api Dependencies --}}
@@ -468,9 +469,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQ
 </script>
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
-<script src="../assets/js/maps-script.js"></script>
+<script src="/assets/js/maps-script.js"></script>
 
 
-<script src="../assets/js/main.js"></script>
+<script src="/assets/js/main-nosidepop.js"></script>
 
 </html>

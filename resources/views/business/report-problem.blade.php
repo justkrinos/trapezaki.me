@@ -70,7 +70,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Modal starts here-->
     <div class="modal fade" id="probModal" tabindex="-1" role="dialog" aria-labelledby="probModalCenterTitle"
@@ -124,15 +123,6 @@
             </div>
         </div>
     </div>
-
-    <div id="main">
-        <header class="mb-3">
-            <a href="#" class="burger-btn d-block d-xl-none">
-                <i class="bi bi-justify fs-3"></i>
-            </a>
-        </header>
-
-
 
         <section class="section">
             <div class="card">
@@ -204,8 +194,8 @@
             </div>
         </section>
     </div>
+    @include('business.components.footer')
 </body>
-
 
 <footer>
 </footer>

@@ -168,6 +168,10 @@ use App\Models\User2;
             </div>
         </div>
 
+
+        @include('www.components.footer')
+
+
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trapezaki - Floor Plan Editor</title>
+    <title>Trapezaki - Modify Reservation</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -73,12 +73,9 @@
             @include ('business.components.modify-book-modal')
             <span id="username" user="{{ Auth::guard('user2')->user()->username }}"></span>
 
-
-            <footer>
-            </footer>
         </div>
     </div>
-
+    @include('business.components.footer')
 </body>
 
 </html>
@@ -97,7 +94,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/assets/vendors/toastify/toastify.js"></script>
 <script src="/assets/js/extensions/toastify.js"></script>
 
-@include('components.toasts');
+@include('components.toasts')
 
 <script src="/assets/js/user2-fabric-resv.js"></script>
 <script src="/assets/js/user2-resv-options.js"></script>

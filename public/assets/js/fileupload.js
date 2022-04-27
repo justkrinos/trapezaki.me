@@ -1,7 +1,7 @@
 $("ul.images").on("click", "li span.del", function () {
     var photo = $(this).parent();
 
-    
+
 });
 
 $("ul.images").on("click", "li span.view", function () {
@@ -100,3 +100,8 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function () {
     document.getElementById("photo-popup").style.display = "none";
 };
+
+
+if($('#footer').length){
+    $('#footer').attr('id','')
+}

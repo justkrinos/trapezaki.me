@@ -82,7 +82,6 @@
             </div>
             <div class="col-lg-6 d-none d-lg-block">
                 <div id="auth-right">
-
                 </div>
             </div>
         </div>
@@ -91,6 +90,7 @@
 </body>
 
 </html>
+
 
 {{--Toast dependencies--}}
 <script src="assets/vendors/toastify/toastify.js"></script>
