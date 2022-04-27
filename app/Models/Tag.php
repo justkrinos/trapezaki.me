@@ -9,6 +9,7 @@ class Tag extends Model
 {
     use HasFactory;
 
+    //TODO: na to grapsume tuto se kapio eggrafo
     public static function convertToArray(string $tags){
         //Asxolithu mono an dennen ofkero, alios aisto na fkalei error sto view
         if (!empty($tags)) {
