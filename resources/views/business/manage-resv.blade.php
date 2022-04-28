@@ -92,53 +92,55 @@ use App\Models\Table;
                                                             <input id="currentDate" type="hidden" value="">
                                                             {{-- TODO na erkunte pu to view tuta --}}
                                                             @foreach (App\Models\Reservation::all() as $reservation)
-                                                                @if ($reservation->date == $date)
-                                                                    <tr class="resvPopup">
-                                                                        <td class="time">
-                                                                            {{ $reservation->time }}</td>
-                                                                        <td class="customerName"
-                                                                            class="text-bold-500">
-                                                                            {{ User3::find($reservation->user3_id)->full_name }}
-                                                                        </td>
-                                                                        <td>
-                                                                            <span
-                                                                                class="attendance">{{ $reservation->attended }}</span>/<span
-                                                                                class="people">{{ $reservation->pax }}</span>
-                                                                        </td>
-                                                                        <td>{{ $reservation->table->table_no }}</td>
-                                                                        <td class="details" hidden>
-                                                                            {{ $reservation->details }}
-                                                                        </td>
-                                                                        <td class="res_id" hidden>
-                                                                            {{ $reservation->id }}
-                                                                        </td>
-                                                                        <td class="table_no" hidden>
-                                                                            {{ Table::find($reservation->table_id)->table_no }}
-                                                                        </td>
-                                                                        <td class="phone" hidden>
-                                                                            {{ User3::find($reservation->user3_id)->phone }}
-                                                                        </td>
-                                                                        <td class="people" hidden>
-                                                                            {{ $reservation->pax }}
-                                                                        </td>
-                                                                        <td id="resNum" hidden>{{ $reservation->id }}
-                                                                        </td>
-                                                                        <td hidden>
-                                                                            <span class="cancelled">
-                                                                                @if ($reservation->cancelled)
-                                                                                    1
-                                                                                @else
-                                                                                    0
-                                                                                @endif
-                                                                            </span>
-                                                                        </td>
-                                                                        <td hidden>
-                                                                            @if ($reservation->cancelled)
+                                                                @if(App\Models\Table::find($reservation->table_id)->user2_id == Auth::guard('user2')->user()->id)
+                                                                    @if ($reservation->date == $date)
+                                                                        <tr class="resvPopup">
+                                                                            <td class="time">
+                                                                                {{ $reservation->time }}</td>
+                                                                            <td class="customerName"
+                                                                                class="text-bold-500">
+                                                                                {{ User3::find($reservation->user3_id)->full_name }}
+                                                                            </td>
+                                                                            <td>
                                                                                 <span
-                                                                                    class="reason">{{ $reservation->cancelled->reason }}</span>
-                                                                            @endif
-                                                                        </td>
-                                                                    </tr>
+                                                                                    class="attendance">{{ $reservation->attended }}</span>/<span
+                                                                                    class="people">{{ $reservation->pax }}</span>
+                                                                            </td>
+                                                                            <td>{{ $reservation->table->table_no }}</td>
+                                                                            <td class="details" hidden>
+                                                                                {{ $reservation->details }}
+                                                                            </td>
+                                                                            <td class="res_id" hidden>
+                                                                                {{ $reservation->id }}
+                                                                            </td>
+                                                                            <td class="table_no" hidden>
+                                                                                {{ Table::find($reservation->table_id)->table_no }}
+                                                                            </td>
+                                                                            <td class="phone" hidden>
+                                                                                {{ User3::find($reservation->user3_id)->phone }}
+                                                                            </td>
+                                                                            <td class="people" hidden>
+                                                                                {{ $reservation->pax }}
+                                                                            </td>
+                                                                            <td id="resNum" hidden>{{ $reservation->id }}
+                                                                            </td>
+                                                                            <td hidden>
+                                                                                <span class="cancelled">
+                                                                                    @if ($reservation->cancelled)
+                                                                                        1
+                                                                                    @else
+                                                                                        0
+                                                                                    @endif
+                                                                                </span>
+                                                                            </td>
+                                                                            <td hidden>
+                                                                                @if ($reservation->cancelled)
+                                                                                    <span
+                                                                                        class="reason">{{ $reservation->cancelled->reason }}</span>
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endif
                                                                 @endif
                                                             @endforeach
                                                         </tbody>
