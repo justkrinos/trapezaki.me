@@ -98,7 +98,7 @@ use App\Models\User2_Photo;
                                                                 <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$issue->user2_id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
                                                             </div>
                                                             <p class="font-bold ms-3 mb-0">
-                                                                {{ $username = User2::find($issue->user2_id)->username }}
+                                                                {{ $username = User2::find($issue->user2_id)->business_name }}
                                                             </p>
                                                         </div>
                                                     </td>

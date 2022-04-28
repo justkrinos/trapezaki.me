@@ -88,7 +88,7 @@ use App\Models\User2_Photo;
                                 @include('www.search.random')
                             @endif
 
-
+                            {{--@include('www.components.choose-city')--}}
 
                             {{-- TODO: na katalaveni an ekames search j na fefki ta exta
                                       magazia j na su fkalli ta search results --}}

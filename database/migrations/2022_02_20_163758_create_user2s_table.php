@@ -17,7 +17,7 @@ class CreateUser2sTable extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('business_name');
+            $table->string('business_name')->unique();
             $table->string('company_name');
             $table->string('email')->unique();
             $table->string('phone');
