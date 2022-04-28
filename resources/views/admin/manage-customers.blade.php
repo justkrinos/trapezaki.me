@@ -89,7 +89,7 @@
                                                             <div class="avatar avatar-md">
                                                                 <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
                                                             </div>
-                                                            <p class="font-bold ms-3 mb-0 text-nowrap">{{ $user->username }}</p>
+                                                            <p class="font-bold ms-3 mb-0 text-nowrap">{{ $user->business_name }}</p>
                                                         </div>
                                                     </a>
                                                 </td>

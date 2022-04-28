@@ -63,7 +63,7 @@
                                                                 <img
                                                                     src="../assets/images/uploads/{{ $user->logo() }}">
                                                             </div>
-                                                            <p class="font-bold ms-3 mb-0">{{ $user->username }}</p>
+                                                            <p class="font-bold ms-3 mb-0">{{ $user->business_name }}</p>
                                                         </div>
                                                     </a>
                                                 </td>
