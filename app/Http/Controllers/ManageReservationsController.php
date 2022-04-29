@@ -59,17 +59,20 @@ class ManageReservationsController extends Controller
     }
 
     public function changeAttendance(){
+
+        //validate the request data
         $validatedData = request()->validate([
             'attendance'         => 'required|numeric|min:0',
             'reservation_id' =>  'required|numeric|min:0',
         ]);
 
+
         //get the authenticated user and reservation
         $user2 = Auth::guard('user2')->user();
         $reservation = Reservation::find($validatedData['reservation_id']);
 
-        $resvDate = Carbon::parse($reservation->date)->endOfDay();
-        $todayDate = Carbon::now('Europe/Athens')->endOfDay();
+        //parse the today's date to a carbon object for ease of comparison
+        $resvDate = Carbon::parse($reservation->date)->startOfDay();
 
         //make sure its on a table that its owned by the u2
         //make sure to attendance ennen megalitero tu arithmou twn atomwn
@@ -78,19 +81,16 @@ class ManageReservationsController extends Controller
         if($reservation->table->user2_id  == $user2->id
             && $validatedData['attendance'] <= $reservation->pax
             && !$reservation->cancelled
-            && $resvDate->eq($todayDate)
+            && $resvDate->isToday()
         ){
+            //set the attendance, save and return success
             $reservation->attended = $validatedData['attendance'];
             $reservation->save();
             return "success";
         }
 
-        //back to the page p itan prin
-        return response()->json(['success'],422);
-
-        // TODO: an to reservation en cancelled, tote na men eshi epilogi cancel
-        //       na men afinei 2o cancellation (primary key to reservation_id sto cancellations)
-        //       na ginei j sto rating tuto
+        //back to the page if an error occurs (it shouldnt)
+        return response()->json(['error'],422);
 
     }
 }

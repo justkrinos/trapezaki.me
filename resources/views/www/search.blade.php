@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php
-use App\Models\User2_Photo;
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,10 +69,14 @@ use App\Models\User2_Photo;
                                             </div>
                                         </div>
                                     </div>
-
                                     @include('www.components.searchbar')
                                 </div>
                             </div>
+
+                            {{--@include('www.components.choose-city')--}}
+
+                            {{-- TODO: na katalaveni an ekames search j na fefki ta exta
+                                      magazia j na su fkalli ta search results --}}
 
 
 
@@ -87,13 +86,6 @@ use App\Models\User2_Photo;
                             @else
                                 @include('www.search.random')
                             @endif
-
-                            {{--@include('www.components.choose-city')--}}
-
-                            {{-- TODO: na katalaveni an ekames search j na fefki ta exta
-                                      magazia j na su fkalli ta search results --}}
-
-
 
                         </div>
 
@@ -115,24 +107,25 @@ use App\Models\User2_Photo;
 
 
 </body>
+</html>
 
 
+{{-- //TODO: otan ginei to search  na apothikefkete kathe fora to city --}}
 
-<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
-<script src="../assets/js/date-no-prev.js"></script>
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/date-no-prev.js"></script>
 
 {{-- En xriazete i main dame gt en mono gia to sidebar --}}
-<script src="../assets/js/main-nosidepop.js"></script>
+<script src="/assets/js/main-nosidepop.js"></script>
 
 {{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 @include('components.toasts')
 
 <script>
-    console.log(sessionStorage.getItem('reservation'));
     if(sessionStorage.getItem('reservation') == 'success'){
         Toastify({
             text: "Reservation was successfully booked, check your email for more information!",
@@ -147,58 +140,8 @@ use App\Models\User2_Photo;
     sessionStorage.removeItem("reservation");
 </script>
 
-<script>
-    //TODO na mpeoi se js file
-    $(document).ready(function() {
-        $("#chooseCity").modal('show')
-    })
-
-    $(".city-option").click(function() {
-        option = $(this).attr("id")
-        switch (option) {
-            case 'Limassol':
-                $("#citySelect").prop('selectedIndex', 0);
-                break;
-            case 'Paphos':
-                $("#citySelect").prop('selectedIndex', 1);
-                break;
-            case 'Larnaca':
-                $("#citySelect").prop('selectedIndex', 2);
-                break;
-            case 'Nicosia':
-                $("#citySelect").prop('selectedIndex', 3);
-                break;
-            case 'Famagusta':
-                $("#citySelect").prop('selectedIndex', 4);
-                break;
-        }
-
-        $.ajaxSetup({
-            headers: {
-                "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
-            },
-        });
-
-        $.ajax({
-            url: "/api/change-city",
-            method: "post",
-            data: {
-                'city': option
-            },
-            success: function(result) {
-                console.log("success")
-                console.log(result);
-            },
-            error: function(error){
-                console.log("error")
-                console.log(error)
-            }
-        });
-    })
-</script>
-
-
 </html>
 
 
 {{-- //TODO: otan ginei to search  na apothikefkete kathe fora to city --}}
+<script src="/assets/js/choose-city.js">></script>

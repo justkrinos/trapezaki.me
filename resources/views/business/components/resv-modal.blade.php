@@ -1,4 +1,4 @@
-<div class="modal fade" id="resvPopup" tabindex="-1" role="dialog" aria-labelledby="issueModalCenterTitle"
+<div class="modal fade" id="resvModal" tabindex="-1" role="dialog" aria-labelledby="issueModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -14,37 +14,40 @@
                         <div class="col-sm-7">
                             <div class="flex-nowrap input-group col-md-5 mb-4">
                                 <label class="input-group-text" for="issueBusiness">Status</label>
-                                <label id="status" class="d-flex form-control justify-content-begin align-items-center">@include('business.components.circle-icon')&nbsp;<div id="statusText" class="text-secondary">Canceled</div></label>
+                                <label id="status" class="d-flex form-control justify-content-begin align-items-center">
+                                    @include('business.components.circle-icon')&nbsp;
+                                    <div id="statusText" class="text-secondary">Canceled</div>
+                                </label>
                             </div>
                         </div>
 
                         <div class="col-sm-10">
                             <div class="flex-nowrap input-group col-md-5 mb-4">
-                                <label class="input-group-text" for="issueBusiness">Reservation No.</label>
-                                <label type="text" class="form-control" id="myresvBusiness">35234</label>
+                                <label class="input-group-text" for="myresvBusiness">Reservation No.</label>
+                                <label type="text" class="form-control" id="myresvBusiness"></label>
                             </div>
                         </div>
 
                         <div class="col-sm-10">
                             <div class="flex-nowrap input-group col-md-5 mb-4">
-                                <label class="input-group-text" for="issueBusiness">Name</label>
-                                <label type="text" class="form-control" id="customerName">Efstathios Andreou</label>
+                                <label class="input-group-text" for="customerName">Name</label>
+                                <label type="text" class="form-control" id="customerName"></label>
                             </div>
                         </div>
 
                         <div class="col-sm-10">
                             <div class="flex-nowrap input-group col-md-5 mb-4">
-                                <label class="input-group-text" for="issueBusiness">Phone
+                                <label class="input-group-text" for="phone">Phone
                                     Number</label>
-                                <label type="text" class="form-control" id="phone">99081329</label>
+                                <label type="text" class="form-control" id="phone"></label>
                             </div>
                         </div>
 
                         <div class="col-sm-5">
                             <div class="d-flex input-group col-md-3 mb-3">
-                                <label class="input-group-text" for="issueType">Table</label>
+                                <label class="input-group-text" for="myresvType">Table</label>
                                 <div class="col-4">
-                                    <label type="text" class="form-control" id="myresvType">4</label>
+                                    <label type="text" class="form-control" id="myresvType"></label>
                                 </div>
                             </div>
                         </div>
@@ -63,8 +66,8 @@
                         <div class="col-sm-12">
                             <div class="col-md-4 mb-4">
                                 <div class="input-group mb-4">
-                                    <label class="input-group-text" for="issueImportance">Time</label>
-                                    <label type="text" class="form-control" id="myresvTime">18:00</label>
+                                    <label class="input-group-text" for="myresvTime">Time</label>
+                                    <label type="text" class="form-control" id="myresvTime"></label>
                                 </div>
                             </div>
                         </div>

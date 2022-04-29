@@ -32,6 +32,7 @@ function setStatus(that){
     $('#status').removeClass('text-success')
     $('#status').removeClass('text-warning')
 
+    //add new classes depending on the color of the row
     if($(that).hasClass('table-info')){
         $('#status').addClass('text-info')
         $('#statusText').html('Incomplete')
@@ -50,20 +51,21 @@ function setStatus(that){
 }
 
 
-//Event on modal closed na stelnei sto ajax to number an allakse
-$('#resvPopup').on('hidden.bs.modal', function () {
-    //get the attended number from modal and row
-
+//Event on modal closed, send the ajax request
+$('#resvModal').on('hidden.bs.modal', function () {
+    //get the attended number from modal
     modal_attendance = $("#attendance").val()
 
     //get the reservation id
     id = parseInt($("#myresvBusiness").html(),10)
 
     //If there is a change
+    //NOTE: unchanged_attendance is a DOM element
+    //      it is initialized on click to the modal
     if(modal_attendance != parseInt(unchanged_attendance.html(),10)){
+        //apply the chanfes
         applyAttendanceChanges(modal_attendance, id);
     }
-    //an en ok tote allassw to p to row j kamnw ksana colorize
 
   })
 
@@ -71,11 +73,7 @@ $('#resvPopup').on('hidden.bs.modal', function () {
 //Function to pop the modal
 function modalpop() {
     $(document).on("click", ".resvPopup", function () {
-        
-        //console.log($(".details").html())
-        //TODO
-        //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
-        //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
+
 
         resv_details = $(this).children(".details").html();
         resv_id = $(this).children(".res_id").html();
@@ -135,37 +133,51 @@ function modalpop() {
         $("#FormCancel").append(
             '<input name="reservation_id" value="' + resv_id + '" hidden>'
         );
-        $("#resvPopup").modal("show");
+
+        $("#resvModal").modal("show");
     });
 }
 
 
+//function to apply the changes in attendance
 function applyAttendanceChanges(attendance,id){
+    //use the csrf token to prevent csrf attacks
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
         },
     });
-
+    //make the ajax request
     $.ajax({
+
+        //the url is an api that accepts two parameters
         url: "/api/apply-attendance",
         type: "post",
+
+        //use the reservation id and new attendance
+        //these are taken from the function arguments
         data: {
             'reservation_id': id,
             'attendance': attendance,
         },
+
+        //on success make the changes
         success: function (result) {
-            console.log(result)
+            //we should get a string message "success"
+            //from the controller
             if(result == "success"){
-                //an en ok tote allakse sto datatable to value
+                //change the attendance from the table row
                 unchanged_attendance.html(attendance)
+                //recolorize table due to the new attendance
                 colorizeTable()
             }
         },
+        //on error show a toast
         error: function (data) {
             Toastify({
-                //an exw error fkale toast
-                text: "Oops! Something went wrong :(",
+                //we shouldnt have an error
+                //but if we do, inform the user
+                text: "Oops! Something went wrong.",
                 duration: 5000,
                 close: true,
                 gravity: "top",
