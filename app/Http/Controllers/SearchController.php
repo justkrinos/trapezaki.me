@@ -13,7 +13,7 @@ class SearchController extends Controller
     public function index()
     {
         $businesses = User2::latest();
-        //An ginei search   
+        //An ginei search
         if(request("search"))
         {
 
@@ -34,7 +34,7 @@ class SearchController extends Controller
                 }else
                 $tagsQuery .= "or tags.name like '" . $tag . "' ";
             }
-            
+
             //Getting type
             if(request("coffee"))
             {
@@ -57,21 +57,21 @@ class SearchController extends Controller
                 $type .= ":drinks";
             }
         //Main query
-        $results = DB::select(" SELECT user2s.id, user2s.username, user2s.password, user2s.business_name, 
-                                    user2s.company_name, user2s.email, user2s.phone, user2s.representative, 
-                                    user2s.city, user2s.address, user2s.postal, user2s.long, user2s.lat, 
-                                    user2s.type, user2s.status, user2s.res_range, user2s.duration, user2s.menu, 
-                                    user2s.description, user2s.verification_code, user2s.is_verified, user2s.remember_token, 
+        $results = DB::select(" SELECT user2s.id, user2s.username, user2s.password, user2s.business_name,
+                                    user2s.company_name, user2s.email, user2s.phone, user2s.representative,
+                                    user2s.city, user2s.address, user2s.postal, user2s.long, user2s.lat,
+                                    user2s.type, user2s.status, user2s.res_range, user2s.duration, user2s.menu,
+                                    user2s.description, user2s.verification_code, user2s.is_verified, user2s.remember_token,
                                     user2s.created_at, user2s.updated_at
                                 FROM user2s join tables join tags join user2tags
-                                WHERE user2s.id = tables.user2_id AND taggable_id = user2s.id AND 
-                                    user2tags.tag_id = tags.tag_id 
+                                WHERE user2s.id = tables.user2_id AND taggable_id = user2s.id AND
+                                    user2tags.tag_id = tags.tag_id
                                     AND capacity >= '$people'
-                                    AND city LIKE '%$city%' AND type LIKE '%$type%' 
+                                    AND city LIKE '%$city%' AND type LIKE '%$type%'
                                     AND (business_name LIKE '%$search%' OR description LIKE '%$search%'
                                         OR $tagsQuery)
                                 GROUP BY user2s.id
-                                ORDER BY 
+                                ORDER BY
                                     CASE
                                     WHEN business_name LIKE '$search' THEN 1
                                     WHEN business_name LIKE '%$search%' THEN 2
@@ -92,9 +92,19 @@ class SearchController extends Controller
                 'businesses' => $businesses,
                 'everything' => User2::all()
             ]);
-            
+
         }
-        return view('www.search');
+
+        //get random users
+        $randomUsers = User2::inRandomOrder()
+            ->limit(5)
+            ->where('is_verified', 1)
+            ->where('status', 1)
+            ->get();
+
+        return view('www.search',[
+            'users' => $randomUsers
+        ]);
     }
 
 
@@ -107,15 +117,15 @@ class SearchController extends Controller
                 if(!$this->getAvailability($user2, $table->id, $date)){
                     $checkTable = false;
                     break;
-                }          
+                }
             }
             if($checkTable)
-                $usersAvailability->push($user2);       
-    
+                $usersAvailability->push($user2);
+
         }
 
         return $usersAvailability;
-        
+
     }
 
     public function getAvailability(User2 $user2, int $t, string $d)
