@@ -1,16 +1,3 @@
-{{-- Evre random users p en verified j active --}}
-{{-- TODO: na allaksi tuto na erkete p ton controller --}}
-@php
-    use App\Models\User2;
-    //dd($users);
-    $users = App\Models\User2::inRandomOrder()
-    ->limit(5)
-    ->where('is_verified', 1)
-    ->where('status', 1)
-    ->get();
-@endphp
-
-
 @if ($users) {{-- An iparxun users --}}
 
     <section id="content-types">
