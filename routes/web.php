@@ -68,7 +68,7 @@ Route::bind('guest', function ($value) {
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
     //TODO: delete this
-    Route::get('/dokimi', [SearchController::class, 'dokimi']);
+    //Route::get('/dokimi', [SearchController::class, 'dokimi']);
 
     Route::get('/make-a-reservation', [SearchController::class, 'index'])->name('first_page');
 
@@ -118,9 +118,15 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
                 $showCityPop = false;
                 $city = session()->get('city');
             }
+            //TODO evala to etsi gia na dulefkei, sigirisma
             return view('www.search', [
                 'showCityPop' => $showCityPop,
-                'city'        => $city
+                'city'        => $city,
+                'users'       => App\Models\User2::inRandomOrder()
+                                        ->limit(5)
+                                        ->where('is_verified', 1)
+                                        ->where('status', 1)
+                                        ->get()
             ]);
         });
 
