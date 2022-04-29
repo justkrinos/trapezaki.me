@@ -29,7 +29,7 @@
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>
-                                    <label for="inputSlots">Availabiliy</label>
+                                    <label for="inputSlots">Availability</label>
                                     <div id="inputSlots" class="input-group col-md-5">
                                         <span id="timeSlots" class="form-control"></span>
                                         <div class="invalid-feedback">

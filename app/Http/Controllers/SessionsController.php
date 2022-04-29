@@ -25,7 +25,7 @@ class SessionsController extends Controller
         //              dld na mennen 'form1' alla kapio name
 
         //Both change password and edit profile are here
-        if(request()->has('form1'))
+        if(request()->has('changeAccountDetails'))
         {
             //User3 edit profile
             $attributes = request()->validate([
@@ -33,25 +33,22 @@ class SessionsController extends Controller
                 'phone' => 'required|digits_between:8,13|numeric',
             ]);
 
-            //get the id of the user
-            $id = Auth::guard('user3')->user()->id;
-
-            //$guest = User3::update($attributes);
-
-            User3::where('id', $id)->first()->update($attributes);
-
-
+            //update the details
+            Auth::guard('user3')->user()->update($attributes);
 
             return redirect('/profile')->with("success", "Your changes have been applied successfully!");
         }
         //Change password
-        else if(request()->has('form2'))
+        else if(request()->has('changePassword'))
         {
              //get the id of the user
-            $id = Auth::guard('user3')->user()->id;
+            $user = Auth::guard('user3')->user();
 
-            $request = request()->merge([ 'username' => Auth::guard('user3')->user()->username]);
-            $oldPassword = request()->validate(['username' => 'required', 'password' => 'required']);
+            $request = request()->merge([ 'username' => $user->username]);
+            $oldPassword = request()->validate([
+                'username' => 'required',
+                 'password' => 'required|max:50|min:7'
+            ]);
 
 
             if (!Auth::guard('user3')->attempt($oldPassword))
@@ -60,31 +57,30 @@ class SessionsController extends Controller
             }
 
             $pass = request()->validate([
-                'new-password' => 'required|max:50|min:7|confirmed',
-                'new-password_confirmation' => 'required'
+                'new-password' => 'required|max:50|min:7',
+                'new-password_confirmation' => 'required|same:new-password'
+            ],[
+                'new-password_confirmation.same' => 'The passwords do not match.'
             ]);
 
-            $old_pass = $_POST['password'];
-            $pass = $_POST['new-password'];
+            $old_pass = $oldPassword['password'];
+            $pass = $pass['new-password'];
 
             //checking if new pass==old pass
             if(strcmp($old_pass, $pass) == 0)
             {
-                session()->flash('error','New Password cannot be the same as the old one!');
                 return redirect('/profile')->with("error", "New Password cannot be the same as the old one!");
             }
 
 
-            //updating user password
-            $user = User3::find($id);
+            //update user password
             $user->password = $pass;
             $user->save();
+            
+            //log the user out to log in with the new password
+            auth('user3')->logout();
 
-            //dd($user);
-            //User3::where('id', $id)->first()->update($pass);
-            //session()->flash('success','Your password has been updated');
-
-            return redirect('/profile')->with("success", "Your password has been updated");
+            return redirect('/login')->with("success", "Your password has been updated. Please log in to continue.");
         }
 
     }
@@ -163,19 +159,16 @@ class SessionsController extends Controller
         //J ena username p ginete generate me ena random arithmo + to id tou gia na en sioura unique
         //J ena random password pu en tha xrisimopoiithei potte apla gia na eshei password epd en prepei nan blank
         $request = request()->merge([
-            'guest' => 1,
             'username' => "guest-" . mt_rand(1000000000, 9999999999) . strval(User3::max('id') + 1),
             'password' => bcrypt(uniqid() . strval(mt_rand(1000000, 9999999)) . uniqid())
         ]);
 
 
-        //try{
         $attributes = $request->validate(
             [
                 'full_name' => 'required|max:50|min:3',
                 'phone' => 'required|digits_between:8,13|numeric',
-                'email' => 'required|email|max:100|unique:user3s,email',
-                'guest' => 'required',
+                'email' => 'required|email|max:100|unique:user3s,email,NULL,id,guest,0',
                 'username' => 'required',
                 'password' => 'required'
             ],
@@ -183,9 +176,7 @@ class SessionsController extends Controller
                 'email.unique' => 'An account already exists with this email. You can just log in. :)'
             ]
         );
-        // } catch (\Illuminate\Validation\ValidationException $e ) {
-        //     return \response($e->errors(),400);
-        // }
+
 
         //User3::create($attributes); en tha ginete create epd en tha exume session gia ton guest
         // ena ginete create otan kami j tin kratisi
@@ -216,6 +207,12 @@ class SessionsController extends Controller
         }
 
         return 'success';
+    }
+
+    public function showProfile() {
+        if (!Auth::check('user3'))
+            return redirect('/');
+        return view('www.profile');
     }
 
 }

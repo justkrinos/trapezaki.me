@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use App\Models\Daily_Setting;
 
 
 //For USER2
@@ -17,6 +18,48 @@ class SessionsController2 extends Controller
         //Both change password and edit profile are here
         //if(request()->has('form1'))
         //{
+        if((request()->has('first'))||(request()->has('last')))
+        {
+            $day = request("day");
+            $day_id = 1;
+            switch ($day)
+            {
+                case "Monday":
+                    $day_id = 1;
+                    break;
+
+                case "Tuesday":
+                    $day_id = 2;
+                    break;
+                
+                case "Wednesday":
+                    $day_id = 3;
+                    break;
+
+                case "Thursday":
+                    $day_id = 4;
+                    break;
+
+                case "Friday":
+                    $day_id = 5;
+                    break;
+
+                case "Saturday":
+                    $day_id = 6;
+                    break;
+
+                case "Sunday":
+                    $day_id = 7;
+                    break;
+            }
+
+            $day = Daily_Setting::where('day_id', $day_id)->where('user2_id', Auth::guard('user2')->user()->id)->first();
+
+            $minTime = Time::createFromInt($day->time_min)->getStr();
+            $maxTime = Time::createFromInt($day->time_max)->getStr();
+    
+            return [$minTime, $maxTime];
+        }
         if(request()->has('form1'))
         {
 
@@ -222,5 +265,22 @@ class SessionsController2 extends Controller
         //Stelnw pisw  to array p ekama
         //gia na to valw mesto request mou gia na ginei to validate
         return $tags;
+    }
+
+    public function showProfile(){
+        $user2 = Auth::guard('user2')->user();
+        $tags = $user2->tags->pluck('name')->toArray();
+
+        //TODO: fix this na en opws tu admin
+        $day = $user2->dailySettings->where('day_id', 1)->first();
+        $max = (Time::createFromInt($day->time_max))->getStr();
+        $min = (Time::createFromInt($day->time_min))->getStr();
+
+        return view('business.profile',[
+            'tags' => $tags,
+            'max'  => $max,
+            'min'  => $min,
+            'user2'=> $user2
+        ]);
     }
 }

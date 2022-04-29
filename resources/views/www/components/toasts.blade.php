@@ -2,7 +2,6 @@
 {{--An irta se tunto page me ena cookie success tote kame to tuto --}}
 
 @if (session()->has('success'))
-
 <span id="msg">{{ session('success') }}</span>
 
 <script>

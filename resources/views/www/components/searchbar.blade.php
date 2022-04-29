@@ -12,22 +12,22 @@ $city = request("city");
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
                     <input type="text" class="form-control" placeholder="Find restaurants, bar, cafe..."
                         name="search" aria-describedby="button-addon2" value="{{ request("search") }}">
-                    <button class="btn btn-outline-white bg-info" type="submit"
+                    <button class="btn btn-outline-white bg-info" type="submit" name="btn-search"
                         id="button-search">Search</button>
                 </div>
-                {{-- TODO: na mpun ulla ta options prin to koumpi tu search --}}
+                {{-- TODO: ama kamis search j meta en su fkalli checkarismena ta coffee food drinks p ekames --}}
                 <div class="card-content bg-primary">
                     <div class="d-flex justify-content-center">
                         <div class="form-check form-check-inline form-switch">
-                            <input class="form-check-input bg-info" type="checkbox" name="food" id="switchCheck">
+                            <input class="form-check-input bg-info" type="checkbox" name="food" id="switchCheck" @if (request("food")) checked @endif>
                             <label class="form-check-label text-white" for="switchCheck"> Food</label>
                         </div>
                         <div class="form-check form-check-inline form-switch">
-                            <input class="form-check-input bg-info" type="checkbox" name="coffee" id="switchCheck">
+                            <input class="form-check-input bg-info" type="checkbox" name="coffee" id="switchCheck" @if (request("coffee")) checked @endif>
                             <label class="form-check-label text-white" for="switchCheck"> Coffee</label>
                         </div>
                         <div class="form-check form-check-inline form-switch">
-                            <input class="form-check-input bg-info" type="checkbox" name="drinks" id="switchCheck">
+                            <input class="form-check-input bg-info" type="checkbox" name="drinks" id="switchCheck" @if (request("drinks")) checked @endif>
                             <label class="form-check-label text-white" for="switchCheck"> Drinks</label>
                         </div>
                     </div>

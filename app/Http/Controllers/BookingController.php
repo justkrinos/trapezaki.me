@@ -47,7 +47,7 @@ class BookingController extends Controller
             $email = session()->get('email');
 
 
-            //TODO: na gini uncomment tuto
+            //TODO: na gini uncomment tuto j na checkaristi an en ok
             // session()->forget(['full_name', 'phone', 'email']);
 
 
@@ -80,16 +80,19 @@ class BookingController extends Controller
 
 
             //TODO: opu eshi validation numeric na to kamume nan min:0 j na valume max an xriazete (px. pax <=16)
+            //TODO: an den valis date fkalli error logika epd en bori nan null otan mpei sto table (ekama to null sta migrations check if works)
             $validatedData = $request->validate([
                 'date'=> 'required|date',
-                'time'=> 'required',
-                'table_id'=> 'required|numeric',
+                'time'=> 'required|date_format:H:i',
+                'table_id'=> 'required|numeric|min:0',
                 'details'=> 'string|max:200',
-                'pax'=> 'required|numeric'
+                'pax'=> 'required|numeric|min:0|max:16'
             ]);
 
             $reservation = $guest->reservations()->create($validatedData);
-            // $reservation['guest'] = 1;
+
+            session()->forget('date');
+            session()->forget('people');
 
             return $reservation;
 
@@ -102,7 +105,7 @@ class BookingController extends Controller
 
             $validatedData = $request->validate([
                 'date'=> 'required|date',
-                'time'=> 'required',
+                'time'=> 'required|date_format:H:i',
                 'table_id'=> 'required|numeric',
                 'details'=> 'string|max:200',
                 'user3_id' => "required",
@@ -110,12 +113,12 @@ class BookingController extends Controller
                 'attended' => 'required'
             ]);
 
-            // return $validatedData;
-
             unset($validatedData['user3_username']);
 
             $reservation = Reservation::create($validatedData);
 
+            //TODO na men kamni return reservation afu en dia pisw ta data
+            //TODO: na stelnei email
             return $reservation;
         }
     }

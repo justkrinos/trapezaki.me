@@ -134,7 +134,7 @@ $tags = $user2->tags->pluck('name')->toArray();
                                 <div class="col-md-5">
                                     <label for="email">Email</label>
                                     <input type="text" id="email" class="form-control round"
-                                        value="{{ $user2->email }}" disabled>
+                                        value="{{ $user2->email }}" disabled >
 
                                     @if (!$user2->is_verified == 1)
                                         <p style="color:red">Not verified</p>
@@ -249,7 +249,7 @@ $tags = $user2->tags->pluck('name')->toArray();
                                                 <div class="input-group">
                                                 {{-- TODO: na grafti sta eggrafa oti to minimum duration en 30 --}}
                                                 <input type="number" min="30" id="resv-duration" name="duration"
-                                                    class="form-control square" value="{{$user2->duration}}">
+                                                    class="form-control square" step="30" value="{{$user2->duration}}">
                                                 <label class="input-group-text" for="range">minutes</label>
                                                 </div>
                                             </div>
@@ -336,83 +336,100 @@ $tags = $user2->tags->pluck('name')->toArray();
                 </div>
             </div>
 
-
-            <div class="card" href="#location">
-                <div class="card-header">
-                    <h4 class="card-title">Location</h4>
-                </div>
-
-                <div class="card-body">
-                    <div class="col-md-6 col-12 mb-1">
-                        <input type="text" id="location" class="form-control round" name="location">
+            <form method="POST" action="/user/{{ $user2->username }}#locationForm">
+                @csrf
+                <div class="card" id="locationForm" href="#location">
+                    <div class="card-header">
+                        <h4 class="card-title">Location</h4>
                     </div>
 
-
-
-                    <div class="form-group row">
-                        <div class="col-md-6 col-12 mb-2">
-                            <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                    <div class="card-body">
+                        <div class="col-md-6 col-12 mb-1">
+                            <input type="text" id="location" class="form-control round" name="location">
                         </div>
 
-                        <div class="col-md-6 col-12">
+                        <input type="hidden" id="id" name="id" class="form-control round"
+                        value="{{ $user2->id }}">
 
-                            <div class="row flex">
-                                <div class="col-sm-2 col-2">
-                                    <label class="col-form-label">Lat</label>
+                        <div class="form-group row">
+                            <div class="col-md-6 col-12 mb-2">
+                                <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+
+                                <div class="row flex">
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Lat</label>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="lat" class="form-control" value="{{ $user2->lat }}"
+                                            name="lat" readonly>
+                                    </div>
+
+                                    <div class="col-sm-2 col-2">
+                                        <label class="col-form-label">Long</label>
+                                    </div>
+                                    <div class="col-md-4 col-4">
+                                        <input type="text" id="long" class="form-control" value="{{ $user2->long }}"
+                                            name="long" readonly>
+                                    </div>
+
                                 </div>
-                                <div class="col-md-4 col-4">
-                                    <input type="text" id="lat" class="form-control" value="{{ $user2->lat }}"
-                                        name="lat" disabled>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">Address</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="address" class="form-control @error('address') is-invalid @enderror" name="address"
+                                        value="{{ $user2->address }}">
+                                    @error('address')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
 
-                                <div class="col-sm-2 col-2">
-                                    <label class="col-form-label">Long</label>
+                                <div class="col-sm-4">
+                                    <label class="col-form-label text-nowrap">Zip Code</label>
                                 </div>
-                                <div class="col-md-4 col-4">
-                                    <input type="text" id="long" class="form-control" value="{{ $user2->long }}"
-                                        name="long" disabled>
+                                <div class="col-lg-6">
+                                    <input type="text" id="postal" class="form-control @error('postal') is-invalid @enderror" name="postal"
+                                        value="{{ $user2->postal }}">
+                                    @error('postal')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label class="col-form-label">City</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" id="city" class="form-control @error('city') is-invalid @enderror" value="{{ $user2->city }}"
+                                        name="city">
+                                        @error('city')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                 </div>
 
                             </div>
-
-                            <div class="col-sm-4">
-                                <label class="col-form-label">Address</label>
+                            
+                            <div class="col-sm-6">
+                                <button type="submit" name="location"
+                                    class="btn btn-success me-1 mb-1">Save changes</button>
                             </div>
-                            <div class="col-lg-6">
-                                <input type="text" id="address" class="form-control" name="address"
-                                    value="{{ $user2->address }}">
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label class="col-form-label text-nowrap">Zip Code</label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" id="zip" class="form-control" name="zip"
-                                    value="{{ $user2->postal }}">
-                            </div>
-
-                            <div class="col-sm-4">
-                                <label class="col-form-label">City</label>
-                            </div>
-                            <div class="col-lg-6">
-                                <input type="text" id="city" class="form-control" value="{{ $user2->city }}"
-                                    name="city">
-                            </div>
-
                         </div>
-
                     </div>
-
-
-
                 </div>
-
-            </div>
+            </form>
         </div>
-
-        <footer>
-            <button type="submit" class="btn btn-success me-1 mb-1">Save changes</button>
-        </footer>
 
 
         {{-- Photo Popup Modal --}}

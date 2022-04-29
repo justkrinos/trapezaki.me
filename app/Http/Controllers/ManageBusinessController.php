@@ -6,12 +6,33 @@ use Illuminate\Http\Request;
 use App\Models\User2;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Validation\Rule;
 
 
 class ManageBusinessController extends Controller
 {
     public function edit(Request $request, User2 $user2)
     {
+        if(request()->has("location"))
+        {
+            //ddd(request()->all());
+            $validatedData = request()->validate([
+                'id' => 'required',
+
+                'address' => 'required|min:2',
+                'postal' => 'required|numeric|max:999999|min:1',
+                'city' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
+                'lat' => 'required|numeric|max:36',
+                'long' => 'required|numeric|max:36',
+            ]);
+            //ddd($validatedData);
+            $user2 = User2::find($validatedData['id']);
+
+            unset($validatedData['id']);
+            $user2->update($validatedData);
+
+            return redirect('/user/' . $user2->username)->with("success", "Your changes have been applied successfully!");
+        }
         if(request()->has('businessInfo'))
         {
 

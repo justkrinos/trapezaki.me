@@ -134,7 +134,6 @@ class TimeSlotController extends Controller
         return $timeSlotsStr;
     }
 
-
     private function getDay(string $date)
     {
         $day = Carbon::parse($date)->format('l');

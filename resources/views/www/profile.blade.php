@@ -18,15 +18,10 @@ use App\Models\User2;
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="shortcut icon" href="/assets/images/logo/logo_small.png" type="image/x-icon">
 
-    {{-- TODO:  //-prepei na mpei sitemap sto bottom tu page gia na eshi:
-                                                        -about us
-                                                        -become a partner ston user3 j user2
-                                                        -ulla ta links p eshi idi to sidebar
-                                                        -copyright @ Trapezaki
-                //- to sitemap prp na en responsive mazi me to sidebar
-                //- to sitemap ennan ena bar p ena pianni ullo to length
-                    but ta contents prp nan justified center me to card
-        --}}
+
+    {{-- TODO: ta error messages nan kalitera j to $user na erkete p to controller
+               aman kamis lathos en erkunte pisw ta old()
+     --}}
 
     {{-- Toast dependency --}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
@@ -74,7 +69,7 @@ use App\Models\User2;
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label for="basicInput">Name</label>
+                                                    <label for="basicInput">Full Name</label>
                                                     <small class="text-muted"><i>(First and Last name)</i></small>
                                                     <input type="text" class="form-control" id="full_name"
                                                         name="full_name"
@@ -104,7 +99,7 @@ use App\Models\User2;
                                                 </div>
 
                                                 <div class="col-sm-12 d-flex justify-content-end">
-                                                    <button type="submit" name="form1"
+                                                    <button type="submit" name="changeAccountDetails"
                                                         class="btn btn-primary me-1 mb-1">Save Changes</button>
 
                                                 </div>
@@ -113,14 +108,14 @@ use App\Models\User2;
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
+                            <div class="card" id="changePasswordForm">
                                 <div class="card-header">
                                     <h4 class="card-title">Change Password</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-md-4">
-                                            <form method="POST" action="/profile" class="col-md-12">
+                                            {{-- <form method="POST" action="/profile#changePasswordCard" class="col-md-12"> --}}
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="basicInput">Old Password</label>
@@ -148,13 +143,13 @@ use App\Models\User2;
                                                         id="new-password_confirmation" name="new-password_confirmation"
                                                         placeholder="Password" required>
                                                     <div style="color:red">
-                                                        {{ $errors->first('password_confirmation') }}
+                                                        {{ $errors->first('new-password_confirmation') }}
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-12 d-flex justify-content-end">
-                                                    <button type="submit" name="form2"
-                                                        class="btn btn-primary me-1 mb-1">Change</button>
+                                                    <button type="submit" name="changePassword"
+                                                        class="btn btn-primary me-1 mb-1">Apply</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -187,4 +182,4 @@ use App\Models\User2;
 <script src="../assets/js/main-nosidepop.js"></script>
 
 
-@include('components.toasts')
+@include('www.components.toasts')

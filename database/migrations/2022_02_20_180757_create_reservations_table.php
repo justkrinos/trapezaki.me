@@ -19,7 +19,7 @@ class CreateReservationsTable extends Migration
             $table->foreignId('table_id');//->constrained();//->onDelete('cascade')->onUpdate('cascade');
             $table->date('date');
             $table->time('time'); //integer gia na mporw efkola na to sigkrinw
-            $table->text('details');
+            $table->text('details')->nullable();
             $table->smallInteger('attended')->default(0);
             $table->foreignId('user3_id')->constrained('user3s')->onDelete('cascade')->onUpdate('cascade');
 

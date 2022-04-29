@@ -13,9 +13,9 @@ class SearchController extends Controller
     public function show()
     {
         //An ginei search
-        if(request("search"))
+        if(request()->has("btn-search"))
         {
-
+            
             //TODO: validation
             //Getting form variables
             $type = "";
@@ -56,7 +56,7 @@ class SearchController extends Controller
                 $type .= ":drinks";
             }
         //Main query
-        $results = DB::select(" SELECT user2s.id, user2s.username, user2s.password, user2s.business_name,
+        $results = DB::select("SELECT user2s.id, user2s.username, user2s.password, user2s.business_name,
                                     user2s.company_name, user2s.email, user2s.phone, user2s.representative,
                                     user2s.city, user2s.address, user2s.postal, user2s.long, user2s.lat,
                                     user2s.type, user2s.status, user2s.res_range, user2s.duration, user2s.menu,
@@ -77,7 +77,7 @@ class SearchController extends Controller
                                     WHEN description LIKE '%$search%' THEN 3
                                     ELSE 4
                                     END
-                                    ");
+                            ");
 
             $businesses = [];
             foreach($results as $result){
@@ -85,6 +85,11 @@ class SearchController extends Controller
             }
 
             $businesses =  $this->getAvailableUsers($businesses,$date);
+
+            session([
+                'people' => $people,
+                'date' => $date
+            ]);
 
             // dd($businesses);
             return view('www.search',[
@@ -104,7 +109,6 @@ class SearchController extends Controller
             'users' => $randomUsers
         ]);
     }
-
 
     public function getAvailableUsers(array $users2, string $date){
 
@@ -223,6 +227,12 @@ class SearchController extends Controller
             return false;
     }
 
+    public function showProfile(User2 $user2) {
+        return view('www.selected-profile',
+        [
+            'user2' => $user2
+        ]);
+    }
 
     private function getDay(string $date)
     {

@@ -81,7 +81,7 @@ class ManageReservationsController extends Controller
         if($reservation->table->user2_id  == $user2->id
             && $validatedData['attendance'] <= $reservation->pax
             && !$reservation->cancelled
-            && $resvDate->isToday()
+            && $resvDate->isToday('Europe/Athens')
         ){
             //set the attendance, save and return success
             $reservation->attended = $validatedData['attendance'];

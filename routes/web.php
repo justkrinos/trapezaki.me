@@ -67,9 +67,6 @@ Route::bind('guest', function ($value) {
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
-    //TODO: delete this
-    //Route::get('/dokimi', [SearchController::class, 'dokimi']);
-
     Route::get('/make-a-reservation', [SearchController::class, 'show'])->name('first_page');
 
     //TODO: tuto edulefke
@@ -91,9 +88,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         ]);
     })->name('first_page');*/
 
-    Route::get('/user/{user2}', function (User2 $user2) {
-        return view('www.selected-profile');
-    });
+    Route::get('/user/{user2}', [SearchController::class,'showProfile']);
 
     Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
 
@@ -112,22 +107,25 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         //TODO na mpei se controller
         Route::get('/', function () {
-            $showCityPop = true;
-            $city = "";
-            if (session()->has('city')) {
-                $showCityPop = false;
-                $city = session()->get('city');
-            }
-            //TODO evala to etsi gia na dulefkei, sigirisma
-            return view('www.search', [
-                'showCityPop' => $showCityPop,
-                'city'        => $city,
-                'users'       => App\Models\User2::inRandomOrder()
-                                        ->limit(5)
-                                        ->where('is_verified', 1)
-                                        ->where('status', 1)
-                                        ->get()
-            ]);
+            return redirect()->route('first_page');
+            // $showCityPop = true;
+            // $city = "";
+            // if (session()->has('city')) {
+            //     $showCityPop = false;
+            //     $city = session()->get('city');
+            // }
+
+            
+            // //TODO evala to etsi gia na dulefkei, sigirisma
+            // return view('www.search', [
+            //     'showCityPop' => $showCityPop,
+            //     'city'        => $city,
+            //     'users'       => App\Models\User2::inRandomOrder()
+            //                             ->limit(5)
+            //                             ->where('is_verified', 1)
+            //                             ->where('status', 1)
+            //                             ->get()
+            // ]);
         });
 
         Route::get('/login', [SessionsController::class, 'create']);
@@ -168,11 +166,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
         //New controller pu elegxei ta sessions gia log in log out
         Route::get('/logout', [SessionsController::class, 'destroy']);
 
-        Route::get('/profile', function () {
-            if (!Auth::check('user3'))
-                return redirect('/');
-            return view('www.profile');
-        });
+        Route::get('/profile', [SessionsController::class,'showProfile']);
 
         //TODO en dulefki to route dunno why
         //TODO: na stelnei email sto reservation
@@ -202,9 +196,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/edit-reservation',[BookingController::class,'editResv']);
 
 
-        Route::get('/profile', function () {
-            return view('business.profile');
-        });
+        Route::get('/profile', [SessionsController2::class,'showProfile']);
         Route::get('/list-problems', function () {
             return view('business.list-problems');
         });

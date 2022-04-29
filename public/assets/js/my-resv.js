@@ -1,18 +1,12 @@
 var resv_id, raterow;
 
+var rate_clicked = false;
+
 $(document).ready(function () {
     //Update notifications
     notification_update();
 
-    //When user clicks on Rate Now!
-    $(document).on("click", ".rate", (function (e) {
-        //Show the rating modal
-        
-        $("#small").modal("show");
-        //Get the element clicked
-        resv_id = $(this).parents("div").attr("resv");
-        raterow = $(this).parents("td");
-    }));
+    //When user clicks on Rate Now button
 
     //When user confirms rating
     $("#rateConfirm").click(function () {
@@ -25,26 +19,44 @@ $(document).ready(function () {
 
     //If a row is clicked
     $(document).on("click", ".resvPopup", function () {
-        id = $(this).children(".resvID").html();
-        console.log
-
+        id = $(this).siblings(".resvID").html();
+        console.log($(this).siblings(".pastResv").text());
         //Give the details to the modal
         $("#myresvNumber").html(id);
-        $("#myresvTable").html($(this).children(".resvTable").html());
-        $("#myresvPeople").html($(this).children(".resvPeople2").html());
-        console.log($(this).children(".resvTime").html());
-        $("#myresvTime").html($(this).children(".resvTime").html());
-        $("#myresvDetails").html($(this).children(".resvDetails").html());
+        $("#myresvTable").html($(this).siblings(".resvTable").html());
+        $("#myresvPeople").html($(this).siblings(".resvPeople2").html());
+        console.log($(this).siblings(".resvTime").html());
+        $("#myresvTime").html($(this).siblings(".resvTime").html());
+        $("#myresvDetails").html($(this).siblings(".resvDetails").html());
 
         //Give the id to the cancel modal
         $("#FormCancel").append(
             '<input name="reservation_id" value="' + id + '" hidden>'
         );
-
-        //Show the modal
+        //An eperasen i kratisi, na eksafanisti to button cancel
+        if($(this).siblings(".pastResv").text() == "true"){
+            $("#modCancel").hide();
+        }
+        //Alliws na emfanistei to button cancel
+        else
+        {
+            $("#modCancel").show();
+        }
         
         $("#myresvModal").modal("show");
     });
+
+    $(document).on("click", ".rate", (function (e) {
+        //Show the rating modal
+        //console.log(document.getElementsByClassName('rate').clicked == true)
+        $("#myresvModal").modal("hide");
+        $('.resvPopup').modal('hide') ;
+        console.log(document.getElementById('test'). clicked == true);
+        $("#small").modal("show");
+        //Get the element clicked
+        resv_id = $(this).parents("div").attr("resv");
+        raterow = $(this).parents("td");
+    }));
 
     //If cancel modal is clicked, show it
     $("#modCancel").click(function () {

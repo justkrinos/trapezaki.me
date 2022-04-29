@@ -9,7 +9,10 @@ var yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
 //Today's date as default value
 $("#resv-date").attr("min", today)
-$("#resv-date").val(today)
+
+if(!$("#resv-date").val()){
+    $('#resv-date').val(today);
+}
 
 
 function loadFloorPlan(floorplan) {

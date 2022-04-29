@@ -1,7 +1,49 @@
 $("ul.images").on("click", "li span.del", function () {
     var photo = $(this).parent();
 
+    var photo = $(this).parent();
 
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
+        },
+    });
+
+    $.ajax({
+        url: "/api/photo-modify",
+        type: "post",
+        data: {
+            user_id: $(".user_id").attr("value"),
+            action: "delete",
+            photo_path: photo.attr("img"),
+        },
+        dataType: "json", // added data type
+        success: function (data) {
+            Toastify({
+                text: "Photo Deleted",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #f6d365 0%, #fda085 100%)",
+            }).showToast()
+            
+            photo.fadeOut(300, function () {
+                photo.remove();
+            });
+        },
+        error: function (data) {
+            console.log(data.responseText);
+            Toastify({
+                text: "You can't delete the last photo!",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "linear-gradient(to right, #f5210a 0%, #c40000 100%)",
+            }).showToast()
+        },
+    });
 });
 
 $("ul.images").on("click", "li span.view", function () {

@@ -32,8 +32,11 @@
 <body>
     <div id="app">
     {{-- TODO: na mpoun numbers gia ta ratings pending
-    j pano sto username j sta list items tu
-    j sto sidebar dipla gia ulla ta pages--}}
+            j pano sto username j sta list items tu
+            j sto sidebar dipla gia ulla ta pages
+        //- gia osa thelun rate en grafi arithmo an en paginated
+        //- episis en fefki to cancel reservation ute fenete to cancelled details
+        --}}
 
         @include("www.components.sidebar")
 
@@ -95,12 +98,12 @@
                                                                                     <tbody>
 
                                                                                     @foreach($upcomingReservations as $reservation)
-                                                                                        <tr class="resvPopup">
+                                                                                        <tr>
                                                                                             <td class="resvID" hidden>{{$reservation->id}}</td>
-                                                                                            <td>{{ $reservation->user2->business_name }}</td>
-                                                                                            <td class="resvTime">{{$reservation->time}}</td>
-                                                                                            <td>{{$reservation->date}}</td>
-                                                                                            <td class="resvPeople2"><span class="resvPeople">{{$reservation->pax}}</span></td>
+                                                                                            <td class="resvPopup">{{ $reservation->user2->business_name }}</td>
+                                                                                            <td class="resvTime resvPopup">{{$reservation->time}}</td>
+                                                                                            <td class="resvPopup">{{$reservation->date}}</td>
+                                                                                            <td class="resvPeople2 resvPopup"><span class="resvPeople">{{$reservation->pax}}</span></td>
                                                                                             <td class="resvDetails" hidden>{{$reservation->details}}</td>
                                                                                             <td class="resvTable" hidden>{{$reservation->table_id}}</td>
                                                                                         </tr>
@@ -128,18 +131,19 @@
                                                                                     </thead>
                                                                                     <tbody>
                                                                                     @foreach($pastReservations as $reservation)
-                                                                                        <tr class="resvPopup">
+                                                                                        <tr>
+                                                                                            <td class="pastResv" hidden>true</td>
                                                                                             <td class="resvID" hidden>{{$reservation->id}}</td>
                                                                                             <td class="resvDetails" hidden>{{$reservation->details}}</td>
                                                                                             <td class="resvTable" hidden>{{$reservation->table_id}}</td>
                                                                                             <td class="resvTime" hidden>{{$reservation->time}}</td>
-                                                                                            <td>{{$reservation->user2->business_name}}</td>
-                                                                                            <td>{{$reservation->date}}</td>
+                                                                                            <td class="resvPopup">{{$reservation->user2->business_name}}</td>
+                                                                                            <td class="resvPopup">{{$reservation->date}}</td>
                                                                                             <td>
                                                                                             {{-- An den en cancelled j an den eshi rating tote vartu button --}}
                                                                                             @if(!$reservation->rating && !$reservation->cancelled && $reservation->attended)
                                                                                                 <div class="col-md-5 col-12" resv="{{$reservation->id}}">
-                                                                                                    <button
+                                                                                                    <button id="test"
                                                                                                         class="btn text-nowrap btn-outline-info btn-sm btn-block rate">Rate
                                                                                                         Now!</button>
                                                                                                 </div>

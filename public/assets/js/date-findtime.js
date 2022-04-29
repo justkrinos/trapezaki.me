@@ -63,13 +63,44 @@ function getTime(element) {
 //     }
 //     document.querySelectorAll('#modal-table-id')[0].innerHTML = modalText
 //   })
+$('#resvModal').on('hidden.bs.modal', function () {
+    $("#pax").empty()
+  })
 
 function setPeople()
 {
-    $("#pax").empty()
-    for (i = 2; i <= canvas.getActiveObject().capacity; i++)
-        $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
+    if ($("#pax").length == 0) {
+        $("#pax").empty()
+        for (i = 2; i <= canvas.getActiveObject().capacity; i++)
+            $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
+    }
+   else if($("#pax").val()>canvas.getActiveObject().capacity)
+   {
+        $("#pax").empty()
+        for (i = 2; i <= canvas.getActiveObject().capacity; i++)
+            $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
+       Toastify({
+        text: 'This table has a capacity of only ' + canvas.getActiveObject().capacity + ' people',
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#ba0b0b",
+    }).showToast()
+   }
+   else
+   {
+         for (i = 2; i <= canvas.getActiveObject().capacity; i++)
+         {
+              if($("#pax").val() == i)
+              {
+                  break;
+              }
+              $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
+         }
+   }
 }
+    
 
 function getTimeSlots(table) {
     if (table == undefined) {

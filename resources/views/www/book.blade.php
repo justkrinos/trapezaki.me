@@ -69,13 +69,9 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                             <button class="prev-day btn btn-outline-secondary btn-google"><i
                                                     class="bi bi-chevron-left" aria-hidden='true'></i></button>
                                             <input type="date"
-                                                class="form-control no-prev date-slide @error('date') is-invalid @enderror"
+                                                class="form-control no-prev date-slide" @if(session('date')) value="{{session('date')}}" @endif
                                                 name="txtDate" style="min-width: 66px;" id="resv-date">
-                                            <div class="invalid-feedback">
-                                                @error('description')
-                                                    {{ $message }}
-                                                @enderror
-                                            </div>
+                                            
                                             <button class='next-day btn btn-outline-secondary btn-google'><i
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>
                                         </div>
@@ -84,11 +80,6 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                 </div>
                             </div>
 
-                            <div class="form-group customer-menu" style="display: none;">
-                                <div class="btn-group">
-                                    <button class="btn btn-warning btn-sm admin-mode">Admin mode</button>
-                                </div>
-                            </div>
                         </div>
                         {{-- Floor Plan --}}
                         @if (Table::where('user2_id', $user2->id)->first())
@@ -106,10 +97,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
             <!-- Modal starts here-->
             @include('www.components.book-modal')
 
-            <span id="username" user="{{ $user2->username }}"></span>
-
-
-
+            <span id="username" user="{{ $user2->username }}" hidden></span>
         </div>
     </div>
     @include('www.components.footer')
@@ -143,3 +131,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Fancy input number dependency --}}
 <script src="/assets/js/input-number.js"></script>
+
+
+{{-- TODO: otan kameis search j ertis dame en fernei to date j to pax dame --}}

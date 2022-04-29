@@ -16,7 +16,7 @@
                         <div class="col-md-10">
                             <div class="input-group">
                                 @csrf
-                                    <label for="inputSlots">Availabiliy</label>
+                                    <label for="inputSlots">Availability</label>
                                     <div id="inputSlots" class="input-group col-md-5">
                                         <span id="timeSlots" class="form-control row-cols-6"></span>
                                     </div>
@@ -24,7 +24,9 @@
                                     <label for="pax">People</label>
                                     <fieldset class="form-group">
                                         <select class="form-select" name="people" id="pax">
-                                            
+                                        @if(session('people')) 
+                                            <option value="{{session('people')}}" selected>{{session('people')}}</option>
+                                        @endif
                                         </select>
                                     </fieldset>
                                 </div>

@@ -56,7 +56,7 @@ class RegisterUser2 extends Controller
 
                 'address' => 'required|min:2',
                 'postal' => 'required|numeric|max:999999|min:1',
-                'city' => 'required|max:30|min:2',
+                'city' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
 
                 'coffee' => 'in:on|required_without_all:food,drinks',
                 'food' => 'in:on|required_without_all:coffee,drinks',

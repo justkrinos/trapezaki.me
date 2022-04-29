@@ -5,12 +5,14 @@ use App\Models\User2;
 use App\Models\User2_Tag;
 use App\Models\Tag;
 use App\Models\User2_Photo;
+use App\Models\Daily_Setting;
 
-$tags = Auth::guard('user2')
-    ->user()
-    ->tags->pluck('name')
-    ->toArray();
+
+
+
 ?>
+
+{{-- TODO: ta business info j jina nan pio wraia --}}
 
 <head>
     <meta charset="UTF-8">
@@ -215,31 +217,34 @@ $tags = Auth::guard('user2')
                                 <div class="card-header">
                                     <h4 class="card-title">Reservation Management</h4>
                                 </div>
-
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="roundText">Reservation Range</label>
-                                                <input type="text" id="roundText" class="form-control round" value="30"
-                                                    disabled>
+                                <form method="POST" action="/profile" class="col-md-12 ">
+                                    @csrf
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="roundText">Reservation Range</label>
+                                                    <input type="text" id="roundText" class="form-control round"
+                                                        value="{{ Auth::guard('user2')->user()->res_range }}"
+                                                        disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="squareText">Reservation Duration</label>
+                                                    <input type="text" id="squareText" class="form-control square"
+                                                        value="{{ Auth::guard('user2')->user()->duration }}"
+                                                        disabled>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="squareText">Reservation Duration</label>
-                                            <input type="text" id="squareText" class="form-control square" value="2:30"
-                                                disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        <label for="basicSelect">Last Reservation Hour</label>
-                                        <div class="row">
-                                            <div class="col-md-3 mb-2">
-
-                                                <fieldset class="form-group">
-                                                    <select class="form-select" id="basicSelect">
+                                        <div class="d-flex col-12 mb-2">
+                                            <div class="form-group col-5 me-2">
+                                                <label for="basicSelect">Day</label>
+                                                <fieldset id="first" class="form-group">
+                                                    <select class="form-select" id="basicSelect" name="first">
                                                         <option>Monday</option>
-                                                        <option>Tuseday</option>
+                                                        <option>Tuesday</option>
                                                         <option>Wednesday</option>
                                                         <option>Thursday</option>
                                                         <option>Friday</option>
@@ -248,19 +253,30 @@ $tags = Auth::guard('user2')
                                                     </select>
                                                 </fieldset>
                                             </div>
-                                            <div class="col-md-2 mb-1">
-                                                <input type="text" id="squareText" class="form-control square"
-                                                    value="21:30" disabled>
-                                            </div>
+                                            <div>
 
+                                                <div class="row">
+                                                    <label for="basicSelect">First Reservation Hour</label>
+                                                    <div class="col-md-2 mb-1">
+                                                        <input type="text" id="firstResv" class="form-control square"
+                                                            value="{{ $min }}" disabled>
+                                                    </div>
+                                                    <label for="basicSelect">Last Reservation Hour</label>
+                                                    <div class="col-md-2 mb-1">
+                                                        <input type="text" id="lastResv" class="form-control square"
+                                                            value="{{ $max }}" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
+
                         </div>
                     </div>
+                </section>
             </div>
-            </section>
 
             <div class="card">
                 <div class="card-header">
@@ -323,8 +339,6 @@ $tags = Auth::guard('user2')
                 </div>
             </div>
 
-            <br>
-            <br>
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Change Password</h4>
@@ -421,3 +435,33 @@ $tags = Auth::guard('user2')
 
 {{-- Include for flash messages --}}
 @include('components.toasts')
+
+<script>
+    //Ajax call for reservation settings(switch between days)
+
+    $(document).ready(function() {
+        $("#first").change(function() {
+            var day = $("#first").find(":selected").text();
+            console.log(day);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "/profile",
+                data: {
+                    "day": day,
+                    "first": 1
+                },
+                success: function(data) {
+                    console.log(data[0]);
+                    $("#firstResv").val(data[0]);
+                    $("#lastResv").val(data[1]);
+                }
+            });
+        });
+    });
+</script>
