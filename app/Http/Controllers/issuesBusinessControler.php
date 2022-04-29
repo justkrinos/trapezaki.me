@@ -49,7 +49,7 @@ class issuesBusinessControler extends Controller
 
         Issue::create($attribute);
 
-        return view('business.report-problem');
+        return redirect('report-problem')->with('success', "The issue was submitted succesfully!");
     }
 
     /**

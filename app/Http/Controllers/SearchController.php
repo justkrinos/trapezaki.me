@@ -15,7 +15,6 @@ class SearchController extends Controller
         //An ginei search
         if(request("search"))
         {
-            $businesses = User2::latest();
 
             //TODO: validation
             //Getting form variables
@@ -89,8 +88,7 @@ class SearchController extends Controller
 
             // dd($businesses);
             return view('www.search',[
-                'businesses' => $businesses,
-                'everything' => User2::all()
+                'businesses' => $businesses
             ]);
 
         }
