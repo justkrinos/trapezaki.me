@@ -43,7 +43,7 @@ class RegisterUser2 extends Controller
                 'email' => 'required|max:50|unique:user2s|email',
                 'password' => 'required|max:50|min:7',
 
-                'business_name' => 'required|max:50|min:1',
+                'business_name' => 'required|max:50|min:1|unique:user2s',
                 'company_name' => 'required|max:50|min:1',
                 'representative' => 'required|max:50|min:2',
                 'phone' => 'required|max:13|min:8',
