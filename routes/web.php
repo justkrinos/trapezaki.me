@@ -188,6 +188,52 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 //Busiess domain right here
 Route::domain('business.' . env('APP_URL'))->group(function () {
 
+    Route::middleware(['auth:user2'])->group(function () {
+
+        Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
+        Route::post('/api/apply-attendance', [ManageReservationsController::class, 'changeAttendance']);
+
+        Route::get('/add-reservation', function () {
+            return view('business.add-resv');
+        });
+
+        Route::get('/logout', [SessionsController2::class, 'destroy']);
+        Route::post('/profile', [SessionsController2::class, 'edit']);
+
+        Route::get('/edit-reservation', [BookingController::class,'showEditResv']);
+        Route::post('/edit-reservation',[BookingController::class,'editResv']);
+
+
+        Route::get('/profile', function () {
+            return view('business.profile');
+        });
+        Route::get('/list-problems', function () {
+            return view('business.list-problems');
+        });
+
+        Route::get('/report-problem', function () {
+            return view('business.report-problem');
+        });
+
+        Route::post('/report-problem', [issuesBusinessControler::class, 'store']);
+        Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
+        Route::post('/api/photo-paths', [PhotosController::class, 'show']);
+        Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
+
+        Route::post('/manage-reservations', [ManageReservationsController::class, 'modify']);
+        Route::get('/api/floor-plan', [FloorPlanController::class, 'getFloorPlanJsonU2']);
+
+        Route::get('/profile/menu', [SessionsController2::class, 'showMenu']);
+
+        //Book as user2
+        Route::post('/add-reservation', [BookingController::class, 'createBookUser2']);
+
+        //Get timeSlots
+        Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
+
+
+    });
+
 
     Route::middleware(['guest:user2'])->group(function () {
         Route::get('/login', [SessionsController2::class, 'create']);
@@ -220,53 +266,6 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
     });
 
 
-
-    Route::middleware(['auth:user2'])->group(function () {
-
-        Route::get('/add-reservation', function () {
-            return view('business.add-resv');
-        });
-
-        Route::get('/logout', [SessionsController2::class, 'destroy']);
-        Route::post('/profile', [SessionsController2::class, 'edit']);
-
-        Route::get('/edit-reservation', [BookingController::class,'showEditResv']);
-        Route::post('/edit-reservation',[BookingController::class,'editResv']);
-
-        Route::get('/dashboard', function () {
-            return view('business.dashboard');
-        });
-
-        Route::get('/profile', function () {
-            return view('business.profile');
-        });
-        Route::get('/list-problems', function () {
-            return view('business.list-problems');
-        });
-
-        Route::get('/report-problem', function () {
-            return view('business.report-problem');
-        });
-
-        Route::post('/report-problem', [issuesBusinessControler::class, 'store']);
-        Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
-        Route::post('/api/photo-paths', [PhotosController::class, 'show']);
-        Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
-
-        Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
-        Route::post('/manage-reservations', [ManageReservationsController::class, 'modify']);
-        Route::get('/api/floor-plan', [FloorPlanController::class, 'getFloorPlanJsonU2']);
-
-        Route::get('/profile/menu', [SessionsController2::class, 'showMenu']);
-
-        //Book as user2
-        Route::post('/add-reservation', [BookingController::class, 'createBookUser2']);
-
-        //Get timeSlots
-        Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
-
-        Route::post('/api/apply-attendance', [ManageReservationsController::class, 'changeAttendance']);
-    });
 });
 
 
