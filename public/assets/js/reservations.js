@@ -24,7 +24,9 @@ $(document).ready(function () {
     //On click sto modify reservvation tu modal
     $("#modResv").click(function () {
         //change location to the edit page
-        window.location.href = "/edit-reservation/?id=" + parseInt($('#myresvBusiness').html());
+        console.log("/edit-reservation/?id=" + parseInt($('#myresvBusiness').html(),10))
+        
+        window.location.href = "/edit-reservation/?id=" + parseInt($('#myresvBusiness').html(),10)
     })
 
     //Redirect when add a reservation is clicked

@@ -10,12 +10,12 @@ use Illuminate\Support\Collection;
 
 class SearchController extends Controller
 {
-    public function index()
+    public function show()
     {
-        $businesses = User2::latest();
         //An ginei search
         if(request("search"))
         {
+            $businesses = User2::latest();
 
             //TODO: validation
             //Getting form variables
@@ -101,7 +101,7 @@ class SearchController extends Controller
             ->where('is_verified', 1)
             ->where('status', 1)
             ->get();
-
+        //ddd($randomUsers);
         return view('www.search',[
             'users' => $randomUsers
         ]);

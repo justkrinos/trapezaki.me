@@ -70,7 +70,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     //TODO: delete this
     //Route::get('/dokimi', [SearchController::class, 'dokimi']);
 
-    Route::get('/make-a-reservation', [SearchController::class, 'index'])->name('first_page');
+    Route::get('/make-a-reservation', [SearchController::class, 'show'])->name('first_page');
 
     //TODO: tuto edulefke
     /*Route::get('/make-a-reservation', function () {

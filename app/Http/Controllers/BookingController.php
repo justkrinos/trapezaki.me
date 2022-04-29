@@ -246,7 +246,7 @@ class BookingController extends Controller
             $validated  = request()->validate([
                 'id' => 'required|numeric|exists:reservations,id',
             ]);
-
+            //ddd($validated);
             $user2 = Auth::guard('user2')->user();
             $reservation = Reservation::where('id', $validated['id'])->first();
 
