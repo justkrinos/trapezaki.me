@@ -154,10 +154,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
         Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
-
-        Route::get('/reservation/{guest}/{reservation}', function ($guest, $reservation) {
-            return view('www.successfully-booked', ['user3' => $guest, 'reservation' => $reservation]);
-        });
     });
 
 
@@ -174,10 +170,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         //TODO en dulefki to route dunno why
         //TODO: na stelnei email sto reservation
-        //Route::get('/reservation/{user3_id}/{reservation}', [MyReservationsController::class, 'show']);
-        Route::get('/reservation/{user3_id}/{reservation_id}', function ($user3, $reservation) {
-            return view('www.successfully-booked', ['user3' => $user3, 'reservation' => $reservation]);
-        });
         Route::post('/profile', [SessionsController::class, 'edit']);
 
         Route::get('/my-reservations', [MyReservationsController::class, 'show']);

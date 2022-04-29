@@ -180,7 +180,10 @@ function bookTable()
         data: data,
         success: function(success) {
             console.log(success);
-            window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
+            //Create session that tells the user that the reservation was successful
+            //and redirect to make a reservation page
+            sessionStorage.setItem("reservation", "success");
+            window.location.href = "/";
         },
         error: function(error) {
             console.log(error);
