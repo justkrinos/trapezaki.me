@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User2_Photo;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User2;
 use App\Models\User1;
 use App\Models\Tag;
@@ -57,7 +58,9 @@ class PhotosController extends Controller
             'action' => 'required|in:delete,modify',
             'user_id' => 'required|numeric'
         ]);
-        $user2_id = $request['user_id'];
+
+        $user2 = Auth::guard('user2')->user();
+
 
         if(strcmp($request['action'],'delete')==0){
 
@@ -69,14 +72,12 @@ class PhotosController extends Controller
             $photo_path = $request['photo_path'];
 
             //Can't delete last photo
-            if(User2_Photo::where('user2_id', $user2_id)->get()->count() == 2){ //==2 because 1 is for logo and 1 for the photo
+            if($user2->photos->count() == 1){ //because logos do not count in the relationship $user2->photos
                 return false;
             }
             else{
-                $deleted = User2_Photo::where('photo_path', $photo_path)->where('user2_id', $user2_id)->delete();
-
-                File::delete('assets/images/uploads/' . $photo_path);
-
+                $deleted = $user2->photos->where('photo_path', $photo_path)->first()->delete(); //delete record in db
+                File::delete('assets/images/uploads/' . $photo_path); //delete file
                 return true;
             }
 
@@ -87,7 +88,7 @@ class PhotosController extends Controller
                 'photo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
             ]);
 
-            User2_Photo::store_one(request()->file('photo'),$user2_id);
+            User2_Photo::store_one(request()->file('photo'),$user2->id);
 
             return ['ok'];
         }
