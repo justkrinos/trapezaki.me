@@ -191,7 +191,7 @@ function bookTable()
         error: function(error) {
             console.log(error);
             Toastify({ //an exw error fkale toast
-                text: 'Oops! Something went wrong :(',
+                text: 'Please, select a Timeslot and enter a Description!',
                 duration: 5000,
                 close: true,
                 gravity: "top",
