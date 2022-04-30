@@ -10,9 +10,9 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\User1;
 
 
-class User1Controller extends Controller
+class SessionsU1Controller extends Controller
 {
-    public function create(){
+    public function show(){
         return view('admin.login');
     }
 

@@ -12,7 +12,7 @@ use App\Models\User2;
 
 class MenuController extends Controller
 {
-    public function showU3(User2 $user2){
+    public function show(User2 $user2){
         $menu = $user2->menu;
         $file = File::get(public_path('assets/menus/') . $menu);
         $response = Response::make($file, 200);

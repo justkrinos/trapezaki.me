@@ -10,8 +10,7 @@ use Illuminate\Support\Collection;
 
 class SearchController extends Controller
 {
-    public function show()
-    {
+    public function show(){
         //An ginei search
         if(request()->has("btn-search"))
         {
@@ -110,13 +109,20 @@ class SearchController extends Controller
         ]);
     }
 
-    public function getAvailableUsers(array $users2, string $date){
+    public function showProfile(User2 $user2) {
+        return view('www.selected-profile',
+        [
+            'user2' => $user2
+        ]);
+    }
+
+    private function getAvailableUsers(array $users2, string $date){
 
         $usersAvailability = collect();
         foreach ($users2 as $user2) {
             $checkTable = true;
             foreach($user2->tables as $table){
-                if(!$this->getAvailability($user2, $table->id, $date)){
+                if(!$this->getTableAvailablity($user2, $table->id, $date)){
                     $checkTable = false;
                     break;
                 }
@@ -130,8 +136,7 @@ class SearchController extends Controller
 
     }
 
-    public function getAvailability(User2 $user2, int $t, string $d)
-    {
+    private function getTableAvailablity(User2 $user2, int $t, string $d){
 
         //parse the given date
         $date = Carbon::parse($d);
@@ -227,11 +232,21 @@ class SearchController extends Controller
             return false;
     }
 
-    public function showProfile(User2 $user2) {
-        return view('www.selected-profile',
-        [
-            'user2' => $user2
+    public function changeCity(){
+        $validatedData = request()->validate([
+            'city' => "required|in:Limassol,Larnaca,Paphos,Famagusta,Nicosia"
         ]);
+
+        $user3 = Auth::guard('user3')->user();
+
+        if($user3){
+            $user3->city = $validatedData['city'];
+            $user3->save();
+        }else{
+            session([ 'city' => $validatedData['city']]);
+        }
+
+        return 'success';
     }
 
     private function getDay(string $date)

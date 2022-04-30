@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class FloorPlanController extends Controller
 {
-    function show(User2 $user2)
+    public function show(User2 $user2)
     {
         return view('admin.floorplan-editor', [
             'user2' => $user2
         ]);
     }
 
-    function getFloorPlanJson(User2 $user2)
+    public function getFloorPlanJson(User2 $user2)
     {
         if ($user2->floorPlan->json) //an den en ofkero stilto
             return $user2->floorPlan->json;
@@ -24,7 +24,7 @@ class FloorPlanController extends Controller
             return []; //aliws stile ofkero gia na kserei oti en null
     }
 
-    function getFloorPlanJsonU2()
+    public function getFloorPlanJsonU2()
     {
         $user2 = Auth::guard('user2')->user();
         if ($user2->floorPlan->json) //an den en ofkero stilto
@@ -33,7 +33,7 @@ class FloorPlanController extends Controller
             return []; //aliws stile ofkero gia na kserei oti en null
     }
 
-    function modify(User2 $user2)
+    public function modify(User2 $user2)
     {
         if(request()->has('save')){
         $validatedData = request()->validate([

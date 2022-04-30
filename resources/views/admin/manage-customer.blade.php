@@ -153,6 +153,20 @@ $tags = $user2->tags->pluck('name')->toArray();
                                         value="{{ $user2->phone }}" disabled>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label for="representative">Representative</label>
+                                    <input type="text" name="representative" class="form-control round @error ('representative') is-invalid  @enderror"
+                                        value="{{ $user2->representative }}">
+                                    @error('representative')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
 
                         <div class="card-header">
@@ -424,7 +438,7 @@ $tags = $user2->tags->pluck('name')->toArray();
                             </div>
 
                             <div class="col-sm-6">
-                                <button type="submit" name="location"
+                                <button type="submit" name="locationForm"
                                     class="btn btn-success me-1 mb-1">Save changes</button>
                             </div>
                         </div>

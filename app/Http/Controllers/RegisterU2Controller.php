@@ -9,15 +9,13 @@ use App\Http\Controllers\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
-class RegisterUser2 extends Controller
+class RegisterU2Controller extends Controller
 {
-    public function view(){
+    public function show(){
         if(Auth::check('user2'))
             return redirect('/profile');
         return view('business.signup');
     }
-
-
 
     public function create(Request $request)
     {
@@ -138,8 +136,6 @@ class RegisterUser2 extends Controller
         return redirect('/login')->with('success', "Your account has been created successfully! Check your email for verification.");
 
     }
-
-
 
     //Function gia xrisi mesa sto object pu kamni format to type (food coffe drinks)
     private function formatType(array $validatedData){

@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@php
-    use App\Models\User2_Photo;
-@endphp
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,14 +76,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach (App\Models\User2::all() as $user)
-                                        @if($user->status==1 || $user->status==2)
+                                    @foreach ($users2 as $user)
                                             <tr>
                                                 <td class="col-8">
                                                     <a href="/user/{{$user->username}}">
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar avatar-md">
-                                                                <img src="../assets/images/uploads/{{User2_Photo::where('user2_id',$user->id)->where('photo_path','like','logo%')->get()->first()->photo_path}}">
+                                                                <img src="../assets/images/uploads/{{ $user->logo() }}">
                                                             </div>
                                                             <p class="font-bold ms-3 mb-0 text-nowrap">{{ $user->business_name }}</p>
                                                         </div>
@@ -102,7 +97,6 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                        @endif
                                     @endforeach
                                     </tbody>
                                 </table>

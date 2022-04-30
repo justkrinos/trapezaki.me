@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\Rule;
 
+// TODO: search all dd() and ddd() and remove them
+
 
 class ManageBusinessController extends Controller
 {
-    public function edit(Request $request, User2 $user2)
+    public function modify(Request $request, User2 $user2)
     {
-        if(request()->has("location"))
+        if(request()->has("locationForm"))
         {
-            //ddd(request()->all());
             $validatedData = request()->validate([
                 'id' => 'required',
 
@@ -25,7 +26,7 @@ class ManageBusinessController extends Controller
                 'lat' => 'required|numeric|max:36',
                 'long' => 'required|numeric|max:36',
             ]);
-            //ddd($validatedData);
+
             $user2 = User2::find($validatedData['id']);
 
             unset($validatedData['id']);
@@ -43,6 +44,7 @@ class ManageBusinessController extends Controller
             $validatedData = $request->validate([
                 'id' => 'required',
                 'description' => 'required|max:1000',
+                'representative' => 'required|max:50|min:2|alpha',
 
                 'coffee' => 'in:on|required_without_all:food,drinks',
                 'food' => 'in:on|required_without_all:coffee,drinks',
@@ -198,6 +200,16 @@ class ManageBusinessController extends Controller
         ]);
     }
 
+    public function showAll(){
+        //show those that are not pending
+        $users2 = User2::where('status','1')->orWhere('status','2')->get();
+
+        //show the view
+        return view('admin.manage-customers',[
+            'users2' => $users2
+        ]);
+    }
+    
     private function formatType(array $validatedData){
         //Kamni ta tis morfis coffee:food:drinks gia osa iparxun
         //etsi wste na borume na ta kamume extract later
@@ -240,11 +252,4 @@ class ManageBusinessController extends Controller
         return $tags;
     }
 
-    public function getMenu(User2 $user2)
-    {
-        $file = File::get(public_path('assets/menus/') . $user2->menu);
-        $response = Response::make($file, 200);
-        $response->header('Content-Type', 'application/pdf');
-        return $response;
-    }
 }

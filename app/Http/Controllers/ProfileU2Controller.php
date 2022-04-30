@@ -2,18 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User2;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
-use App\Models\Daily_Setting;
 
-
-//For USER2
-class SessionsController2 extends Controller
+class ProfileU2Controller extends Controller
 {
-    //TODO: fix this
-    public function edit(Request $request)
+    public function modify(Request $request)
     {
         if((request()->has('first'))||(request()->has('last')))
         {
@@ -145,83 +138,51 @@ class SessionsController2 extends Controller
         }
     }
 
+    public function show(){
+        $user2 = Auth::guard('user2')->user();
+        $tags = $user2->tags->pluck('name')->toArray();
+
+        //TODO: fix this na en opws tu admin
+        $day = $user2->dailySettings->where('day_id', 1)->first();
+        $max = (Time::createFromInt($day->time_max))->getStr();
+        $min = (Time::createFromInt($day->time_min))->getStr();
+
+        return view('business.profile',[
+            'tags' => $tags,
+            'max'  => $max,
+            'min'  => $min,
+            'user2'=> $user2
+        ]);
+    }
 
     //Function gia xrisi mesa sto object pu kamni format to type (food coffe drinks)
     private function formatType(array $validatedData){
-        //Kamni ta tis morfis coffee:food:drinks gia osa iparxun
-        //etsi wste na borume na ta kamume extract later
-
-        $stringToMake = ""; //to string pu ena stilume pisw
-        $dataToChange = ['coffee','food','drinks']; //jina p ena checkarume
-
-
-
-        foreach ($dataToChange as $type) { //gia kathe ena p jina p ena checkarume
-            if (array_key_exists($type,$validatedData)){ //an iparxi
-                if (empty($stringToMake))
-                    $stringToMake .= $type; //men tu valis : an akoma en ofkero
-                else
-                    $stringToMake .= ':' . $type; //vartu : afu empike idi ena mesto array
+            //Kamni ta tis morfis coffee:food:drinks gia osa iparxun
+            //etsi wste na borume na ta kamume extract later
+    
+            $stringToMake = ""; //to string pu ena stilume pisw
+            $dataToChange = ['coffee','food','drinks']; //jina p ena checkarume
+    
+    
+    
+            foreach ($dataToChange as $type) { //gia kathe ena p jina p ena checkarume
+                if (array_key_exists($type,$validatedData)){ //an iparxi
+                    if (empty($stringToMake))
+                        $stringToMake .= $type; //men tu valis : an akoma en ofkero
+                    else
+                        $stringToMake .= ':' . $type; //vartu : afu empike idi ena mesto array
+                }
+                //diagrafw ta data pu mesa gt thelw mono to (type => food:coffee klp)
+                unset($validatedData[$type]);
             }
-            //diagrafw ta data pu mesa gt thelw mono to (type => food:coffee klp)
-            unset($validatedData[$type]);
-        }
-
-        //vallw tu to string p ekama p en ulla mesa
-        $validatedData['type'] = $stringToMake;
-
-        //diw to pisw sto function pu to kalese
-        return $validatedData;
+    
+            //vallw tu to string p ekama p en ulla mesa
+            $validatedData['type'] = $stringToMake;
+    
+            //diw to pisw sto function pu to kalese
+            return $validatedData;
     }
 
-    public function destroy()
-    {
-        //dd('log the user out');
-        auth('user2')->logout();
-
-        return redirect('/')->with('logout','Goodbye!');
-    }
-
-    public function create()
-    {
-        return view('business.login');
-    }
-
-    public function login()
-    {
-        //validate the request
-        $attributes = request()->validate([
-            'username' => 'required',
-            'password' => 'required'
-        ]);
-
-
-        //TODO: Gia to Keep me logged in, evre to section Remembering Users https://laravel.com/docs/7.x/authentication
-
-
-
-        if (! Auth::guard('user2')->attempt($attributes)) //attempt to log the user in with the given data/credentials
-        {
-            return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);
-        }
-
-        if(!Auth::guard('user2')->user()->is_verified){
-            auth('user2')->logout();
-            return back()->withErrors(['message' => 'Your account is not yet verified! Please check your email.']);
-        };
-
-        if(!Auth::guard('user2')->user()->status){
-            auth('user2')->logout();
-            return back()->withErrors(['message' => 'Your account activation is pending. Our team will contact you soon.']);
-        };
-
-
-        //To prevent session fixation (stealing session IDs)
-        session()->regenerate();
-
-        return redirect('/manage-reservations')->withInput()->with('success','Welcome!');
-
-    }
 
     private function tagsToArray(string $tags){
         //Asxolithu mono an dennen ofkero, alios aisto na fkalei error sto view
@@ -238,20 +199,5 @@ class SessionsController2 extends Controller
         return $tags;
     }
 
-    public function showProfile(){
-        $user2 = Auth::guard('user2')->user();
-        $tags = $user2->tags->pluck('name')->toArray();
 
-        //TODO: fix this na en opws tu admin
-        $day = $user2->dailySettings->where('day_id', 1)->first();
-        $max = (Time::createFromInt($day->time_max))->getStr();
-        $min = (Time::createFromInt($day->time_min))->getStr();
-
-        return view('business.profile',[
-            'tags' => $tags,
-            'max'  => $max,
-            'min'  => $min,
-            'user2'=> $user2
-        ]);
-    }
 }

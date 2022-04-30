@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 //A class to make the registration of user3
-class RegisterUser3 extends Controller
+class RegisterU3Controller extends Controller
 {
     //private $guest;
 
-    public function view(){
+    public function show(){
         if(Auth::check('user3'))
             return redirect('/make-a-reservation');
 
@@ -73,16 +73,5 @@ class RegisterUser3 extends Controller
                 //en gia na fkalei ena popup "success"
     }
 
-    public function createGuest(){
-        //pws na mpenei o guest sto db?
-        $attributes = request()->validate([
-            'email' => 'required|email|max:100|unique:user3s,email'
-        ]);
-        //Must remove from $attributes
-
-        //Make the account and add to db
-        User3::create($attributes);
-
-    }
 
 }

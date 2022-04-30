@@ -8,18 +8,21 @@
 */
 
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\issueControler;
+use App\Http\Controllers\TagsApiController;
+use App\Http\Controllers\IssuesU1Controller;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\IssuesU2Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FloorPlanController;
-use App\Http\Controllers\RegisterUser3;
-use App\Http\Controllers\RegisterUser2;
-use App\Http\Controllers\User1Controller;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\SessionsController2;
+use App\Http\Controllers\RegisterU3Controller;
+use App\Http\Controllers\RegisterU2Controller;
+use App\Http\Controllers\SessionsU1Controller;
+use App\Http\Controllers\VerifyEmailController;
+use App\Http\Controllers\SessionsU3Controller;
+use App\Http\Controllers\SessionsU2Controller;
+use App\Http\Controllers\ProfileU2Controller;
+use App\Http\Controllers\ProfileU3Controller;
 use App\Http\Controllers\PhotosController;
 use App\Http\Controllers\ManageBusinessController;
 use App\Http\Controllers\PendingRequestsController;
@@ -93,14 +96,14 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
 
-    Route::get('/user/{user2}/menu', [MenuController::class, 'showU3']);
+    Route::get('/user/{user2}/menu', [MenuController::class, 'show']);
 
 
-    Route::get('/user/{user2}/book', [BookingController::class, 'showBook']);
-    Route::post('/user/{user2}/book', [BookingController::class, 'createBook']);
+    Route::get('/user/{user2}/book', [ReservationController::class, 'showResvU3']);
+    Route::post('/user/{user2}/book', [ReservationController::class, 'createResvU3']);
     Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
 
-    Route::post('/api/change-city',[SessionsController::class,'changeCity']);
+    Route::post('/api/change-city',[SearchController::class,'changeCity']);
 
     // ^ Tuta  panw en eksw pu to middleware
     //   epd boris na to dis ite ise logged in ite oi
@@ -131,49 +134,46 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
             // ]);
         });
 
-        Route::get('/login', [SessionsController::class, 'create']);
+        Route::get('/login', [SessionsU3Controller::class, 'show']);
 
-        Route::post('/login', [SessionsController::class, 'login']);
+        Route::post('/login', [SessionsU3Controller::class, 'login']);
 
-        Route::post('/login_popup', [SessionsController::class, 'login_popup']);
-        Route::post('/guest_popup', [SessionsController::class, 'guest_popup']);
+        Route::post('/login_popup', [SessionsU3Controller::class, 'login_popup']);
+        Route::post('/guest_popup', [SessionsU3Controller::class, 'guest_popup']);
 
         //when you get, return the view
-        Route::get('/signup', [RegisterUser3::class, 'view']);
+        Route::get('/signup', [RegisterU3Controller::class, 'show']);
         //you can access this page
         //only if you are not signed in
         //Http/Kernel.php has a link to a handler for guest
 
 
         //Handler when signup button is pressed
-        //it uses the RegisterUser3 class and its function "create"
+        //it uses the RegisterU3Controller class and its function "create"
         //the class is in app/http/controllers
-        Route::post('/signup', [RegisterUser3::class, 'create']);
+        Route::post('/signup', [RegisterU3Controller::class, 'create']);
 
-        //Should be able to handle guest
-        //Route::post('/selected-profile', [RegisterUser3::class, 'createGuest']);
-
-        Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser3']);
+        Route::get('verify/{email}/{secret}/', [VerifyEmailController::class, 'verifyUser3']);
 
         //TODO: na ginun bind ta secret me u2 j u3
-        Route::get('/change-password/{email}/{secret}/', [EmailController::class, 'showForgotUser3']);
-        Route::post('/change-password/{email}/{secret}/', [EmailController::class, 'modifyForgotUser3']);
+        Route::get('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'showForgotU3']);
+        Route::post('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'modifyForgotU3']);
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
-        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser3']);
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailU3']);
     });
 
 
 
     Route::middleware(['auth:user3'])->group(function () {
         //New controller pu elegxei ta sessions gia log in log out
-        Route::get('/logout', [SessionsController::class, 'destroy']);
+        Route::get('/logout', [SessionsU3Controller::class, 'logout']);
 
-        Route::get('/profile', [SessionsController::class,'showProfile']);
+        Route::get('/profile', [ProfileU3Controller::class,'show']);
 
         //TODO en dulefki to route dunno why
         //TODO: na stelnei email sto reservation
-        Route::post('/profile', [SessionsController::class, 'edit']);
+        Route::post('/profile', [ProfileU3Controller::class, 'modify']);
 
         Route::get('/my-reservations', [MyReservationsController::class, 'show']);
         Route::post('/my-reservations', [MyReservationsController::class, 'modify']);
@@ -188,22 +188,19 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
         Route::post('/api/apply-attendance', [ManageReservationsController::class, 'changeAttendance']);
 
-        Route::get('/add-reservation', [BookingController::class, 'showAddResv']);
+        Route::get('/add-reservation', [ReservationController::class, 'showAddResv']);
 
-        Route::get('/logout', [SessionsController2::class, 'destroy']);
-        Route::post('/profile', [SessionsController2::class, 'edit']);
+        Route::get('/logout', [SessionsU2Controller::class, 'logout']);
+        Route::post('/profile', [ProfileU2Controller::class, 'modify']);
 
-        Route::get('/edit-reservation', [BookingController::class,'showEditResv']);
-        Route::post('/edit-reservation',[BookingController::class,'editResv']);
+        Route::get('/edit-reservation', [ReservationController::class,'showEditResv']);
+        Route::post('/edit-reservation',[ReservationController::class,'editResvU2']);
 
 
-        Route::get('/profile', [SessionsController2::class,'showProfile']);
-        Route::get('/list-problems', function () {
-            return view('business.list-problems');
-        });
+        Route::get('/profile', [ProfileU2Controller::class,'show']);
 
         Route::get('/report-problem', [IssuesU2Controller::class,'show']);
-        Route::post('/report-problem', [IssuesU2Controller::class, 'post']);
+        Route::post('/report-problem', [IssuesU2Controller::class, 'store']);
 
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
@@ -215,7 +212,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/profile/menu', [MenuController::class, 'modify']);
 
         //Book as user2
-        Route::post('/add-reservation', [BookingController::class, 'createBookUser2']);
+        Route::post('/add-reservation', [ReservationController::class, 'createResvU2']);
 
         //Get timeSlots
         Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
@@ -225,33 +222,30 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
 
 
     Route::middleware(['guest:user2'])->group(function () {
-        Route::get('/login', [SessionsController2::class, 'create']);
-        Route::post('/login', [SessionsController2::class, 'login']);
+        Route::get('/login', [SessionsU2Controller::class, 'show']);
+        Route::post('/login', [SessionsU2Controller::class, 'login']);
 
         //TODO: Na sasun ta "/" gia oullous tous users
         //      An en logged in na kami redirect sto main page
         //      an den en logged in na kami redirect sto login page
         //      gia ton logged in user dulefki gia kapio logo
         //      kapws to ixa kami alla en thimume pws
-        Route::get('/', [SessionsController2::class, 'create']);
-        Route::post('/', [SessionsController2::class, 'login']);
+        Route::get('/', [SessionsU2Controller::class, 'create']);
+        Route::post('/', [SessionsU2Controller::class, 'login']);
 
-        Route::get('/signup', [RegisterUser2::class, 'view']);
-        Route::post('/signup', [RegisterUser2::class, 'create']);
+        Route::get('/signup', [RegisterU2Controller::class, 'show']);
+        Route::post('/signup', [RegisterU2Controller::class, 'create']);
 
         // TODO: na pai sto api route na dulepsun jina
-        Route::get('/api/tags', function () {
-            $tag = Tag::all()->pluck('name')->toArray();
-            return response($tag);
-        });
+        Route::get('/api/tags', [TagsApiController::class,'show']);
 
-        Route::get('verify/{email}/{secret}/', [EmailController::class, 'verifyUser2']);
+        Route::get('verify/{email}/{secret}/', [VerifyForgotPasswordController::class, 'verifyUser2']);
 
-        Route::get('/change-password/{email}/{secret}/', [EmailController::class, 'showForgotUser2']);
-        Route::post('/change-password/{email}/{secret}/', [EmailController::class, 'modifyForgotUser2']);
+        Route::get('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'showForgotU2']);
+        Route::post('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'modifyForgotU2']);
 
         Route::get('/forgot-password', [ForgotPasswordController::class, 'show']);
-        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailUser2']);
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'sendEmailU2']);
     });
 
 
@@ -262,38 +256,31 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
 
     Route::middleware(['guest:user1'])->group(function () {
-        Route::get('/login', [User1Controller::class, 'create']);
-        Route::get('/', [User1Controller::class, 'create']);
+        Route::get('/login', [SessionsU1Controller::class, 'show']);
+        Route::get('/', [SessionsU1Controller::class, 'show']);
 
-        Route::post('/login', [User1Controller::class, 'login']);
+        Route::post('/login', [SessionsU1Controller::class, 'login']);
     });
-
-
 
 
     Route::middleware(['auth:user1'])->group(function () {
 
         Route::get('/manage-customers', [ManageBusinessController::class, 'showAll']);
-        Route::get('/issues', function () {
-            return view('admin.issues');
-        });
 
-        Route::post('/issues', [issueControler::class, 'flagIssue']);
+        Route::get('/issues', [IssuesU1Controller::class, 'show']);
+        Route::post('/issues', [IssuesU1Controller::class, 'modify']);
 
 
         Route::get('/pending-requests', [PendingRequestsController::class, 'show']);
         Route::post('/pending-requests', [PendingRequestsController::class, 'modify']);
 
         Route::get('/user/{user2}', [ManageBusinessController::class, 'show']);
-        Route::post('/user/{user2}', [ManageBusinessController::class, 'edit']);
+        Route::post('/user/{user2}', [ManageBusinessController::class, 'modify']);
 
 
-        Route::get('/api/tags', function () {
-            $tag = Tag::all()->pluck('name')->toArray();
-            return response($tag);
-        });
+        Route::get('/api/tags', [TagsApiController::class,'show']);
 
-        Route::get('/user/{user2}/menu', [ManageBusinessController::class, 'getMenu']);
+        Route::get('/user/{user2}/menu', [MenuController::class, 'show']);
 
         Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
         Route::get('/user/{user2}/floor-plan', [FloorPlanController::class, 'show']);
@@ -301,7 +288,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
 
         //Edit User2
-        Route::get('/logout', [User1Controller::class, 'logout']);
+        Route::get('/logout', [SessionsU1Controller::class, 'logout']);
 
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);

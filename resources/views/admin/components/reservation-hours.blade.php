@@ -1,3 +1,4 @@
+{{--TODO: na sasei to alignment aman en mitsia i selida --}}
 <div class="d-flex col-12 mb-2">
     <div class="form-group col-5 me-2">
         <label for="day">Daily Reservation Range</label>
@@ -18,12 +19,12 @@
     @foreach ($settings as $setting)
         <div class="d-flex col-8 day @if($setting['day'] != 1) hidden-setting @endif" id="day-{{$setting['day']}}">
             <div class="col-sm-4 col-4 input-group-md mb-1">
-                <label for="reservation-{{$setting['day']}}">First Reservation</label>
+                <label for="reservation-{{$setting['day']}}">First</label>
                 <input type="time" id="first-{{$setting['day']}}" name="min-{{$setting['day']}}" class="form-control square first-reservation"
                     value="{{$setting['min']}}">
             </div>
             <div class="col-sm-4 col-4 input-group-md mb-1">
-                <label for="last-reservation">Last Reservation</label>
+                <label for="last-reservation">Last</label>
                 <input type="time" id="last-{{$setting['day']}}" name="max-{{$setting['day']}}" class="form-control square last-reservation"
                     value="{{$setting['max']}}">
             </div>

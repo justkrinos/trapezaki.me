@@ -18,7 +18,6 @@ class ManageReservationsController extends Controller
         ]);
     }
 
-
     //TODO: na en me get an en imerominia
     public function modify(request $request)
     {
