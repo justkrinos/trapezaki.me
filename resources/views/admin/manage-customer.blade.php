@@ -12,8 +12,10 @@ $tags = $user2->tags->pluck('name')->toArray();
 
 @endphp
 
-{{-- TODO: to reservation duration na piennei ana  misawra alliws enna santanosi ta reservations
-            duration min misi wra j max 5 --}}
+{{-- TODO: //to reservation duration na piennei ana  misawra alliws enna santanosi ta reservations
+            //duration min misi wra j max 5
+
+            //to representative name en iparxi pupote, prp na iparxi j nan editable--}}
 
 <head>
     <meta charset="UTF-8">
@@ -420,7 +422,7 @@ $tags = $user2->tags->pluck('name')->toArray();
                                 </div>
 
                             </div>
-                            
+
                             <div class="col-sm-6">
                                 <button type="submit" name="location"
                                     class="btn btn-success me-1 mb-1">Save changes</button>

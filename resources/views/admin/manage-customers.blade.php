@@ -116,6 +116,7 @@
     </section>
     </div>
 
+    {{-- TODO: eite na fiei telia eite na mpi kala --}}
     <footer>
         <div class="footer clearfix mb-0 text-muted">
             <div class="float-start">
