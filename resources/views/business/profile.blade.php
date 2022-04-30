@@ -300,11 +300,11 @@ use App\Models\Daily_Setting;
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" id="menuForm">
                 <div class="card-header">
                     <h4 class="card-title">Menu</h4>
                 </div>
-                <form method="POST" action="/profile" class="col-md-12 " enctype="multipart/form-data">
+                <form method="POST" action="/profile/menu#menuForm" class="col-md-12 " enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="mb-3">

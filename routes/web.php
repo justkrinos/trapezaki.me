@@ -9,6 +9,7 @@
 
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\issueControler;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\issuesBusinessControler;
 use Illuminate\Support\Facades\Route;
@@ -92,7 +93,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
 
-    Route::get('/user/{user2}/menu', [BookingController::class, 'showMenu']);
+    Route::get('/user/{user2}/menu', [MenuController::class, 'showU3']);
+
+
     Route::get('/user/{user2}/book', [BookingController::class, 'showBook']);
     Route::post('/user/{user2}/book', [BookingController::class, 'createBook']);
     Route::get('/api/{user2}/floor-plan', [FloorPlanController::class, 'getFloorPlanJson']);
@@ -115,7 +118,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
             //     $city = session()->get('city');
             // }
 
-            
+
             // //TODO evala to etsi gia na dulefkei, sigirisma
             // return view('www.search', [
             //     'showCityPop' => $showCityPop,
@@ -213,7 +216,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/manage-reservations', [ManageReservationsController::class, 'modify']);
         Route::get('/api/floor-plan', [FloorPlanController::class, 'getFloorPlanJsonU2']);
 
-        Route::get('/profile/menu', [SessionsController2::class, 'showMenu']);
+        Route::get('/profile/menu', [MenuController::class, 'showU2']);
+        Route::post('/profile/menu', [MenuController::class, 'modify']);
 
         //Book as user2
         Route::post('/add-reservation', [BookingController::class, 'createBookUser2']);
