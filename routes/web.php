@@ -11,7 +11,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\issueControler;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\issuesBusinessControler;
+use App\Http\Controllers\IssuesU2Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FloorPlanController;
 use App\Http\Controllers\RegisterUser3;
@@ -204,12 +204,9 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
             return view('business.list-problems');
         });
 
-        Route::get('/report-problem', function () {
-            return view('business.report-problem');
-        });
+        Route::get('/report-problem', [IssuesU2Controller::class,'show']);
+        Route::post('/report-problem', [IssuesU2Controller::class, 'modify']);
 
-        Route::post('/report-problem', [issuesBusinessControler::class, 'store']);
-        Route::get('/list-problems', [issuesBusinessControler::class, 'show']);
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
 

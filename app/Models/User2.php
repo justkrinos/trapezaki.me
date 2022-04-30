@@ -71,4 +71,8 @@ class User2 extends Authenticatable implements MustVerifyEmail
         return $value->format('Y-m-d');
     }
 
+    public function issues(){
+        return $this->hasMany('App\Models\Issue','user2_id','id');
+
+    }
 }
