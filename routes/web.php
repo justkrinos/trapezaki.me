@@ -188,9 +188,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
         Route::post('/api/apply-attendance', [ManageReservationsController::class, 'changeAttendance']);
 
-        Route::get('/add-reservation', function () {
-            return view('business.add-resv');
-        });
+        Route::get('/add-reservation', [BookingController::class, 'showAddResv']);
 
         Route::get('/logout', [SessionsController2::class, 'destroy']);
         Route::post('/profile', [SessionsController2::class, 'edit']);

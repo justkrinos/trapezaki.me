@@ -309,4 +309,8 @@ class BookingController extends Controller
         return 'success';
 
     }
+
+    public function showAddResv() {
+        return view('business.add-resv');
+    }
 }
