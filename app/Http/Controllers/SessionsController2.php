@@ -12,11 +12,9 @@ use App\Models\Daily_Setting;
 //For USER2
 class SessionsController2 extends Controller
 {
+    //TODO: fix this
     public function edit(Request $request)
     {
-        //Both change password and edit profile are here
-        //if(request()->has('form1'))
-        //{
         if((request()->has('first'))||(request()->has('last')))
         {
             $day = request("day");
@@ -59,7 +57,7 @@ class SessionsController2 extends Controller
 
             return [$minTime, $maxTime];
         }
-        if(request()->has('form1'))
+        if(request()->has('detailsForm'))
         {
 
 
@@ -88,10 +86,7 @@ class SessionsController2 extends Controller
             //Change the format of type (food,drinks,coffee) using the private function of this object
             $validatedData = $this->formatType($validatedData);
 
-
-            $id = Auth::guard('user2')->user()->id;
-            $user = User2::where('id', $id)->first();
-
+            $user = auth('user2')->user();
             $user->update($validatedData);
             $user->retag($tags);
 
@@ -99,26 +94,31 @@ class SessionsController2 extends Controller
             return redirect('/profile')->with("success", "Your changes have been applied successfully!");
         }
         //Change password
-        else if(request()->has('form2'))
+        else if(request()->has('passwordForm'))
         {
-            //get the id of the user
-            $id = request()->validate(['id' => 'required', 'username' => 'required']);
+            // //get the id of the user
+            // $id = request()->validate([
+            //     'id' => 'required',
+            //     'username' => 'required'
+            // ]);
 
 
-            $oldPassword = request()->validate(['username' => 'required', 'password' => 'required|max:50|min:7']);
+            $oldPassword = request()->validate([
+                'username' => 'required',
+                'password' => 'required|max:50|min:7'
+            ]);
 
-            //dd($oldPassword);
             if (!Auth::guard('user2')->attempt($oldPassword))
             {
-                session()->flash('error','Wrong old password!');
-                return redirect('/profile')->with("error", "Wrong old password!");
+                session()->flash('password','Wrong old password!');
+                return redirect('/profile')->with("error", "The old password is incorrect");
             }
 
             $pass = request()->validate([
                 'new-password' => 'required|max:50|min:7',
                 'new-password_confirmation' => 'required|same:password'
             ],[
-                'password_confirmation.same' => 'Passwords do not match.'
+                'new-password_confirmation.same' => 'Passwords do not match.'
             ]);
 
             $old_pass = $_POST['password'];

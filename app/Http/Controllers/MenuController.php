@@ -35,16 +35,14 @@ class MenuController extends Controller
                 'menu.required' => 'You must select a file.'
             ]);
 
-            $id = Auth::guard('user2')->user()->id;
-            $oldMenu = Auth::guard('user2')->user()->menu;
+            $user = Auth::guard('user2')->user();
+            $oldMenu = $user->menu;
 
-            $menuName = time() . strval($id) . uniqid() . '.' . request()->file('menu')->extension();
+            $menuName = time() . strval($user->id) . uniqid() . '.' . request()->file('menu')->extension();
             request()->file('menu')->move(public_path('assets/menus/'), $menuName);
 
             File::delete('assets/menus/' . $oldMenu);
 
-
-            $user = User2::where("id", $id)->first();
             $user->menu =$menuName;
             $user->save();
 

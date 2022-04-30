@@ -93,9 +93,9 @@ use App\Models\Daily_Setting;
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="/profile" class="col-md-12">
+                <form method="POST" action="/profile#detailsCard" class="col-md-12">
                     @csrf
-                    <div class="card">
+                    <div class="card" id="detailsCard">
                         <div class="card-header">
                             <h4 class="card-title">Description</h4>
                         </div>
@@ -193,20 +193,11 @@ use App\Models\Daily_Setting;
                                                 </div>
                                             </div>
                                         </div>
-
                                     </section>
-                                    <!-- Multiple choices end -->
-
                                 </div>
                             </div>
-
-
-                            <button type="submit" name="form1" class="btn btn-success me-1 mb-1">Save changes</button>
-
-
+                            <button type="submit" name="detailsForm" class="btn btn-success me-1 mb-1">Save changes</button>
                         </div>
-
-
                     </div>
                 </form>
 
@@ -339,7 +330,7 @@ use App\Models\Daily_Setting;
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" id="passwordCard">
                 <div class="card-header">
                     <h4 class="card-title">Change Password</h4>
                 </div>
@@ -347,33 +338,51 @@ use App\Models\Daily_Setting;
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <form method="POST" action="/profile" class="col-md-12">
+                            <form method="POST" action="/profile#passwordCard" class="col-md-12">
                                 @csrf
                                 <div class="form-group">
                                     <label for="basicInput">Old Password</label>
-                                    <input type="password" class="form-control form-control-l" id="password"
+                                    <input type="password" class="form-control form-control-l
+                                        @error('password')@enderror
+                                        @if(Session::has('password')) is-invalid @endif" id="password"
                                         name="password" placeholder="Password" required>
-                                    <div style="color:red">{{ $errors->first('password') }}</div>
-                                    @if (session()->has('error'))
-                                        <div>
-                                            <p style="color:red;">{{ session('error') }}</p>
-                                        </div>
+                                    @if(Session::has('password'))
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ Session::get('password') }}
+                                            </div>
                                     @endif
+                                    @error('password')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="basicInput">New Password</label>
-                                    <input type="password" class="form-control form-control-l" id="new-password"
+                                    <input type="password" class="form-control form-control-l @error('new-password') is-invalid @enderror" id="new-password"
                                         name="new-password" placeholder="Password" required>
-                                    <div style="color:red">{{ $errors->first('new-password') }}</div>
+                                    @error('new-password')
+                                        <div class="invalid-feedback">
+                                           <i class="bx bx-radio-circle"></i>
+                                           {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="basicInput">Re-enter New Password</label>
-                                    <input type="password" class="form-control form-control-l"
+                                    <input type="password" class="form-control form-control-l @error('new-password_confirmation') is-invalid @enderror"
                                         id="new-password_confirmation" name="new-password_confirmation"
                                         placeholder="Password" required>
-                                    <div style="color:red">{{ $errors->first('password_confirmation') }}
+                                    @error('new-password_confirmation')
+                                    <div class="invalid-feedback">
+                                        <i class="bx bx-radio-circle"></i>
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                     </div>
                                 </div>
 
@@ -389,7 +398,7 @@ use App\Models\Daily_Setting;
                                 </div>
 
                                 <div class="col-sm-12 d-flex justify-content-end">
-                                    <button type="submit" name="form2"
+                                    <button type="submit" name="passwordForm"
                                         class="btn btn-primary me-1 mb-1">Change</button>
                                 </div>
                             </form>
