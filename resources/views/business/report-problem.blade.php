@@ -63,7 +63,14 @@
                         </div>
                         <div class="card">
                             <h4 class="card-title" for="details">Details</h4>
-                            <textarea class="form-control" id="details" rows="2" name="details"></textarea>
+                            <textarea class="form-control @error ('description') is-invalid @enderror" 
+                            id="details" rows="2" name="details" required></textarea>
+                            @error('description')
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                         <div class="col-sm-12 d-flex justify-content-start">
                             <input type="submit" class="btn btn-primary" value="Submit Issue" />
