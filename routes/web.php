@@ -8,6 +8,7 @@
 */
 
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\IssuesU1Controller;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\IssuesU2Controller;
