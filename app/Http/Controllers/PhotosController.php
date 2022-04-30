@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User2_Photo;
+use App\Models\User2;
 use App\Models\User1;
 use App\Models\Tag;
 use Image;
@@ -47,13 +48,7 @@ class PhotosController extends Controller
             'user_id' => 'required|numeric'
         ]);
 
-        //return User2_Photo::where('user2_id',->$request['user_id'])->where('photo_path','!like','logo%')->get()->first()->photo_path);
-
-
-        return User2_Photo::select('photo_path')
-                            ->where('user2_id',$request['user_id'])
-                            ->where('photo_path','not like','logo%')
-                            ->get();
+        return User2::find($request['user_id'])->photos;
     }
 
     public function modify()
@@ -69,8 +64,8 @@ class PhotosController extends Controller
             $request =  request()->validate([
                 'photo_path' => 'required'
             ]);
-        
-            
+
+
             $photo_path = $request['photo_path'];
 
             //Can't delete last photo
@@ -84,7 +79,7 @@ class PhotosController extends Controller
 
                 return true;
             }
-            
+
         }
 
         else if(strcmp($request['action'],'modify')==0){
@@ -93,10 +88,10 @@ class PhotosController extends Controller
             ]);
 
             User2_Photo::store_one(request()->file('photo'),$user2_id);
-    
-            return ['ok'];   
+
+            return ['ok'];
         }
-        
+
     }
 
 
