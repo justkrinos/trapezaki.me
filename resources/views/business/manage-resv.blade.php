@@ -79,12 +79,12 @@ use App\Models\Reservation;
                                                                 <th>Name</th>
                                                                 <th>People</th>
                                                                 <th>Table</th>
-                                                                {{-- <!-- Analogws me ti ena epileksei na tu fkallei to analogo text --> --}}
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <input id="currentDate" type="hidden" value="">
                                                             {{-- TODO na erkunte pu to view tuta --}}
+                                                            {{-- gia na ginei omos prp na gini relationship to u2 me ta resv --}}
                                                             @foreach (App\Models\Reservation::all() as $reservation)
                                                                 @if(App\Models\Table::find($reservation->table_id)->user2_id == Auth::guard('user2')->user()->id)
                                                                     @if ($reservation->date == $date)

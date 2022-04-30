@@ -205,7 +205,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         });
 
         Route::get('/report-problem', [IssuesU2Controller::class,'show']);
-        Route::post('/report-problem', [IssuesU2Controller::class, 'modify']);
+        Route::post('/report-problem', [IssuesU2Controller::class, 'post']);
 
         Route::post('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);

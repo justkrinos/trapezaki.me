@@ -14,16 +14,20 @@ class ManageReservationsController extends Controller
     function show()
     {
         return view('business.manage-resv', [
-            'date' => date('Y-m-d'),
+            'date' => date('Y-m-d')
         ]);
     }
 
+
+    //TODO: na en me get an en imerominia
     public function modify(request $request)
     {
         //TODO tuta p en if else mesta functions
         //     na ginun ksexorista private functions
         //     j na eshi ena p ena ta dromologei
         //     apla gia na men en terastia
+
+        //change date
         if (request()->has('date')) {
             $attribute = request()->validate([
                 'date' => 'required|date',
@@ -33,7 +37,9 @@ class ManageReservationsController extends Controller
                 'date' => $attribute['date'],
             ]);
         }
+        //cancel reservation
         elseif(request()->has('reservation_id')){
+
             $validatedData = request()->validate([
                 'reason'         => 'required',
                 'reservation_id' =>  'required|numeric',

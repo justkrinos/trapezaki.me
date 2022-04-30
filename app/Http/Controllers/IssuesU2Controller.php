@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class IssuesU2Controller extends Controller
 {
-    public function modify()
-    {
+    public function post(){
         $request = request()->merge([
             'user2_id' => Auth::guard('user2')->user()->id,
             'status' => 0
@@ -30,8 +29,7 @@ class IssuesU2Controller extends Controller
     }
 
 
-    public function show(Issue $issue)
-    {
+    public function show(Issue $issue){
         $user2 = auth('user2')->user();
         $issues = $user2->issues;
 
