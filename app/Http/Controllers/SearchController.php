@@ -10,11 +10,14 @@ use Illuminate\Support\Collection;
 
 class SearchController extends Controller
 {
+    //TODO: na men fkalli jinus p en disabled
+        // ute pu to route (fix to bind)
+        //ute pu to random p fkalli stin arxi
     public function show(){
         //An ginei search
         if(request()->has("btn-search"))
         {
-            
+
             //TODO: validation
             //Getting form variables
             $type = "";

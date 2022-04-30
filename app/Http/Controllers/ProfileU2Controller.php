@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProfileU2Controller extends Controller
@@ -159,12 +159,12 @@ class ProfileU2Controller extends Controller
     private function formatType(array $validatedData){
             //Kamni ta tis morfis coffee:food:drinks gia osa iparxun
             //etsi wste na borume na ta kamume extract later
-    
+
             $stringToMake = ""; //to string pu ena stilume pisw
             $dataToChange = ['coffee','food','drinks']; //jina p ena checkarume
-    
-    
-    
+
+
+
             foreach ($dataToChange as $type) { //gia kathe ena p jina p ena checkarume
                 if (array_key_exists($type,$validatedData)){ //an iparxi
                     if (empty($stringToMake))
@@ -175,10 +175,10 @@ class ProfileU2Controller extends Controller
                 //diagrafw ta data pu mesa gt thelw mono to (type => food:coffee klp)
                 unset($validatedData[$type]);
             }
-    
+
             //vallw tu to string p ekama p en ulla mesa
             $validatedData['type'] = $stringToMake;
-    
+
             //diw to pisw sto function pu to kalese
             return $validatedData;
     }
