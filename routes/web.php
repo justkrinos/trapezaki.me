@@ -273,9 +273,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
     Route::middleware(['auth:user1'])->group(function () {
 
-        Route::get('/manage-customers', function () {
-            return view('admin.manage-customers');
-        });
+        Route::get('/manage-customers', [ManageBusinessController::class, 'showAll']);
         Route::get('/issues', function () {
             return view('admin.issues');
         });

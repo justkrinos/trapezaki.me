@@ -310,6 +310,10 @@ class BookingController extends Controller
 
     }
 
+    public function showAll() {
+        return view('admin.manage-customers');
+    }
+
     public function showAddResv() {
         return view('business.add-resv');
     }
