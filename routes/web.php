@@ -239,7 +239,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         // TODO: na pai sto api route na dulepsun jina
         Route::get('/api/tags', [TagsApiController::class,'show']);
 
-        Route::get('verify/{email}/{secret}/', [VerifyForgotPasswordController::class, 'verifyUser2']);
+        Route::get('verify/{email}/{secret}/', [VerifyEmailController::class, 'verifyUser2']);
 
         Route::get('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'showForgotU2']);
         Route::post('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'modifyForgotU2']);
