@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProfileU3Controller extends ProfileController
 {

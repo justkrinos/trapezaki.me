@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\RegisterController;
 
+
 //A class to make the registration of user3
 class RegisterU3Controller extends RegisterController
 {
