@@ -234,7 +234,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::post('/', [SessionsU2Controller::class, 'login']);
 
         Route::get('/signup', [RegisterU2Controller::class, 'show']);
-        Route::post('/signup', [RegisterU2Controller::class, 'login']);
+        Route::post('/signup', [RegisterU2Controller::class, 'create']);
 
         // TODO: na pai sto api route na dulepsun jina
         Route::get('/api/tags', [TagsApiController::class,'show']);
