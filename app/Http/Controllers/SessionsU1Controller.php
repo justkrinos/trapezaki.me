@@ -6,25 +6,25 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\SessionsController;
 
 use App\Models\User1;
 
 
-class SessionsU1Controller extends Controller
+class SessionsU1Controller extends SessionsController
 {
     public function show(){
         return view('admin.login');
     }
 
-    public function login(Request $request){
-
+    public function login(){
         //Validate the data
-        $request->validate([
+        request()->validate([
             'username' => 'required',
             'password' => 'required'
         ]);
 
-        $creds = $request->only('username','password');
+        $creds = request()->only('username','password');
 
         //Check if credentials ar ok
         if (! Auth::guard('user1')->attempt($creds)){
