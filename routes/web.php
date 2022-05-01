@@ -230,11 +230,11 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         //      an den en logged in na kami redirect sto login page
         //      gia ton logged in user dulefki gia kapio logo
         //      kapws to ixa kami alla en thimume pws
-        Route::get('/', [SessionsU2Controller::class, 'create']);
+        Route::get('/', [SessionsU2Controller::class, 'show']);
         Route::post('/', [SessionsU2Controller::class, 'login']);
 
         Route::get('/signup', [RegisterU2Controller::class, 'show']);
-        Route::post('/signup', [RegisterU2Controller::class, 'create']);
+        Route::post('/signup', [RegisterU2Controller::class, 'login']);
 
         // TODO: na pai sto api route na dulepsun jina
         Route::get('/api/tags', [TagsApiController::class,'show']);
