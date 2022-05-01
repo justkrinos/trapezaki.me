@@ -20,9 +20,10 @@ class RegisterU2Controller extends RegisterController
 
     public function create()
     {
+        $request = request();
         //Split the tags (comma separated) into an array
         //using this object's private function
-        request()['tags'] = $this->tagsToArray(request()['tags']);
+        $request['tags'] = $this->tagsToArray($request['tags']);
 
         //First only validate password
         request()->validate([
@@ -33,10 +34,10 @@ class RegisterU2Controller extends RegisterController
         ]);
 
         //verification code
-        request()->merge(['verification_code' => substr(md5(rand()),0,25)]);
+        $request->merge(['verification_code' => substr(md5(rand()),0,25)]);
 
         //Then save the attributes of the record, because we don't want to include password confirmation
-        $validatedData = request()->validate(
+        $validatedData = $request->validate(
             [
                 'username' => 'required|max:50|min:3|unique:user2s',
                 'email' => 'required|max:50|unique:user2s|email',
