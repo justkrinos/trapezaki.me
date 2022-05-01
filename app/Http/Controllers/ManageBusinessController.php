@@ -44,7 +44,7 @@ class ManageBusinessController extends Controller
             $validatedData = $request->validate([
                 'id' => 'required',
                 'description' => 'required|max:1000',
-                'representative' => 'required|max:50|min:2|alpha',
+                'representative' => 'required|max:50|min:2|regex:/^[\pL\s\-]+$/u',
 
                 'coffee' => 'in:on|required_without_all:food,drinks',
                 'food' => 'in:on|required_without_all:coffee,drinks',

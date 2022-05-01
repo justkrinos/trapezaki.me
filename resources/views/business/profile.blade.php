@@ -138,6 +138,20 @@ use App\Models\Daily_Setting;
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <div class="col-md-2">
+                                    <label for="representative">Representative</label>
+                                    <input type="text" name="representative" class="form-control round @error ('representative') is-invalid  @enderror"
+                                        value="{{ Auth::guard('user2')->user()->representative }}">
+                                    @error('representative')
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="card-header">
                                 <h4 class="card-title">Services</h4>
                             </div>

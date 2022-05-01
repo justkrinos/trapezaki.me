@@ -60,6 +60,7 @@ class ProfileU2Controller extends Controller
             //User3 edit profile
             $validatedData = $request->validate([
                 'description' => 'required|max:1000',
+                'representative' => 'required|max:50|min:2|regex:/^[\pL\s\-]+$/u',
 
                 'coffee' => 'in:on|required_without_all:food,drinks',
                 'food' => 'in:on|required_without_all:coffee,drinks',
