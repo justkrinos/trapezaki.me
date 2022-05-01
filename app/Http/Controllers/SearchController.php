@@ -20,6 +20,10 @@ class SearchController extends Controller
 
             //TODO: validation
             //Getting form variables
+            $validatedData = request()->validate([
+                'search' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            ]);
+
             $type = "";
             $city = "";
             $search = request("search");
