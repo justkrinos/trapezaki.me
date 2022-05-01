@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Models\Daily_Setting;
+use App\Http\Controllers\SessionsController;
 
 
 //For USER2
-class SessionsU2Controller extends Controller
+class SessionsU2Controller extends SessionsController
 {
 
     public function logout()

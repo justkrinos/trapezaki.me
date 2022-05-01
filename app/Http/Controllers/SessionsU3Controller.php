@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User3;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SessionsController;
 
 //Na metonomasti o controller se user3 controller or LoginUser3?
 //Not sure pos ton metonomazw omws bori na ta santanosume
 
 //FOR USER1
-class SessionsU3Controller extends Controller
+class SessionsU3Controller extends SessionsController
 {
     public function logout()
     {
