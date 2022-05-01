@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentTaggable\Taggable;
 use PHPUnit\Framework\MockObject\Verifiable;
 
-class User2 extends Authenticatable implements MustVerifyEmail
+class User2 extends User implements MustVerifyEmail
 {
     // O user2 eshei tags (has-a relationship)
     use Taggable;
