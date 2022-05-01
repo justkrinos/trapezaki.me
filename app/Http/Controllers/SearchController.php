@@ -171,10 +171,9 @@ class SearchController extends Controller
         $max = Time::createFromInt($settings->time_max);
 
         //round se misawra ta reservation settings gia na fkennun ta time slots
-        $min->round30();
+        $min->roundUp30();
 
-        //TODO: nan rounddown gia to max j roundup gia to min
-        $max->round30();
+        $max->roundDown30();
 
 
         //initialize the time slots from min to max

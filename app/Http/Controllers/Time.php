@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 //Function to create time in minutes and string
-class Time extends Controller
-{
+class Time{
     private int $intTime;
     private string $strTime;
     private int $intMin;
@@ -77,7 +76,7 @@ class Time extends Controller
         $this->intTime = $t;
     }
 
-    public function round30(){
+    public function roundUp30(){
         if($this->intMin > 30){
             $this->intMin = 0;
             $this->intHour++;
@@ -96,9 +95,24 @@ class Time extends Controller
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->strTime;
+    //TODO: na dulefki swsta (tr en apla copy)
+    public function roundDown30(){
+        if($this->intMin > 30){
+            $this->intMin = 0;
+            $this->intHour++;
+        }elseif($this->intMin < 30 && $this->intMin != 0){
+            $this->intMin = 30;
+        }
+
+        $time = Carbon::now('Europe/Athens');
+        $time->setHour($this->intHour);
+        $time->setMinutes($this->intMin);
+
+        $this->setTimeInt($this->intMin + $this->intHour*60);
+
+        $this->setStrTime($time->format('H:i'));
+
+        return $this;
     }
 
     public function getStr()
