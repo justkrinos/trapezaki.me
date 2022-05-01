@@ -265,9 +265,12 @@ $tags = $user2->tags->pluck('name')->toArray();
                                                 <div class="input-group">
                                                 {{-- TODO: na grafti sta eggrafa oti to minimum duration en 30 --}}
                                                 <input type="number" min="30" id="resv-duration" name="duration"
-                                                    class="form-control square" step="30" value="{{$user2->duration}}">
+                                                    class="form-control square @error ('duration') is-invalid @enderror" step="30" value="{{$user2->duration}}">
                                                 <label class="input-group-text" for="range">minutes</label>
                                                 </div>
+                                                @error('duration')
+                                                    <p style="color:red">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
 
