@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Issue;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\IssuesController;
 
 
 class IssuesU2Controller extends Controller

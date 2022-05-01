@@ -6,9 +6,10 @@ use App\Models\User3;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\RegisterController;
 
 //A class to make the registration of user3
-class RegisterU3Controller extends Controller
+class RegisterU3Controller extends RegisterController
 {
     //private $guest;
 

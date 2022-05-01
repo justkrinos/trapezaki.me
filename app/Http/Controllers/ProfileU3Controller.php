@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 
-class ProfileU3Controller extends Controller
+class ProfileU3Controller extends ProfileController
 {
     public function show() {
         if (!Auth::check('user3'))
@@ -74,7 +74,7 @@ class ProfileU3Controller extends Controller
             //update user password
             $user->password = $pass;
             $user->save();
-            
+
             //log the user out to log in with the new password
             auth('user3')->logout();
 
@@ -83,5 +83,5 @@ class ProfileU3Controller extends Controller
 
     }
 
-    
+
 }

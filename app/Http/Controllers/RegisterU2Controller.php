@@ -8,8 +8,9 @@ use App\Models\User2_Photo;
 use App\Http\Controllers\Time;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\RegisterController;
 
-class RegisterU2Controller extends Controller
+class RegisterU2Controller extends RegisterController
 {
     public function show(){
         if(Auth::check('user2'))
@@ -17,11 +18,11 @@ class RegisterU2Controller extends Controller
         return view('business.signup');
     }
 
-    public function create(Request $request)
+    public function create()
     {
         //Split the tags (comma separated) into an array
         //using this object's private function
-        $request['tags'] = $this->tagsToArray($request['tags']);
+        request()['tags'] = $this->tagsToArray(request()['tags']);
 
         //First only validate password
         request()->validate([
@@ -32,10 +33,10 @@ class RegisterU2Controller extends Controller
         ]);
 
         //verification code
-        $request->merge(['verification_code' => substr(md5(rand()),0,25)]);
+        request()->merge(['verification_code' => substr(md5(rand()),0,25)]);
 
         //Then save the attributes of the record, because we don't want to include password confirmation
-        $validatedData = $request->validate(
+        $validatedData = request()->validate(
             [
                 'username' => 'required|max:50|min:3|unique:user2s',
                 'email' => 'required|max:50|unique:user2s|email',

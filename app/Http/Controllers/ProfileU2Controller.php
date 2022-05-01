@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Daily_Setting;
+use App\Http\Controllers\ProfileController;
 
-class ProfileU2Controller extends Controller
+class ProfileU2Controller extends ProfileController
 {
-    public function modify(Request $request)
+    public function modify()
     {
         if((request()->has('first'))||(request()->has('last')))
         {
@@ -55,10 +56,10 @@ class ProfileU2Controller extends Controller
         {
 
 
-            $request['tags'] = $this->tagsToArray(request()['tags']);
+            request()['tags'] = $this->tagsToArray(request()['tags']);
 
             //User3 edit profile
-            $validatedData = $request->validate([
+            $validatedData = request()->validate([
                 'description' => 'required|max:1000',
                 'representative' => 'required|max:50|min:2|regex:/^[\pL\s\-]+$/u',
 
@@ -157,6 +158,8 @@ class ProfileU2Controller extends Controller
         ]);
     }
 
+
+    //TODO tuta ta extra functions na ta kamumme san extend gia na men fenunte
     //Function gia xrisi mesa sto object pu kamni format to type (food coffe drinks)
     private function formatType(array $validatedData){
             //Kamni ta tis morfis coffee:food:drinks gia osa iparxun
