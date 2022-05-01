@@ -55,10 +55,10 @@ class ProfileU2Controller extends ProfileController
         }
         if(request()->has('detailsForm'))
         {
-
-
-            request()['tags'] = $this->tagsToArray(request()['tags']);
-
+            
+            if(request()['tags'] != null)
+                request()['tags'] = $this->tagsToArray(request()['tags']);
+            
             //User3 edit profile
             $validatedData = request()->validate([
                 'description' => 'required|max:1000',

@@ -174,6 +174,12 @@ use App\Models\Daily_Setting;
                                             @if (str_contains(Auth::guard('user2')->user()->type, 'drinks')) checked @endif>
                                         <label for="checkbox1">Drinks</label>
                                     </div>
+                                    @error('coffee')
+                                        @php
+                                            $message = "*You must select at least 1 of the types of service.";
+                                        @endphp
+                                        <p style="color: red;">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">

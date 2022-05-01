@@ -116,7 +116,7 @@ use App\Models\User2;
                                 <div class="card-body">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-md-4">
-                                            {{-- <form method="POST" action="/profile#changePasswordCard" class="col-md-12"> --}}
+                                            <form method="POST" action="/profile#changePasswordCard" class="col-md-12">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="basicInput">Old Password</label>
