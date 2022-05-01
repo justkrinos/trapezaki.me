@@ -22,12 +22,6 @@ class User3 extends User implements MustVerifyEmail
         'password_confirmation'
     ];
 
-    //Opote ena kamw set password, prin na mpei mesto database enna kamei run to function
-    //iparxei kai to antistoixo get gia opote kamw access pu to database
-    public function setPasswordAttribute($password){
-        $this->attributes['password'] = bcrypt($password);
-    }
-
     public function reservations(){
         return $this->hasMany('App\Models\Reservation');
     }

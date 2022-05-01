@@ -21,6 +21,7 @@ use App\Models\User2;
 
     {{-- TODO: ta error messages nan kalitera j to $user na erkete p to controller
                aman kamis lathos en erkunte pisw ta old()
+               change password doesnt work
      --}}
 
     {{-- Toast dependency --}}

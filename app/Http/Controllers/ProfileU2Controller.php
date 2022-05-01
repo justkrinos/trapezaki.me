@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Daily_Setting;
 use App\Http\Controllers\ProfileController;
+use App\Models\User2;
 
 class ProfileU2Controller extends ProfileController
 {
@@ -112,7 +113,7 @@ class ProfileU2Controller extends ProfileController
 
             $pass = request()->validate([
                 'new-password' => 'required|max:50|min:7',
-                'new-password_confirmation' => 'required|same:password'
+                'new-password_confirmation' => 'required|same:new-password'
             ],[
                 'new-password_confirmation.same' => 'Passwords do not match.'
             ]);
