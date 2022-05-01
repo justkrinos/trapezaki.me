@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User2;
 
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class VerifyEmailController extends Controller
         $user = User3::where('email', $email)->first();
         return $this->verify($user,$secret);
     }
-    
+
     private function verify($user, $secret)
     {
         if (!$user || strcmp($secret, $user->verification_code)) {
