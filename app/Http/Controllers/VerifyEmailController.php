@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\User2;
+use App\Models\User3;
+
 
 use Illuminate\Http\Request;
 
