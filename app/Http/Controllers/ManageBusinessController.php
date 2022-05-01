@@ -84,7 +84,7 @@ class ManageBusinessController extends Controller
             //      -na erkunte pisw errors (ena gia oulla alla perigrafiko)
             $validatedData = request()->validate([
                 'res_range' => 'required|numeric',
-                'duration'  => 'required|numeric',
+                'duration'  => 'required|numeric|min:30|max:420',
                 'min-1'     => 'required|date_format:H:i',
                 'min-2'     => 'required|date_format:H:i',
                 'min-3'     => 'required|date_format:H:i',
