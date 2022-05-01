@@ -18,7 +18,7 @@ class VerifyEmailController extends Controller
             $user->is_verified = 1;
             $user->verification_code = substr(md5(rand()), 0, 25); //Create a new verification code
             $user->save();
-            return redirect('/login')->with('success', 'Your account has been Activated! Our team will contact you for further instructions.');
+            return redirect('/login')->with('success', 'Your account has been activated! Our team will contact you for further instructions.');
         }
     }
 
@@ -31,7 +31,7 @@ class VerifyEmailController extends Controller
             $user->is_verified = 1;
             $user->verification_code = substr(md5(rand()), 0, 25); //Create a new verification code
             $user->save();
-            return redirect('/login')->with('success', 'Your account has been Activated! Please log in to continue.');
+            return redirect('/login')->with('success', 'Your account has been activated! Please log in to continue.');
         }
     }
 
