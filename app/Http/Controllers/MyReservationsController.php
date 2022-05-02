@@ -12,6 +12,7 @@ use App\Models\User3;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User2;
+use App\Models\Table;
 
 class MyReservationsController extends Controller
 {
