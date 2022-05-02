@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use App\Http\Controllers\Time;
 use App\Models\Cancellation;
 use App\Models\Rating;
+use App\Models\User3;
+use App\Models\Reservation;
 
 class MyReservationsController extends Controller
 {
@@ -59,6 +61,13 @@ class MyReservationsController extends Controller
 
             //an iparxei to reservation ston current user
             if ($user3->reservations->find($validatedData['reservation_id'])) {
+                //email to inform the user that the reservation was cancelled
+
+                if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+                        Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
+                                                    ($user3->email, Reservation::find($validatedData['reservation_id']), 
+                                                    $validatedData['reason']));
+            
                 Cancellation::create($validatedData);
                 return back()->with('success', 'The reservation has been cancelled!');
             }

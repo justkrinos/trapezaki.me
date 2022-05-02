@@ -7,6 +7,7 @@ use App\Models\Cancellation;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\User3;
 
 
 class ManageReservationsController extends Controller
@@ -36,9 +37,15 @@ class ManageReservationsController extends Controller
         //get the authenticated user and reservation
         $user2 = Auth::guard('user2')->user();
         $reservation = Reservation::find($validatedData['reservation_id']);
+        $user3 = User3::find($reservation->user3_id);
 
         //make sure its on a table that its owned by the u2
         if ($reservation->table->user2_id  == $user2->id) {
+            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+                        Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
+                                                    ($user3->email, Reservation::find($validatedData['reservation_id']), 
+                                                    $validatedData['reason']));
+                                                    
             Cancellation::create($validatedData);
             return back()->with('success', 'The reservation has been cancelled!');
         }

@@ -6,6 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Reservation;
+use App\Models\User3;
+use App\Models\Table;
 
 class MailNewReservation extends Mailable
 {
@@ -13,18 +16,32 @@ class MailNewReservation extends Mailable
 
     use Queueable, SerializesModels;
 
-    public $link;
-
+    public $reservation_id;
+    public $business_name;
+    public $date;
+    public $time;
+    public $details;
+    public $pax;
+    public $username;
+    public $table;
+    public $reason;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($email, $secret, $user)
+    public function __construct($email, Reservation $reservation, $reason)
     {
         // TODO: change this to https when ssl works
-        $this->link = 'http://' . $user . '.trapezaki.me' . '/change-password/' . $email . '/' . $secret . '/';
-
+        $this-> business_name = $reservation->business_name;
+        $this-> date = $reservation->date;
+        $this-> time = $reservation->time;
+        $this-> details = $reservation->details;
+        $this-> pax = $reservation->pax;
+        $this-> reservation_id = $reservation->id;
+        $this-> username = User::find($reservation->user3_id)->username;
+        $this-> table = Table::find($reservation->table_id)->table_no;
+        $this-> reason = $reason;
     }
 
     /**
@@ -34,6 +51,6 @@ class MailNewReservation extends Mailable
      */
     public function build()
     {
-        return $this->subject("Trapezaki Forgot Password")->view('emails.forgot');
+        return $this->subject("Trapezaki Cancelled Reservation")->view('emails.cancelled');
     }
 }
