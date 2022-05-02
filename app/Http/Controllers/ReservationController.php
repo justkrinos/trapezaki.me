@@ -119,7 +119,7 @@ class ReservationController extends Controller
                 $reservation = Reservation::create($validatedData);
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
                 Mail::to($user->email)->queue(new \App\Mail\MailCreatedReservation
-                    ($user->email, $validatedData, $user2->business_name));
+                    ($user->email, $reservation, $user2->business_name));
             }
             else
             {
