@@ -137,9 +137,16 @@
                     <tr>
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">Dear {{ $username }}, your reservation with number {{ $reservation_id }}
-                            on {{ $business_name }} for the date {{ $date }} and time {{ $time }} for {{ $pax }} people
-                            on table with number {{ $table }} has been modified"</p>
+                            <p style="margin: 0;">Dear {{ $username }},
+                                <br><br> Your reservation has been created succesfully!<br><br>
+                                Please, find bellow the details:<br>
+                                Place: {{ $business_name }}<br>
+                                Reservation Code: {{ $reservation_id }}<br>
+                                Date: {{ $date }}<br>
+                                Time: {{ $time }}<br>
+                                People: {{ $pax }}<br>
+                                Table Number: {{ $table }}<br>
+                                with number {{ $reservation_id }}
                         </td>
                     </tr>
                     
