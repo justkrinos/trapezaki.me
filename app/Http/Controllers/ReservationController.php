@@ -215,7 +215,7 @@ class ReservationController extends Controller
 
 
             $validatedData = $request->validate([
-                'user3_username' => 'required|max:50|min:3|exists:user3s,username',//
+                'user3_username' => 'required|max:50|min:3|exists:user3s,username',
                 'date'=> 'required|date|after:yesterday',
                 'time'=> 'required',
                 'table_id'=> 'required|numeric',
@@ -226,7 +226,8 @@ class ReservationController extends Controller
 
 
             // return $validatedData;
-            $user3_id = User3::where('username', $validatedData['user3_username'])->first()->id;
+            $user3 = User3::where('username', $validatedData['user3_username']);
+            $user3_id = $user3->id;
             $validatedData['user3_id'] = $user3_id;
             unset($validatedData['user3_username']);
 
@@ -234,8 +235,8 @@ class ReservationController extends Controller
             {
                 $reservation = Reservation::create($validatedData);
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
-                Mail::to($user->email)->queue(new \App\Mail\MailCreatedReservation
-                    ($user->email, $reservation, $user2->business_name));
+                Mail::to($user3->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($user3->email, $reservation, $user2->business_name));
             }
             else
             {
