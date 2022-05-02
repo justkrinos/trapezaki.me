@@ -122,8 +122,8 @@ class ReservationController extends Controller
             {
                 $reservation = Reservation::create($validatedData);
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
-                Mail::to($user->email)->queue(new \App\Mail\MailCreatedReservation
-                    ($user->email, $reservation, $user2->business_name));
+                Mail::to($user2->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($user2->email, $reservation, $user2->business_name));
             }
             else
             {
@@ -182,9 +182,20 @@ class ReservationController extends Controller
             }else{
                 $guest = User3::create($attributes);
             }
+            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+            {
+                $validatedData['user3_id'] = $guest->id;
+                $reservation = $guest->reservations()->create($validatedData);
+                Mail::to($guest->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($guest->email, $reservation, $user2->business_name));
+            }
+            else
+            {
+                $reservation = $guest->reservations()->create($validatedData);
+            }
 
 
-            $validatedData['user3_id'] = $guest->id;
+            
             $reservation = Reservation::create($validatedData);
 
             //TODO: na men kamnei return to reservation
@@ -198,7 +209,7 @@ class ReservationController extends Controller
 
 
             $validatedData = $request->validate([
-                'user3_username' => 'required|max:50|min:3|exists:user3s,username',//
+                'user3_username' => 'required|max:50|min:3|exists:user3s,username',
                 'date'=> 'required|date|after:yesterday',
                 'time'=> 'required',
                 'table_id'=> 'required|numeric',
@@ -209,10 +220,22 @@ class ReservationController extends Controller
 
 
             // return $validatedData;
-            $user3_id = User3::where('username', $validatedData['user3_username'])->first()->id;
+            $user3 = User3::where('username', $validatedData['user3_username'])->first();
+            $user3_id = $user3->id;
             $validatedData['user3_id'] = $user3_id;
             unset($validatedData['user3_username']);
-            $reservation = Reservation::create($validatedData);
+
+            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+            {
+                $reservation = Reservation::create($validatedData);
+                $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
+                Mail::to($user3->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($user3->email, $reservation, $user2->business_name));
+            }
+            else
+            {
+                $reservation = Reservation::create($validatedData);
+            }
 
             return $reservation;
         }
@@ -284,10 +307,14 @@ class ReservationController extends Controller
 
         $user3 = User3::find($reservation->user3_id);
         if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
-                        Mail::to($user3->email)->queue(new \App\Mail\MailModifiedReservation
+        {
+            $reservation->update($validatedData);
+            Mail::to($user3->email)->queue(new \App\Mail\MailModifiedReservation
                                                     ($user3->email, $reservation, $user2->business_name));
+        }
         //update the reservations details
-        $reservation->update($validatedData);
+        else
+            $reservation->update($validatedData);
 
         return 'success';
 

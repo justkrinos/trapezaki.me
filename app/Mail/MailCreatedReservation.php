@@ -37,7 +37,15 @@ class MailCreatedReservation extends Mailable
         $this-> details = $reservation->details;
         $this-> pax = $reservation->pax;
         $this-> reservation_id = $reservation->id;
-        $this-> username = User3::find($reservation->user3_id)->username;
+        $user3 = User3::find($reservation->user3_id);
+        if($user3->guest==1)
+        {
+            $this-> username = $user3->full_name;
+        }
+        else
+        {
+            $this-> username = $user3->username;
+        }
         $this-> table = Table::find($reservation->table_id)->table_no;
     }
 
@@ -48,6 +56,6 @@ class MailCreatedReservation extends Mailable
      */
     public function build()
     {
-        return $this->subject("Trapezaki Reservation booked")->view('emails.newresv');
+        return $this->subject("Trapezaki Reservation booked!")->view('emails.newresv');
     }
 }
