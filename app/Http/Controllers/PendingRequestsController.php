@@ -33,7 +33,7 @@ class PendingRequestsController extends Controller
 
         if ($user2) {
             if ($action === 'accept') {
-                if(!$user2->floorplan == null)
+                if($user2->floorplan == null)
                     return 'no-floorplan';
                 //TODO: approve mono an en filled ulla ta data!
                 //sto manage customers na dixnei j ta pending j ta disabled j ta approved
