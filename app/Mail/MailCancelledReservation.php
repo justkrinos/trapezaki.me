@@ -10,7 +10,7 @@ use App\Models\Reservation;
 use App\Models\User3;
 use App\Models\Table;
 
-class MailNewReservation extends Mailable
+class MailCancelledReservation extends Mailable
 {
     //TODO: otan kami o u2 j o u3 cancel
 
