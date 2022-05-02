@@ -226,7 +226,7 @@ class ReservationController extends Controller
 
 
             // return $validatedData;
-            $user3 = User3::where('username', $validatedData['user3_username']);
+            $user3 = User3::where('username', $validatedData['user3_username'])->get();
             $user3_id = $user3->id;
             return $user3_id;
             $validatedData['user3_id'] = $user3_id;
