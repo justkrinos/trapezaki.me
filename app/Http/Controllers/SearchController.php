@@ -75,6 +75,8 @@ class SearchController extends Controller
                                     AND city LIKE '%$city%' AND type LIKE '%$type%'
                                     AND (business_name LIKE '%$search%' OR description LIKE '%$search%'
                                         OR $tagsQuery)
+                                    AND user2s.status = 1
+                                    AND user2s.is_verified = 1
                                 GROUP BY user2s.id
                                 ORDER BY
                                     CASE
