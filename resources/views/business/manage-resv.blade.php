@@ -50,7 +50,7 @@ use App\Models\Reservation;
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <form method="POST" action="/manage-reservations" id="dateInput">
+                                <form method="GET" action="/manage-reservations" id="dateInput">
                                     @csrf
                                     <div class="input-group">
                                         <label class="input-group-text" for="mydate">Date</label>

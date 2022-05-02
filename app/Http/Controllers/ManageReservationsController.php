@@ -13,57 +13,46 @@ class ManageReservationsController extends Controller
 {
     function show()
     {
+        if (request()->has('date')) {
+            $attribute = request()->validate(['date' => 'required|date']);
+            $date = $attribute['date'];
+        }
+        else
+            $date = date('Y-m-d');
+
         return view('business.manage-resv', [
-            'date' => date('Y-m-d')
+            'date' => $date
         ]);
     }
 
     //TODO: na en me get an en imerominia
-    public function modify(request $request)
+    public function modify()
     {
-        //TODO tuta p en if else mesta functions
-        //     na ginun ksexorista private functions
-        //     j na eshi ena p ena ta dromologei
-        //     apla gia na men en terastia
+        $validatedData = request()->validate([
+            'reason'         => 'required',
+            'reservation_id' =>  'required|numeric',
+        ]);
 
-        //change date
-        if (request()->has('date')) {
-            $attribute = request()->validate([
-                'date' => 'required|date',
-            ]);
+        //get the authenticated user and reservation
+        $user2 = Auth::guard('user2')->user();
+        $reservation = Reservation::find($validatedData['reservation_id']);
 
-            return view('business.manage-resv', [
-                'date' => $attribute['date'],
-            ]);
+        //make sure its on a table that its owned by the u2
+        if ($reservation->table->user2_id  == $user2->id) {
+            Cancellation::create($validatedData);
+            return back()->with('success', 'The reservation has been cancelled!');
         }
-        //cancel reservation
-        elseif(request()->has('reservation_id')){
 
-            $validatedData = request()->validate([
-                'reason'         => 'required',
-                'reservation_id' =>  'required|numeric',
-            ]);
+        //back to the page p itan prin
+        return back()->with('success', 'Oops! Something went wrong');
 
-            //get the authenticated user and reservation
-            $user2 = Auth::guard('user2')->user();
-            $reservation = Reservation::find($validatedData['reservation_id']);
-
-            //make sure its on a table that its owned by the u2
-            if($reservation->table->user2_id  == $user2->id){
-                Cancellation::create($validatedData);
-                return back()->with('success', 'The reservation has been cancelled!');
-            }
-
-            //back to the page p itan prin
-            return back()->with('success', 'Oops! Something went wrong');
-
-            // TODO: an to reservation en cancelled, tote na men eshi epilogi cancel
-            //       na men afinei 2o cancellation (primary key to reservation_id sto cancellations)
-            //       na ginei j sto rating tuto
-        }
+        // TODO: an to reservation en cancelled, tote na men eshi epilogi cancel
+        //       na men afinei 2o cancellation (primary key to reservation_id sto cancellations)
+        //       na ginei j sto rating tuto
     }
 
-    public function changeAttendance(){
+    public function changeAttendance()
+    {
 
         //validate the request data
         $validatedData = request()->validate([
@@ -83,11 +72,12 @@ class ManageReservationsController extends Controller
         //make sure to attendance ennen megalitero tu arithmou twn atomwn
         //make sure oti to reservation ennen cancelled
         //make sure oti mono ta simerina reservations borei na allaksei
-        if($reservation->table->user2_id  == $user2->id
+        if (
+            $reservation->table->user2_id  == $user2->id
             && $validatedData['attendance'] <= $reservation->pax
             && !$reservation->cancelled
             && $resvDate->isToday('Europe/Athens')
-        ){
+        ) {
             //set the attendance, save and return success
             $reservation->attended = $validatedData['attendance'];
             $reservation->save();
@@ -95,7 +85,6 @@ class ManageReservationsController extends Controller
         }
 
         //back to the page if an error occurs (it shouldnt)
-        return response()->json(['error'],422);
-
+        return response()->json(['error'], 422);
     }
 }
