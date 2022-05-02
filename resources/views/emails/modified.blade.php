@@ -138,7 +138,7 @@
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                             <p style="margin: 0;">Dear {{ $username }},<br><br>
-                                 We would like to inform you that your reservation has been modified.<br><br>
+                                 We would like to inform you that your reservation with number {{ $reservation_id }} has been modified.<br><br>
                                  Please find below the new details:<br><br>
                                  Place: {{ $business_name }}<br>
                                  Reservation Number: {{ $reservation_id }}<br>

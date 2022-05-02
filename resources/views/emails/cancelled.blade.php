@@ -137,9 +137,20 @@
                     <tr>
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                            <p style="margin: 0;">Dear {{ $username }}, your reservation with number {{ $reservation_id }}
-                            on {{ $business_name }} for the date {{ $date }} and time {{ $time }} for {{ $pax }} people
-                            on table with number {{ $table }} has been cancelled due to the reason "{{ $reason }}"</p>
+                            <p style="margin: 0;">Dear {{ $username }},<br><br>
+                                We would like to inform you that your reservation with number {{ $reservation_id }} has been cancelled.<br><br>
+                                Please find below the reservation details:<br><br>
+                                Place: {{ $business_name }}<br>
+                                Reservation Number: {{ $reservation_id }}<br>
+                                Date: {{ $date }}<br>
+                                Time: {{ $time }}<br>
+                                People: {{ $pax }}<br>
+                                Table Number: {{ $table }}<br>
+                                Details: {{ $details }}<br>
+                                Reason of cancellation: {{ $reason }}<br>
+
+
+                           </p>
                         </td>
                     </tr>
                     

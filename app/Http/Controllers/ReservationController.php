@@ -313,10 +313,14 @@ class ReservationController extends Controller
 
         $user3 = User3::find($reservation->user3_id);
         if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
-                        Mail::to($user3->email)->queue(new \App\Mail\MailModifiedReservation
+        {
+            $reservation->update($validatedData);
+            Mail::to($user3->email)->queue(new \App\Mail\MailModifiedReservation
                                                     ($user3->email, $reservation, $user2->business_name));
+        }
         //update the reservations details
-        $reservation->update($validatedData);
+        else
+            $reservation->update($validatedData);
 
         return 'success';
 
