@@ -141,7 +141,6 @@
                                 <br><br> Your reservation has been created succesfully!<br><br>
                                 Please, find bellow the details:<br><br>
                                 Place: {{ $business_name }}<br>
-                                Reservation Code: {{ $reservation_id }}<br>
                                 Date: {{ $date }}<br>
                                 Time: {{ $time }}<br>
                                 People: {{ $pax }}<br>
