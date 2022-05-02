@@ -114,10 +114,18 @@ class ReservationController extends Controller
 
             unset($validatedData['user3_username']);
 
-            $reservation = Reservation::create($validatedData);
-
+            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+            {
+                $reservation = Reservation::create($validatedData);
+                $user2 = User::find($reservation->user2_id);
+                Mail::to($user->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($user->email, $validatedData, $user2->$business_name));
+            }
+            else
+            {
+                $reservation = Reservation::create($validatedData);
+            }
             //TODO na men kamni return reservation afu en dia pisw ta data
-            //TODO: na stelnei email
             return $reservation;
         }
     }
