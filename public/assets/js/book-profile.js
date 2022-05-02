@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var back = document.referrer
     if (window.location.hash.match("login")) {
-        $("#inlineForm").modal('show')
+        $("#login").modal('show')
     }
 
     //Go back button
@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     //An den ise logged in fkenni tunto button
     $("#btnPop").click(function () {
-        $("#inlineForm").modal('show')
+        $("#login").modal('show')
     })
 
 

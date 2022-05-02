@@ -45,6 +45,15 @@ class ReservationController extends Controller
             $phone = session()->get('phone');
             $email = session()->get('email');
 
+            //TODO: opu eshi validation numeric na to kamume nan min:0 j na valume max an xriazete (px. pax <=16)
+            //TODO: an den valis date fkalli error logika epd en bori nan null otan mpei sto table (ekama to null sta migrations check if works)
+            $validatedData = request()->validate([
+                'date'=> 'required|date',
+                'time'=> 'required|date_format:H:i',
+                'table_id'=> 'required|numeric|min:0',
+                'details'=> 'string|max:200',
+                'pax'=> 'required|numeric|min:0|max:16'
+            ]);
 
             //TODO: na gini uncomment tuto j na checkaristi an en ok
             // session()->forget(['full_name', 'phone', 'email']);
@@ -77,28 +86,14 @@ class ReservationController extends Controller
                 $guest = User3::create($attributes);
             }
 
-
-            //TODO: opu eshi validation numeric na to kamume nan min:0 j na valume max an xriazete (px. pax <=16)
-            //TODO: an den valis date fkalli error logika epd en bori nan null otan mpei sto table (ekama to null sta migrations check if works)
-            $validatedData = $request->validate([
-                'date'=> 'required|date',
-                'time'=> 'required|date_format:H:i',
-                'table_id'=> 'required|numeric|min:0',
-                'details'=> 'string|max:200',
-                'pax'=> 'required|numeric|min:0|max:16'
-            ]);
-
+            $reservation = $guest->reservations()->create($validatedData);
 
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
             {
-                $reservation = $guest->reservations()->create($validatedData);
+
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
                 Mail::to($guest->email)->queue(new \App\Mail\MailCreatedReservation
                     ($guest->email, $reservation, $user2->business_name));
-            }
-            else
-            {
-                $reservation = $guest->reservations()->create($validatedData);
             }
 
             session()->forget('date');
@@ -123,8 +118,6 @@ class ReservationController extends Controller
                 'attended' => 'required'
             ]);
 
-            unset($validatedData['user3_username']);
-
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
             {
                 $reservation = Reservation::create($validatedData);
@@ -137,6 +130,7 @@ class ReservationController extends Controller
                 $reservation = Reservation::create($validatedData);
             }
             //TODO na men kamni return reservation afu en dia pisw ta data
+            //sto eggrafo egrapsa epistrefei success
             return $reservation;
         }
     }
