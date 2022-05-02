@@ -19,14 +19,12 @@ class SessionsU1Controller extends SessionsController
 
     public function login(){
         //Validate the data
-        request()->validate([
+        $creds = request()->validate([
             'username' => 'required',
             'password' => 'required'
         ]);
 
-        $creds = request()->only('username','password');
-
-        //Check if credentials ar ok
+        //Check if credentials are ok
         if (! Auth::guard('user1')->attempt($creds)){
             return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);
         }
