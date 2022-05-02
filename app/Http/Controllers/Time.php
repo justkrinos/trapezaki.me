@@ -49,7 +49,6 @@ class Time{
         }else{
             $this->intHour = 0;
         }
-
     }
 
     public function setMinutes(int $m){
