@@ -22,6 +22,14 @@ declinedToast = Toastify({
     backgroundColor: "#3cc2b4",
 })
 
+floorplanToast = Toastify({
+    text: 'Please set up the Floor Plan first!',
+    duration: 5000,
+    close:true,
+    gravity:"top",
+    position: "right",
+    backgroundColor: "#db0f0f",
+})
 
 let table = document.querySelector("#tableSort");
 let dataTable = new simpleDatatables.DataTable(table, {
@@ -80,7 +88,9 @@ $(document).ready(function () {
                         user.fadeOut(400, function () {
                             dataTable.rows().remove(index) //diegrapse to pu to datatable me vasi to index
                         }) //kame to fade out
-                        approvedToast.showToast();
+                        approvedToast.showToast()
+                    }else if (result === 'no-floorplan'){
+                        floorplanToast.showToast()
                     }else
                         console.log(result)
                 }

@@ -53,6 +53,7 @@ class MyReservationsController extends Controller
                 'reason' => 'required',
                 'reservation_id' =>  'required|numeric'
             ]);
+
             //get the authenticated user
             $user3 = Auth::guard('user3')->user();
 
@@ -63,6 +64,7 @@ class MyReservationsController extends Controller
             }
             //back to the page p itan prin
             return back()->with('success', 'Oops! Something went wrong');
+
         } else if (request()->has('rate')) {
             $validatedData = request()->validate([
                 'rating' => 'required|numeric',
@@ -77,7 +79,7 @@ class MyReservationsController extends Controller
                 Rating::create($validatedData);
                 return 'success';
             } else {
-                return response()->json([], 422);
+                return response('error')->json([], 422);
             }
         }
     }
