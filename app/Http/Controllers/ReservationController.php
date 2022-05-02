@@ -88,7 +88,18 @@ class ReservationController extends Controller
                 'pax'=> 'required|numeric|min:0|max:16'
             ]);
 
-            $reservation = $guest->reservations()->create($validatedData);
+
+            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+            {
+                $reservation = $guest->reservations()->create($validatedData);
+                $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
+                Mail::to($guest->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($guest->email, $reservation, $user2->business_name));
+            }
+            else
+            {
+                $reservation = $guest->reservations()->create($validatedData);
+            }
 
             session()->forget('date');
             session()->forget('people');
