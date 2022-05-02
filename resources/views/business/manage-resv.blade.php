@@ -3,6 +3,7 @@
 
 @php
 use App\Models\Reservation;
+use App\Models\Table;
 @endphp
 
 <head>
