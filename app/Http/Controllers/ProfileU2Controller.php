@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Daily_Setting;
 use App\Http\Controllers\ProfileController;
 use App\Models\User2;
-use App\Controllers\Format;
+use App\Http\Controllers\Format;
 
 class ProfileU2Controller extends ProfileController
 {
