@@ -11,6 +11,7 @@ use App\Models\Rating;
 use App\Models\User3;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
+use App\Models\User2;
 
 class MyReservationsController extends Controller
 {
@@ -63,10 +64,11 @@ class MyReservationsController extends Controller
             //an iparxei to reservation ston current user
             if ($user3->reservations->find($validatedData['reservation_id'])) {
                 //email to inform the user that the reservation was cancelled
-
+                $reservation = Reservation::find($validatedData['reservation_id']);
+                $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
                 if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
                         Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
-                                                    ($user3->email, Reservation::find($validatedData['reservation_id']), 
+                                                    ($user3->email,  $reservation, 
                                                     $validatedData['reason'], $user2->business_name));
             
                 Cancellation::create($validatedData);
