@@ -28,17 +28,17 @@ class MailCreatedReservation extends Mailable
      *
      * @return void
      */
-    public function __construct($email, Reservation $reservation, $business_name)
+    public function __construct($email,array $reservation, $business_name)
     {
         // TODO: change this to https when ssl works
         $this-> business_name = $business_name;
-        $this-> date = $reservation->date;
-        $this-> time = $reservation->time;
-        $this-> details = $reservation->details;
-        $this-> pax = $reservation->pax;
-        $this-> reservation_id = $reservation->id;
-        $this-> username = User3::find($reservation->user3_id)->username;
-        $this-> table = Table::find($reservation->table_id)->table_no;
+        $this-> date = $reservation['date'];
+        $this-> time = $reservation['time'];
+        $this-> details = $reservation['details'];
+        $this-> pax = $reservation['pax'];
+        $this-> reservation_id = $reservation['id'];
+        $this-> username = User3::find($reservation['user3_id'])->username;
+        $this-> table = Table::find($reservation['table_id'])->table_no;
     }
 
     /**
