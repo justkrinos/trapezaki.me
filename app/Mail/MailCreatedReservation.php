@@ -56,6 +56,6 @@ class MailCreatedReservation extends Mailable
      */
     public function build()
     {
-        return $this->subject("Trapezaki Reservation booked")->view('emails.newresv');
+        return $this->subject("Trapezaki Reservation booked!")->view('emails.newresv');
     }
 }

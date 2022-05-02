@@ -106,7 +106,7 @@
     <!-- HIDDEN PREHEADER TEXT -->
     <div
         style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
-        Cancelled Reservation </div>
+        Succesfully Booked!</div>
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <!-- LOGO -->
         <tr>
@@ -139,7 +139,7 @@
                             style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                             <p style="margin: 0;">Dear {{ $username }},
                                 <br><br> Your reservation has been created succesfully!<br><br>
-                                Please, find bellow the details:<br>
+                                Please, find bellow the details:<br><br>
                                 Place: {{ $business_name }}<br>
                                 Reservation Code: {{ $reservation_id }}<br>
                                 Date: {{ $date }}<br>
@@ -156,6 +156,7 @@
                             <p style="margin: 0;">We look forward to help you book your reservations easier!</p>
                         </td>
                     </tr>
+                    <br>
                     <tr>
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
