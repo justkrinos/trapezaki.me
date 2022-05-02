@@ -118,17 +118,15 @@ class ReservationController extends Controller
                 'attended' => 'required'
             ]);
 
+            $reservation = Reservation::create($validatedData);
+
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
             {
-                $reservation = Reservation::create($validatedData);
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
                 Mail::to($user2->email)->queue(new \App\Mail\MailCreatedReservation
                     ($user2->email, $reservation, $user2->business_name));
             }
-            else
-            {
-                $reservation = Reservation::create($validatedData);
-            }
+
             //TODO na men kamni return reservation afu en dia pisw ta data
             //sto eggrafo egrapsa epistrefei success
             return $reservation;
@@ -195,7 +193,7 @@ class ReservationController extends Controller
             }
 
 
-            
+
             $reservation = Reservation::create($validatedData);
 
             //TODO: na men kamnei return to reservation
