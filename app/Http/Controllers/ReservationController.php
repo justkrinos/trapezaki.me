@@ -99,6 +99,7 @@ class ReservationController extends Controller
             session()->forget('date');
             session()->forget('people');
 
+            //TODO: to idio me pukatw, na epistrefei success
             return $reservation;
 
         } else {
@@ -128,7 +129,7 @@ class ReservationController extends Controller
             }
 
             //TODO na men kamni return reservation afu en dia pisw ta data
-            //sto eggrafo egrapsa epistrefei success
+            //sto eggrafo egrapsa epistrefei 'success'
             return $reservation;
         }
     }
@@ -237,8 +238,6 @@ class ReservationController extends Controller
 
             return $reservation;
         }
-        //get data from the request if not logged in
-        //return (request());
 
 
 

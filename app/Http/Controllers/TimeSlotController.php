@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Controllers\Time;
 use App\Models\Reservation;
+use App\Http\Controllers\Format;
 
 class TimeSlotController extends Controller
 {
@@ -45,7 +46,7 @@ class TimeSlotController extends Controller
 
 
         //get the day id gia na to valw stin database
-        $day_id = $this->getDay($validatedData['date']);
+        $day_id = Format::dayInt($validatedData['date']);
 
         //get the table id
         $table = $validatedData['table_id'];
@@ -132,27 +133,5 @@ class TimeSlotController extends Controller
         }
 
         return $timeSlotsStr;
-    }
-
-    private function getDay(string $date)
-    {
-        $day = Carbon::parse($date)->format('l');
-
-        switch ($day) {
-            case 'Monday':
-                return 1;
-            case 'Tuesday':
-                return 2;
-            case 'Wednesday':
-                return 3;
-            case 'Thursday':
-                return 4;
-            case 'Friday':
-                return 5;
-            case 'Saturday':
-                return 6;
-            case 'Sunday':
-                return 7;
-        }
     }
 }
