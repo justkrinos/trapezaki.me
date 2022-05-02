@@ -10,7 +10,7 @@ use App\Models\Reservation;
 use App\Models\User3;
 use App\Models\Table;
 
-class MailModifiedReservation extends Mailable
+class MailCreatedReservation extends Mailable
 {
     use Queueable, SerializesModels;
 
