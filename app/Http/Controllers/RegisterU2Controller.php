@@ -13,8 +13,6 @@ use App\Http\Controllers\RegisterController;
 class RegisterU2Controller extends RegisterController
 {
     public function show(){
-        if(Auth::check('user2'))
-            return redirect('/profile');
         return view('business.signup');
     }
 
@@ -77,7 +75,7 @@ class RegisterU2Controller extends RegisterController
                 'photo.*.image' => 'The files must be images',
                 'photo.*.mimes' => 'The files must be images',
                 'photo.*.max'   => 'The maximum file size is 2048',
-                'tags.*.regex' => 'Please only use aphabetic characters.'
+                'tags.*.regex' => 'Please only use alphabetic characters.'
 
             ]
         );

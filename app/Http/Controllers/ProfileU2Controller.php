@@ -74,7 +74,7 @@ class ProfileU2Controller extends ProfileController
 
             ],
             [
-                'tags.*.regex' => 'Please only use aphabetic characters.'
+                'tags.*.regex' => 'Please only use alphabetic characters.'
             ]);
 
 
