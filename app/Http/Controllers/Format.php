@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 //TODO: na ton valume sta eggrafa?
@@ -48,5 +49,27 @@ class Format
         //Stelnw pisw  to array p ekama
         //gia na to valw mesto request mou gia na ginei to validate
         return $tags;
+    }
+
+    public static function dayInt(string $date)
+    {
+        $day = Carbon::parse($date)->format('l');
+
+        switch ($day) {
+            case 'Monday':
+                return 1;
+            case 'Tuesday':
+                return 2;
+            case 'Wednesday':
+                return 3;
+            case 'Thursday':
+                return 4;
+            case 'Friday':
+                return 5;
+            case 'Saturday':
+                return 6;
+            case 'Sunday':
+                return 7;
+        }
     }
 }

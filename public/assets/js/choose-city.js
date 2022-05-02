@@ -33,14 +33,6 @@ $(".city-option").click(function () {
         method: "post",
         data: {
             'city': option
-        },
-        success: function (result) {
-            console.log("success")
-            console.log(result);
-        },
-        error: function (error) {
-            console.log("error")
-            console.log(error)
         }
     });
 })

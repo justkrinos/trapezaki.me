@@ -42,6 +42,7 @@ class PhotosController extends Controller
             $photo_path = $request['photo_path'];
 
             //Can't delete last photo
+            //TODO: en dulefki kala?
             if($user2->photos->count() == 1){ //because logos do not count in the relationship $user2->photos
                 return false;
             }

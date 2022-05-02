@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Format;
 
 class SearchController extends Controller
 {
@@ -166,7 +168,7 @@ class SearchController extends Controller
 
 
         //get the day id gia na to valw stin database
-        $day_id = $this->getDay($d);
+        $day_id = Format::dayInt($d);
 
         //get the table id
         $table = $t;
@@ -257,25 +259,4 @@ class SearchController extends Controller
         return 'success';
     }
 
-    private function getDay(string $date)
-    {
-        $day = Carbon::parse($date)->format('l');
-
-        switch ($day) {
-            case 'Monday':
-                return 1;
-            case 'Tuesday':
-                return 2;
-            case 'Wednesday':
-                return 3;
-            case 'Thursday':
-                return 4;
-            case 'Friday':
-                return 5;
-            case 'Saturday':
-                return 6;
-            case 'Sunday':
-                return 7;
-        }
-    }
 }
