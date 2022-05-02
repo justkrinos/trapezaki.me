@@ -33,7 +33,7 @@ class PendingRequestsController extends Controller
 
         if ($user2) {
             if ($action === 'accept') {
-                if($user2->floorplan == null)
+                if($user2->floorplan->json == null)
                     return 'no-floorplan';
                 //TODO: approve mono an en filled ulla ta data!
                 //sto manage customers na dixnei j ta pending j ta disabled j ta approved
@@ -50,10 +50,10 @@ class PendingRequestsController extends Controller
                 return 'success';
             }
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
-                {
-                    Mail::to($user2->email)->queue(new \App\Mail\MailPendingHandled
-                                                            ($user2->email, $action, $user2->representative));
-                }
+            {
+                Mail::to($user2->email)->queue(new \App\Mail\MailPendingHandled
+                                                        ($user2->email, $action, $user2->representative));
+            }
         }
         return 'error';
     }
