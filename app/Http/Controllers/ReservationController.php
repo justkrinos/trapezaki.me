@@ -129,8 +129,8 @@ class ReservationController extends Controller
             {
                 $reservation = Reservation::create($validatedData);
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
-                Mail::to($user->email)->queue(new \App\Mail\MailCreatedReservation
-                    ($user->email, $reservation, $user2->business_name));
+                Mail::to($user2->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($user2->email, $reservation, $user2->business_name));
             }
             else
             {
@@ -188,9 +188,20 @@ class ReservationController extends Controller
             }else{
                 $guest = User3::create($attributes);
             }
+            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+            {
+                $validatedData['user3_id'] = $guest->id;
+                $reservation = $guest->reservations()->create($validatedData);
+                Mail::to($guest->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($guest->email, $reservation, $user2->business_name));
+            }
+            else
+            {
+                $reservation = $guest->reservations()->create($validatedData);
+            }
 
 
-            $validatedData['user3_id'] = $guest->id;
+            
             $reservation = Reservation::create($validatedData);
 
             //TODO: na men kamnei return to reservation
@@ -218,7 +229,18 @@ class ReservationController extends Controller
             $user3_id = User3::where('username', $validatedData['user3_username'])->first()->id;
             $validatedData['user3_id'] = $user3_id;
             unset($validatedData['user3_username']);
-            $reservation = Reservation::create($validatedData);
+
+            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+            {
+                $reservation = Reservation::create($validatedData);
+                $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
+                Mail::to($user->email)->queue(new \App\Mail\MailCreatedReservation
+                    ($user->email, $reservation, $user2->business_name));
+            }
+            else
+            {
+                $reservation = Reservation::create($validatedData);
+            }
 
             return $reservation;
         }
