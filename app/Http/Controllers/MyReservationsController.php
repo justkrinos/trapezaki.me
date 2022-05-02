@@ -10,6 +10,7 @@ use App\Models\Cancellation;
 use App\Models\Rating;
 use App\Models\User3;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Mail;
 
 class MyReservationsController extends Controller
 {

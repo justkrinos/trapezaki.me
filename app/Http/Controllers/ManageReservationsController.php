@@ -8,6 +8,7 @@ use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User3;
+use Illuminate\Support\Facades\Mail;
 
 
 class ManageReservationsController extends Controller
@@ -45,7 +46,7 @@ class ManageReservationsController extends Controller
                         Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
                                                     ($user3->email, Reservation::find($validatedData['reservation_id']), 
                                                     $validatedData['reason']));
-                                                    
+
             Cancellation::create($validatedData);
             return back()->with('success', 'The reservation has been cancelled!');
         }
