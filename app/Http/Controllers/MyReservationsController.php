@@ -67,7 +67,7 @@ class MyReservationsController extends Controller
                 if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
                         Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
                                                     ($user3->email, Reservation::find($validatedData['reservation_id']), 
-                                                    $validatedData['reason']));
+                                                    $validatedData['reason'], $user2->$business_name));
             
                 Cancellation::create($validatedData);
                 return back()->with('success', 'The reservation has been cancelled!');

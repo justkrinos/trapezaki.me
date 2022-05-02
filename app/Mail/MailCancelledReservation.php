@@ -30,10 +30,10 @@ class MailCancelledReservation extends Mailable
      *
      * @return void
      */
-    public function __construct($email, Reservation $reservation, $reason)
+    public function __construct($email, Reservation $reservation, $reason, $business_name)
     {
         // TODO: change this to https when ssl works
-        $this-> business_name = $reservation->business_name;
+        $this-> business_name = $business_name;
         $this-> date = $reservation->date;
         $this-> time = $reservation->time;
         $this-> details = $reservation->details;
