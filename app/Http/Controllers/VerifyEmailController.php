@@ -11,6 +11,7 @@ class VerifyEmailController extends Controller
 {
     public function verifyUser2($email, $secret)
     {
+        //TODO: ta pramata sto url na ginun base64 encode
         $user = User2::where('email', $email)->first();
         if (!$user || strcmp($secret, $user->verification_code)) {
             return abort(404);

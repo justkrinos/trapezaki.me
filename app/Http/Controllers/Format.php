@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 
 //TODO: na ton valume sta eggrafa?
-class Format extends Controller
+class Format
 {
     public static function formatType(array $validatedData){
         //Kamni ta tis morfis coffee:food:drinks gia osa iparxun

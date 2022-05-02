@@ -15,15 +15,10 @@ class RegisterU3Controller extends RegisterController
     //private $guest;
 
     public function show(){
-        if(Auth::check('user3'))
-            return redirect('/make-a-reservation');
-
         return view('www.signup');
     }
 
     public function create(){
-
-
         //Ta validation rules iparxun sto documentation tis laravel
         //An den einai success to validation, en tha proxorisi, enna kami redirect stin idia page me ta errors
         //Ta errors ginunte catch pu to blade view
