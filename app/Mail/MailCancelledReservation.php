@@ -39,7 +39,7 @@ class MailCancelledReservation extends Mailable
         $this-> details = $reservation->details;
         $this-> pax = $reservation->pax;
         $this-> reservation_id = $reservation->id;
-        $this-> username = User::find($reservation->user3_id)->username;
+        $this-> username = User3::find($reservation->user3_id)->username;
         $this-> table = Table::find($reservation->table_id)->table_no;
         $this-> reason = $reason;
     }
