@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -244,7 +245,8 @@ class ReservationController extends Controller
         $reservation = Reservation::find($validatedData['id']);
 
         $currentTableOwnerId = $reservation->table->user2->id;
-        $currentUserId = Auth::guard('user2')->user()->id;
+        $user2 = Auth::guard('user2')->user();
+        $currentUserId = $user2->id;
 
         //dont continue if reservsation is not owned by auth user
         if($currentTableOwnerId != $currentUserId)
@@ -267,6 +269,10 @@ class ReservationController extends Controller
             return response()->json([],422);
         }
 
+        $user3 = User::find($reservation->user3_id);
+        if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+                        Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
+                                                    ($user3->email, $reservation, $user2->$business_name));
         //update the reservations details
         $reservation->update($validatedData);
 
