@@ -70,34 +70,40 @@ class ForgotPasswordController extends Controller
     public function modifyForgotU3($email, $secret)
     {
         $user = User3::where('email', $email)->first();
-        return $this->changePassword($user,$secret, request());
-    }
-
-    public function modifyForgotU2($email, $secret)
-    {
-        $user = User2::where('email', $email)->first();
-        return $this->changePassword($user,$secret, request());
-    }
-
-    //TODO: tuto prp na iparxei sto model or sto controller j oi sto email
-    private function changePassword($user,$secret, $request){
-            //check an den en null o user
+        //check an den en null o user
         //j an to verification code en to sosto
         if ($user && !strcmp($secret, $user->verification_code)) {
-            $request->validate([
+            $validatedData = request()->validate([
                 'password' => 'required|max:50|min:7',
                 'password_confirmation' => 'required|same:password', //only check, don't save
             ], [
-                'password' => 'required|max:50|min:7',
                 'password_confirmation.same' => 'Passwords do not match.'
             ]);
 
-            $user->password = $request->all()['password'];
+            $user->password = $validatedData['password'];
             $user->verification_code = substr(md5(rand()), 0, 25);
             $user->save();
             return redirect('/login')->with('success', 'Your password has been changed! Please log in to continue');
         } else return back();
     }
 
+    public function modifyForgotU2($email, $secret)
+    {
+        $user = User2::where('email', $email)->first();
+        return $this->changePassword($user,$secret, request());
+        if ($user && !strcmp($secret, $user->verification_code)) {
+            $validatedData = request()->validate([
+                'password' => 'required|max:50|min:7',
+                'password_confirmation' => 'required|same:password', //only check, don't save
+            ], [
+                'password_confirmation.same' => 'Passwords do not match.'
+            ]);
+
+            $user->password = $validatedData['password'];
+            $user->verification_code = substr(md5(rand()), 0, 25);
+            $user->save();
+            return redirect('/login')->with('success', 'Your password has been changed! Please log in to continue');
+        } else return back();
+    }
 
 }

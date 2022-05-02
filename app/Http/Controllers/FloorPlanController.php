@@ -35,6 +35,7 @@ class FloorPlanController extends Controller
 
     public function modify(User2 $user2)
     {
+        //TODO: en prp na checkari an iparxi resv?
         if(request()->has('save')){
         $validatedData = request()->validate([
             'floorplan' => 'required',
@@ -46,8 +47,8 @@ class FloorPlanController extends Controller
 
         ]);
 
-        
-        
+
+
         $user2->floorPlan->json = $validatedData['floorplan'];
         $user2->floorPlan->save();
 
@@ -62,7 +63,7 @@ class FloorPlanController extends Controller
                 $table
             );
         }
-        
+
         //TODO: table number prp nan unique gia kathe user
         //TODO: jina p en exun ID mesto json na tus valw ta id tous afou ta dimiourgiso
 
@@ -81,6 +82,9 @@ class FloorPlanController extends Controller
             return $table->id;
         }
 
+    }
+
+    public function availableTables(){
 
     }
 }

@@ -24,12 +24,15 @@ class IssuesU2Controller extends Controller
             'status' => 'required'
         ]);
 
-        Issue::create($attribute);
+        $issue = Issue::create($attribute);
+        if($issue)
+            return redirect('/report-problem')->with('success', "The issue was submitted succesfully!");
+        else
+            return redirect('/report-problem')->with('success', "Oops! Something went wrong");
 
-        return redirect('report-problem')->with('success', "The issue was submitted succesfully!");
     }
 
-    public function show(Issue $issue){
+    public function show(){
         $user2 = auth('user2')->user();
         $issues = $user2->issues;
 

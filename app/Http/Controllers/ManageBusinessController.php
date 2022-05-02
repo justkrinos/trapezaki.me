@@ -7,19 +7,17 @@ use App\Models\User2;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Format;
 
 // TODO: search all dd() and ddd() and remove them
 
 
 class ManageBusinessController extends Controller
 {
-    public function modify(Request $request, User2 $user2)
-    {
+    public function modify(Request $request, User2 $user2){
         if(request()->has("locationForm"))
         {
             $validatedData = request()->validate([
-                'id' => 'required',
-
                 'address' => 'required|min:2',
                 'postal' => 'required|numeric|max:999999|min:1',
                 'city' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
@@ -27,9 +25,6 @@ class ManageBusinessController extends Controller
                 'long' => 'required|numeric|max:36',
             ]);
 
-            $user2 = User2::find($validatedData['id']);
-
-            unset($validatedData['id']);
             $user2->update($validatedData);
 
             return redirect('/user/' . $user2->username)->with("success", "Your changes have been applied successfully!");
@@ -37,7 +32,7 @@ class ManageBusinessController extends Controller
         if(request()->has('businessInfo'))
         {
 
-            $request['tags'] = $this->tagsToArray(request()['tags']);
+            $request['tags'] = Format::tagsToArray(request()['tags']);
 
             //User3 edit profile
             //TODO na exei error an den epilekses kanena type
@@ -55,31 +50,22 @@ class ManageBusinessController extends Controller
 
             ],
             [
-                'tags.*.regex' => 'Please only use aphabetic characters.'
+                'tags.*.regex' => 'Please only use alphabetic characters.'
             ]);
-            //ddd($validatedData);
 
             $tags = $validatedData['tags'];
             unset($validatedData['tags']);
 
-            //Change the format of type (food,drinks,coffee) using the private function of this object
-            $validatedData = $this->formatType($validatedData);
+            //Change the format of type (food,drinks,coffee)
+            $validatedData = Format::formatType($validatedData);
 
+            $user2->update($validatedData);
+            $user2->retag($tags);
 
-            $id = $validatedData['id'];
-            $user = User2::where('id', $id)->first();
-
-            $username = $user->username;
-
-            $user->update($validatedData);
-            $user->retag($tags);
-
-
-            return redirect('/user/' . $username)->with("success", "Your changes have been applied successfully!");
+            return redirect('/user/' . $user2->username)->with("success", "Your changes have been applied successfully!");
         }
         else if(request()->has('reservationSettings'))
         {
-
             //TODO: -to reservation range na ginete validate se mod 30
             //      -na erkunte pisw errors (ena gia oulla alla perigrafiko)
             $validatedData = request()->validate([
@@ -125,25 +111,22 @@ class ManageBusinessController extends Controller
 
             }
 
-            return back()->with('success', 'The Reservation Management has been updated successfully');
+            return back()->with('success', 'Your changes have been applied successfully');
 
 
         }
         else if(request()->has('menuForm'))
         {
             $validatedData = request()->validate([
-                'id' => "required",
                 'menu' => "required|mimes:pdf|max:10000"
             ]);
 
 
-            $menuName = time() . strval($validatedData['id']) . uniqid() . '.' . request()->file('menu')->extension();
+            $menuName = time() . strval($user2->id) . uniqid() . '.' . request()->file('menu')->extension();
             request()->file('menu')->move(public_path('assets/menus/'), $menuName);
 
-            $user = User2::where("id", $validatedData['id'])->first();
-
-            $user->menu =$menuName;
-            $user->save();
+            $user2->menu =$menuName;
+            $user2->save();
 
             return back()->with("success", "The Menu has been uploaded successfully");
         }
@@ -151,34 +134,20 @@ class ManageBusinessController extends Controller
         else if(request()->has('action'))
         {
             $validatedData = request()->validate([
-                'username' => 'required',
                 'action'   => 'required|in:activate,disable'
             ]);
 
-            $username = $validatedData['username'];
             $action   = $validatedData['action'];
 
-            $user2 = User2::where('username',$username)->first();
-
             if($action === 'disable'){
-
-                if($user2){
-                    $user2->status = 2;
-                   /* $user2->deletePhotos();
-                    $user2->detag();
-                    $user2->delete();
-                    User2::truncate();*/
-                    $user2->save();
-                    return 'success';
-                }
+                $user2->status = 2;
+                $user2->save();
+                return 'success';
 
             }else if($action == 'activate'){
-
-                if($user2){
-                    $user2->status = 1;
-                    $user2->save();
-                    return 'success';
-                }
+                $user2->status = 1;
+                $user2->save();
+                return 'success';
             }
             return 'error';
         }
@@ -208,48 +177,6 @@ class ManageBusinessController extends Controller
         return view('admin.manage-customers',[
             'users2' => $users2
         ]);
-    }
-    
-    private function formatType(array $validatedData){
-        //Kamni ta tis morfis coffee:food:drinks gia osa iparxun
-        //etsi wste na borume na ta kamume extract later
-
-        $stringToMake = ""; //to string pu ena stilume pisw
-        $dataToChange = ['coffee','food','drinks']; //jina p ena checkarume
-
-
-
-        foreach ($dataToChange as $type) { //gia kathe ena p jina p ena checkarume
-            if (array_key_exists($type,$validatedData)){ //an iparxi
-                if (empty($stringToMake))
-                    $stringToMake .= $type; //men tu valis : an akoma en ofkero
-                else
-                    $stringToMake .= ':' . $type; //vartu : afu empike idi ena mesto array
-            }
-            //diagrafw ta data pu mesa gt thelw mono to (type => food:coffee klp)
-            unset($validatedData[$type]);
-        }
-
-        //vallw tu to string p ekama p en ulla mesa
-        $validatedData['type'] = $stringToMake;
-
-        //diw to pisw sto function pu to kalese
-        return $validatedData;
-    }
-
-    private function tagsToArray(string $tags){
-        //Asxolithu mono an dennen ofkero, alios aisto na fkalei error sto view
-        if (!empty($tags)) {
-            //En xwrismena se komma, ara kamnw ta se array
-            $tags = explode(',', $tags);
-
-            //To polli 10 tags na mpennun alliws na men mpennei tpt
-            if(count($tags) > 10)
-                $tags = [];
-        }
-        //Stelnw pisw  to array p ekama
-        //gia na to valw mesto request mou gia na ginei to validate
-        return $tags;
     }
 
 }
