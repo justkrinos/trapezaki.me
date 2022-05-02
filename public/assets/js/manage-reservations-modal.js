@@ -182,7 +182,7 @@ function applyAttendanceChanges(attendance,id){
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#3cc2b4",
+                backgroundColor: "#db0f0f",
             }).showToast();
         },
     })

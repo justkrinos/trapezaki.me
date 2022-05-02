@@ -13,6 +13,16 @@ approvedToast = Toastify({
     backgroundColor: "#3cc2b4",
 })
 
+errorToast = Toastify({
+    text: 'Oops! Something went wrong.',
+    duration: 5000,
+    close:true,
+    gravity:"top",
+    position: "right",
+    backgroundColor: "#db0f0f",
+})
+
+
 declinedToast = Toastify({
     text: 'The request has been rejected!',
     duration: 5000,

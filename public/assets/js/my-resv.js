@@ -42,7 +42,7 @@ $(document).ready(function () {
         {
             $("#modCancel").show();
         }
-        
+
         $("#myresvModal").modal("show");
     });
 
@@ -194,7 +194,7 @@ function pushRating(rating) {
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#3cc2b4",
+                backgroundColor: "#db0f0f",
             }).showToast();
         },
     });

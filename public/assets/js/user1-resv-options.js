@@ -85,6 +85,7 @@ $('#save').click(function () {
 
         success: function (result) {
             toast.options.text = "Your changes have been saved successfully!"
+            toast.options.backgroundColor = "#3cc2b4"
             toast.showToast()
             // console.log(result)
         },
@@ -94,6 +95,7 @@ $('#save').click(function () {
                 toast.showToast()
             } else {
                 toast.options.text = 'Oops! Something went wrong :('
+                toast.options.backgroundColor = "#db0f0f"
                 toast.showToast()
             }
             console.log(err)
@@ -177,12 +179,12 @@ function giveId(capacity, table_no, shape) {
         error: function (err) {
             Toastify({
                 //an exw error fkale toast
-                text: "Oops! Something went wrong :(",
+                text: "Oops! Something went wrong",
                 duration: 5000,
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#3cc2b4",
+                backgroundColor: "#db0f0f",
             }).showToast();
         },
     })
@@ -313,12 +315,12 @@ $(document).ready(function () {
         },
         error: function (err) {
             Toastify({ //an exw error fkale toast
-                text: 'Oops! Something went wrong :(',
+                text: 'Oops! Something went wrong.',
                 duration: 5000,
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#3cc2b4",
+                backgroundColor: "#db0f0f",
             }).showToast();
         }
     });

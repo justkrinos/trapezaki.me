@@ -16,16 +16,16 @@ function createSwal(shape){
             capacity = parseInt(document.getElementById("capacity").value);
             table_no = parseInt(document.getElementById("table_no").value);
             var numberExists = false
-    
+
             canvas.getObjects().forEach(obj => {
-                if(obj.number == table_no) 
+                if(obj.number == table_no)
                 {
                     numberExists = true
                 }
             })
-    
+
             var isOkay = true
-    
+
             //Check capacity in range of 2-16 and tabe no in range >0
             if (!(capacity <= 16 && capacity >= 2 && typeof capacity == "number")) {
                 //check an to trapezi en tulaxisto 1 j en arithmos
@@ -34,7 +34,7 @@ function createSwal(shape){
                     "You need to select a number between 2 and 16"
                 ); //shwo error gia to capacity
             }
-            
+
             if (!(table_no > 0 && typeof table_no == "number")){
                     isOkay = false
                     Swal.showValidationMessage(
@@ -47,10 +47,10 @@ function createSwal(shape){
                     "There is already a table with this number"
                 ); //show error gia to table
             }
-    
+
             if(isOkay)
                 return { 'capacity': capacity, 'table_no': table_no };
-    
+
         },
     }).then((result) => {
         //If they clicked ok
@@ -84,7 +84,7 @@ function saveAndGetId(capacity, table_no, shape) {
               o = addRect(0, 0, 60, 60, table_no, capacity);
             }else if(shape == "circle"){
               o = addCircle(0, 0, 60, table_no, capacity);
-            }            
+            }
             o.set("capacity", capacity);
             o.set("number", table_no);
             o.set("id", tableID);
@@ -95,12 +95,12 @@ function saveAndGetId(capacity, table_no, shape) {
         error: function (err) {
             Toastify({
                 //an exw error fkale toast
-                text: "Oops! Something went wrong :(",
+                text: "Oops! Something went wrong.",
                 duration: 5000,
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#3cc2b4",
+                backgroundColor: "#db0f0f",
             }).showToast();
         },
     });

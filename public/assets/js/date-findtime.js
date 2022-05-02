@@ -100,7 +100,7 @@ function setPeople()
          }
    }
 }
-    
+
 
 function getTimeSlots(table) {
     if (table == undefined) {
@@ -143,7 +143,7 @@ function getTimeSlots(table) {
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#ba0b0b",
+                backgroundColor: "#db0f0f",
             }).showToast();
         }
     });
