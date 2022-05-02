@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class ProfileU3Controller extends ProfileController
 {
     public function show() {
-        if (!Auth::check('user3'))
-            return redirect('/');
-        return view('www.profile');
+        $user2 = Auth::guard('user2')->user();
+        return view('www.profile',[
+            'user2' => $user2
+        ]);
     }
 
     public function modify()

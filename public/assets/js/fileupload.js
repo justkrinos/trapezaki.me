@@ -27,7 +27,7 @@ $("ul.images").on("click", "li span.del", function () {
                 position: "right",
                 backgroundColor: "linear-gradient(to right, #f6d365 0%, #fda085 100%)",
             }).showToast()
-            
+
             photo.fadeOut(300, function () {
                 photo.remove();
             });
@@ -66,7 +66,7 @@ function loadPhotos() {
 
     $.ajax({
         url: "/api/photo-paths",
-        type: "post",
+        type: "GET",
         data: {
             user_id: $(".user_id").attr("value"),
         },

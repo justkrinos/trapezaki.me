@@ -202,7 +202,7 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/report-problem', [IssuesU2Controller::class,'show']);
         Route::post('/report-problem', [IssuesU2Controller::class, 'store']);
 
-        Route::post('/api/photo-paths', [PhotosController::class, 'show']);
+        Route::get('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
 
         Route::post('/manage-reservations', [ManageReservationsController::class, 'modify']);
@@ -290,7 +290,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
         //Edit User2
         Route::get('/logout', [SessionsU1Controller::class, 'logout']);
 
-        Route::post('/api/photo-paths', [PhotosController::class, 'show']);
+        Route::get('/api/photo-paths', [PhotosController::class, 'show']);
         Route::post('/api/photo-modify', [PhotosController::class, 'modify']);
     });
 });

@@ -15,10 +15,7 @@ use Illuminate\Http\Request;
 class PhotosController extends Controller
 {
     public function show(){
-        $request = request()->validate([
-            'user_id' => 'required|numeric'
-        ]);
-
+        $request = request()->validate(['user_id' => 'required|numeric|min:0']);
         return User2::find($request['user_id'])->photos;
     }
 
@@ -51,7 +48,7 @@ class PhotosController extends Controller
             else{
                 $deleted = $user2->photos->where('photo_path', $photo_path)->first()->delete(); //delete record in db
                 File::delete('assets/images/uploads/' . $photo_path); //delete file
-                return true;
+                return 'success';
             }
 
         }
@@ -61,14 +58,15 @@ class PhotosController extends Controller
                 'photo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
             ]);
 
+            //TODO: tuta en ta valame sta eggrafa (sxediasmou parapanw j prodiagrafon ta megala diagrammata)
             User2_Photo::store_one(request()->file('photo'),$user2->id);
 
-            return ['ok'];
+            return ['success'];
         }
 
     }
 
-        //THIS IS FOR FUTURE USE
+    //THIS IS FOR FUTURE USE
     // public function store_resize(Request $request)
     // {
 

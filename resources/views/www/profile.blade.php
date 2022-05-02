@@ -65,7 +65,7 @@ use App\Models\User2;
                                                 <div class="form-group">
                                                     <label for="basicInput">Username</label>
                                                     <input type="text"
-                                                        value="{{ Auth::guard('user3')->user()->username }}"
+                                                        value="{{ $user3->username }}"
                                                         class="form-control" id="username" name="username" readonly>
                                                 </div>
 
@@ -74,7 +74,7 @@ use App\Models\User2;
                                                     <small class="text-muted"><i>(First and Last name)</i></small>
                                                     <input type="text" class="form-control" id="full_name"
                                                         name="full_name"
-                                                        value="{{ Auth::guard('user3')->user()->full_name }}">
+                                                        value="{{ $user3->full_name }}">
                                                     <div style="color:red">{{ $errors->first('full_name') }}</div>
 
                                                 </div>
@@ -82,21 +82,21 @@ use App\Models\User2;
                                                 <div class="form-group">
                                                     <label for="basicInput">Email</label>
                                                     <input type="text" class="form-control" id="email" name="email"
-                                                        value="{{ Auth::guard('user3')->user()->email }}" readonly>
+                                                        value="{{ $user3->email }}" readonly>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="basicInput">Phone number</label>
 
                                                     <input type="text" class="form-control" id="phone" name="phone"
-                                                        value="{{ Auth::guard('user3')->user()->phone }}">
+                                                        value="{{ $user3->phone }}">
                                                     <div style="color:red">{{ $errors->first('phone') }}</div>
                                                 </div>
 
                                                 {{-- Hidden id, to show each time which user to update --}}
                                                 <div class="form-group">
                                                     <input type="hidden" class="form-control" id="id" name="id"
-                                                        value="{{ Auth::guard('user3')->user()->id }}">
+                                                        value="{{ $user3->id }}">
                                                 </div>
 
                                                 <div class="col-sm-12 d-flex justify-content-end">
