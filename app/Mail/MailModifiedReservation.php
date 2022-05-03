@@ -37,10 +37,10 @@ class MailModifiedReservation extends Mailable
         $this-> details = $reservation->details;
         $this-> pax = $reservation->pax;
         $this-> reservation_id = $reservation->id;
-        $user3 = User3::find($reservation->user3_id);
+        $user3 = $reservation->user3;
         if($user3->guest == 1)
         {
-            $this-> username = $user3->ful_name;
+            $this-> username = $user3->full_name;
         }
         else
         {
