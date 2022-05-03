@@ -309,9 +309,6 @@ class ReservationController extends Controller
             Mail::to($user3->email)->queue(new \App\Mail\MailModifiedReservation
                                                     ($user3->email, $reservation, $user2->business_name));
         }
-        //update the reservations details
-        $reservation->update($validatedData);
-
         return 'success';
 
     }
