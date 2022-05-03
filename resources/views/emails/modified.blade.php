@@ -135,8 +135,7 @@
             <td bgcolor="#e1e1e1" align="center" style="padding: 0px 10px 0px 10px;">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
-                        <td bgcolor="#ffffff" align="left"
-                            style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
+                        <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                             <p style="margin: 0;">Dear {{ $username }},<br><br>
                                  We would like to inform you that your reservation No.#{{ $reservation_id }} for {{ $business_name }} has been modified.<br><br>
                                  Please find below the new details:<br><br>
@@ -144,7 +143,7 @@
                                  Reservation No: #{{ $reservation_id }}<br>
                                  Date: {{ $date }}<br>
                                  Time: {{ $time }}<br>
-                                 People: {{ $pax }}<br>
+                                 People: {{$pax}}
                                  Table Number: {{ $table }}<br>
                                  Details: {{ $details }}<br><br>
                             </p>
