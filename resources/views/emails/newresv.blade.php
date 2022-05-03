@@ -138,19 +138,19 @@
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                             <p style="margin: 0;">Dear {{ $username }},
-                                <br><br> Your reservation has been created succesfully!<br><br>
+                                <br><br> Your reservation for {{ $business_name }} has been created succesfully!<br><br>
                                 Please, find bellow the details:<br><br>
                                 Place: {{ $business_name }}<br>
                                 Date: {{ $date }}<br>
                                 Time: {{ $time }}<br>
                                 People: {{ $pax }}<br>
                                 Table Number: {{ $table }}<br>
-                                Reservation Number: {{ $reservation_id }}<br>
+                                Reservation No: #{{ $reservation_id }}<br>
                                 Details: {{ $details }}<br><br>
                             </p>
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td bgcolor="#ffffff" align="left"
                             style="padding: 0px 30px 0px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">

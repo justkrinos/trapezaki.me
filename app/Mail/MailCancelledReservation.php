@@ -32,7 +32,6 @@ class MailCancelledReservation extends Mailable
      */
     public function __construct($email, Reservation $reservation, $reason, $business_name)
     {
-        // TODO: change this to https when ssl works
         $this-> business_name = $business_name;
         $this-> date = $reservation->date;
         $this-> time = $reservation->time;
@@ -42,7 +41,7 @@ class MailCancelledReservation extends Mailable
         $user3 = User3::find($reservation->user3_id);
         if($user3->guest == 1)
         {
-            $this-> username = $user3->first_name;
+            $this-> username = $user3->full_name;
         }
         else
         {
