@@ -22,12 +22,12 @@
 
 
 body > div > footer {
-    position: sticky;
+    position: relative;
     top: 100vh;
 }
 
 #footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
 }

@@ -20,7 +20,7 @@
     <!-- Rater Stylesheet-->
     <link rel="stylesheet" href="/assets/vendors/rater-js/style.css">
 
-    {{--Toast dependency--}}
+    {{-- Toast dependency --}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 
     <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
@@ -31,18 +31,17 @@
 
 <body>
     <div id="app">
-    {{-- TODO: na mpoun numbers gia ta ratings pending
+        {{-- TODO: na mpoun numbers gia ta ratings pending
             j pano sto username j sta list items tu
             j sto sidebar dipla gia ulla ta pages
         //- gia osa thelun rate en grafi arithmo an en paginated
-        //- episis en fefki to cancel reservation ute fenete to cancelled details
-        --}}
+        //- episis en fefki to cancel reservation ute fenete to cancelled details --}}
 
-        @include("www.components.sidebar")
+        @include('www.components.sidebar')
 
         <div id="main" class='layout-navbar'>
 
-            @include("www.components.navbar")
+            @include('www.components.navbar')
 
             <div id="main-content">
 
@@ -59,143 +58,177 @@
                                 <section class="section">
                                     <div class="row" id="table-hover-row">
                                         <div class="col-12">
-                                                    <section class="section">
-                                                        <div class="row">
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                                                        <li class="nav-item" role="presentation">
-                                                                            <a class="nav-link active" id="upcoming-tab"
-                                                                                data-bs-toggle="tab" href="#upcoming"
-                                                                                role="tab" aria-controls="upcoming"
-                                                                                aria-selected="false">Upcoming</a>
-                                                                        </li>
-                                                                        <li class="nav-item" role="presentation">
-                                                                            <a class="nav-link" id="completed-tab"
-                                                                                data-bs-toggle="tab" href="#completed"
-                                                                                role="tab" aria-controls="completed"
-                                                                                aria-selected="false">Completed <span
-                                                                                    class="badge bg-info"
-                                                                                    id="notification"></span></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <div class="tab-content" id="myTabContent">
-                                                                        <div class="tab-pane fade show active"
-                                                                            id="upcoming" role="tabpanel"
-                                                                            aria-labelledby="home-tab">
+                                            <section class="section">
+                                                <div class="row">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link active" id="upcoming-tab"
+                                                                        data-bs-toggle="tab" href="#upcoming" role="tab"
+                                                                        aria-controls="upcoming"
+                                                                        aria-selected="false">Upcoming</a>
+                                                                </li>
+                                                                <li class="nav-item" role="presentation">
+                                                                    <a class="nav-link" id="completed-tab"
+                                                                        data-bs-toggle="tab" href="#completed"
+                                                                        role="tab" aria-controls="completed"
+                                                                        aria-selected="false">Completed <span
+                                                                            class="badge bg-info"
+                                                                            id="notification"></span></a>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="tab-content" id="myTabContent">
+                                                                <div class="tab-pane fade show active" id="upcoming"
+                                                                    role="tabpanel" aria-labelledby="home-tab">
 
-                                                                            <!-- table hover -->
-                                                                            <div class="table-responsive">
-                                                                                <table id="upcomingTable" class="table table-hover mb-0">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Place</th>
-                                                                                            <th>Time</th>
-                                                                                            <th>Date</th>
-                                                                                            <th>People</th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
+                                                                    <!-- table hover -->
+                                                                    <div class="table-responsive">
+                                                                        <table id="upcomingTable"
+                                                                            class="table table-hover mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Place</th>
+                                                                                    <th>Time</th>
+                                                                                    <th>Date</th>
+                                                                                    <th>People</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
 
-                                                                                    @foreach($upcomingReservations as $reservation)
-                                                                                        <tr>
-                                                                                            <td class="resvID" hidden>{{$reservation->id}}</td>
-                                                                                            <td class="resvPopup">{{ $reservation->user2->business_name }}</td>
-                                                                                            <td class="resvTime resvPopup">{{$reservation->time}}</td>
-                                                                                            <td class="resvPopup">{{$reservation->date}}</td>
-                                                                                            <td class="resvPeople2 resvPopup"><span class="resvPeople">{{$reservation->pax}}</span></td>
-                                                                                            <td class="resvDetails" hidden>{{$reservation->details}}</td>
-                                                                                            <td class="resvTable" hidden>{{$reservation->table_id}}</td>
-                                                                                        </tr>
-                                                                                    @endforeach
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
+                                                                                @foreach ($upcomingReservations as $reservation)
+                                                                                    <tr>
+                                                                                        <td class="resvID"
+                                                                                            hidden>
+                                                                                            {{ $reservation->id }}</td>
+                                                                                        <td class="resvPopup">
+                                                                                            {{ $reservation->user2->business_name }}
+                                                                                        </td>
+                                                                                        <td class="resvTime resvPopup">
+                                                                                            {{ $reservation->time }}
+                                                                                        </td>
+                                                                                        <td class="resvPopup">
+                                                                                            {{ $reservation->date }}
+                                                                                        </td>
+                                                                                        <td
+                                                                                            class="resvPeople2 resvPopup">
+                                                                                            <span
+                                                                                                class="resvPeople">{{ $reservation->pax }}</span>
+                                                                                        </td>
+                                                                                        <td class="resvDetails"
+                                                                                            hidden>
+                                                                                            {{ $reservation->details }}
+                                                                                        </td>
+                                                                                        <td class="resvTable"
+                                                                                            hidden>
+                                                                                            {{ $reservation->table_id }}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
 
-                                                                        </div>
+                                                                </div>
 
-                                                                        <div class="tab-pane fade" id="completed"
-                                                                            role="tabpanel"
-                                                                            aria-labelledby="completed-tab">
+                                                                <div class="tab-pane fade" id="completed"
+                                                                    role="tabpanel" aria-labelledby="completed-tab">
 
-                                                                            {{-- <!-- table hover --> --}}
-                                                                            <div class="table-responsive">
-                                                                                <table id="pastTable" class="table table-hover mb-0">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th>Place</th>
-                                                                                            <th>Date</th>
-                                                                                            <th>Status</th>
-                                                                                            {{-- TODO: to date en ginetai sort swsta ute se tuto ute sto allo tab --}}
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                    @foreach($pastReservations as $reservation)
-                                                                                        <tr>
-                                                                                            <td class="pastResv" hidden>true</td>
-                                                                                            <td class="resvID" hidden>{{$reservation->id}}</td>
-                                                                                            <td class="resvDetails" hidden>{{$reservation->details}}</td>
-                                                                                            <td class="resvTable" hidden>{{$reservation->table_id}}</td>
-                                                                                            <td class="resvTime" hidden>{{$reservation->time}}</td>
-                                                                                            <td class="resvPopup">{{$reservation->user2->business_name}}</td>
-                                                                                            <td class="resvPopup">{{$reservation->date}}</td>
-                                                                                            <td>
+                                                                    {{-- <!-- table hover --> --}}
+                                                                    <div class="table-responsive">
+                                                                        <table id="pastTable"
+                                                                            class="table table-hover mb-0">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Place</th>
+                                                                                    <th>Date</th>
+                                                                                    <th>Status</th>
+                                                                                    {{-- TODO: to date en ginetai sort swsta ute se tuto ute sto allo tab --}}
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach ($pastReservations as $reservation)
+                                                                                    <tr>
+                                                                                        <td class="pastResv"
+                                                                                            hidden>true</td>
+                                                                                        <td class="resvID"
+                                                                                            hidden>
+                                                                                            {{ $reservation->id }}</td>
+                                                                                        <td class="resvDetails"
+                                                                                            hidden>
+                                                                                            {{ $reservation->details }}
+                                                                                        </td>
+                                                                                        <td class="resvTable"
+                                                                                            hidden>
+                                                                                            {{ $reservation->table_id }}
+                                                                                        </td>
+                                                                                        <td class="resvTime"
+                                                                                            hidden>
+                                                                                            {{ $reservation->time }}
+                                                                                        </td>
+                                                                                        <td class="resvPopup">
+                                                                                            {{ $reservation->user2->business_name }}
+                                                                                        </td>
+                                                                                        <td class="resvPopup">
+                                                                                            {{ $reservation->date }}
+                                                                                        </td>
+                                                                                        <td>
                                                                                             {{-- An den en cancelled j an den eshi rating tote vartu button --}}
-                                                                                            @if(!$reservation->rating && !$reservation->cancelled && $reservation->attended)
-                                                                                                <div class="col-md-5 col-12" resv="{{$reservation->id}}">
+                                                                                            @if (!$reservation->rating && !$reservation->cancelled && $reservation->attended)
+                                                                                                <div class="col-md-5 col-12"
+                                                                                                    resv="{{ $reservation->id }}">
                                                                                                     <button id="test"
                                                                                                         class="btn text-nowrap btn-outline-info btn-sm btn-block rate">Rate
                                                                                                         Now!</button>
                                                                                                 </div>
-                                                                                            {{-- An en cancelled vartu oti en cancelled gt en prp na kami rate --}}
+                                                                                                {{-- An en cancelled vartu oti en cancelled gt en prp na kami rate --}}
                                                                                             @elseif($reservation->cancelled)
                                                                                                 Cancelled
                                                                                             @elseif(!$reservation->attended)
                                                                                                 Not Attended
-                                                                                            {{-- Aliws eshei rating ara ok --}}
+                                                                                                {{-- Aliws eshei rating ara ok --}}
                                                                                             @else
                                                                                                 Completed
                                                                                             @endif
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    @endforeach
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                @endforeach
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </section>
-
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </section>
+
                                         </div>
                                     </div>
-                                </section>
-                                {{-- <!-- Hoverable rows end --> --}}
-
-
                             </div>
                         </div>
+                        </section>
+                        {{-- <!-- Hoverable rows end --> --}}
+
+
                     </div>
                 </div>
-
-                @include('www.components.rating-modal')
-                @include('www.components.resv-modal')
-                @include('www.components.cancel-resv-modal')
-
             </div>
         </div>
 
-        @include('www.components.footer')
+        @include('www.components.rating-modal')
+        @include('www.components.resv-modal')
+        @include('www.components.cancel-resv-modal')
+
+    </div>
+
+    @include('www.components.footer')
 
 </body>
 
 </html>
 
- {{-- Datatable Js Include  --}}
+{{-- Datatable Js Include --}}
 <script src="/assets/vendors/simple-datatables/simple-datatables.js"></script>
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -209,7 +242,6 @@
 
 <script src="../assets/js/main-nosidepop.js"></script>
 
-{{--Toast dependencies--}}
+{{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 @include('components.toasts')
-

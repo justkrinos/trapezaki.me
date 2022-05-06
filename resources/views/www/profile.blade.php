@@ -21,8 +21,7 @@ use App\Models\User2;
 
     {{-- TODO: ta error messages nan kalitera j to $user na erkete p to controller
                aman kamis lathos en erkunte pisw ta old()
-               change password doesnt work
-     --}}
+               change password doesnt work --}}
 
     {{-- Toast dependency --}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
@@ -64,8 +63,7 @@ use App\Models\User2;
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="basicInput">Username</label>
-                                                    <input type="text"
-                                                        value="{{ $user3->username }}"
+                                                    <input type="text" value="{{ $user3->username }}"
                                                         class="form-control" id="username" name="username" readonly>
                                                 </div>
 
@@ -73,8 +71,7 @@ use App\Models\User2;
                                                     <label for="basicInput">Full Name</label>
                                                     <small class="text-muted"><i>(First and Last name)</i></small>
                                                     <input type="text" class="form-control" id="full_name"
-                                                        name="full_name"
-                                                        value="{{ $user3->full_name }}">
+                                                        name="full_name" value="{{ $user3->full_name }}">
                                                     <div style="color:red">{{ $errors->first('full_name') }}</div>
 
                                                 </div>
@@ -116,7 +113,8 @@ use App\Models\User2;
                                 <div class="card-body">
                                     <div class="row d-flex justify-content-center">
                                         <div class="col-md-4">
-                                            <form method="POST" action="/profile#changePasswordCard" class="col-md-12">
+                                            <form method="POST" action="/profile#changePasswordCard"
+                                                class="col-md-12">
                                                 @csrf
                                                 <div class="form-group">
                                                     <label for="basicInput">Old Password</label>
@@ -163,22 +161,19 @@ use App\Models\User2;
 
             </div>
         </div>
-
-
         @include('www.components.footer')
-
-
 </body>
 
 </html>
 
 <script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/jquery-3.6.0.min.js"></script>
+
 
 {{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 <script src="assets/js/extensions/toastify.js"></script>
-<script src="../assets/js/jquery-3.6.0.min.js"></script>
 
 <script src="../assets/js/main-nosidepop.js"></script>
 

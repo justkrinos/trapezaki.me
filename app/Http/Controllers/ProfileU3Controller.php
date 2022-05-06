@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class ProfileU3Controller extends ProfileController
 {
     public function show() {
-        $user2 = Auth::guard('user2')->user();
+        $user3 = Auth::guard('user3')->user();
         return view('www.profile',[
-            'user2' => $user2
+            'user3' => $user3
         ]);
     }
 
