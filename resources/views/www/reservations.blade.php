@@ -100,7 +100,8 @@
                                                                                     <tr>
                                                                                         <td class="resvID"
                                                                                             hidden>
-                                                                                            {{ $reservation->id }}</td>
+                                                                                            {{ $reservation->id }}
+                                                                                        </td>
                                                                                         <td class="resvPopup">
                                                                                             {{ $reservation->user2->business_name }}
                                                                                         </td>
@@ -153,7 +154,8 @@
                                                                                             hidden>true</td>
                                                                                         <td class="resvID"
                                                                                             hidden>
-                                                                                            {{ $reservation->id }}</td>
+                                                                                            {{ $reservation->id }}
+                                                                                        </td>
                                                                                         <td class="resvDetails"
                                                                                             hidden>
                                                                                             {{ $reservation->details }}
@@ -202,12 +204,11 @@
                                                     </div>
                                                 </div>
                                             </section>
-
                                         </div>
                                     </div>
+                                </section>
                             </div>
                         </div>
-                        </section>
                         {{-- <!-- Hoverable rows end --> --}}
 
 

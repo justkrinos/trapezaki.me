@@ -49,11 +49,11 @@
                             Contact
                         </h6>
                         <p>
-                            <i class="fas fa-envelope me-3"></i>
+                            <i class="fas fa-envelope"></i>
                             info@trapezaki.me
                         </p>
-                        <p><i class="fas fa-phone me-3"></i> + 357 22 222222</p>
-                        <p><i class="fas fa-print me-3"></i> + 357 99 999999</p>
+                        <p><i class="fas fa-phone"></i> + 357 22 222222</p>
+                        <p><i class="fas fa-print"></i> + 357 99 999999</p>
                     </div>
                     {{-- <!-- Grid column --> --}}
                 </div>

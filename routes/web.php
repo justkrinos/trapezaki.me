@@ -71,6 +71,7 @@ Route::bind('guest', function ($value) {
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
+    Route::get('/about-us', function(){return view('www.about');});
     Route::get('/make-a-reservation', [SearchController::class, 'show'])->name('first_page');
 
     //TODO: tuto edulefke
@@ -184,6 +185,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 Route::domain('business.' . env('APP_URL'))->group(function () {
 
     Route::middleware(['auth:user2'])->group(function () {
+        Route::get('/about-us', function(){return view('business.about');});
 
         Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
         Route::post('/api/apply-attendance', [ManageReservationsController::class, 'changeAttendance']);
