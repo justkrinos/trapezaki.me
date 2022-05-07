@@ -54,7 +54,7 @@ class ProfileU3Controller extends ProfileController
 
             if (!Auth::guard('user3')->attempt($oldPassword))
             {
-                return redirect('/profile')->with("error", "Wrong old password");
+                return redirect('/profile')->with("error", "The old password is incorrect");
             }
 
             $pass = request()->validate([

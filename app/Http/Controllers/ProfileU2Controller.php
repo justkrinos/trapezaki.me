@@ -107,7 +107,7 @@ class ProfileU2Controller extends ProfileController
 
             if (!Auth::guard('user2')->attempt($oldPassword))
             {
-                session()->flash('password','Wrong old password!');
+                session()->flash('password','The old password is incorrect');
                 return redirect('/profile')->with("error", "The old password is incorrect");
             }
 
@@ -115,7 +115,9 @@ class ProfileU2Controller extends ProfileController
                 'new-password' => 'required|max:50|min:7',
                 'new-password_confirmation' => 'required|same:new-password'
             ],[
-                'new-password_confirmation.same' => 'Passwords do not match.'
+                'new-password_confirmation.same' => 'Passwords do not match.',
+                'new-password.min' => 'The new password must be at least 7 characters.',
+
             ]);
 
             $old_pass = $_POST['password'];
@@ -124,8 +126,8 @@ class ProfileU2Controller extends ProfileController
             //checking if new pass==old pass
             if(strcmp($old_pass, $pass) == 0)
             {
-                session()->flash('error','New Password cannot be the same as the old one!');
-                return redirect('/profile')->with("error", "New Password cannot be the same as the old one!");
+                session()->flash('error','The new password cannot be the same as the old one');
+                return redirect('/profile')->with("error", "The new password cannot be the same as the old one");
             }
 
             $id = $_POST['id'];
@@ -138,7 +140,8 @@ class ProfileU2Controller extends ProfileController
             //User3::where('id', $id)->first()->update($pass);
             //session()->flash('success','Your password has been updated');
 
-            return redirect('/profile')->with("success", "Your password has been updated");
+            auth('user3')->logout();
+            return redirect('/login')->with("success", "Your password has been updated. Please log in to continue.");
         }
     }
 

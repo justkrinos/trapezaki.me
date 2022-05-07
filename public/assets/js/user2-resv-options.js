@@ -146,7 +146,7 @@ $(document).ready(function () {
         error: function (err) {
             Toastify({
                 //an exw error fkale toast
-                text: "Oops! Something went wrong :(",
+                text: "Oops! Something went wrong",
                 duration: 5000,
                 close: true,
                 gravity: "top",

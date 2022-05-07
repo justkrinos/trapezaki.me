@@ -138,7 +138,7 @@ function getTimeSlots(table) {
         //TODO toast error colors nan idio se ulla
         error: function (error) {
             Toastify({ //an exw error fkale toast
-                text: 'Oops! Something went wrong :(',
+                text: 'Oops! Something went wrong',
                 duration: 5000,
                 close: true,
                 gravity: "top",

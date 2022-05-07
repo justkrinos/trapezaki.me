@@ -94,7 +94,7 @@ $('#save').click(function () {
                 toast.options.text = 'You must have at least one table!'
                 toast.showToast()
             } else {
-                toast.options.text = 'Oops! Something went wrong :('
+                toast.options.text = 'Oops! Something went wrong'
                 toast.options.backgroundColor = "#db0f0f"
                 toast.showToast()
             }

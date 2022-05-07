@@ -128,7 +128,7 @@
 <script>
     if(sessionStorage.getItem('reservation') == 'success'){
         Toastify({
-            text: "Reservation was successfully booked, check your email for more information!",
+            text: "The reservation was successfully booked, check your email for more information!",
             duration: 5000,
             close: true,
             gravity: "top", // `top` or `bottom`

@@ -101,7 +101,8 @@ class SessionsU3Controller extends SessionsController
                 'password' => 'required'
             ],
             [
-                'email.unique' => 'An account already exists with this email. You can just log in. :)'
+                'email.unique' => 'An account already exists with this email. You can just log in. :)',
+                'full_name'    => 'The name field is required'
             ]
         );
 
