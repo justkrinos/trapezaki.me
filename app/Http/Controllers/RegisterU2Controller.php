@@ -20,8 +20,10 @@ class RegisterU2Controller extends RegisterController
     public function create()
     {
         $request = request();
-        //Split the tags (comma separated) into an array
-        //using this object's private function
+
+        request()->validate([
+            'tags' => 'required'
+        ]);
         $request['tags'] = Format::tagsToArray($request['tags']);
 
         //First only validate password

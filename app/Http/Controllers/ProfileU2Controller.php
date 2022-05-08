@@ -57,8 +57,11 @@ class ProfileU2Controller extends ProfileController
         if(request()->has('detailsForm'))
         {
 
-            if(request()['tags'] != null)
-                request()['tags'] = Format::tagsToArray(request()['tags']);
+            request()->validate([
+                'tags' => 'required'
+            ]);
+
+            request()['tags'] = Format::tagsToArray(request()['tags']);
 
             //User3 edit profile
             $validatedData = request()->validate([

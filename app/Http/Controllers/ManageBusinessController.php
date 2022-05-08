@@ -32,6 +32,10 @@ class ManageBusinessController extends Controller
         if(request()->has('businessInfo'))
         {
 
+            request()->validate([
+                'tags' => 'required'
+            ]);
+
             $request['tags'] = Format::tagsToArray(request()['tags']);
 
             //User3 edit profile
