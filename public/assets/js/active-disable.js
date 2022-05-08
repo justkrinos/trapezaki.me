@@ -1,5 +1,5 @@
 approvedToast = Toastify({
-    text: "User is activated!",
+    text: "The user is activated!",
     duration: 5000,
     close: true,
     gravity: "top",
@@ -8,13 +8,14 @@ approvedToast = Toastify({
 });
 
 declinedToast = Toastify({
-    text: "User is disabled!",
+    text: "The user is disabled!",
     duration: 5000,
     close: true,
     gravity: "top",
     position: "right",
     backgroundColor: "#db0f0f",
 });
+
 $(document).ready(function () {
     var parts = window.location.href.split("/");
     var lastSegment = parts.pop() || parts.pop(); // handle potential trailing slash
@@ -49,7 +50,7 @@ $(document).ready(function () {
                     //if success then continue
                     console.log(result);
                     //approvedToast.showToast();
-                    declinedToast.showToast();
+                    // declinedToast.showToast();
                 },
             });
         } else if ($(butt).hasClass("btn-success")) {
@@ -74,7 +75,7 @@ $(document).ready(function () {
 
                     console.log(result);
                     //approvedToast.showToast();
-                    approvedToast.showToast();
+                    // approvedToast.showToast();
                 },
             });
         }

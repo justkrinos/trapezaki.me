@@ -36,7 +36,7 @@ function bookTable() {
             url: "/add-reservation",
             data: data,
             success: function (success) {
-                sessionStorage.setItem("success", "The reservation has been added successfully!");
+                sessionStorage.setItem("success", "The reservation has been added successfully.");
                 window.location.href = "/manage-reservations/";
                 //window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
                 $("#user3_username").removeClass("is-invalid");
@@ -110,7 +110,7 @@ function bookTable() {
             url: "/add-reservation",
             data: data,
             success: function (success) {
-                sessionStorage.setItem("success", "The reservation has been added successfully!");
+                sessionStorage.setItem("success", "The reservation has been added successfully.");
                 window.location.href = "/manage-reservations/";
             },
             error: function (error) {

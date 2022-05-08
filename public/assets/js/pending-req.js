@@ -126,14 +126,14 @@ $(document).ready(function () {
                 success: function (result) {
                     //if success then continue
                     if (result === 'success'){
-                        console.log(result)
+                        // console.log(result)
                         index = user.index() //piase to row index
                         user.fadeOut(400, function () {
                             dataTable.rows().remove(index) //diegrapse to pu to datatable me vasi to index
                         }) //kame to fade out
                         declinedToast.showToast();
                     }else
-                        console.log(result)
+                        // console.log(result)
                 }
             });
         }

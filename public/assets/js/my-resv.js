@@ -182,7 +182,7 @@ function pushRating(rating) {
         success: function (data) {
             if (data == "success") {
                 //Replace button with text "Rating added"
-                raterow.html("Completed");
+                raterow.html("Rating added");
                 notification_update();
             }
         },

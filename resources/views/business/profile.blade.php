@@ -465,6 +465,7 @@ use App\Models\Daily_Setting;
 {{-- Include for flash messages --}}
 @include('components.toasts')
 
+{{-- TODO: na mpi se diko tu file --}}
 <script>
     //Ajax call for reservation settings(switch between days)
 

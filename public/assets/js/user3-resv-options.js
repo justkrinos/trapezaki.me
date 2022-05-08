@@ -191,7 +191,8 @@ function bookTable()
         error: function(error) {
             console.log(error);
             Toastify({ //an exw error fkale toast
-                text: 'Please, select a Timeslot and enter a Description!',
+                //TODO: na sasei analoga me ta eggrafa
+                text: 'Please, select a timeslot and enter a description!',
                 duration: 5000,
                 close: true,
                 gravity: "top",

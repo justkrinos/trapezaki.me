@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\User2;
 use App\Models\Table;
 
+ 
 class MyReservationsController extends Controller
 {
     public function show()
@@ -69,11 +70,11 @@ class MyReservationsController extends Controller
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
                 if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
                         Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
-                                                    ($user3->email,  $reservation, 
+                                                    ($user3->email,  $reservation,
                                                     $validatedData['reason'], $user2->business_name));
-            
+
                 Cancellation::create($validatedData);
-                return back()->with('success', 'The reservation has been cancelled!');
+                return back()->with('success', 'The reservation has been cancelled.');
             }
             //back to the page p itan prin
             return back()->with('success', 'Oops! Something went wrong');

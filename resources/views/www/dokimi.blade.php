@@ -1,3 +1,4 @@
+{{-- TODO delete this itan gia dokimi --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,14 +48,9 @@
 
                 <section class="section d-flex justify-content-center">
                     <div class="card col-md-12 col-12">
-                        @include('components.back-button')
-                        <div class="card-header text-center justify-content-center">
-                            <h3 class="title">Become an associate</h3>
-                            <p class="breadcrumb-item">Already an associate? <a href="/login">Login</a></p>
-                        </div>
                         <div class="card-body">
 
-                            <form method="POST" action="/signup" class="" enctype="multipart/form-data">
+                            <form method="POST" action="/dokimi" class="" enctype="multipart/form-data">
                                 {{-- To prevent csrf attacks --}}
                                 @csrf
 
@@ -65,7 +61,7 @@
                                         <input type="text"
                                             class="form-control
                                                 @error('username') is-invalid @enderror"
-                                            id="username" name="username" value="{{ old('username') }}" required>
+                                            id="username" name="username" value="{{ old('username') }}" >
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('username')
@@ -82,7 +78,7 @@
                                         <input type="email"
                                             class="form-control
                                                 @error('email') is-invalid @enderror"
-                                            id="email" name="email" value="{{ old('email') }}" required>
+                                            id="email" name="email" value="{{ old('email') }}" >
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('email')
@@ -102,7 +98,7 @@
                                         <input type="password"
                                             class="form-control form-control-l
                                                 @error('password') is-invalid @enderror"
-                                            placeholder="Password" name="password" id="password" required>
+                                            placeholder="Password" name="password" id="password" >
 
                                         @error('password')
                                             <div class="invalid-feedback">
@@ -118,7 +114,7 @@
                                             class="form-control form-control-l
                                                 @error('password_confirmation') is-invalid @enderror"
                                             placeholder="Password" name="password_confirmation"
-                                            id="password_confirmation" required>
+                                            id="password_confirmation" >
 
                                         @error('password_confirmation')
                                             <div class="invalid-feedback">
@@ -130,7 +126,7 @@
                                     </div>
                                 </div>
 
-                                <h5 class="mb-4">Business Information</h5>
+                                {{-- <h5 class="mb-4">Business Information</h5>
 
                                 <div class="d-flex row col-md-12 mb-4 justify-content-center">
                                     <div class="form-group col-md-5 col-12">
@@ -139,9 +135,8 @@
                                             class="form-control
                                             @error('business_name') is-invalid @enderror"
                                             placeholder="Business Name" id="business_name" name="business_name"
-                                            value="{{ old('business_name') }}" required>
+                                            value="{{ old('business_name') }}" >
 
-                                        {{-- This will be pulled everytime there's an error --}}
                                         @error('business_name')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
@@ -155,9 +150,8 @@
                                             class="form-control
                                             @error('company_name') is-invalid @enderror"
                                             placeholder="Company Name" id="company_name" name="company_name"
-                                            value="{{ old('company_name') }}" required>
+                                            value="{{ old('company_name') }}" >
 
-                                        {{-- This will be pulled everytime there's an error --}}
                                         @error('company_name')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
@@ -171,9 +165,8 @@
                                             class="form-control
                                             @error('representative') is-invalid @enderror"
                                             placeholder="Representative Name" id="representative" name="representative"
-                                            value="{{ old('representative') }}" required>
+                                            value="{{ old('representative') }}" >
 
-                                        {{-- This will be pulled everytime there's an error --}}
                                         @error('representative')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
@@ -188,9 +181,8 @@
                                             class="form-control
                                                     @error('phone') is-invalid @enderror"
                                             id="phone" name="phone" placeholder="Phone" value="{{ old('phone') }}"
-                                            required>
+                                            >
 
-                                        {{-- This will be pulled everytime there's an error --}}
                                         @error('phone')
                                             <div class="invalid-feedback">
                                                 <i class="bx bx-radio-circle"></i>
@@ -199,19 +191,10 @@
                                         @enderror
 
                                     </div>
-                                </div>
+                                </div> --}}
 
 
-                                <h5 class="h6 mb-2">Description</h5>
-                                {{-- TODO: Tuto itan gia na kamume pio advanced editor alla ennaxume themata me XSS --}}
-                                {{-- <div class="col-mb-6 col-12 mb-5">
-                                        <div id="snow">
-                                            <p>Description goes here. </p>
-                                            <p>This is some initial <strong>bold</strong> text</p>
-                                            <p><br></p>
-
-                                        </div>
-                                        </div> --}}
+                                {{-- <h5 class="h6 mb-2">Description</h5>
                                 <div class="form-group col-12 justify-content-center mb-5">
                                     <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}"
                                         rows=" 4"></textarea>
@@ -220,14 +203,12 @@
                                                 {{ $message }}
                                             @enderror
                                         </div>
-                                </div>
+                                </div> --}}
 
 
-                                <h5 class="mb-1">File Uploads</h5>
+                                {{-- <h5 class="mb-1">File Uploads</h5>
                                 <div class="card-body">
                                     <div class="col-md-5 col-12">
-                                    {{-- <form action="/api/photo-upload" method="POST" enctype="multipart/form-data">
-                                        @csrf --}}
                                         <label for="formFileMultiple" class="form-label">Add
                                             Photos</label>
                                         <input
@@ -242,16 +223,14 @@
                                                 {{ $message }}
                                             @enderror
                                         </div>
-                                        {{-- <input class="btn btn-primary" type="submit">
-                                    </form> --}}
                                     </div>
-                                </div>
+                                </div> --}}
 
-                                <div class="card-body">
+                                {{-- <div class="card-body">
                                     <div class="form-group col-md-5 col-12">
                                         <label for="logo" class="form-label">Add Logo</label>
                                         <input class="form-control @error('logo') is-invalid @enderror" type="file"
-                                            id="logo" name="logo" required>
+                                            id="logo" name="logo" >
                                         @error('logo')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -264,17 +243,17 @@
                                     <div class="form-group col-md-5 col-12">
                                         <label for="logo" class="form-label">Add Menu (.pdf)</label>
                                         <input class="form-control @error('menu') is-invalid @enderror" type="file"
-                                            id="menu" name="menu" required>
+                                            id="menu" name="menu" >
                                         @error('menu')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
+                                </div> --}}
 
 
-                                <h5 class="mb-4">Location</h5>
+                                {{-- <h5 class="mb-4">Location</h5>
                                 <div class="col-md-6 col-12 mb-1">
                                     <input type="text" id="location" class="form-control round">
                                 </div>
@@ -312,7 +291,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="text" id="address"
-                                                class="form-control @error('address') is-invalid @enderror" name="address"
+                                                class="form-control @error('city') is-invalid @enderror" name="address"
                                                 value="{{ old('postal') }}">
                                             @error('address')
                                                 <div class="invalid-feedback">
@@ -328,8 +307,8 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="text" id="zip"
-                                                class="form-control @error('postal') is-invalid @enderror" name="postal"
-                                                value="{{ old('postal') }}" required>
+                                                class="form-control @error('city') is-invalid @enderror" name="postal"
+                                                value="{{ old('postal') }}" >
 
                                             @error('postal')
                                                 <div class="invalid-feedback">
@@ -347,7 +326,7 @@
                                                 class="form-control
                                                                 @error('city') is-invalid @enderror"
                                                 placeholder="City" id="city" name="city" value="{{ old('city') }}"
-                                                required>
+                                                >
 
                                             @error('city')
                                                 <div class="invalid-feedback">
@@ -359,7 +338,7 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
 
 
                                 <h5 class="mb-4">Business Characteristics</h5>
@@ -395,7 +374,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6 col-12">
+                                    {{-- <div class="col-md-6 col-12">
                                         <div class="card-header">
                                             <h6 class="h6">Tags</h6>
                                         </div>
@@ -430,7 +409,7 @@
                                             <!-- Multiple choices end -->
 
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit" id="submit" class="btn btn-primary btn-lg me-3 mb-1">Sign

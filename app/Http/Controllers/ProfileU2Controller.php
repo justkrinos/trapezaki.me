@@ -12,6 +12,7 @@ class ProfileU2Controller extends ProfileController
 {
     public function modify()
     {
+        //TODO fix this
         if((request()->has('first'))||(request()->has('last')))
         {
             $day = request("day");
@@ -66,7 +67,7 @@ class ProfileU2Controller extends ProfileController
             //User3 edit profile
             $validatedData = request()->validate([
                 'description' => 'required|max:1000',
-                'representative' => 'required|max:50|min:2|regex:/^[\pL\s\-]+$/u',
+                'representative' => 'required|max:50|min:2',
 
                 'coffee' => 'in:on|required_without_all:food,drinks',
                 'food' => 'in:on|required_without_all:coffee,drinks',
@@ -77,7 +78,11 @@ class ProfileU2Controller extends ProfileController
 
             ],
             [
-                'tags.*.regex' => 'Please only use alphabetic characters.'
+                //TODO: nmz en fkalli error msg ama en epileksis kanena service
+                'food.required_without_all' => 'Please select at least one service that you provide.',
+                'coffee.required_without_all' => 'Please select at least one service that you provide.',
+                'drinks.required_without_all' => 'Please select at least one service that you provide.',
+                'tags.*.regex' => 'Please only use alphabetic characters for tags.'
             ]);
 
 

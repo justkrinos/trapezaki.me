@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\User2;
 use App\Models\User2_Photo;
 use App\Http\Controllers\Time;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Format;
@@ -41,7 +40,7 @@ class RegisterU2Controller extends RegisterController
         $validatedData = $request->validate(
             [
                 'username' => 'required|max:50|min:3|unique:user2s',
-                'email' => 'required|max:50|unique:user2s|email',
+                'email' => 'required|max:60|unique:user2s|email',
                 'password' => 'required|max:50|min:7',
 
                 'business_name' => 'required|max:50|min:1|unique:user2s',
@@ -53,10 +52,10 @@ class RegisterU2Controller extends RegisterController
                 'photo' => 'required',
                 'photo.*' => 'image|mimes:jpg,png,jpeg,svg|max:2048',
                 'logo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048',
-                'menu' => "required|mimes:pdf|max:10000",
+                'menu' => "required|mimes:pdf|max:50000",
 
                 'address' => 'required|min:2',
-                'postal' => 'required|numeric|max:999999|min:1',
+                'postal' => 'required|numeric|max:7999|min:1000',
                 'city' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
 
                 'coffee' => 'in:on|required_without_all:food,drinks',
@@ -74,12 +73,15 @@ class RegisterU2Controller extends RegisterController
                 'postal.numeric' => 'The postal code must be a number.',
                 'postal.required' => 'The postal code is required.',
                 'food.required_without_all' => 'Please select at least one service that you provide.',
-                'photo.required' => 'The photos field is required',
-                'photo.*.image' => 'The files must be images',
-                'photo.*.mimes' => 'The files must be images',
-                'photo.*.max'   => 'The maximum file size is 2048',
-                'tags.*.regex' => 'Please only use alphabetic characters.'
-
+                'coffee.required_without_all' => 'Please select at least one service that you provide.',
+                'drinks.required_without_all' => 'Please select at least one service that you provide.',
+                'photo.required' => 'The photos field is required.',
+                'photo.*.image' => 'The files must be images.',
+                'photo.*.mimes' => 'The files must be images.',
+                'photo.*.max'   => 'The maximum file size is 2048.',
+                'logo.mimes'    => 'The logo must be an image.',
+                'tags.*.regex' => 'Please only use alphabetic characters for tags.',
+                'city.in'   => 'The city must be one of the following: Paphos, Limassol, Nicosia, Larnaca, Famagusta.'
             ]
         );
 

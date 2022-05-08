@@ -71,6 +71,20 @@ Route::bind('guest', function ($value) {
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
+    //TODO delete this itan gia dokimi
+    Route::get('/dokimi', function(){
+        return view('www.dokimi');
+    });
+
+    //TODO delete this itan gia dokimi
+    Route::post('/dokimi', function(){
+       request()->validate([
+        'username' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
+    ]);
+
+       return 'ok';
+    });
+
     Route::get('/about-us', function(){return view('www.about');});
     Route::get('/make-a-reservation', [SearchController::class, 'show'])->name('first_page');
 

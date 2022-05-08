@@ -158,6 +158,15 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'business_name' => 'business name',
+        'company_name' => 'company name',
+        'password_confirmation' => 'password confirmation',
+        'full_name'         => 'name',
+        'new-password_confirmation' => 'password confirmation',
+        'new-password'  =>  'new password'
+
+
+    ],
 
 ];

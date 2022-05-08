@@ -14,23 +14,24 @@ use App\Http\Controllers\Format;
 
 class ManageBusinessController extends Controller
 {
-    public function modify(Request $request, User2 $user2){
-        if(request()->has("locationForm"))
-        {
+    public function modify(Request $request, User2 $user2)
+    {
+        if (request()->has("locationForm")) {
             $validatedData = request()->validate([
                 'address' => 'required|min:2',
-                'postal' => 'required|numeric|max:999999|min:1',
+                'postal' => 'required|numeric|max:7999|min:1000',
                 'city' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
                 'lat' => 'required|numeric|max:36',
                 'long' => 'required|numeric|max:36',
+            ],[
+                'city.in'   => 'The city must be one of the following: Paphos, Limassol, Nicosia, Larnaca, Famagusta.'
             ]);
 
             $user2->update($validatedData);
 
             return redirect('/user/' . $user2->username)->with("success", "Your changes have been applied successfully!");
         }
-        if(request()->has('businessInfo'))
-        {
+        if (request()->has('businessInfo')) {
 
             request()->validate([
                 'tags' => 'required'
@@ -40,22 +41,28 @@ class ManageBusinessController extends Controller
 
             //User3 edit profile
             //TODO na exei error an den epilekses kanena type
-            $validatedData = $request->validate([
-                'id' => 'required',
-                'description' => 'required|max:1000',
-                'representative' => 'required|max:50|min:2|regex:/^[\pL\s\-]+$/u',
+            $validatedData = $request->validate(
+                [
+                    'id' => 'required',
+                    'description' => 'required|max:1000',
+                    'representative' => 'required|max:50|min:2',
 
-                'coffee' => 'in:on|required_without_all:food,drinks',
-                'food' => 'in:on|required_without_all:coffee,drinks',
-                'drinks' => 'in:on|required_without_all:coffee,food',
+                    'coffee' => 'in:on|required_without_all:food,drinks',
+                    'food' => 'in:on|required_without_all:coffee,drinks',
+                    'drinks' => 'in:on|required_without_all:coffee,food',
 
-                'tags' => 'required',
-                'tags.*' => 'regex:/^[\pL\s\-]+$/u|max:15'
+                    'tags' => 'required',
+                    'tags.*' => 'regex:/^[\pL\s\-]+$/u|max:15'
 
-            ],
-            [
-                'tags.*.regex' => 'Please only use alphabetic characters.'
-            ]);
+                ],
+                [
+                    //TODO: nmz en fkalli error msg ama en epileksis kanena service
+                    'food.required_without_all' => 'Please select at least one service that you provide.',
+                    'coffee.required_without_all' => 'Please select at least one service that you provide.',
+                    'drinks.required_without_all' => 'Please select at least one service that you provide.',
+                    'tags.*.regex' => 'Please only use alphabetic characters for the tags.'
+                ]
+            );
 
             $tags = $validatedData['tags'];
             unset($validatedData['tags']);
@@ -67,9 +74,7 @@ class ManageBusinessController extends Controller
             $user2->retag($tags);
 
             return redirect('/user/' . $user2->username)->with("success", "Your changes have been applied successfully!");
-        }
-        else if(request()->has('reservationSettings'))
-        {
+        } else if (request()->has('reservationSettings')) {
             //TODO: -to reservation range na ginete validate se mod 30
             //      -na erkunte pisw errors (ena gia oulla alla perigrafiko)
             $validatedData = request()->validate([
@@ -100,7 +105,7 @@ class ManageBusinessController extends Controller
             $userSettings = $user2->dailySettings;
 
             //for each day
-            for($day=1; $day<8; $day++){
+            for ($day = 1; $day < 8; $day++) {
                 //get the setting
                 $daySetting = $userSettings->where('day_id', $day)->first();
 
@@ -112,15 +117,10 @@ class ManageBusinessController extends Controller
                 $daySetting->time_min = $min->get();
                 $daySetting->time_max = $max->get();
                 $daySetting->save();
-
             }
 
             return back()->with('success', 'Your changes have been applied successfully');
-
-
-        }
-        else if(request()->has('menuForm'))
-        {
+        } else if (request()->has('menuForm')) {
             $validatedData = request()->validate([
                 'menu' => "required|mimes:pdf|max:10000"
             ]);
@@ -129,26 +129,24 @@ class ManageBusinessController extends Controller
             $menuName = time() . strval($user2->id) . uniqid() . '.' . request()->file('menu')->extension();
             request()->file('menu')->move(public_path('assets/menus/'), $menuName);
 
-            $user2->menu =$menuName;
+            $user2->menu = $menuName;
             $user2->save();
 
-            return back()->with("success", "The Menu has been uploaded successfully");
+            return back()->with("success", "The menu has been uploaded successfully.");
         }
         //An thelw na allaksw to status
-        else if(request()->has('action'))
-        {
+        else if (request()->has('action')) {
             $validatedData = request()->validate([
                 'action'   => 'required|in:activate,disable'
             ]);
 
             $action   = $validatedData['action'];
 
-            if($action === 'disable'){
+            if ($action === 'disable') {
                 $user2->status = 2;
                 $user2->save();
                 return 'success';
-
-            }else if($action == 'activate'){
+            } else if ($action == 'activate') {
                 $user2->status = 1;
                 $user2->save();
                 return 'success';
@@ -157,30 +155,31 @@ class ManageBusinessController extends Controller
         }
     }
 
-    public function show(User2 $user2) {
+    public function show(User2 $user2)
+    {
         $newDailySettings = [];
-        foreach ($user2->dailySettings as $setting){
+        foreach ($user2->dailySettings as $setting) {
             $minTime = Time::createFromInt($setting->time_min)->getStr();
             $maxTime = Time::createFromInt($setting->time_max)->getStr();
-            array_push($newDailySettings,array('day' => $setting->day_id, 'min' => $minTime, 'max' => $maxTime));
+            array_push($newDailySettings, array('day' => $setting->day_id, 'min' => $minTime, 'max' => $maxTime));
         }
 
 
-        return view('admin.manage-customer',[
+        return view('admin.manage-customer', [
             'user2' => $user2,
             'tags'  => $user2->tags->pluck('name')->toArray(),
             'settings' => $newDailySettings
         ]);
     }
 
-    public function showAll(){
+    public function showAll()
+    {
         //show those that are not pending
-        $users2 = User2::where('status','1')->orWhere('status','2')->get();
+        $users2 = User2::where('status', '1')->orWhere('status', '2')->get();
 
         //show the view
-        return view('admin.manage-customers',[
+        return view('admin.manage-customers', [
             'users2' => $users2
         ]);
     }
-
 }

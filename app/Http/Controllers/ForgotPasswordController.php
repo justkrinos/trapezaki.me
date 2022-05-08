@@ -83,7 +83,7 @@ class ForgotPasswordController extends Controller
             $user->password = $validatedData['password'];
             $user->verification_code = substr(md5(rand()), 0, 25);
             $user->save();
-            return redirect('/login')->with('success', 'Your password has been changed! Please log in to continue');
+            return redirect('/login')->with('success', 'Your password has been changed! Please log in to continue.');
         } else return back();
     }
 

@@ -29,6 +29,7 @@ class SessionsU1Controller extends SessionsController
             return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);
         }
 
+
         //Continue to login
 
             //To prevent session fixation (stealing session IDs)

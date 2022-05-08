@@ -57,6 +57,8 @@ class PhotosController extends Controller
         else if(strcmp($request['action'],'modify')==0){
             $request = request()->validate([
                 'photo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
+            ],[
+                'photo.mimes'    => 'The photo must be an image.'
             ]);
 
             //TODO: tuta en ta valame sta eggrafa (sxediasmou parapanw j prodiagrafon ta megala diagrammata)

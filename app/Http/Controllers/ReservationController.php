@@ -53,6 +53,8 @@ class ReservationController extends Controller
                 'table_id'=> 'required|numeric|min:0',
                 'details'=> 'string|max:200',
                 'pax'=> 'required|numeric|min:0|max:16'
+            ],[
+                'pax.required' => 'The people field is required.'
             ]);
 
             //TODO: na gini uncomment tuto j na checkaristi an en ok
@@ -265,7 +267,7 @@ class ReservationController extends Controller
     public function editResvU2(){
         $validatedData = request()->validate([
             'date'=> 'required|date|after:yesterday',
-            'time'=> 'required', //TODO: validate this
+            'time'=> 'required|date_format:H:i',
             'table_id'=> 'numeric',
             'id' => 'required|exists:reservations,id',
             'details'=> 'required|string|max:200',

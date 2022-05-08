@@ -20,7 +20,7 @@ $("ul.images").on("click", "li span.del", function () {
         dataType: "json", // added data type
         success: function (data) {
             Toastify({
-                text: "Photo Deleted",
+                text: "Photo deleted.",
                 duration: 3000,
                 close: true,
                 gravity: "top",

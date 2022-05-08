@@ -30,7 +30,7 @@ class MenuController extends Controller
 
     public function modify(){
             $validatedData = request()->validate([
-                'menu' => "required|mimes:pdf|max:10000"
+                'menu' => "required|mimes:pdf|max:50000"
             ],[
                 'menu.required' => 'You must select a file.'
             ]);
@@ -43,10 +43,10 @@ class MenuController extends Controller
 
             File::delete('assets/menus/' . $oldMenu);
 
-            $user->menu =$menuName;
+            $user->menu = $menuName;
             $user->save();
 
-            return back()->with("success", "The Menu has been uploaded successfully");
+            return back()->with("success", "The menu has been uploaded successfully.");
     }
 
 
