@@ -123,7 +123,7 @@ class ProfileU2Controller extends ProfileController
                 'new-password' => 'required|max:50|min:7',
                 'new-password_confirmation' => 'required|same:new-password'
             ],[
-                'new-password_confirmation.same' => 'Passwords do not match.',
+                'new-password_confirmation.same' => 'The passwords do not match.',
                 'new-password.min' => 'The new password must be at least 7 characters.',
 
             ]);

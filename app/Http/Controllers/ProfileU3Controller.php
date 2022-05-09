@@ -19,7 +19,7 @@ class ProfileU3Controller extends ProfileController
     {
 
         //##TODO:
-        //-Se tuntes formes na sasun ta error messages
+        //-Se tuntes formes na sasun ta error messages (o tropos p fenunte sto view)
         //-Na ginunte kochina ta input boxes j na mpenni to error me to class tou pukatw
         //-Ta error messages kapies fores ennen sta sosta field na sasun
         //- nan descriptive to kateh form se tuto j sta alla has() se alla controllers
@@ -54,7 +54,7 @@ class ProfileU3Controller extends ProfileController
 
             if (!Auth::guard('user3')->attempt($oldPassword))
             {
-                return redirect('/profile')->with("error", "The old password is incorrect");
+                return redirect('/profile')->with("error", "The old password is incorrect.");
             }
 
             $pass = request()->validate([

@@ -77,7 +77,7 @@ class ForgotPasswordController extends Controller
                 'password' => 'required|max:50|min:7',
                 'password_confirmation' => 'required|same:password', //only check, don't save
             ], [
-                'password_confirmation.same' => 'Passwords do not match.'
+                'password_confirmation.same' => 'The passwords do not match.'
             ]);
 
             $user->password = $validatedData['password'];
@@ -96,7 +96,7 @@ class ForgotPasswordController extends Controller
                 'password' => 'required|max:50|min:7',
                 'password_confirmation' => 'required|same:password', //only check, don't save
             ], [
-                'password_confirmation.same' => 'Passwords do not match.'
+                'password_confirmation.same' => 'The passwords do not match.'
             ]);
 
             $user->password = $validatedData['password'];
