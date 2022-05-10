@@ -32,6 +32,10 @@
             <p>
               <a href="/about-us" class="text-reset">About Us</a>
             </p>
+            {{-- TODO: na mpoun ta pragmatika manuals gia ullus --}}
+            <p>
+              <a href="/tutorial" class="text-reset">Tutorial</a>
+            </p>
             <p>
               <a href="http://business.trapezaki.me/signup" class="text-reset">Become an Associate!</a>
             </p>

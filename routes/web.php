@@ -6,7 +6,7 @@
     AN DEN DIAGRAFONTE TA TABLES APO TIN VASI, TO SEARCH TA VRISKEI AN IKANOPOIEI TO PAX<=CAPACITY
     KAI ETSI EMFANIZEI BUSINESSES PU ISWS DEN EXOUN KATALLILO TABLE, EPD I VASI LEEI PWS IPARXEI
 */
-
+use App\Http\Controllers\ManualsController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\TagsApiController;
 use App\Http\Controllers\IssuesU1Controller;
@@ -71,20 +71,7 @@ Route::bind('guest', function ($value) {
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
-    //TODO delete this itan gia dokimi
-    Route::get('/dokimi', function(){
-        return view('www.dokimi');
-    });
-
-    //TODO delete this itan gia dokimi
-    Route::post('/dokimi', function(){
-       request()->validate([
-        'username' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
-    ]);
-
-       return 'ok';
-    });
-
+    Route::get('/tutorial', [ManualsController::class, 'showU3']);
     Route::get('/about-us', function(){return view('www.about');});
     Route::get('/make-a-reservation', [SearchController::class, 'show'])->name('first_page');
 
@@ -197,8 +184,10 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
 //Busiess domain right here
 Route::domain('business.' . env('APP_URL'))->group(function () {
+    Route::get('/tutorial',[ManualsController::class, 'showU2']);
 
     Route::middleware(['auth:user2'])->group(function () {
+
         Route::get('/about-us', function(){return view('business.about');});
 
         Route::get('/manage-reservations', [ManageReservationsController::class, 'show']);
@@ -280,7 +269,7 @@ Route::domain('admin.' . env('APP_URL'))->group(function () {
 
 
     Route::middleware(['auth:user1'])->group(function () {
-
+        Route::get('/tutorial', [ManualsController::class,'showU1']);
         Route::get('/manage-customers', [ManageBusinessController::class, 'showAll']);
 
         Route::get('/issues', [IssuesU1Controller::class, 'show']);

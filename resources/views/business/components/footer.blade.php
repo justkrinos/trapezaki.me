@@ -36,6 +36,9 @@
                             <a href="/about-us" class="text-reset">About Us</a>
                         </p>
                         <p>
+                            <a href="/tutorial" class="text-reset">Tutorial</a>
+                        </p>
+                        <p>
                             {{-- TODO: search ulla ta http na ginun https molis mpei to ssl cert --}}
                             <a href="http://www.trapezaki.me/make-a-reservation" class="text-reset">Make a
                                 Reservation</a>
