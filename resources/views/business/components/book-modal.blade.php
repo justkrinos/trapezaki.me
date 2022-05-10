@@ -35,9 +35,10 @@
                                         <div class="invalid-feedback">
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-md-2">
+
+                                    <div class="col-md-4 col-md-2">
                                         <label for="pax">People:</label>
-                                        <select name="pax" id="pax">
+                                        <select class="form-select" name="pax" id="pax">
                                             <option>2</option>
                                             <option>3</option>
                                             <option>4</option>
@@ -55,8 +56,8 @@
                                             <option>16</option>
                                         </select>
                                     </div>
-                                    
-                                   
+
+
                                     <div class="form-group col-12 justify-content-center mb-5">
                                         <label class="mb-2" for="description">Description</label>
                                         <textarea class="form-control" id="description" name="description"
@@ -102,7 +103,7 @@
                                     </div>
                                     <div class="col-md-6 col-md-2">
                                         <label for="pax">People:</label>
-                                        <select name="pax" id="guest_pax">
+                                        <select class="form-select" name="pax" id="guest_pax">
                                             <option>2</option>
                                             <option>3</option>
                                             <option>4</option>
@@ -120,7 +121,7 @@
                                             <option>16</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div class="form-group col-12 justify-content-center mb-5">
                                         <label class="mb-2" for="description">Description</label>
                                         <textarea class="form-control" id="description_guest" name="description"

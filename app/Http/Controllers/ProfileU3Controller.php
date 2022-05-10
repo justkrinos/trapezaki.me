@@ -58,6 +58,7 @@ class ProfileU3Controller extends ProfileController
             }
 
             $pass = request()->validate([
+                'password' => 'required',
                 'new-password' => 'required|max:50|min:7',
                 'new-password_confirmation' => 'required|same:new-password'
             ],[

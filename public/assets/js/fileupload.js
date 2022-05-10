@@ -14,7 +14,10 @@ $("ul.images").on("click", "li span.del", function () {
         type: "post",
         data: {
             user_id: $(".user_id").attr("value"),
-            action: "delete",
+            action: "                                                @if (session('people'))
+            <option value="{{ session('people') }}" selected>
+                {{ session('people') }}</option>
+        @else",
             photo_path: photo.attr("img"),
         },
         dataType: "json", // added data type

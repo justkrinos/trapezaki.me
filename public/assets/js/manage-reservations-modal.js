@@ -1,3 +1,7 @@
+//TODO: aman patisis add reservation pu ton u2
+//      prp na dia sto epomeno page tin imerominia p ishe
+
+
 $(document).ready(function () {
     $("#mydate").val($("#mydate").attr("value"));
 
@@ -107,7 +111,7 @@ function modalpop() {
         //If date ennen simera na men bori na kami modify or cancel
         //j na men bori na kami modify to attendance
         //same gia cancelled
-        if (now.valueOf() > date.valueOf() || cancelled) {
+        if (now.valueOf() > date.valueOf() || now.valueOf() < date.valueOf() || cancelled) {
             $("#modCancel").hide();
             $("#modResv").hide();
             $("#attendance").prop("disabled", true).attr("type","text").addClass("bg-white")

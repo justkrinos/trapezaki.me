@@ -31,7 +31,7 @@ function createSwal(shape){
                 //check an to trapezi en tulaxisto 1 j en arithmos
                 isOkay = false
                 Swal.showValidationMessage(
-                    "You need to select a number between 2 and 16"
+                    "You need to select a capacity between 2 and 16"
                 ); //shwo error gia to capacity
             }
 
