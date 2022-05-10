@@ -14,7 +14,8 @@ $("ul.images").on("click", "li span.del", function () {
         type: "post",
         data: {
             user_id: $(".user_id").attr("value"),
-            action: "delete",
+            action: "delete"
+        },
         dataType: "json", // added data type
         success: function (data) {
             Toastify({
@@ -40,7 +41,7 @@ $("ul.images").on("click", "li span.del", function () {
                 position: "right",
                 backgroundColor: "linear-gradient(to right, #f5210a 0%, #c40000 100%)",
             }).showToast()
-        },
+        }
     });
 });
 
