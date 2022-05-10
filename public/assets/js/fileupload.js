@@ -14,12 +14,7 @@ $("ul.images").on("click", "li span.del", function () {
         type: "post",
         data: {
             user_id: $(".user_id").attr("value"),
-            action: "                                                @if (session('people'))
-            <option value="{{ session('people') }}" selected>
-                {{ session('people') }}</option>
-        @else",
-            photo_path: photo.attr("img"),
-        },
+            action: "delete",
         dataType: "json", // added data type
         success: function (data) {
             Toastify({
