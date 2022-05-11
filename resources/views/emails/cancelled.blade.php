@@ -147,7 +147,7 @@
                                 People: {{ $pax }}<br>
                                 Table Number: {{ $table }}<br>
                                 Details: {{ $details }}<br>
-                                Cancellation Reson: {{ $reason }}<br>
+                                Cancellation Reason: {{ $reason }}<br>
 
 
                            </p>
