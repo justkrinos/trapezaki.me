@@ -10,7 +10,7 @@ $city = request("city");
             <div class="card-header bg-primary">
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Find restaurants, bar, cafe..."
+                    <input type="text" class="form-control" placeholder="Find restaurants, bars, cafes..."
                         name="search" aria-describedby="button-addon2" value="{{ request("search") }}">
                     <button class="btn btn-outline-white bg-info" type="submit" name="btn-search"
                         id="button-search">Search</button>
