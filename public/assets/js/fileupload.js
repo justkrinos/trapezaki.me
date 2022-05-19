@@ -8,16 +8,20 @@ $("ul.images").on("click", "li span.del", function () {
             "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
         },
     });
-
+    //TODO: MESA STO deleteData prepei kapws na mpainei kai to path.
+    deleteData = {
+        user_id: $(".user_id").attr("value"),
+        action: "delete",
+        photo_path: photo.photo_path
+    }
+    console.log(deleteData);
     $.ajax({
         url: "/api/photo-modify",
         type: "post",
-        data: {
-            user_id: $(".user_id").attr("value"),
-            action: "delete"
-        },
+        data: deleteData,
         dataType: "json", // added data type
         success: function (data) {
+            //console.log(data)
             Toastify({
                 text: "Photo deleted.",
                 duration: 3000,
@@ -32,6 +36,7 @@ $("ul.images").on("click", "li span.del", function () {
             });
         },
         error: function (data) {
+            console.log(data)
             console.log(data.responseText);
             Toastify({
                 text: "You can't delete the last photo!",
