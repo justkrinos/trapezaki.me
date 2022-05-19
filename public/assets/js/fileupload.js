@@ -12,7 +12,7 @@ $("ul.images").on("click", "li span.del", function () {
     deleteData = {
         user_id: $(".user_id").attr("value"),
         action: "delete",
-        photo_path: photo.photo_path
+        photo_path: photo.attr("img")
     }
     console.log(deleteData);
     $.ajax({
@@ -36,7 +36,7 @@ $("ul.images").on("click", "li span.del", function () {
             });
         },
         error: function (data) {
-            console.log(data)
+            //console.log(data)
             console.log(data.responseText);
             Toastify({
                 text: "You can't delete the last photo!",

@@ -42,14 +42,14 @@ class PhotosController extends Controller
             $photo_path = $request['photo_path'];
 
             //Can't delete last photo
-            //TODO: en dulefki kala?
+            //TODO: epiasamen to path, tr eshi thema otan kalei to delete()
             if($user2->photos->count() == 1){ //because logos do not count in the relationship $user2->photos
                 return false;
             }
-            else{
+            else{                                                                   //touto to delete()
                 $deleted = $user2->photos->where('photo_path', $photo_path)->first()->delete(); //delete record in db
                 File::delete('assets/images/uploads/' . $photo_path); //delete file
-                return 'success';
+                return ['success'];
             }
 
         }
