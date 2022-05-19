@@ -103,15 +103,14 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Toast dependencies --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
-<script src="/assets/js/extensions/toastify.js"></script>
 
 @include('components.toasts')
+
+<script src="/assets/js/reservation-date.js"></script>
 
 <script src="/assets/js/user3-fabric-resv.js"></script>
 <script src="/assets/js/user3-resv-options.js"></script>
 
-<script src="/assets/js/date-no-prev.js"></script>
-<script src="/assets/js/reservation-date.js"></script>
 
 <script src="/assets/js/main-noside.js"></script>
 

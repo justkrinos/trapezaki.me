@@ -97,6 +97,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::get('/user/{user2}', [SearchController::class,'showProfile']);
 
     Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
+    Route::get('/api/{user2}/availability', [TimeSlotController::class, 'getTableAvailability']);
 
     Route::get('/user/{user2}/menu', [MenuController::class, 'show']);
 

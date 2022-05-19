@@ -134,4 +134,11 @@ class TimeSlotController extends Controller
 
         return $timeSlotsStr;
     }
+
+    //TODO: na mpi sta eggrafa tuto
+    public function getTableAvailability(User2 $user2){
+        $data = request()->validate([ 'date' => 'required|date']);
+        $today = $data['date'];
+        return SearchController::getAvailableTables($user2,$today);
+    }
 }

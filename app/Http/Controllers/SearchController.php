@@ -148,9 +148,21 @@ class SearchController extends Controller
         return $usersAvailability;
     }
 
-    private function getTableAvailablity(User2 $user2, int $t, string $d)
-    {
+    //TODO Na mpei kapou sta eggrafa
+    static public function getAvailableTables(User2 $user2, $date){
+        $tablesAvailability = collect();
+        $searchController = new SearchController();
+        foreach ($user2->tables as $table) {
+            if (!$searchController->getTableAvailablity($user2, $table->id, $date)) {
+                $tablesAvailability->push($table->id);
+            }
+        }
 
+        return $tablesAvailability;
+    }
+
+    public function getTableAvailablity(User2 $user2, int $t, string $d)
+    {
         //parse the given date
         $date = Carbon::parse($d);
 
@@ -242,21 +254,21 @@ class SearchController extends Controller
             return false;
     }
 
-    public function changeCity()
-    {
-        $validatedData = request()->validate([
-            'city' => "required|in:Limassol,Larnaca,Paphos,Famagusta,Nicosia"
-        ]);
+    // public function changeCity()
+    // {
+    //     $validatedData = request()->validate([
+    //         'city' => "required|in:Limassol,Larnaca,Paphos,Famagusta,Nicosia"
+    //     ]);
 
-        $user3 = Auth::guard('user3')->user();
+    //     $user3 = Auth::guard('user3')->user();
 
-        if ($user3) {
-            $user3->city = $validatedData['city'];
-            $user3->save();
-        } else {
-            session(['city' => $validatedData['city']]);
-        }
+    //     if ($user3) {
+    //         $user3->city = $validatedData['city'];
+    //         $user3->save();
+    //     } else {
+    //         session(['city' => $validatedData['city']]);
+    //     }
 
-        return 'success';
-    }
+    //     return 'success';
+    // }
 }

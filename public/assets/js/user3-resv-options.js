@@ -28,50 +28,8 @@ function loadFloorPlan(floorplan) {
     })
 
     canvas.renderAll();
+    updateTableAvailability()
     CustomerMode()
-
-    //TODO
-    //TI PREPEI NA KAMUME
-    //- sto book molis valis imerominia tha kamni
-    //      kochina ta trapezia p en full j kanonika ta alla
-    //      ta kochina trapezia en prp nan clickable
-    //      or aman ginun klick na fkallei table is full for this date
-
-    // -an eperase i mera or wra na men fkallei to analogo time slot
-
-    //- pu katw p tin imerominia na eshi j arithmo atomwn
-    //      j to query na ginete mazi me tin imerominia
-    //      nan dropdown 2 mexri 16
-
-    //- mesto modal an en guest na dinxi ta stoixeia tu
-    //    an den en guest na men ta dixnei
-    //- na dixnei episis to description gia tin kratisi
-
-    //- molis tsillas to trapezi enna kamni ajax j na girefkei wres
-    //      ena elexei - ta daily settings to time min j max
-    //                 - tes kratisi p iparxun idi sto date j time
-    //                 - to duration tis kratisis
-    //      me vasi tuta enna ipologizi ta time slots
-    //      dld ta koumpia
-
-    //- molis gini to reservation stelnei email ta details tu
-
-    //- molis patite to book tha:
-    //-  kammei redirect se ena page pu na eshi reservation number
-    //      j na lalei success j check your inbox
-
-
-    //TODO
-    //na eshi kapia parameters kapio trapezi
-    //analoga an eshi kratisi na men bori na taraksi nan locked
-    //na checkari o server prin ta vali mesa an e taraksan
-    //kathe trapezi p ginete generate prp na eshi id pu to database
-
-    //na kamw export to trapezi
-    //na thori me kapio tropo tin kratisi tu se svg?
-
-    // console.log('import done')
-
 
 }
 

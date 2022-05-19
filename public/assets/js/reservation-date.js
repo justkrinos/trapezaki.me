@@ -38,20 +38,55 @@ $(function () {
 
 
 $('#resv-date').on('change', updateTableAvailability)
+
 function updateTableAvailability(){
+    //send to api the date to find tables with no availability and return them as an array here
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+        }
+    });
 
-    //TODO send to api the date to find tables with no availability and return them as an array here
-    canvas.getObjects("table").filter(obj => obj.type === 'table').forEach(obj => {
-        //TODO gia kahe table checkarw an to id (obj.id) tu en idio me kapia pu to array p epiasa
-        //     tote na kamw kochino to border tou
+    $.ajax({
+        type: "GET",
+        url: "/api/" + username + "/availability",
+        data: {
+            'date' : $('.date-slide').val()
+        },
+        success: function (result) {
+            renderUnavailableTables(result);
 
-        //Me tuta ginete kochino to border j to selection
-        // obj.borderColor = '#cf1d1d'
-        // obj._objects[0].set("stroke", '#cf1d1d')
+        },
+        error: function (error) {
+            Toastify({ //an exw error fkale toast
+                text: 'Oops! Something went wrong',
+                duration: 5000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#db0f0f",
+            }).showToast();
+        }
+    });
 
-        //To set custom or non-custom parameters
-        // obj.set('krinos',100)
-        // obj.get('krinos')
+}
+
+
+function renderUnavailableTables(availability){
+    //check for each table if unavailable
+    canvas.getObjects().filter(obj => obj.visualType === "table").forEach(obj => {
+        //reset its colors
+        obj.borderColor = "#38A62E"
+        obj._objects[0].set("stroke","#151a30")
+
+        availability.forEach( table_id => {
+            if(obj.id == table_id){
+                //if unavailable then set red borders
+                obj.borderColor = '#cf1d1d'
+                obj._objects[0].set("stroke", '#cf1d1d')
+            }
+        })
+
       })
-    canvas.renderAll() //me tuto ginunte apply oi allages
+    canvas.renderAll();
 }

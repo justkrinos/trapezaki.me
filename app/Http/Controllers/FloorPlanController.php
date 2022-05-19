@@ -8,6 +8,7 @@ use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Http\Controllers\SearchController;
 
 
 class FloorPlanController extends Controller
@@ -115,7 +116,4 @@ class FloorPlanController extends Controller
         }
     }
 
-    public function availableTables()
-    {
-    }
 }
