@@ -19,17 +19,21 @@ class FloorPlanController extends Controller
         ]);
     }
 
+
     public function getFloorPlanJson(User2 $user2)
     {
         //get todays date
         $today = Carbon::now('Europe/Athens')->format('Y-m-d');
 
         //make the query to get tables that have reservations today or later
+        //also check if not cancelled
         $tablesWithReservations =
             Table::where('user2_id', $user2->id)
                 ->leftJoin('reservations', 'reservations.table_id', '=', 'tables.id')
-                ->select('reservations.date', 'tables.id', 'reservations.table_id')
+                ->leftJoin('cancellations', 'cancellations.reservation_id', '=', 'reservations.id')
+                ->select('reservations.date', 'tables.id', 'reservations.table_id', 'cancellations.reason')
                 ->whereDate('reservations.date', '>=', $today)
+                ->whereNull('cancellations.reason')
                 ->select('table_id')
                 ->distinct()
                 ->get();

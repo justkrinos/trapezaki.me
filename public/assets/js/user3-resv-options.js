@@ -133,8 +133,8 @@ $(document).ready(function () {
 
         success: function (result) {
             if (result) { //an den en null to floor plan
-                floorplan = result
-                loadFloorPlan(result)//kame run to import function
+                floorplan = JSON.parse(result["floorplan"])
+                loadFloorPlan(floorplan)//kame run to import function
             }
         },
         error: function (err) {

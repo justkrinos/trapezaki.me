@@ -7,20 +7,6 @@ use App\Models\Table;
 
 {{-- TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
 TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
-
-Name: {{ session()->get('full_name')}}
-Phone: {{ session()->get('phone')}}
-Email: {{ session()->get('email')}}
-
-<form method="POST" action="/seven-seas/book">
-@csrf
-<button type="submit">Submit Booking</button>
-</form>
-
-<br>
-<br>
-TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso sto make a reservation --}}
-
 {{-- TODO: na iparxei to navbar j to sidebar swsta --}}
 
 <head>
@@ -71,7 +57,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                             <input type="date"
                                                 class="form-control no-prev date-slide" @if(session('date')) value="{{session('date')}}" @endif
                                                 name="txtDate" style="min-width: 66px;" id="resv-date">
-                                            
+
                                             <button class='next-day btn btn-outline-secondary btn-google'><i
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>
                                         </div>
