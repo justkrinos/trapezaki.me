@@ -41,8 +41,6 @@ class PhotosController extends Controller
 
             $photo_path = $request['photo_path'];
 
-            //Can't delete last photo
-            //TODO: epiasamen to path, tr eshi thema otan kalei to delete()
             if($user2->photos->count() == 1){ //because logos do not count in the relationship $user2->photos
                 return false;
             }
@@ -61,7 +59,6 @@ class PhotosController extends Controller
                 'photo.mimes'    => 'The photo must be an image.'
             ]);
 
-            //TODO: tuta en ta valame sta eggrafa (sxediasmou parapanw j prodiagrafon ta megala diagrammata)
             User2_Photo::store_one(request()->file('photo'),$user2->id);
 
             return ['success'];
