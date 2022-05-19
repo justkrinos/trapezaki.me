@@ -51,18 +51,7 @@ function getTime(element) {
     a.setAttribute("sel", "selected");
 }
 
-//FOR LATER USE ON SUBMITTING
 
-// //Submit button functionality
-// document.querySelectorAll('.submit')[0].addEventListener('click', function () {
-//     const obj = canvas.getActiveObject()
-//     $('#modal').modal('show')
-//     let modalText = 'You have not selected anything'
-//     if (obj) {
-//       modalText = 'You have selected table ' + obj.number + ', time: ' + formatTime(slider.noUiSlider.get())
-//     }
-//     document.querySelectorAll('#modal-table-id')[0].innerHTML = modalText
-//   })
 $('#resvModal').on('hidden.bs.modal', function () {
     $("#pax").empty()
   })

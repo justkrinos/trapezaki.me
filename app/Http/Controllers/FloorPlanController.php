@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User2;
+use App\Models\Reservation;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+
 
 class FloorPlanController extends Controller
 {
@@ -18,6 +21,33 @@ class FloorPlanController extends Controller
 
     public function getFloorPlanJson(User2 $user2)
     {
+        //get todays date
+        $today = Carbon::now('Europe/Athens')->format('Y-m-d');
+
+        //make the query to get tables that have reservations today or later
+        $tablesWithReservations =
+            Table::where('user2_id', $user2->id)
+                ->leftJoin('reservations', 'reservations.table_id', '=', 'tables.id')
+                ->select('reservations.date', 'tables.id', 'reservations.table_id')
+                ->whereDate('reservations.date', '>=', $today)
+                ->select('table_id')
+                ->distinct()
+                ->get();
+
+        //get the floorplan
+        $floorplan = $user2->floorPlan->json;
+
+        if ($floorplan){ //an den en ofkero stilto
+            $returnData['floorplan'] = $floorplan;
+            $returnData['tablesWithReservations'] = $tablesWithReservations;
+
+            return $returnData;
+        }
+
+        else
+            return []; //aliws stile ofkero gia na kserei oti en null
+
+        //OLD CODE
         if ($user2->floorPlan->json) //an den en ofkero stilto
             return $user2->floorPlan->json;
         else
@@ -36,55 +66,52 @@ class FloorPlanController extends Controller
     public function modify(User2 $user2)
     {
         //TODO: en prp na checkari an iparxi resv?
-        if(request()->has('save')){
-        $validatedData = request()->validate([
-            'floorplan' => 'required',
-            'tables'    => 'required|array|min:1',
-            'tables.*'  => 'required',
-            'tables.*.id' => 'required|string', //TODO na men en string
-            'tables.*.table_no' => 'required|numeric|min:1',
-            'tables.*.capacity' =>   'required|numeric|min:2|max:16'
+        if (request()->has('save')) {
+            $validatedData = request()->validate([
+                'floorplan' => 'required',
+                'tables'    => 'required|array|min:1',
+                'tables.*'  => 'required',
+                'tables.*.id' => 'required|string', //TODO na men en string
+                'tables.*.table_no' => 'required|numeric|min:1',
+                'tables.*.capacity' =>   'required|numeric|min:2|max:16'
 
-        ]);
+            ]);
 
 
 
-        $user2->floorPlan->json = $validatedData['floorplan'];
-        $user2->floorPlan->save();
+            $user2->floorPlan->json = $validatedData['floorplan'];
+            $user2->floorPlan->save();
 
-        //TODO
-        //STA TABLES PU EN THA EXUN ID J ENNA PIASUN ID PRP NA TO KAMW
-        //MESA STON CONTROLLER NA TA DIA STO JSON FLOOR PLAN NA TA KAMI SAVE STO DB
-        //J MOLIS KAMW SAVE NA KAMNW REINITIALIZE TO FLOORPLAN STO VIEW GIA NA MPENNUN TA IDS
+            //TODO
+            //STA TABLES PU EN THA EXUN ID J ENNA PIASUN ID PRP NA TO KAMW
+            //MESA STON CONTROLLER NA TA DIA STO JSON FLOOR PLAN NA TA KAMI SAVE STO DB
+            //J MOLIS KAMW SAVE NA KAMNW REINITIALIZE TO FLOORPLAN STO VIEW GIA NA MPENNUN TA IDS
 
-        foreach($validatedData['tables'] as $table){
-            $user2->tables()->updateOrCreate(
-                ['id' => $table['id']],
-                $table
-            );
-        }
+            foreach ($validatedData['tables'] as $table) {
+                $user2->tables()->updateOrCreate(
+                    ['id' => $table['id']],
+                    $table
+                );
+            }
 
-        //TODO: table number prp nan unique gia kathe user
-        //TODO: jina p en exun ID mesto json na tus valw ta id tous afou ta dimiourgiso
+            //TODO: table number prp nan unique gia kathe user
+            //TODO: jina p en exun ID mesto json na tus valw ta id tous afou ta dimiourgiso
 
-        return 'success';
-        }
-
-        else if(request()->has('getId')){
+            return 'success';
+        } else if (request()->has('getId')) {
 
             $validatedData = request()->validate([
-               'table_no' => 'required|numeric|min:1',
-                'capacity' =>'required|numeric|min:2|max:16'
+                'table_no' => 'required|numeric|min:1',
+                'capacity' => 'required|numeric|min:2|max:16'
             ]);
 
             $table = $user2->tables()->create($validatedData);
 
             return $table->id;
         }
-
     }
 
-    public function availableTables(){
-
+    public function availableTables()
+    {
     }
 }

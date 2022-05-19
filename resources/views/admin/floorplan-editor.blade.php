@@ -58,11 +58,11 @@
                                     <button class="btn btn-outline-primary btn-sm wall text-nowrap">+ &#9646; Wall</button>
                                 </div>
                                 <div class="btn-group mb-1">
+                                {{-- TODO: efie to customer mode epd itan astoxo en efkalle kan timeslots so na fiei j pu ta eggrafa --}}
                                     <button class="btn btn-outline-danger btn-sm remove text-nowrap">@include('admin.components.delete-icon')</button>
                                     <button class="btn btn-outline-danger btn-sm clear text-nowrap">Clear All</button>
                                 </div>
                                 <div class="btn-group mb-1">
-                                    <button class="btn btn-outline-warning btn-sm customer-mode text-nowrap">Customer mode</button>
                                     <button class="btn btn-outline-success btn-sm save" id="save">Save</button>
                                 </div>
                                 <div class="btn-group mb-1">
@@ -70,7 +70,6 @@
                                     <button class="btn btn-outline-secondary btn-sm import">Import</button>
                                 </div>
                                 <pre id="contents"></pre>
-                                {{-- <input type="file" id="jsonUpload" hidden> --}}
                             </div>
 
                             <div class="form-group customer-menu" style="display: none;">
@@ -161,8 +160,6 @@
     integrity="sha512-ZKqmaRVpwWCw7S7mEjC89jDdWRD/oMS0mlfH96mO0u3wrPYoN+lXmqvyptH4P9mY6zkoPTSy5U2SwKVXRY5tYQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script src="pinch-zoom-canvas.js"></script> -->
-
-<script src="/assets/js/date-findtime.js"></script>
 
 {{-- Include for flash messages --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>

@@ -77,9 +77,6 @@ function initCanvas() {
   });
 
 
-  //TODO PLS USE THIS https://codepen.io/sabatino/pen/EwJYeO or not?
-
-
   var pausePanning = false;
   var lastX, lastY;
 
@@ -92,10 +89,19 @@ function initCanvas() {
   canvas.on({
     'selection:created': function (o) {
       pausePanning = true;
-      if (!adminMode) {
-        $('#resvModal').modal('show');
-        findTimeSlots();
-        pausePanning = false;
+    //   if (!adminMode) {
+    //     $('#resvModal').modal('show');
+    //     findTimeSlots();
+    //     pausePanning = false;
+    //   }
+      if(o.selected[0].isDisabled){
+        Toastify({
+            //TODO: add tunto text sta eggrafa
+            text: "You can't move a table with upcoming reservations!",
+            duration: 3000,
+            close: true,
+            backgroundColor: "#b30511",
+          }).showToast();
       }
 
     },
@@ -589,9 +595,18 @@ document.querySelectorAll('.remove')[0].addEventListener('click', function () {
   //   canvas.getActiveGroup().forEachObject(function (o) { canvas.remove(o) });
   //   canvas.discardActiveGroup().renderAll();
   // } else {
-  if (canvas.getActiveObject())
-    canvas.remove(canvas.getActiveObject());
-  else {
+  var obj = canvas.getActiveObject()
+  if (obj && !obj.isDisabled){
+    canvas.remove(obj);
+  }else if(obj.isDisabled){
+    //TODO: add these messages kapou sta eggrafa
+    Toastify({
+        text: "You can't delete a table with upcoming reservations!",
+        duration: 3000,
+        close: true,
+        backgroundColor: "#b30511",
+      }).showToast();
+  } else {
     Toastify({
       text: "You must select something to remove!",
       duration: 3000,
