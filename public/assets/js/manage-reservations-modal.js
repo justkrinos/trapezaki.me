@@ -57,6 +57,7 @@ function setStatus(that){
 
 //Event on modal closed, send the ajax request
 $('#resvModal').on('hidden.bs.modal', function () {
+    canvas.discardActiveObject().renderAll();
     //get the attended number from modal
     modal_attendance = $("#attendance").val()
 
@@ -111,7 +112,7 @@ function modalpop() {
         //If date ennen simera na men bori na kami modify or cancel
         //j na men bori na kami modify to attendance
         //same gia cancelled
-        if (now.valueOf() > date.valueOf() || now.valueOf() < date.valueOf() || cancelled) {
+        if (now.valueOf() > date.valueOf() || cancelled) {
             $("#modCancel").hide();
             $("#modResv").hide();
             $("#attendance").prop("disabled", true).attr("type","text").addClass("bg-white")

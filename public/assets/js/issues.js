@@ -10,7 +10,7 @@ $(document).ready(function () {
         $("#issueTextArea").html($description);
         $("#issueBusiness").html($issuer);
         $("#issueType").html($type);
-        
+
         $("#issueModal").modal('show');
     })
 
@@ -50,7 +50,6 @@ $(document).ready(function () {
         checkSol = document.getElementById("checkSolved");
         checkCant = document.getElementById("checkCant");
         checkNot = document.getElementById("checkNot");
-        console.log(checkSol);
 
         table = document.getElementById("issueTable");
         tr = table.getElementsByTagName("tr");
@@ -77,7 +76,6 @@ $(document).ready(function () {
                 if (tdCheck) {
 
                     tdCheck = tdCheck.getElementsByTagName("button");
-                    console.log(tdCheck[0]);
                     if (tr[i].style.display != "none") {
                         if (
                             (tdCheck[0].classList.contains("active") && checkSol.checked) ||
@@ -99,7 +97,7 @@ $(document).ready(function () {
         checkCant = document.getElementById("checkCant");
         checkSol = document.getElementById("checkSolved");
         checkNot = document.getElementById("checkNot");
-        console.log(checkSol);
+        // console.log(checkSol);
         if (checkCant.checked == true)
             checkCant.checked = false
         if (checkNot.checked == true)

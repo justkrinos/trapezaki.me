@@ -20,14 +20,10 @@ $(document).ready(function () {
     var parts = window.location.href.split("/");
     var lastSegment = parts.pop() || parts.pop(); // handle potential trailing slash
 
-    console.log(lastSegment);
-
     $(document).on("click", ".changeStatus", function (e) {
         e.preventDefault();
         //Get the last 2 segments of URL
-        console.log($("button#dropdownMenuButton").get());
         var butt = $("button#dropdownMenuButton").get();
-        console.log($(butt).hasClass("btn-danger"));
 
         if ($(butt).hasClass("btn-danger")) {
             //an en to disable button
@@ -48,7 +44,7 @@ $(document).ready(function () {
                 },
                 success: function (result) {
                     //if success then continue
-                    console.log(result);
+                    // console.log(result);
                     //approvedToast.showToast();
                     // declinedToast.showToast();
                 },
@@ -73,7 +69,7 @@ $(document).ready(function () {
                 success: function (result) {
                     //if success then continue
 
-                    console.log(result);
+                    // console.log(result);
                     //approvedToast.showToast();
                     // approvedToast.showToast();
                 },

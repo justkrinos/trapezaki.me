@@ -140,14 +140,12 @@ function bookTable()
         url: "/user/" + username + "/book",
         data: data,
         success: function(success) {
-            console.log(success);
             //Create session that tells the user that the reservation was successful
             //and redirect to make a reservation page
             sessionStorage.setItem("reservation", "success");
             window.location.href = "/";
         },
         error: function(error) {
-            console.log(error);
             Toastify({ //an exw error fkale toast
                 //TODO: na sasei analoga me ta eggrafa
                 text: 'Please, select a timeslot and enter a description!',

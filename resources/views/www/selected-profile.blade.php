@@ -166,8 +166,6 @@ $('#user-photos').children('.photo').each(function(){
     photopaths.push(  { src: '../assets/images/uploads/' + $(this).attr('img'), srct: '../assets/images/uploads/' + $(this).attr('img')})
 })
 
-console.log(photopaths)
-
 
 $("#gallery").nanogallery2({
   thumbnailHeight:  150,

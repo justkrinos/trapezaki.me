@@ -202,6 +202,8 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/edit-reservation', [ReservationController::class,'showEditResv']);
         Route::post('/edit-reservation',[ReservationController::class,'editResvU2']);
 
+        Route::get('/api/{user2}/availability', [TimeSlotController::class, 'getTableAvailability']);
+
 
         Route::get('/profile', [ProfileU2Controller::class,'show']);
 

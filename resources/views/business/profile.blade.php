@@ -472,7 +472,6 @@ use App\Models\Daily_Setting;
     $(document).ready(function() {
         $("#first").change(function() {
             var day = $("#first").find(":selected").text();
-            console.log(day);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -487,7 +486,6 @@ use App\Models\Daily_Setting;
                     "first": 1
                 },
                 success: function(data) {
-                    console.log(data[0]);
                     $("#firstResv").val(data[0]);
                     $("#lastResv").val(data[1]);
                 }

@@ -53,41 +53,37 @@ function getTime(element) {
 
 
 $('#resvModal').on('hidden.bs.modal', function () {
+    canvas.discardActiveObject().renderAll();
     $("#pax").empty()
-  })
+})
 
-function setPeople()
-{
+function setPeople() {
     if ($("#pax").length == 0) {
         $("#pax").empty()
         for (i = 2; i <= canvas.getActiveObject().capacity; i++)
             $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
     }
-   else if($("#pax").val()>canvas.getActiveObject().capacity)
-   {
+    else if ($("#pax").val() > canvas.getActiveObject().capacity) {
         $("#pax").empty()
         for (i = 2; i <= canvas.getActiveObject().capacity; i++)
             $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
-       Toastify({
-        text: 'This table has a capacity of only ' + canvas.getActiveObject().capacity + ' people',
-        duration: 5000,
-        close: true,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#ba0b0b",
-    }).showToast()
-   }
-   else
-   {
-         for (i = 2; i <= canvas.getActiveObject().capacity; i++)
-         {
-              if($("#pax").val() == i)
-              {
-                  break;
-              }
-              $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
-         }
-   }
+        Toastify({
+            text: 'This table has a capacity of only ' + canvas.getActiveObject().capacity + ' people',
+            duration: 5000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#ba0b0b",
+        }).showToast()
+    }
+    else {
+        for (i = 2; i <= canvas.getActiveObject().capacity; i++) {
+            if ($("#pax").val() == i) {
+                break;
+            }
+            $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
+        }
+    }
 }
 
 
@@ -120,26 +116,31 @@ function getTimeSlots(table) {
         url: "/api/" + username + "/time-slots",
         data: content,
         success: function (timeSlots) {
-            //TODO NA FIGEI APO EDW
             setTimeSlots(timeSlots); //eprepe na ferw edw to call sto setTimeSlots gia na fkei pu tin 1i fora
         },
 
         //TODO toast error colors nan idio se ulla
         error: function (error) {
-            Toastify({ //an exw error fkale toast
-                text: 'Oops! Something went wrong',
-                duration: 5000,
-                close: true,
-                gravity: "top",
-                position: "right",
-                backgroundColor: "#db0f0f",
-            }).showToast();
+            if (error.responseJSON.errors.date != undefined) {
+                //No availability, delete book button if exists
+                $("#timeSlots").append("<div class=\"text-danger text-nowrap\">No availability for this date</div>")
+                $('#btnBook').empty()
+            } else {
+                Toastify({ //an exw error fkale toast
+                    text: 'Oops! Something went wrong',
+                    duration: 5000,
+                    close: true,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#db0f0f",
+                }).showToast();
+            }
         }
     });
 }
 
 
 
-if($('#footer').length){
-    $('#footer').attr('id','')
+if ($('#footer').length) {
+    $('#footer').attr('id', '')
 }

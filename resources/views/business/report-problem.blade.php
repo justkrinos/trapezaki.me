@@ -114,9 +114,9 @@
                                                                         <td class="probPopup">
                                                                             <span
                                                                                 class="status"><?php
-                                                                                if($issue->status==0) {echo "Pending.";}
-                                                                                else if($issue->status==1) {echo "<p style='color:green;'>Solved!</p>";}
-                                                                                else if($issue->status==2) {echo "<p style='color:red;'>Cannot be solved...</p>";}
+                                                                                if($issue->status==0) {echo "Pending";}
+                                                                                else if($issue->status==1) {echo "<a style='color:green;'>Solved</a>";}
+                                                                                else if($issue->status==2) {echo "<a style='color:red;'>Can't be solved</a>";}
                                                                                 ?></span>
                                                                         </td>
                                                                         <td class="problem-description" hidden>

@@ -37,7 +37,6 @@ $("ul.images").on("click", "li span.del", function () {
         },
         error: function (data) {
             //console.log(data)
-            console.log(data.responseText);
             Toastify({
                 text: "You can't delete the last photo!",
                 duration: 3000,
@@ -128,7 +127,7 @@ $("#image-upload-form").on("submit", function (e) {
                 var errors = $.parseJSON(data.responseText);
 
                 $("#upload_photo").addClass("is-invalid");
-                console.log(errors);
+                // console.log(errors);
                 $("#upload-photo-error").html(errors.errors.photo[0]);
             }
         },

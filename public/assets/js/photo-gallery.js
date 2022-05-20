@@ -8,7 +8,7 @@ $("#user-photos")
         });
     });
 
-console.log(photopaths);
+// console.log(photopaths);
 
 $("#gallery").nanogallery2({
     thumbnailHeight: 150,

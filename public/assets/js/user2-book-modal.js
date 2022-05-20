@@ -14,7 +14,7 @@ function bookTable() {
     if (!guest) {
         var user3_username = document.getElementById("user3_username").value;
         var description = document.getElementById("description").value;
-        console.log(description)
+        // console.log(description)
         var data = {
             date: date,
             time: timeSlot,
@@ -23,7 +23,7 @@ function bookTable() {
             details: description,
             pax: pax,
         };
-        console.log(data);
+        // console.log(data);
 
         $.ajaxSetup({
             headers: {
@@ -43,7 +43,7 @@ function bookTable() {
                 $("#resvModal").modal("hide");
             },
             error: function (error) {
-                console.log(error);
+                // console.log(error);
 
                 $("#user3_username").removeClass("is-invalid");
                 $("#timeSlots").removeClass("is-invalid");
@@ -152,6 +152,7 @@ W
 
 //An klisei to modal tote na fiun ta error messages
 $('#resvModal').on('hidden.bs.modal', function () {
+    canvas.discardActiveObject().renderAll();
     $("#user3_username").removeClass("is-invalid");
     $("#timeSlots").removeClass("is-invalid");
     $("#description").removeClass("is-invalid");

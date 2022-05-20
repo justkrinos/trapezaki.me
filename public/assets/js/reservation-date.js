@@ -2,6 +2,7 @@
 $(function () {
     $('.next-day').on('click', function () {
         var date = new Date($('.date-slide').val());
+
         date.setDate(date.getDate() + 1)
 
         var month = date.getMonth() + 1;
@@ -13,7 +14,11 @@ $(function () {
             day = '0' + day.toString();
 
         var newDate = year + '-' + month + '-' + day;
-        $('.date-slide').val(newDate)
+
+        var maxDate = new Date($('.date-slide').attr('max'))//.toISOString().split('T')[0];
+        if(maxDate >= date){
+            $('.date-slide').val(newDate)
+        }
         updateTableAvailability()
     });
     $('.prev-day').on('click', function () {

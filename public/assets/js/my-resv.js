@@ -20,12 +20,10 @@ $(document).ready(function () {
     //If a row is clicked
     $(document).on("click", ".resvPopup", function () {
         id = $(this).siblings(".resvID").html();
-        console.log($(this).siblings(".pastResv").text());
         //Give the details to the modal
         $("#myresvNumber").html(id);
         $("#myresvTable").html($(this).siblings(".resvTable").html());
         $("#myresvPeople").html($(this).siblings(".resvPeople2").html());
-        console.log($(this).siblings(".resvTime").html());
         $("#myresvTime").html($(this).siblings(".resvTime").html());
         $("#myresvDetails").html($(this).siblings(".resvDetails").html());
 
@@ -51,7 +49,6 @@ $(document).ready(function () {
         //console.log(document.getElementsByClassName('rate').clicked == true)
         $("#myresvModal").modal("hide");
         $('.resvPopup').modal('hide') ;
-        console.log(document.getElementById('test'). clicked == true);
         $("#small").modal("show");
         //Get the element clicked
         resv_id = $(this).parents("div").attr("resv");
@@ -187,7 +184,7 @@ function pushRating(rating) {
             }
         },
         error: function (data) {
-            console.log(data);
+            // console.log(data);
             Toastify({
                 text: "Oops! Something went wrong",
                 duration: 3000,

@@ -54,9 +54,9 @@ TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
                                         <div class="input-group col-sm-3 mb-3">
                                             <button class="prev-day btn btn-outline-secondary btn-google"><i
                                                     class="bi bi-chevron-left" aria-hidden='true'></i></button>
-                                            <input type="date"
+                                            <input type="date" onkeydown="return false"
                                                 class="form-control no-prev date-slide" @if(session('date')) value="{{session('date')}}" @endif
-                                                name="txtDate" style="min-width: 66px;" id="resv-date">
+                                                name="txtDate" style="min-width: 66px;" min="{{$today}}" max="{{$lastDay}}" id="resv-date">
 
                                             <button class='next-day btn btn-outline-secondary btn-google'><i
                                                     class='bi bi-chevron-right' aria-hidden='true'></i></button>

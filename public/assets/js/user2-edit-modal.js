@@ -43,7 +43,7 @@ function modifyBooking() {
             "X-CSRF-TOKEN": $('input[name="_token"]').attr("value"),
         },
     });
-    console.log(data)
+    // console.log(data)
 
     $.ajax({
         type: "POST",

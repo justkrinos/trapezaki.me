@@ -4,17 +4,6 @@
 {{-- TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
 TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
 
-Name: {{ session()->get('full_name')}}
-Phone: {{ session()->get('phone')}}
-Email: {{ session()->get('email')}}
-
-<form method="POST" action="/seven-seas/book">
-@csrf
-<button type="submit">Submit Booking</button>
-</form>
-
-<br>
-<br>
 TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso sto make a reservation --}}
 
 {{-- TODO: na iparxei to navbar j to sidebar swsta --}}
@@ -71,9 +60,9 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
                                         <div class="input-group col-sm-3 mb-3">
                                             <button class="prev-day btn btn-outline-secondary btn-google"><i
                                                     class="bi bi-chevron-left" aria-hidden='true'></i></button>
-                                            <input type="date"
+                                            <input type="date" onkeydown="return false"
                                                 class="form-control no-prev date-slide @error('date') is-invalid @enderror"
-                                                name="txtDate" style="min-width: 66px;" id="resv-date">
+                                                name="txtDate" style="min-width: 66px;" min="{{$today}}" max="{{$lastDay}}" id="resv-date">
                                             <div class="invalid-feedback">
                                                 @error('description')
                                                     {{ $message }}

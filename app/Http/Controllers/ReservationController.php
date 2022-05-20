@@ -11,16 +11,23 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
     public function showResvU3(User2 $user2){
         $user = Auth::guard('user3')->user();
 
+        $date = Carbon::now('Europe/Athens');
+        $today = $date->format('Y-m-d');
+        $lastDay = $date->addDays($user2->res_range)->format('Y-m-d');
+
         //an ise logged in mpenni kanonika
         if ($user)
             return view('www.book', [
-                'user2' => $user2
+                'user2' => $user2,
+                'today' => $today,
+                'lastDay' => $lastDay
             ]);
         //an ise guest mpenni kanonika (checkari p to session)
         else if (
@@ -29,7 +36,9 @@ class ReservationController extends Controller
             && request()->session()->has('email')
         )
             return view('www.book', [
-                'user2' => $user2
+                'user2' => $user2,
+                'today' => $today,
+                'lastDay' => $lastDay
             ]);
 
         // TODO: en fkallei to popup
@@ -249,7 +258,11 @@ class ReservationController extends Controller
             $validated  = request()->validate([
                 'id' => 'required|numeric|exists:reservations,id',
             ]);
-            //ddd($validated);
+
+            $date = Carbon::now('Europe/Athens');
+            $today = $date->format('Y-m-d');
+            $lastDay = $date->addDays(Auth::guard('user2')->user()->res_range)->format('Y-m-d');
+
             $user2 = Auth::guard('user2')->user();
             $reservation = Reservation::where('id', $validated['id'])->first();
 
@@ -257,7 +270,9 @@ class ReservationController extends Controller
             if($user2->tables()->where('id',$reservation->table_id)->exists()){
                 return view('business.edit-resv',[
                     'reservation' => $reservation,
-                    'user3'        => $reservation->user3
+                    'user3'        => $reservation->user3,
+                    'today' => $today,
+                    'lastDay' => $lastDay
                 ]);
             }
 
@@ -316,6 +331,13 @@ class ReservationController extends Controller
     }
 
     public function showAddResv() {
-        return view('business.add-resv');
+        $date = Carbon::now('Europe/Athens');
+        $today = $date->format('Y-m-d');
+        $lastDay = $date->addDays(Auth::guard('user2')->user()->res_range)->format('Y-m-d');
+
+        return view('business.add-resv',[
+            'today' => $today,
+            'lastDay' => $lastDay
+        ]);
     }
 }
