@@ -91,10 +91,6 @@ function initCanvas() {
 
   });
 
-
-  //TODO PLS USE THIS https://codepen.io/sabatino/pen/EwJYeO or not?
-
-
   var pausePanning = false;
   var lastX, lastY;
 

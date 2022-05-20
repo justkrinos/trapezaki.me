@@ -144,7 +144,6 @@
                                                                                     <th>Place</th>
                                                                                     <th>Date</th>
                                                                                     <th>Status</th>
-                                                                                    {{-- TODO: to date en ginetai sort swsta ute se tuto ute sto allo tab --}}
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>

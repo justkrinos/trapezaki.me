@@ -1,7 +1,5 @@
 //On click j on document ready na ginunte
 
-//TODO:
-
 // On click active -> change text to active
 //                   -> remove class btn-success or btn-danger or btn-secondary
 //                   -> add class btn-success

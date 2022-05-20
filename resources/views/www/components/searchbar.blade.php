@@ -1,7 +1,6 @@
 @php
 $city = 'Limassol';
 $city = request("city");
-//TODO: na fiei tuto j na sasei
 @endphp
 
 <section class="section">

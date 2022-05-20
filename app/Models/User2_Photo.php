@@ -42,6 +42,19 @@ class User2_Photo extends Model
         User2_Photo::create(['user2_id' => $userid,'photo_path'=> $imageName]);
     }
 
+    public static function update_logo(UploadedFile $photo, int $userid){
+        //rename the image
+        $imageName = 'logo_' . strval($userid) . '.' . $photo->extension();
+
+        //save in the public folder
+        $photo->move(public_path('assets/images/uploads'), $imageName);
+
+        //Update the record in the table
+        User2_Photo::where('user2_id',$userid)
+            ->where('photo_path', 'like', 'logo%')
+            ->update(['photo_path'=> $imageName]);
+    }
+
     public static function store_one(UploadedFile $photo, int $userid){
         $imageName = time() . strval(User2_Photo::max('id') + 1) . uniqid() . '.' . $photo->extension();
 

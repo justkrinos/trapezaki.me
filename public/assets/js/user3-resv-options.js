@@ -159,6 +159,3 @@ function bookTable()
     });
 }
 
-
-//TODO: opou iparxei console.log na ta fiume  molis teliwsei i ilopoiisi
-//TODO: na checkarume se kathe selida to console na men eshi errors

@@ -35,7 +35,7 @@ class PendingRequestsController extends Controller
             if ($action === 'accept') {
                 if($user2->floorplan->json == null)
                     return 'no-floorplan';
-                //TODO: approve mono an en filled ulla ta data!
+                //TODO
                 //sto manage customers na dixnei j ta pending j ta disabled j ta approved
                 //sto manage customer na dulefki to koumpi approve alla na dixni j tus pending
                 $user2->status = 2; //default na en disabled (pending=0, active=1, disabled=2)

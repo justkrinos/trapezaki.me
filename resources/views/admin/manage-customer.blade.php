@@ -13,9 +13,7 @@ $tags = $user2->tags->pluck('name')->toArray();
 @endphp
 
 {{-- TODO: //to reservation duration na piennei ana  misawra alliws enna santanosi ta reservations
-            //duration min misi wra j max 5
-
-            //to representative name en iparxi pupote, prp na iparxi j nan editable--}}
+            //duration min misi wra j max 5 --}}
 
 <head>
     <meta charset="UTF-8">
@@ -288,9 +286,6 @@ $tags = $user2->tags->pluck('name')->toArray();
                     </div>
                 </div>
             </section>
-            <div class="card">
-
-            </div>
 
             <div class="card">
                 <div class="card-header">
@@ -314,20 +309,48 @@ $tags = $user2->tags->pluck('name')->toArray();
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card" id="logoForm">
+                <div class="card-header">
+                    <h4 class="card-title">Logo</h4>
+                </div>
+                <form method="POST" action="/user/{{ $user2->username }}#logoForm" class="col-md-12" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <label for="formFile" class="form-label">Upload a logo here</label>
+                        <div class="row col-12">
+                            <div class="mb-3 col-md-6 col-6">
+                                <input class="form-control @error('logo') is-invalid @enderror" type="file" id="logo"
+                                    name="logo" id="formFile">
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('logo')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-6">
+                                <button type="submit" name="logoForm" class="btn btn-success">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="card" id="menuForm">
                 <div class="card-header">
                     <h4 class="card-title">Menu</h4>
                 </div>
-                <form method="POST" action="/user/{{ $user2->username }}" class="col-md-12 "
+                <form method="POST" action="/user/{{ $user2->username }}#menuForm" class="col-md-12 "
                     enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div>
+                        <label for="formFile" class="form-label">Upload a menu here</label>
+                        <div class="row col-12">
                             {{-- TODO: na mpei username kalitera anti id --}}
                             <input type="hidden" id="id" name="id" class="form-control round"
                                 value="{{ $user2->id }}">
-                            <div class="mb-3 col-md-5">
-                                <label for="formFile" class="form-label">Upload a menu here</label>
+                            <div class="col-6">
                                 <input class="form-control @error('menu') is-invalid @enderror" type="file" name="menu"
                                     id="formFile">
                                 <div class="invalid-feedback">
@@ -337,9 +360,11 @@ $tags = $user2->tags->pluck('name')->toArray();
                                     @enderror
                                 </div>
                             </div>
-                            <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload</button>
+                            <div class="col-6">
+                            <button type="submit" name="menuForm" class="btn btn-success">Upload</button>
                             <a href="/user/{{ $user2->username }}/menu" name="menuForm"
-                                class="btn btn-info me-1 mb-1" target="_blank">Open</a>
+                                class="btn btn-info me-1" target="_blank">Open</a>
+                            </div>
                         </div>
                     </div>
                 </form>

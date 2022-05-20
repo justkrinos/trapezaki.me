@@ -13,9 +13,7 @@ use App\Http\Controllers\Format;
 
 class SearchController extends Controller
 {
-    //TODO: na men fkalli jinus p en disabled
-    // ute pu to route (fix to bind)
-    //ute pu to random p fkalli stin arxi
+    //TODO: sto random na men dixnei tus disabled
     public function show()
     {
         //An ginei search

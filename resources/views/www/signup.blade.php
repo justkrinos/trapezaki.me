@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{{-- TODO:  //- Na valume ena logo i kati na men en sketto mono tu to page
-            //- Isos na to diksume tou pingou na mas pi apopsi
-            //- Ginete load to ena font j meta to allo j en xalia, na rotisume pingo gt?
---}}
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

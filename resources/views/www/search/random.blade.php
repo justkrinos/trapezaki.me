@@ -37,7 +37,6 @@
                         <div class="card-content">
                             <div class="col-12 row-col-12">
                                 <img style="height: 20rem; object-fit: cover;"
-                                    {{-- TODO: fkallei error dame an enas user en eshi photos, na valume limit tulaxisto mia photo na men bori na svisi ama eshi mono mia --}}
                                     src="../assets/images/uploads/{{ $users[1]->photos()->inRandomOrder()->get()->first()->photo_path }}"
                                     class="card-img-top   img-fluid">
                             </div>

@@ -59,8 +59,6 @@ let dataTable = new simpleDatatables.DataTable(table, {
 
 $(document).ready(function () {
 
-    //TODO: na dulepsi tuto opos dulefki j sta issues
-
     // Click on table row
     $(".clicktoCust").click(function () {
         //fuck javascript
@@ -131,8 +129,7 @@ $(document).ready(function () {
                             dataTable.rows().remove(index) //diegrapse to pu to datatable me vasi to index
                         }) //kame to fade out
                         declinedToast.showToast();
-                    }else
-                        // console.log(result)
+                    }
                 }
             });
         }

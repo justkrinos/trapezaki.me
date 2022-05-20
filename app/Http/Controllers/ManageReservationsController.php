@@ -27,7 +27,6 @@ class ManageReservationsController extends Controller
         ]);
     }
 
-    //TODO: na en me get an en imerominia
     public function modify()
     {
         $validatedData = request()->validate([
@@ -44,7 +43,7 @@ class ManageReservationsController extends Controller
         if ($reservation->table->user2_id  == $user2->id) {
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
                         Mail::to($user3->email)->queue(new \App\Mail\MailCancelledReservation
-                                                    ($user3->email, Reservation::find($validatedData['reservation_id']), 
+                                                    ($user3->email, Reservation::find($validatedData['reservation_id']),
                                                     $validatedData['reason'], $user2->business_name));
 
             Cancellation::create($validatedData);
@@ -53,10 +52,6 @@ class ManageReservationsController extends Controller
 
         //back to the page p itan prin
         return back()->with('success', 'Oops! Something went wrong');
-
-        // TODO: an to reservation en cancelled, tote na men eshi epilogi cancel
-        //       na men afinei 2o cancellation (primary key to reservation_id sto cancellations)
-        //       na ginei j sto rating tuto
     }
 
     public function changeAttendance()

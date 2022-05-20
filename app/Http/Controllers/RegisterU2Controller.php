@@ -109,8 +109,6 @@ class RegisterU2Controller extends RegisterController
         $user2->floorPlan->save();
 
         //Create the default daily settings
-        //TODO tuta en prp nan default alla nan null
-        //j na prp na tu ta vali o admin gia na fiei pu pending
         $maxTime = new Time("22:00");
         $minTime = new Time("08:00");
 

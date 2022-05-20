@@ -32,7 +32,7 @@
             <p>
               <a href="/about-us" class="text-reset">About Us</a>
             </p>
-            {{-- TODO: na mpoun ta pragmatika manuals gia ullus --}}
+            {{-- TODO: na mpoun ta agglika manuals gia ullus --}}
             <p>
               <a href="/tutorial" class="text-reset">Tutorial</a>
             </p>

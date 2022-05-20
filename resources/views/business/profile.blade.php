@@ -7,9 +7,6 @@ use App\Models\Tag;
 use App\Models\User2_Photo;
 use App\Models\Daily_Setting;
 
-
-
-
 ?>
 
 {{-- TODO: ta business info j jina nan pio wraia --}}
@@ -141,7 +138,8 @@ use App\Models\Daily_Setting;
                             <div class="form-group">
                                 <div class="col-md-2">
                                     <label for="representative">Representative</label>
-                                    <input type="text" name="representative" class="form-control round @error ('representative') is-invalid  @enderror"
+                                    <input type="text" name="representative"
+                                        class="form-control round @error('representative') is-invalid @enderror"
                                         value="{{ Auth::guard('user2')->user()->representative }}">
                                     @error('representative')
                                         <div class="invalid-feedback">
@@ -176,7 +174,7 @@ use App\Models\Daily_Setting;
                                     </div>
                                     @error('coffee')
                                         @php
-                                            $message = "*You must select at least 1 of the types of service.";
+                                            $message = '*You must select at least 1 of the types of service.';
                                         @endphp
                                         <p style="color: red;">{{ $message }}</p>
                                     @enderror
@@ -216,7 +214,8 @@ use App\Models\Daily_Setting;
                                     </section>
                                 </div>
                             </div>
-                            <button type="submit" name="detailsForm" class="btn btn-success me-1 mb-1">Save changes</button>
+                            <button type="submit" name="detailsForm" class="btn btn-success me-1 mb-1">Save
+                                changes</button>
                         </div>
                     </div>
                 </form>
@@ -311,28 +310,63 @@ use App\Models\Daily_Setting;
                 </div>
             </div>
 
+            <div class="card" id="logoForm">
+                <div class="card-header">
+                    <h4 class="card-title">Logo</h4>
+                </div>
+                <form method="POST" action="/profile#logoForm" class="col-md-12" enctype="multipart/form-data">
+                    @csrf
+                    <div class="card-body">
+                        <label for="formFile" class="form-label">Upload a logo here</label>
+                        <div class="row col-12">
+                            <div class="mb-3 col-md-6 col-6">
+                                <input class="form-control @error('logo') is-invalid @enderror" type="file" id="logo"
+                                    name="logo" id="formFile">
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('logo')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-6">
+                                <button type="submit" name="logoForm" class="btn btn-success">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
             <div class="card" id="menuForm">
                 <div class="card-header">
                     <h4 class="card-title">Menu</h4>
                 </div>
-                <form method="POST" action="/profile/menu#menuForm" class="col-md-12 " enctype="multipart/form-data">
+
+                <form method="POST" action="/profile/menu#menuForm" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload a menu here</label>
-                            <input class="form-control @error('menu') is-invalid @enderror" type="file" id="menu"
-                                name="menu" id="formFile">
-                            <div class="invalid-feedback">
-                                <i class="bx bx-radio-circle"></i>
-                                @error('menu')
-                                    {{ $message }}
-                                @enderror
+                        <label for="formFile" class="form-label">Upload a menu here</label>
+                        <div class="row col-12">
+                            <div class="col-6">
+                                <input class="form-control @error('menu') is-invalid @enderror" type="file" id="menu"
+                                    name="menu" id="formFile">
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    @error('menu')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload
+                                </button>
+                                <a href="/profile/menu" name="menuForm" class="btn btn-info me-1 mb-1"
+                                    target="_blank">Open</a>
                             </div>
                         </div>
-                        <a href="/profile/menu" name="menuForm" class="btn btn-info me-1 mb-1" target="_blank">Open</a>
-                        <button type="submit" name="menuForm" class="btn btn-success me-1 mb-1">Upload new</button>
                     </div>
                 </form>
+
             </div>
 
 
@@ -362,71 +396,73 @@ use App\Models\Daily_Setting;
                                 @csrf
                                 <div class="form-group">
                                     <label for="basicInput">Old Password</label>
-                                    <input type="password" class="form-control form-control-l
-                                        @error('password')@enderror
-                                        @if(Session::has('password')) is-invalid @endif" id="password"
-                                        name="password" placeholder="Password" required>
-                                    @if(Session::has('password'))
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ Session::get('password') }}
-                                            </div>
+                                    <input type="password"
+                                        class="form-control form-control-l
+                                        @error('password')  @enderror
+                                        @if (Session::has('password')) is-invalid @endif"
+                                        id="password" name="password" placeholder="Password" required>
+                                    @if (Session::has('password'))
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ Session::get('password') }}
+                                        </div>
                                     @endif
                                     @error('password')
-                                            <div class="invalid-feedback">
-                                                <i class="bx bx-radio-circle"></i>
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="basicInput">New Password</label>
-                                    <input type="password" class="form-control form-control-l @error('new-password') is-invalid @enderror" id="new-password"
-                                        name="new-password" placeholder="Password" required>
+                                    <input type="password"
+                                        class="form-control form-control-l @error('new-password') is-invalid @enderror"
+                                        id="new-password" name="new-password" placeholder="Password" required>
                                     @error('new-password')
                                         <div class="invalid-feedback">
-                                           <i class="bx bx-radio-circle"></i>
-                                           {{ $message }}
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="basicInput">Re-enter New Password</label>
-                                    <input type="password" class="form-control form-control-l @error('new-password_confirmation') is-invalid @enderror"
+                                    <input type="password"
+                                        class="form-control form-control-l @error('new-password_confirmation') is-invalid @enderror"
                                         id="new-password_confirmation" name="new-password_confirmation"
                                         placeholder="Password" required>
                                     @error('new-password_confirmation')
-                                    <div class="invalid-feedback">
-                                        <i class="bx bx-radio-circle"></i>
-                                        {{ $message }}
-                                    </div>
+                                        <div class="invalid-feedback">
+                                            <i class="bx bx-radio-circle"></i>
+                                            {{ $message }}
+                                        </div>
                                     @enderror
-                                    </div>
                                 </div>
-
-                                {{-- Hidden id, to show each time which user to update --}}
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" id="id" name="id"
-                                        value="{{ Auth::guard('user2')->user()->id }}">
-                                </div>
-
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" id="username" name="username"
-                                        value="{{ Auth::guard('user2')->user()->username }}">
-                                </div>
-
-                                <div class="col-sm-12 d-flex justify-content-end">
-                                    <button type="submit" name="passwordForm"
-                                        class="btn btn-primary me-1 mb-1">Change</button>
-                                </div>
-                            </form>
                         </div>
+
+                        {{-- Hidden id, to show each time which user to update --}}
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="id" name="id"
+                                value="{{ Auth::guard('user2')->user()->id }}">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="username" name="username"
+                                value="{{ Auth::guard('user2')->user()->username }}">
+                        </div>
+
+                        <div class="col-sm-12 d-flex justify-content-left">
+                            <button type="submit" name="passwordForm" class="btn btn-success me-1 mb-1">Apply</button>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     {{-- Photo Popup Modal --}}

@@ -193,4 +193,3 @@ function applyAttendanceChanges(attendance,id){
     })
 }
 
-//TODO: an en cancelled episis na men allassetai to attendance (ute an eperase i mera)

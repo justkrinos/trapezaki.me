@@ -13,13 +13,6 @@ $(document).ready(function () {
         $("#confirmModal").modal("show");
     })
 
-    $("#confirmed").click(function(){
-        //TODO: send data to the database
-        //TODO: remove the record from the table, ajax?
-        //TODO: send email pu ton server
-        $("#issueModal").modal('hide')
-        alert("TODO THIS (in reservations.js)")
-    })
 
     //On click sto modify reservvation tu modal
     $("#modResv").click(function () {
@@ -46,8 +39,6 @@ $(document).ready(function () {
     //the document is loaded (stin arxi)
 
     $("#mydate").change(function () {
-        //TODO: get data if date changed
-
         // run the colorize function
         colorizeTable()
     })

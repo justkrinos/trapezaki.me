@@ -18,8 +18,7 @@ username = $('#username').attr('user')
 
 $('.clear').click(function () {
     if (noReservationsOnTables) {
-        //TODO: na mpi tuto to popup p kamni clear all sto floorplan editor
-        //      na mpi sta eggrafa
+        //TODO: na mpi sta eggrafa tuto to popup p kamni clear all sto floorplan editor
         Swal.fire({
             title: 'Are you sure you want to delete everything?',
             text: "You won't be able to revert this!",
@@ -49,8 +48,6 @@ $('.clear').click(function () {
         }).showToast();
     }
 
-    //TODO: -WARNING Reservations ENA XATHUN
-    //      -j na men bori na to kamei an eshi locked trapezia
 })
 
 var floorplan
@@ -259,13 +256,6 @@ function loadFloorPlan(floorplan) {
 
     canvas.renderAll();
 
-    //TODO:
-    //na eshi kapia parameters kapio trapezi
-    //analoga an eshi kratisi na men bori na taraksi nan locked
-    //na checkari o server prin ta vali mesa an e taraksan
-    //kathe trapezi p ginete generate prp na eshi id pu to database
-
-    //na thori me kapio tropo tin kratisi tu se svg?
 }
 
 function disableReservedTables(tables) {

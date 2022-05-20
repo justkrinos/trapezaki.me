@@ -31,7 +31,6 @@ class SessionsU3Controller extends SessionsController
     {
 
         //Validate the data
-        //TODO: na dulefki j me email
         $request = request()->merge(['guest' => 0]);
 
         $attributes = $request->validate([

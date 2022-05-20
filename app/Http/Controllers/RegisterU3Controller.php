@@ -45,8 +45,6 @@ class RegisterU3Controller extends RegisterController
             'verification_code' => 'required',
             'guest'             =>  'required'
         ]);
-        //TODO:  //-na sasun ta messages p stelni error (eg. na men grafi full_name)
-
 
         //Make the account and add to db
         $user = User3::updateOrCreate(['email' => $attributes['email'], 'guest' => 1],$attributes);

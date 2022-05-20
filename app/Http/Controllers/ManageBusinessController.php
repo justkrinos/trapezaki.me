@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Format;
+use App\Models\User2_Photo;
 
 // TODO: search all dd() and ddd() and remove them
 
@@ -23,15 +24,14 @@ class ManageBusinessController extends Controller
                 'city' => 'required|max:30|min:2|in:Paphos,Limassol,Nicosia,Larnaca,Famagusta',
                 'lat' => 'required|numeric|max:36',
                 'long' => 'required|numeric|max:36',
-            ],[
+            ], [
                 'city.in'   => 'The city must be one of the following: Paphos, Limassol, Nicosia, Larnaca, Famagusta.'
             ]);
 
             $user2->update($validatedData);
 
             return redirect('/user/' . $user2->username)->with("success", "Your changes have been applied successfully!");
-        }
-        if (request()->has('businessInfo')) {
+        } else if (request()->has('businessInfo')) {
 
             request()->validate([
                 'tags' => 'required'
@@ -133,9 +133,7 @@ class ManageBusinessController extends Controller
             $user2->save();
 
             return back()->with("success", "The menu has been uploaded successfully.");
-        }
-        //An thelw na allaksw to status
-        else if (request()->has('action')) {
+        } else if (request()->has('action')) {
             $validatedData = request()->validate([
                 'action'   => 'required|in:activate,disable'
             ]);
@@ -152,6 +150,15 @@ class ManageBusinessController extends Controller
                 return 'success';
             }
             return 'error';
+        } else if (request()->has('logoForm')) {
+            $data = request()->validate([
+                'logo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
+            ], [
+                'logo.mimes'    => 'The logo must be an image.'
+            ]);
+
+            User2_Photo::update_logo(request()->file('logo'), $user2->id);
+            return back()->with('success', "The logo has been uploaded successfully!");
         }
     }
 

@@ -7,6 +7,7 @@ use App\Models\Daily_Setting;
 use App\Http\Controllers\ProfileController;
 use App\Models\User2;
 use App\Http\Controllers\Format;
+use App\Models\User2_Photo;
 
 class ProfileU2Controller extends ProfileController
 {
@@ -150,6 +151,19 @@ class ProfileU2Controller extends ProfileController
 
             auth('user3')->logout();
             return redirect('/login')->with("success", "Your password has been updated. Please log in to continue.");
+        }
+        else if(request()->has('logoForm')){
+            $data = request()->validate([
+                'logo' => 'required|image|mimes:jpg,png,jpeg,svg|max:2048'
+            ],[
+                'logo.mimes'    => 'The logo must be an image.'
+            ]);
+
+            $user2 = auth('user2')->user();
+            User2_Photo::update_logo(request()->file('logo'),$user2->id);
+
+            return back()->with('success', "The logo has been uploaded successfully!");
+
         }
     }
 

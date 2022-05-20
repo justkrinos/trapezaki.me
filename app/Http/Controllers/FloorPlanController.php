@@ -52,11 +52,11 @@ class FloorPlanController extends Controller
         else
             return []; //aliws stile ofkero gia na kserei oti en null
 
-        //OLD CODE
-        if ($user2->floorPlan->json) //an den en ofkero stilto
-            return $user2->floorPlan->json;
-        else
-            return []; //aliws stile ofkero gia na kserei oti en null
+        // //OLD CODE
+        // if ($user2->floorPlan->json) //an den en ofkero stilto
+        //     return $user2->floorPlan->json;
+        // else
+        //     return []; //aliws stile ofkero gia na kserei oti en null
     }
 
     public function getFloorPlanJsonU2()
@@ -71,6 +71,7 @@ class FloorPlanController extends Controller
     public function modify(User2 $user2)
     {
         //TODO: en prp na checkari an iparxi resv?
+        //      SOLUTION DONE: checkarei to sto front end
         if (request()->has('save')) {
             $validatedData = request()->validate([
                 'floorplan' => 'required',
@@ -86,11 +87,6 @@ class FloorPlanController extends Controller
 
             $user2->floorPlan->json = $validatedData['floorplan'];
             $user2->floorPlan->save();
-
-            //TODO
-            //STA TABLES PU EN THA EXUN ID J ENNA PIASUN ID PRP NA TO KAMW
-            //MESA STON CONTROLLER NA TA DIA STO JSON FLOOR PLAN NA TA KAMI SAVE STO DB
-            //J MOLIS KAMW SAVE NA KAMNW REINITIALIZE TO FLOORPLAN STO VIEW GIA NA MPENNUN TA IDS
 
             foreach ($validatedData['tables'] as $table) {
                 $user2->tables()->updateOrCreate(

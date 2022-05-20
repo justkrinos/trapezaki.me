@@ -5,19 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trapezaki - Make a Reservation</title>
 
-    {{-- TODO:
-              //-se kathe card tu user2 na eshi j mia photo sta deksia mitsia (tin proti p briskis se sql query)
-              //-na valume kamia photo p piso na mennen etsi stegno
-              //- to pagination sta datatable en dulefki me ta popup sto user3 js to user2
-              //- opou eshi code messe view na mpei mono se controllers
-              //-na sastun ta provlimata me to sidebar na megaloni j na men eshi x (en logo tu main.js)
-
-              //-na men to fkallei panta to modal na checkari an eksanaepelekses
-              //- na dume pos enna apothikefkete to city, ston user oksa sto session?
-              //- pagination
-    --}}
-
-
     {{-- Toast dependency --}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 
@@ -110,8 +97,6 @@
 </html>
 
 
-{{-- //TODO: otan ginei to search  na apothikefkete kathe fora to city --}}
-
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -143,5 +128,5 @@
 </html>
 
 
-{{-- //TODO: otan ginei to search  na apothikefkete kathe fora to city --}}
+{{-- //TODO: na apothikefkete kathe fora to city --}}
 <script src="/assets/js/choose-city.js">></script>

@@ -75,25 +75,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::get('/about-us', function(){return view('www.about');});
     Route::get('/make-a-reservation', [SearchController::class, 'show'])->name('first_page');
 
-    //TODO: tuto edulefke
-    /*Route::get('/make-a-reservation', function () {
-        $showCityPop = true;
-        $city = "";
-
-        //na dulefki j gia guest j gia user 3 gt en geniko tuto
-        if (Auth::check('user3') && Auth::guard('user3')->user()->city) {
-            $showCityPop = false;
-            $city = Auth::guard('user3')->user()->city;
-        } elseif(session()->has('city')){
-            $showCityPop = false;
-            $city = session()->get('city');
-        }
-        return view('www.search', [
-            'showCityPop' => $showCityPop,
-            'city'        => $city
-        ]);
-    })->name('first_page');*/
-
     Route::get('/user/{user2}', [SearchController::class,'showProfile']);
 
     Route::get('/api/{user2}/time-slots', [TimeSlotController::class, 'getTimeSlots']);
@@ -114,27 +95,8 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
     Route::middleware(['guest:user3'])->group(function () {
 
-        //TODO na mpei se controller
         Route::get('/', function () {
             return redirect()->route('first_page');
-            // $showCityPop = true;
-            // $city = "";
-            // if (session()->has('city')) {
-            //     $showCityPop = false;
-            //     $city = session()->get('city');
-            // }
-
-
-            // //TODO evala to etsi gia na dulefkei, sigirisma
-            // return view('www.search', [
-            //     'showCityPop' => $showCityPop,
-            //     'city'        => $city,
-            //     'users'       => App\Models\User2::inRandomOrder()
-            //                             ->limit(5)
-            //                             ->where('is_verified', 1)
-            //                             ->where('status', 1)
-            //                             ->get()
-            // ]);
         });
 
         Route::get('/login', [SessionsU3Controller::class, 'show']);
@@ -169,15 +131,9 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
 
     Route::middleware(['auth:user3'])->group(function () {
-        //New controller pu elegxei ta sessions gia log in log out
         Route::get('/logout', [SessionsU3Controller::class, 'logout']);
-
         Route::get('/profile', [ProfileU3Controller::class,'show']);
-
-        //TODO en dulefki to route dunno why
-        //TODO: na stelnei email sto reservation
         Route::post('/profile', [ProfileU3Controller::class, 'modify']);
-
         Route::get('/my-reservations', [MyReservationsController::class, 'show']);
         Route::post('/my-reservations', [MyReservationsController::class, 'modify']);
     });
@@ -233,18 +189,12 @@ Route::domain('business.' . env('APP_URL'))->group(function () {
         Route::get('/login', [SessionsU2Controller::class, 'show']);
         Route::post('/login', [SessionsU2Controller::class, 'login']);
 
-        //TODO: Na sasun ta "/" gia oullous tous users
-        //      An en logged in na kami redirect sto main page
-        //      an den en logged in na kami redirect sto login page
-        //      gia ton logged in user dulefki gia kapio logo
-        //      kapws to ixa kami alla en thimume pws
         Route::get('/', [SessionsU2Controller::class, 'show']);
         Route::post('/', [SessionsU2Controller::class, 'login']);
 
         Route::get('/signup', [RegisterU2Controller::class, 'show']);
         Route::post('/signup', [RegisterU2Controller::class, 'create']);
 
-        // TODO: na pai sto api route na dulepsun jina
         Route::get('/api/tags', [TagsApiController::class,'show']);
 
         Route::get('verify/{email}/{secret}/', [VerifyEmailController::class, 'verifyUser2']);

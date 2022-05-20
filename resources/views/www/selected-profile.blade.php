@@ -156,37 +156,6 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
-
-{{--TODO: iparxi nmz to image-gallery kati etsi na ginete etsi link dame--}}
-<script>
-
-var photopaths = [];
-$('#user-photos').children('.photo').each(function(){
-
-    photopaths.push(  { src: '../assets/images/uploads/' + $(this).attr('img'), srct: '../assets/images/uploads/' + $(this).attr('img')})
-})
-
-
-$("#gallery").nanogallery2({
-  thumbnailHeight:  150,
-  thumbnailWidth:   150,
-  {{-- /TODO: na sasei to base url --}}
-  {{-- "itemsBaseURL": "http://nanogallery2.nanostudio.org/samples/", --}}
-
-  thumbnailBorderVertical: 0,
-  thumbnailBorderHorizontal: 0,
-  thumbnailLabel: {
-        position: "overImageOnBottom",
-        display: false
-    },
-  thumbnailHoverEffect2: "imageBlurOn",
-  galleryLastRowFull: true,
-  thumbnailAlignment: "center",
-  breadcrumbOnlyCurrentLevel: false,
-  thumbnailOpenImage: false,
-
-  items: photopaths
-});
-</script>
+<script src="../assets/js/photo-gallery.js"></script>
 
 

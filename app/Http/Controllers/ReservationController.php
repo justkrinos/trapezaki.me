@@ -42,6 +42,7 @@ class ReservationController extends Controller
             ]);
 
         // TODO: en fkallei to popup
+
         //an den ise tpt kamnise redirect piso j fkalli su to login popup
         else
             return redirect('/user/' . $user2->username . '#login');
@@ -67,7 +68,7 @@ class ReservationController extends Controller
             ]);
 
             //TODO: na gini uncomment tuto j na checkaristi an en ok
-            // session()->forget(['full_name', 'phone', 'email']);
+            session()->forget(['full_name', 'phone', 'email']);
 
 
             $request = request()-> merge([

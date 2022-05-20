@@ -106,8 +106,6 @@ var rater = window.raterJs({
 
 //Function when rating is confirmed
 $("#rateConfirm").click(function () {
-    //TODO: send to db
-
     //This will return the rating submitted
     pushRating(rater.getRating());
 });
@@ -151,14 +149,12 @@ let dataTablePast = new simpleDatatables.DataTable(pasttable, {
     ],
 });
 
-//TODO: na fkallei j sta completed ena popup
-dataTablePast.on("datatable.page", function (column, direction) {
-    //TODO
-});
+// //TODO: na fkallei j sta completed ena popup
+// dataTablePast.on("datatable.page", function (column, direction) {
+// });
 
-dataTableUp.on("datatable.page", function (column, direction) {
-    //TODO
-});
+// dataTableUp.on("datatable.page", function (column, direction) {
+// });
 
 function pushRating(rating) {
     $.ajaxSetup({
