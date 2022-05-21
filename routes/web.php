@@ -74,7 +74,7 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
     Route::get('/.well-known/pki-validation/19AF389A32C3AE1B37D814A65D2749B9.txt',function(){
         $file = File::get(public_path('assets/menus/file.txt'));
         $response = Response::make($file, 200);
-        $response->header('Content-Type', 'text/html');
+        $response->header('Content-Type', 'text');
         return $response;
     });
 
