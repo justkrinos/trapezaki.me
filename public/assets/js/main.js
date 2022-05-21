@@ -11,11 +11,13 @@ for (var i = 0; i < sidebarItems.length; i++) {
         if (submenu.classList.contains('active')) submenu.style.display = "block"
 
         if (submenu.style.display == "none"){
-            footerPadding.hidden = false;
+            if(footerPadding != null)
+                footerPadding.hidden = false;
             submenu.classList.add('active')
         }
         else {
-            footerPadding.hidden = true;
+            if(footerPadding != null)
+                footerPadding.hidden = true;
             submenu.classList.remove('active')
         }
         slideToggle(submenu, 300)
@@ -25,19 +27,23 @@ for (var i = 0; i < sidebarItems.length; i++) {
 window.addEventListener('DOMContentLoaded', (event) => {
     var w = window.innerWidth;
     if (w < 1200) {
-        footerPadding.hidden = true;
+        if(footerPadding != null)
+            footerPadding.hidden = true;
         document.getElementById('sidebar').classList.remove('active');
     }else{
-        footerPadding.hidden = false;
+        if(footerPadding != null)
+            footerPadding.hidden = false;
     }
 });
 window.addEventListener('resize', (event) => {
     var w = window.innerWidth;
     if (w < 1200) {
-        footerPadding.hidden = true;
+        if(footerPadding != null)
+            footerPadding.hidden = true;
         document.getElementById('sidebar').classList.remove('active');
     } else {
-        footerPadding.hidden = false;
+        if(footerPadding != null)
+            footerPadding.hidden = false;
         document.getElementById('sidebar').classList.add('active');
     }
 });
@@ -60,5 +66,7 @@ if (typeof PerfectScrollbar == 'function') {
 }
 
 // Scroll into active sidebar
-document.querySelector('.sidebar-item.active').scrollIntoView(false)
+var scroll = document.querySelector('.sidebar-item.active')
+if (scroll != null)
+    scroll.scrollIntoView(false)
 
