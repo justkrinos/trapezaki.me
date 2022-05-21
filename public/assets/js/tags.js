@@ -30,8 +30,8 @@ window.mobileCheck = function () {
 
 
 //Delete the comma when inserted in a computer broswer
-if (!mobileCheck) {
     $("input[type='text']").filter(".tt-input").keyup(function () {
+        if (mobileCheck) {
         $(this).val(
             function (index, value) {
                 if (value.endsWith(","))
@@ -39,5 +39,5 @@ if (!mobileCheck) {
                 else
                     return value
             })
+        }
     })
-}
