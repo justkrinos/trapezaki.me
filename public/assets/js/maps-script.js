@@ -4,7 +4,7 @@ $(function () {
         $('#long').val(currentLocation.longitude);
         $('#address').val(addressComponents.addressLine1);
         $('#city').val(addressComponents.city);
-        $('#zip').val(addressComponents.postalCode);
+        $('#postal').val(addressComponents.postalCode);
     }
 
     if( $("#lat").attr('value') == "" || $("#long").attr('value') == ""){
@@ -30,10 +30,9 @@ $(function () {
             var addressComponents = $(this).locationpicker('map').location.addressComponents;
             updateControls(addressComponents, currentLocation);
         },
-        // oninitialized: function(component) {
-        //     var addressComponents = $(component).locationpicker('map').location.addressComponents;
-        //     alert(JSON.stringify(addressComponents));
-        // }
+        oninitialized: function(component) {
+            $("#location").val("");
+        }
     })
 
 

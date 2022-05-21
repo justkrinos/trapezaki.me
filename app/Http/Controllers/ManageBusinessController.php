@@ -39,6 +39,8 @@ class ManageBusinessController extends Controller
 
             $request['tags'] = Format::tagsToArray(request()['tags']);
 
+            // ddd($request->all());
+
             //User3 edit profile
             //TODO na exei error an den epilekses kanena type
             $validatedData = $request->validate(
@@ -56,7 +58,6 @@ class ManageBusinessController extends Controller
 
                 ],
                 [
-                    //TODO: nmz en fkalli error msg ama en epileksis kanena service
                     'food.required_without_all' => 'Please select at least one service that you provide.',
                     'coffee.required_without_all' => 'Please select at least one service that you provide.',
                     'drinks.required_without_all' => 'Please select at least one service that you provide.',

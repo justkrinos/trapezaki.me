@@ -18,15 +18,15 @@
 
     @foreach ($settings as $setting)
         <div class="d-flex col-12 col-md-8 day @if($setting['day'] != 1) hidden-setting @endif" id="day-{{$setting['day']}}">
-            <div class="col-sm-4 col-6 input-group-md mb-1">
+            <div class="col-sm-3 col-5 input-group-md mb-1">
                 <label for="reservation-{{$setting['day']}}">First</label>
-                <input type="time" id="first-{{$setting['day']}}" name="min-{{$setting['day']}}" class="form-control square first-reservation"
-                    value="{{$setting['min']}}">
+                <label type="time" id="first-{{$setting['day']}}" name="min-{{$setting['day']}}" class="form-control square first-reservation"
+                >{{$setting['min']}}</label>
             </div>
-            <div class="col-sm-4 col-6 input-group-md mb-1">
+            <div class="col-sm-3 col-5 input-group-md mb-1">
                 <label for="last-reservation">Last</label>
-                <input type="time" id="last-{{$setting['day']}}" name="max-{{$setting['day']}}" class="form-control square last-reservation"
-                    value="{{$setting['max']}}">
+                <label type="time" id="last-{{$setting['day']}}" name="max-{{$setting['day']}}" class="form-control square last-reservation"
+                >{{$setting['max']}}</label>
             </div>
         </div>
     @endforeach

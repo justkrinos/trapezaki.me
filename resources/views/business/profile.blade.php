@@ -48,8 +48,6 @@ use App\Models\Daily_Setting;
         {{-- Include the sidebar from /business/components --}}
         @include('business.components.sidebar')
 
-
-
         <div id="main">
             <header class="mb-3">
                 <a href="#" class="burger-btn d-block d-xl-none">
@@ -90,132 +88,113 @@ use App\Models\Daily_Setting;
                         </div>
                     </div>
                 </div>
-                <form method="POST" action="/profile#detailsCard" class="col-md-12">
+                <form method="POST" action="/profile#detailsCard">
                     @csrf
                     <div class="card" id="detailsCard">
                         <div class="card-header">
-                            <h4 class="card-title">Description</h4>
+                            <h3 class="card-title">Business Information</h3>
                         </div>
-                        <div class="form-group col-12 justify-content-center mb-5">
-                            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                                rows="4">{{ Auth::guard('user2')->user()->description }}</textarea>
-                            <div class="invalid-feedback">
-                                @error('description')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="card-header">
-                            <h6 class="card-title">Business Information</h6>
-                        </div>
-
-                        <div class="card-body">
-                            <div class="form-group">
-                                <div class="col-md-5">
-                                    <label for="email">Email</label>
-                                    <input type="text" id="email" class="form-control round"
-                                        value="{{ Auth::guard('user2')->user()->email }}" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-2">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="text" id="phone" class="form-control round"
-                                        value="{{ Auth::guard('user2')->user()->phone }}" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-2">
-                                    <label for="phone">Work Number</label>
-                                    <input type="text" id="phone" class="form-control round"
-                                        value="{{ Auth::guard('user2')->user()->phone }}" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-2">
-                                    <label for="representative">Representative</label>
-                                    <input type="text" name="representative"
-                                        class="form-control round @error('representative') is-invalid @enderror"
-                                        value="{{ Auth::guard('user2')->user()->representative }}">
-                                    @error('representative')
-                                        <div class="invalid-feedback">
-                                            <i class="bx bx-radio-circle"></i>
+                        <div class="d-flex row card-body col-12">
+                            <div class="mb-3 row">
+                                <h6>Description</h6>
+                                <div class="container">
+                                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                        rows="4">@if(old('description')){{old('description')}}@else{{Auth::guard('user2')->user()->description}}@endif</textarea>
+                                    <div class="invalid-feedback">
+                                        @error('description')
                                             {{ $message }}
-                                        </div>
-                                    @enderror
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="card-header">
-                                <h4 class="card-title">Services</h4>
+
+                            <div class="d-flex mb-3 row col-12">
+                                <h6>Contact Details</h6>
+                                    <div class="col-md-4 col-6 mb-1">
+                                        <label for="email">Email</label>
+                                        <input type="text" id="email" class="form-control round"
+                                            value="{{ Auth::guard('user2')->user()->email }}" disabled>
+                                    </div>
+
+                                    <div class="col-md-4 col-6">
+                                        <label for="representative">Representative</label>
+                                        <input type="text" name="representative"
+                                            class="form-control round @error('representative') is-invalid @enderror"
+                                            value="@if(old('representative')) {{old('representative')}} @else {{ Auth::guard('user2')->user()->representative }} @endif">
+                                        @error('representative')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-3 col-5">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="text" id="phone" class="form-control round"
+                                            value="{{ Auth::guard('user2')->user()->phone }}" disabled>
+                                    </div>
                             </div>
-                            <div class="card-body">
-                                <div class="form-check">
-                                    <div class="checkbox">
-                                        <input name="coffee" type="checkbox" id="checkbox1" class="form-check-input"
-                                            @if (str_contains(Auth::guard('user2')->user()->type, 'coffee')) {
+
+                            <div class="mb-3 col-12 col-md-4">
+                                <h6>Services</h6>
+                                <div class="d-flex row">
+                                    <div class="checkbox col-5 col-sm-6 col-md-4">
+                                        <input name="coffee" type="checkbox" id="coffee" class="form-check-input"
+                                            @if (str_contains(Auth::guard('user2')->user()->type, 'coffee'))
                                                 checked @endif>
-                                        <label for="checkbox1">Coffee</label>
+                                        <label for="coffee">Coffee</label>
 
                                     </div>
-                                    <div class="checkbox">
-                                        <input type="checkbox" name="food" id="checkbox1" class="form-check-input"
+                                    <div class="checkbox col-5 col-sm-6 col-md-4">
+                                        <input type="checkbox" name="food" id="food" class="form-check-input"
                                             @if (str_contains(Auth::guard('user2')->user()->type, 'food')) checked @endif>
-                                        <label for="checkbox1">Food</label>
+                                        <label for="food">Food</label>
                                     </div>
-                                    <div class="checkbox">
-                                        <input name="drinks" type="checkbox" id="checkbox1" class="form-check-input"
+                                    <div class="checkbox col-5 col-sm-6 col-md-4">
+                                        <input name="drinks" type="checkbox" id="drinks" class="form-check-input"
                                             @if (str_contains(Auth::guard('user2')->user()->type, 'drinks')) checked @endif>
-                                        <label for="checkbox1">Drinks</label>
+                                        <label for="drinks">Drinks</label>
                                     </div>
                                     @error('coffee')
-                                        @php
-                                            $message = '*You must select at least 1 of the types of service.';
-                                        @endphp
-                                        <p style="color: red;">{{ $message }}</p>
+                                        <p style="color: red;">You must select at least one service that you provide.</p>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 col-12">
-                                <div class="card-header">
-                                    <h6 class="h6">Tags</h6>
-                                </div>
-                                <div class="card-body">
-                                    <section class="multiple-choices">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="card">
-                                                    <div class="row">
-                                                        <div class="col-md-7">
-                                                            @csrf
-                                                            <input name="tags" id="tags" data-role="tagsinput"
-                                                                class="@error('tags.*') is-invalid @enderror
-                                                                            @error('tags') is-invalid @enderror"
-                                                                value="{{ implode(', ', $tags) }}">
 
-                                                            <div class="invalid-feedback">
-                                                                <i class="bx bx-radio-circle"></i>
-                                                                @error('tags.*')
-                                                                    {{ $message }}
-                                                                @enderror
-                                                                @error('tags')
-                                                                    {{ $message }}
-                                                                @enderror
-                                                            </div>
-                                                        </div>
+                            <div class="mb-3 row">
+                                <h6 class="h6">Tags</h6>
+                                <section class="multiple-choices">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-md-7 form-group">
+                                                    @csrf
+                                                    <input name="tags" id="tags" data-role="tagsinput"
+                                                        class="@error('tags.*') is-invalid @enderror
+                                                                            @error('tags') is-invalid @enderror"
+                                                        value="@if(old('tags')) {{ implode(', ', old('tags'))}} @else {{ implode(', ', $tags) }} @endif">
+
+                                                    <div class="invalid-feedback">
+                                                        <i class="bx bx-radio-circle"></i>
+                                                        @error('tags.*')
+                                                            {{ $message }}
+                                                        @enderror
+                                                        @error('tags')
+                                                            {{ $message }}
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </section>
-                                </div>
+                                    </div>
+                                </section>
                             </div>
+                            <div>
                             <button type="submit" name="detailsForm" class="btn btn-success me-1 mb-1">Save
                                 changes</button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -227,60 +206,39 @@ use App\Models\Daily_Setting;
                                 <div class="card-header">
                                     <h4 class="card-title">Reservation Management</h4>
                                 </div>
-                                <form method="POST" action="/profile" class="col-md-12 ">
-                                    @csrf
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                        <div class="d-flex row col-12">
+                                            <div class="col-md-3 col-6">
                                                 <div class="form-group">
-                                                    <label for="roundText">Reservation Range</label>
-                                                    <input type="text" id="roundText" class="form-control round"
-                                                        value="{{ Auth::guard('user2')->user()->res_range }}"
-                                                        disabled>
+                                                    <label for="range" class="text-nowrap">Reservation Range</label>
+                                                    <div class="input-group">
+                                                        <label
+                                                            class="form-control round">{{ $user2->res_range }}</label>
+                                                        <label class="input-group-text" for="range">days</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-md-3 col-6">
                                                 <div class="form-group">
-                                                    <label for="squareText">Reservation Duration</label>
-                                                    <input type="text" id="squareText" class="form-control square"
-                                                        value="{{ Auth::guard('user2')->user()->duration }}"
-                                                        disabled>
+                                                    <label for="resv-duration" class="text-nowrap">Reservation
+                                                        Duration</label>
+                                                    <div class="input-group">
+                                                        <label
+                                                            class="form-control square">{{ $user2->duration }}</label>
+                                                        <label class="input-group-text" for="range">minutes</label>
+                                                    </div>
+                                                    @error('duration')
+                                                        <p style="color:red">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex col-12 mb-2">
-                                            <div class="form-group col-5 me-2">
-                                                <label for="basicSelect">Day</label>
-                                                <fieldset id="first" class="form-group">
-                                                    <select class="form-select" id="basicSelect" name="first">
-                                                        <option>Monday</option>
-                                                        <option>Tuesday</option>
-                                                        <option>Wednesday</option>
-                                                        <option>Thursday</option>
-                                                        <option>Friday</option>
-                                                        <option>Saturday</option>
-                                                        <option>Sunday</option>
-                                                    </select>
-                                                </fieldset>
-                                            </div>
-                                            <div>
+                                        </div>
 
-                                                <div class="row">
-                                                    <label for="basicSelect">First Reservation Hour</label>
-                                                    <div class="col-md-2 mb-1">
-                                                        <input type="text" id="firstResv" class="form-control square"
-                                                            value="{{ $min }}" disabled>
-                                                    </div>
-                                                    <label for="basicSelect">Last Reservation Hour</label>
-                                                    <div class="col-md-2 mb-1">
-                                                        <input type="text" id="lastResv" class="form-control square"
-                                                            value="{{ $max }}" disabled>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @include('business.components.reservation-hours')
+
                                     </div>
-                                </form>
                             </div>
 
                         </div>
@@ -483,7 +441,9 @@ use App\Models\Daily_Setting;
 <script src="/assets/js/bloodhound.js"></script>
 <script src="/assets/js/bootstrap-tagsinput.js"></script>
 <script src="/assets/vendors/choices.js/choices.min.js"></script>
+<script src="/assets/js/main.js"></script>
 <script src="/assets/js/tags.js"></script>
+<script src="/assets/js/reservation-settings.js"><script>
 
 {{-- For flash messages --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
@@ -491,41 +451,10 @@ use App\Models\Daily_Setting;
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-<script src="/assets/vendors/choices.js/choices.min.js"></script>
-
 {{-- Photos Ajax Dependencies --}}
 <script src="/assets/js/fileupload.js"></script>
-
-<script src="../assets/js/main.js"></script>
 
 {{-- Include for flash messages --}}
 @include('components.toasts')
 
-{{-- TODO: na mpi se diko tu file --}}
-<script>
-    //Ajax call for reservation settings(switch between days)
 
-    $(document).ready(function() {
-        $("#first").change(function() {
-            var day = $("#first").find(":selected").text();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "/profile",
-                data: {
-                    "day": day,
-                    "first": 1
-                },
-                success: function(data) {
-                    $("#firstResv").val(data[0]);
-                    $("#lastResv").val(data[1]);
-                }
-            });
-        });
-    });
-</script>

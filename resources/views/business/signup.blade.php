@@ -65,7 +65,7 @@
                                         <input type="text"
                                             class="form-control
                                                 @error('username') is-invalid @enderror"
-                                            id="username" name="username" value="{{ old('username') }}" required>
+                                            id="username" name="username" value="{{ old('username') }}" placeholder="This will be desplayed on your link" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('username')
@@ -82,7 +82,7 @@
                                         <input type="email"
                                             class="form-control
                                                 @error('email') is-invalid @enderror"
-                                            id="email" name="email" value="{{ old('email') }}" required>
+                                            id="email" name="email" value="{{ old('email') }}" placeholder="eg. example@domain.com" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('email')
@@ -138,8 +138,8 @@
                                         <input type="text"
                                             class="form-control
                                             @error('business_name') is-invalid @enderror"
-                                            placeholder="Business Name" id="business_name" name="business_name"
-                                            value="{{ old('business_name') }}" required>
+                                            id="business_name" name="business_name"
+                                            value="{{ old('business_name') }}"  placeholder="The place where your reservations will be booked" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('business_name')
@@ -154,7 +154,7 @@
                                         <input type="text"
                                             class="form-control
                                             @error('company_name') is-invalid @enderror"
-                                            placeholder="Company Name" id="company_name" name="company_name"
+                                            placeholder="The legal name of your company" id="company_name" name="company_name"
                                             value="{{ old('company_name') }}" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
@@ -276,7 +276,7 @@
 
                                 <h5 class="mb-4">Location</h5>
                                 <div class="col-md-6 col-12 mb-1">
-                                    <input type="text" id="location" class="form-control round">
+                                    <input type="text" id="location" placeholder="Search for location here" class="form-control round">
                                 </div>
 
 
@@ -301,7 +301,7 @@
                                                 <label class="col-form-label">Long</label>
                                             </div>
                                             <div class="col-md-4 col-4">
-                                                <input type="text" id="long" class="form-control" value="{{old('lat')}}" name="long"
+                                                <input type="text" id="long" class="form-control" value="{{old('long')}}" name="long"
                                                     readonly>
                                             </div>
 
@@ -312,8 +312,8 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <input type="text" id="address"
-                                                class="form-control @error('address') is-invalid @enderror" name="address"
-                                                value="{{ old('postal') }}">
+                                                class="form-control @error('address') is-invalid @enderror" placeholder="Address" name="address"
+                                                value="{{ old('address') }}">
                                             @error('address')
                                                 <div class="invalid-feedback">
                                                     <i class="bx bx-radio-circle"></i>
@@ -327,9 +327,9 @@
                                                 Code</label>
                                         </div>
                                         <div class="col-lg-6">
-                                            <input type="text" id="zip"
+                                            <input type="text" id="postal"
                                                 class="form-control @error('postal') is-invalid @enderror" name="postal"
-                                                value="{{ old('postal') }}" required>
+                                                value="{{ old('postal') }}" placeholder="Postal Code" required>
 
                                             @error('postal')
                                                 <div class="invalid-feedback">
@@ -465,7 +465,7 @@
 
 {{-- Maps Api Dependencies --}}
 <script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
+src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
 </script>
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>

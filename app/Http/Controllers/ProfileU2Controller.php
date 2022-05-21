@@ -171,15 +171,16 @@ class ProfileU2Controller extends ProfileController
         $user2 = Auth::guard('user2')->user();
         $tags = $user2->tags->pluck('name')->toArray();
 
-        //TODO: fix this na en opws tu admin
-        $day = $user2->dailySettings->where('day_id', 1)->first();
-        $max = (Time::createFromInt($day->time_max))->getStr();
-        $min = (Time::createFromInt($day->time_min))->getStr();
+        $newDailySettings = [];
+        foreach ($user2->dailySettings as $setting) {
+            $minTime = Time::createFromInt($setting->time_min)->getStr();
+            $maxTime = Time::createFromInt($setting->time_max)->getStr();
+            array_push($newDailySettings, array('day' => $setting->day_id, 'min' => $minTime, 'max' => $maxTime));
+        }
 
         return view('business.profile',[
             'tags' => $tags,
-            'max'  => $max,
-            'min'  => $min,
+            'settings' => $newDailySettings,
             'user2'=> $user2
         ]);
     }
