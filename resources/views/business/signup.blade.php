@@ -25,8 +25,7 @@
         //-na fiei jino to komma sta tags j en spastiko
         //- to location aman en kami signup j epistrepsei fkallei to sti thalassa
         //- ta tags aman en mitsia kamni overflow to placeholder
-        //- kapia en ta ferni piso otan kamis lathoi (px description tags klp)
-     --}}
+        //- kapia en ta ferni piso otan kamis lathoi (px description tags klp) --}}
 
 </head>
 
@@ -65,7 +64,8 @@
                                         <input type="text"
                                             class="form-control
                                                 @error('username') is-invalid @enderror"
-                                            id="username" name="username" value="{{ old('username') }}" placeholder="This will be desplayed on your link" required>
+                                            id="username" name="username" value="{{ old('username') }}"
+                                            placeholder="This will be desplayed on your link" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('username')
@@ -82,7 +82,8 @@
                                         <input type="email"
                                             class="form-control
                                                 @error('email') is-invalid @enderror"
-                                            id="email" name="email" value="{{ old('email') }}" placeholder="eg. example@domain.com" required>
+                                            id="email" name="email" value="{{ old('email') }}"
+                                            placeholder="eg. example@domain.com" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('email')
@@ -138,8 +139,8 @@
                                         <input type="text"
                                             class="form-control
                                             @error('business_name') is-invalid @enderror"
-                                            id="business_name" name="business_name"
-                                            value="{{ old('business_name') }}"  placeholder="The place where your reservations will be booked" required>
+                                            id="business_name" name="business_name" value="{{ old('business_name') }}"
+                                            placeholder="The reservation place" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('business_name')
@@ -154,7 +155,7 @@
                                         <input type="text"
                                             class="form-control
                                             @error('company_name') is-invalid @enderror"
-                                            placeholder="The legal name of your company" id="company_name" name="company_name"
+                                            placeholder="The legal company name" id="company_name" name="company_name"
                                             value="{{ old('company_name') }}" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
@@ -213,23 +214,21 @@
                                         </div>
                                         </div> --}}
                                 <div class="form-group col-12 justify-content-center mb-5">
-                                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description') }}"
-                                        rows=" 4"></textarea>
-                                     <div class="invalid-feedback">
-                                            @error('description')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                        value="{{ old('description') }}"
+                                        rows=" 4">{{ old('description') }}</textarea>
+                                    <div class="invalid-feedback">
+                                        @error('description')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
                                 </div>
 
 
                                 <h5 class="mb-1">File Uploads</h5>
-                                <div class="card-body">
-                                    <div class="col-md-5 col-12">
-                                    {{-- <form action="/api/photo-upload" method="POST" enctype="multipart/form-data">
-                                        @csrf --}}
-                                        <label for="formFileMultiple" class="form-label">Add
-                                            Photos</label>
+                                <div class="card-body col-12 col-md-12">
+                                    <div class="form-group col-md-5 col-12 mb-2">
+                                        <label for="photo" class="form-label">Add Photos</label>
                                         <input
                                             class="form-control @error('photo') is-invalid @enderror @error('photo.*') is-invalid @enderror"
                                             type="file" id="photo" name="photo[]" multiple>
@@ -245,10 +244,8 @@
                                         {{-- <input class="btn btn-primary" type="submit">
                                     </form> --}}
                                     </div>
-                                </div>
 
-                                <div class="card-body">
-                                    <div class="form-group col-md-5 col-12">
+                                    <div class="form-group col-md-5 col-12 mb-2">
                                         <label for="logo" class="form-label">Add Logo</label>
                                         <input class="form-control @error('logo') is-invalid @enderror" type="file"
                                             id="logo" name="logo" required>
@@ -258,11 +255,10 @@
                                             </div>
                                         @enderror
                                     </div>
-                                </div>
 
-                                <div class="card-body mb-3">
-                                    <div class="form-group col-md-5 col-12">
-                                        <label for="logo" class="form-label">Add Menu (.pdf)</label>
+
+                                    <div class="form-group col-md-5 col-12 mb-3">
+                                        <label for="logo" class="form-label">Add Menu (pdf)</label>
                                         <input class="form-control @error('menu') is-invalid @enderror" type="file"
                                             id="menu" name="menu" required>
                                         @error('menu')
@@ -273,176 +269,184 @@
                                     </div>
                                 </div>
 
+                        </div>
 
-                                <h5 class="mb-4">Location</h5>
-                                <div class="col-md-6 col-12 mb-1">
-                                    <input type="text" id="location" placeholder="Search for location here" class="form-control round">
+
+                        <div class="card-body">
+                            <h5 class="mb-4">Location</h5>
+                            <div class="col-md-6 col-12 mb-1">
+                                <input type="text" id="location" placeholder="Search for location here"
+                                    class="form-control round">
+                            </div>
+
+
+
+                            <div class="form-group row mb-5">
+                                <div class="col-md-6 col-12 mb-2">
+                                    <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
                                 </div>
 
+                                <div class="col-md-6 col-12">
 
+                                    <div class="row flex">
+                                        <div class="col-sm-2 col-2">
+                                            <label class="col-form-label">Lat</label>
+                                        </div>
+                                        <div class="col-md-4 col-4">
+                                            <input type="text" id="lat" class="form-control"
+                                                value="{{ old('lat') }}" name="lat" readonly>
+                                        </div>
 
-                                <div class="form-group row mb-5">
-                                    <div class="col-md-6 col-12 mb-2">
-                                        <div id="map" class="form-control-lg mb-3" style="min-height: 300px;"></div>
+                                        <div class="col-sm-2 col-2">
+                                            <label class="col-form-label">Long</label>
+                                        </div>
+                                        <div class="col-md-4 col-4">
+                                            <input type="text" id="long" class="form-control"
+                                                value="{{ old('long') }}" name="long" readonly>
+                                        </div>
+
                                     </div>
 
-                                    <div class="col-md-6 col-12">
-
-                                        <div class="row flex">
-                                            <div class="col-sm-2 col-2">
-                                                <label class="col-form-label">Lat</label>
+                                    <div class="col-sm-4">
+                                        <label class="col-form-label">Address</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" id="address"
+                                            class="form-control @error('address') is-invalid @enderror"
+                                            placeholder="Address" name="address" value="{{ old('address') }}">
+                                        @error('address')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
                                             </div>
-                                            <div class="col-md-4 col-4">
-                                                <input type="text" id="lat" class="form-control" value="{{old('lat')}}" name="lat"
-                                                    readonly>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <label class="col-form-label text-nowrap">Zip
+                                            Code</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text" id="postal"
+                                            class="form-control @error('postal') is-invalid @enderror" name="postal"
+                                            value="{{ old('postal') }}" placeholder="Postal Code" required>
+
+                                        @error('postal')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
                                             </div>
+                                        @enderror
+                                    </div>
 
-                                            <div class="col-sm-2 col-2">
-                                                <label class="col-form-label">Long</label>
-                                            </div>
-                                            <div class="col-md-4 col-4">
-                                                <input type="text" id="long" class="form-control" value="{{old('long')}}" name="long"
-                                                    readonly>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <label class="col-form-label">Address</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="address"
-                                                class="form-control @error('address') is-invalid @enderror" placeholder="Address" name="address"
-                                                value="{{ old('address') }}">
-                                            @error('address')
-                                                <div class="invalid-feedback">
-                                                    <i class="bx bx-radio-circle"></i>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <label class="col-form-label text-nowrap">Zip
-                                                Code</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text" id="postal"
-                                                class="form-control @error('postal') is-invalid @enderror" name="postal"
-                                                value="{{ old('postal') }}" placeholder="Postal Code" required>
-
-                                            @error('postal')
-                                                <div class="invalid-feedback">
-                                                    <i class="bx bx-radio-circle"></i>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <label class="col-form-label">City</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input type="text"
-                                                class="form-control
+                                    <div class="col-sm-4">
+                                        <label class="col-form-label">City</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input type="text"
+                                            class="form-control
                                                                 @error('city') is-invalid @enderror"
-                                                placeholder="City" id="city" name="city" value="{{ old('city') }}"
-                                                required>
+                                            placeholder="City" id="city" name="city" value="{{ old('city') }}"
+                                            required>
 
-                                            @error('city')
-                                                <div class="invalid-feedback">
-                                                    <i class="bx bx-radio-circle"></i>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                        @error('city')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
 
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <h5 class="mb-4">Business Characteristics</h5>
+                            <div class="form-group row">
+                                <div class="col-md-6 col-12">
+
+                                    <div class="card-body">
+                                        <h6 class="h6">Services</h6>
+                                        <div class="form-check" id="type" name="type">
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="coffee" name="coffee"
+                                                    class="form-check-input"
+                                                    @if (old('coffee')) checked @else unchecked @endif>
+                                                <label for="coffee">Coffee</label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="food" name="food" class="form-check-input"
+                                                    @if (old('food')) checked @else unchecked @endif>
+                                                <label for="food">Food</label>
+                                            </div>
+                                            <div class="checkbox">
+                                                <input type="checkbox" id="drinks" name="drinks"
+                                                    class="form-check-input"
+                                                    @if (old('drinks')) checked @else unchecked @endif>
+                                                <label for="drinks">Drinks</label>
+                                            </div>
                                         </div>
-
+                                        <input class="is-invalid" hidden>
+                                        @error('food')
+                                            <div class="invalid-feedback">
+                                                <i class="bx bx-radio-circle"></i>
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
 
-
-                                <h5 class="mb-4">Business Characteristics</h5>
-                                <div class="form-group row">
-                                    <div class="col-md-6 col-12">
-
-                                        <div class="card-body">
-                                            <h6 class="h6">Services</h6>
-                                            <div class="form-check" id="type" name="type">
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="coffee" name="coffee"
-                                                        class="form-check-input" unchecked>
-                                                    <label for="coffee">Coffee</label>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="food" name="food"
-                                                        class="form-check-input" unchecked>
-                                                    <label for="food">Food</label>
-                                                </div>
-                                                <div class="checkbox">
-                                                    <input type="checkbox" id="drinks" name="drinks"
-                                                        class="form-check-input" unchecked>
-                                                    <label for="drinks">Drinks</label>
-                                                </div>
-                                            </div>
-                                            <input class="is-invalid" hidden>
-                                            @error('food')
-                                                <div class="invalid-feedback">
-                                                    <i class="bx bx-radio-circle"></i>
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="card-header">
+                                        <h6 class="h6">Tags</h6>
                                     </div>
+                                    <div class="card-body">
+                                        <section class="multiple-choices">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="row">
+                                                            <div class="col-md-7 col-8">
+                                                                @csrf
+                                                                <input name="tags" id="tags" data-role="tagsinput"
+                                                                    placeholder="e.g souvlakia, beer"
+                                                                    class="@error('tags.*') is-invalid @enderror
+                                                                        @error('tags') is-invalid @enderror"
+                                                                    value="@if (old('tags')) {{ implode(', ', old('tags')) }} @endif">
 
-                                    <div class="col-md-6 col-12">
-                                        <div class="card-header">
-                                            <h6 class="h6">Tags</h6>
-                                        </div>
-                                        <div class="card-body">
-                                            <section class="multiple-choices">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="card">
-                                                            <div class="row">
-                                                                <div class="col-md-7 col-8">
-                                                                    @csrf
-                                                                    <input name="tags" id="tags" data-role="tagsinput" placeholder="e.g souvlakia, beer, ..."
-                                                                        class="@error('tags.*') is-invalid @enderror
-                                                                        @error('tags') is-invalid @enderror">
-
-                                                                    <div class="invalid-feedback">
-                                                                        <i class="bx bx-radio-circle"></i>
-                                                                        @error('tags.*')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                        @error('tags')
-                                                                            {{ $message }}
-                                                                        @enderror
-                                                                    </div>
+                                                                <div class="invalid-feedback">
+                                                                    <i class="bx bx-radio-circle"></i>
+                                                                    @error('tags.*')
+                                                                        {{ $message }}
+                                                                    @enderror
+                                                                    @error('tags')
+                                                                        {{ $message }}
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
-                                            </section>
-                                            <!-- Multiple choices end -->
+                                        </section>
+                                        <!-- Multiple choices end -->
 
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <button type="submit" id="submit" class="btn btn-primary btn-lg me-3 mb-1">Sign
-                                        Up</button>
-                                </div>
 
-                            </form>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" id="submit" class="btn btn-primary btn-lg me-3 mb-1">Sign
+                                    Up</button>
+                            </div>
                         </div>
-
+                        </form>
                     </div>
 
             </div>
+
         </div>
     </div>
 
@@ -453,7 +457,7 @@
 
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/jquery-3.6.0.min.js"></script>
-<script src="/assets/js/register.js"> </script>
+<script src="/assets/js/register.js"></script>
 
 {{-- Gia ta tags --}}
 <script src="/assets/js/typeahead.bundle.js"></script>
@@ -465,8 +469,7 @@
 
 {{-- Maps Api Dependencies --}}
 <script type="text/javascript"
-src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE">
-</script>
+src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDxUlC2oDfRsgJ7YRBsD9nCicQqBLaDNIE"></script>
 <script type="text/javascript"
 src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
 <script src="/assets/js/maps-script.js"></script>

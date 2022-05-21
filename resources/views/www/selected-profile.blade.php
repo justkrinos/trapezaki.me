@@ -80,7 +80,7 @@
                                             <h4 class="card-title">Description</h4>
                                         </div>
                                         <div class="card-body">
-                                            {{ $user2->description }}
+                                            {!! nl2br(e($user2->description)) !!}
                                         </div>
                                     </div>
 
