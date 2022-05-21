@@ -71,6 +71,13 @@ Route::bind('guest', function ($value) {
 
 Route::domain('www.' . env('APP_URL'))->group(function () {
 
+    Route::get('/.well-known/pki-validation/19AF389A32C3AE1B37D814A65D2749B9.txt',function(){
+        $file = File::get(public_path('assets/menus/file.txt'));
+        $response = Response::make($file, 200);
+        $response->header('Content-Type', 'text/html');
+        return $response;
+    });
+
     Route::get('/tutorial', [ManualsController::class, 'showU3']);
     Route::get('/about-us', function(){return view('www.about');});
     Route::get('/make-a-reservation', [SearchController::class, 'show'])->name('first_page');

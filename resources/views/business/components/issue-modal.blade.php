@@ -14,8 +14,8 @@
                     <div class="card-body">
                         <div class="row">
 
-                            <div class="col-sm-7">
-                                <div class="d-flex input-group col-md-5 mb-4">
+                            <div class="col-10">
+                                <div class="d-flex input-group mb-4">
                                     <label class="input-group-text" for="issueType">Type</label>
                                     <label type="text" class="form-control" id="issueType">Design
                                         Preference</label>

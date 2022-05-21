@@ -1,3 +1,4 @@
+//Ajax call otan kamneis delete mia photo
 $("ul.images").on("click", "li span.del", function () {
     var photo = $(this).parent();
 
@@ -93,6 +94,8 @@ function loadPhotos() {
 }
 loadPhotos();
 
+
+//Ajax call otan kamneis upload mia photo
 $("#image-upload-form").on("submit", function (e) {
     e.preventDefault();
 

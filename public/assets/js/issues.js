@@ -15,7 +15,7 @@ $(document).ready(function () {
     })
 
     $("#issueBusiness").click(function () {
-        window.location.href = "/manage-customers" + "/" + $(this).html();
+        window.location.href = "/user" + "/" + $(this).html();
     })
 
     //TODO: if issue.status == solved then

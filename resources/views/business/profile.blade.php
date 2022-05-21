@@ -6,7 +6,6 @@ use App\Models\User2_Tag;
 use App\Models\Tag;
 use App\Models\User2_Photo;
 use App\Models\Daily_Setting;
-
 ?>
 
 <head>
@@ -441,6 +440,7 @@ use App\Models\Daily_Setting;
 <script src="/assets/vendors/choices.js/choices.min.js"></script>
 <script src="/assets/js/main.js"></script>
 <script src="/assets/js/tags.js"></script>
+
 <script src="/assets/js/reservation-settings.js"><script>
 
 {{-- For flash messages --}}
