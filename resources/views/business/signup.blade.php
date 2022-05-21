@@ -61,11 +61,12 @@
                                 <div class="d-flex row col-md-12 justify-content-center">
                                     <div class="form-group col-md-5 col-12">
                                         <label for="username">Username</label>
+                                        <small class="text-muted"><i> This will be displayed on your link</i></small>
                                         <input type="text"
                                             class="form-control
                                                 @error('username') is-invalid @enderror"
                                             id="username" name="username" value="{{ old('username') }}"
-                                            placeholder="This will be desplayed on your link" required>
+                                            placeholder="Username" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('username')
@@ -136,11 +137,12 @@
                                 <div class="d-flex row col-md-12 mb-4 justify-content-center">
                                     <div class="form-group col-md-5 col-12">
                                         <label for="business_name">Business Name</label>
+                                        <small class="text-muted"><i> The name of the place where the reservations will be held.</i></small>
                                         <input type="text"
                                             class="form-control
                                             @error('business_name') is-invalid @enderror"
                                             id="business_name" name="business_name" value="{{ old('business_name') }}"
-                                            placeholder="The reservation place" required>
+                                            placeholder="Business name" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
                                         @error('business_name')
@@ -152,10 +154,11 @@
                                     </div>
                                     <div class="form-group col-md-5 col-12 justify-content-center">
                                         <label for="company_name">Company Name</label>
+                                        <small class="text-muted"><i> The legal name of the company.</i></small>
                                         <input type="text"
                                             class="form-control
                                             @error('company_name') is-invalid @enderror"
-                                            placeholder="The legal company name" id="company_name" name="company_name"
+                                            placeholder="Company Name" id="company_name" name="company_name"
                                             value="{{ old('company_name') }}" required>
 
                                         {{-- This will be pulled everytime there's an error --}}
@@ -168,6 +171,7 @@
                                     </div>
                                     <div class="form-group col-md-5 col-12 justify-content-center">
                                         <label for="representative">Representative Name</label>
+                                        <small class="text-muted"><i> The name of the person who will manage this account</i></small>
                                         <input type="text"
                                             class="form-control
                                             @error('representative') is-invalid @enderror"
@@ -185,6 +189,7 @@
 
                                     <div class="form-group col-md-5 col-12 justify-content-center">
                                         <label for="phone">Phone number</label>
+                                        <small class="text-muted"><i> The phone number of the person who will manage this account</i></small>
                                         <input type="phone"
                                             class="form-control
                                                     @error('phone') is-invalid @enderror"
@@ -204,6 +209,7 @@
 
 
                                 <h5 class="h6 mb-2">Description</h5>
+                                <small class="text-muted"><i> A short description that will be shown to customers.</i></small>
                                 {{-- TODO: Tuto itan gia na kamume pio advanced editor alla ennaxume themata me XSS --}}
                                 {{-- <div class="col-mb-6 col-12 mb-5">
                                         <div id="snow">
@@ -398,16 +404,15 @@
                                 </div>
 
                                 <div class="col-md-6 col-12">
-                                    <div class="card-header">
-                                        <h6 class="h6">Tags</h6>
-                                    </div>
                                     <div class="card-body">
+                                        <h6 class="h6">Tags</h6>
+                                        <small class="text-muted"><i>These are keywords used by customers to search your place.</i></small>
                                         <section class="multiple-choices">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="card">
                                                         <div class="row">
-                                                            <div class="col-md-7 col-8">
+                                                            <div class="col-md-12 col-12">
                                                                 @csrf
                                                                 <input name="tags" id="tags" data-role="tagsinput"
                                                                     placeholder="e.g souvlakia, beer"

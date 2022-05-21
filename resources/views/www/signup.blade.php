@@ -45,7 +45,7 @@
                                     <input type="text"
                                         class="form-control
                                             @error('username') is-invalid @enderror"
-                                        id="username" name="username" value="{{ old('username') }}" required>
+                                        id="username" name="username" placeholder="Username" value="{{ old('username') }}" required>
 
                                     {{-- This will be pulled everytime there's an error --}}
                                     @error('username')
@@ -59,11 +59,10 @@
 
                                 <div class="form-group">
                                     <label for="full_name">Full Name</label>
-                                    <small class="text-muted"><i>(First and Last name)</i></small>
                                     <input type="text"
                                         class="form-control
                                             @error('full_name') is-invalid @enderror"
-                                        id="full_name" name="full_name" value="{{ old('full_name') }}" required>
+                                        id="full_name" name="full_name" placeholder="First name and last name" value="{{ old('full_name') }}" required>
 
                                     {{-- This will be pulled everytime there's an error --}}
                                     @error('full_name')
@@ -81,7 +80,7 @@
                                     <input type="email"
                                         class="form-control
                                             @error('email') is-invalid @enderror"
-                                        id="email" name="email" value="{{ old('email') }}" required>
+                                        id="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
 
                                     {{-- This will be pulled everytime there's an error --}}
                                     @error('email')
@@ -98,7 +97,7 @@
                                     <input type="phone"
                                         class="form-control
                                             @error('phone') is-invalid @enderror"
-                                        id="phone" name="phone" value="{{ old('phone') }}" required>
+                                        id="phone" name="phone" placeholder="Phone Number" value="{{ old('phone') }}" required>
 
                                     {{-- This will be pulled everytime there's an error --}}
                                     @error('phone')
