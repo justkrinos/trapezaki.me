@@ -13,49 +13,6 @@ class ProfileU2Controller extends ProfileController
 {
     public function modify()
     {
-        //TODO fix this
-        if((request()->has('first'))||(request()->has('last')))
-        {
-            $day = request("day");
-            $day_id = 1;
-            switch ($day)
-            {
-                case "Monday":
-                    $day_id = 1;
-                    break;
-
-                case "Tuesday":
-                    $day_id = 2;
-                    break;
-
-                case "Wednesday":
-                    $day_id = 3;
-                    break;
-
-                case "Thursday":
-                    $day_id = 4;
-                    break;
-
-                case "Friday":
-                    $day_id = 5;
-                    break;
-
-                case "Saturday":
-                    $day_id = 6;
-                    break;
-
-                case "Sunday":
-                    $day_id = 7;
-                    break;
-            }
-
-            $day = Daily_Setting::where('day_id', $day_id)->where('user2_id', Auth::guard('user2')->user()->id)->first();
-
-            $minTime = Time::createFromInt($day->time_min)->getStr();
-            $maxTime = Time::createFromInt($day->time_max)->getStr();
-
-            return [$minTime, $maxTime];
-        }
         if(request()->has('detailsForm'))
         {
 

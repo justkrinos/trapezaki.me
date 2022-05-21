@@ -148,7 +148,6 @@ use App\Models\Table;
                             </section>
                             {{-- <!-- Hoverable rows end --> --}}
 
-                            {{-- TODO: nan apla button oi forma tuto katw --}}
                             <div class="col-sm-12 d-flex justify-content-start form-group">
                                 <form>
                                     <input type="button" id="newRes" class="btn btn-primary" value="Add Reservation" />

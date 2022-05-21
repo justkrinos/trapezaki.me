@@ -51,7 +51,6 @@ class SessionsU3Controller extends SessionsController
 
 
         //Continue to login
-        session()->forget('city'); // gia na fiei to city an iparxei
         session()->regenerate();
 
         return redirect('/make-a-reservation')->withInput()->with('success', 'Welcome!');

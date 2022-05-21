@@ -1,4 +1,3 @@
-{{--TODO: na sasei to alignment aman en mitsia i selida --}}
 <div class="d-flex row col-12 mb-2">
     <div class="form-group col-6 col-md-3 me-2">
         <label for="day" class="text-nowrap">Daily Reservation Range</label>

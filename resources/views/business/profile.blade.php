@@ -9,8 +9,6 @@ use App\Models\Daily_Setting;
 
 ?>
 
-{{-- TODO: ta business info j jina nan pio wraia --}}
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
