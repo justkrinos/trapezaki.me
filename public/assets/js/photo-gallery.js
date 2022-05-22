@@ -39,7 +39,7 @@ $("#gallery").nanogallery2({
       { w: 1, h: 1, c: 3, r: 2 },
       { w: 1, h: 2, c: 4, r: 1 },
       { w: 2, h: 1, c: 5, r: 1 },
-      { w: 2, h: 2, c: 5, r: 2 },
+      { w: 2, h: 1, c: 5, r: 2 },
       { w: 1, h: 1, c: 4, r: 3 },
       { w: 2, h: 1, c: 2, r: 3 },
       { w: 1, h: 2, c: 1, r: 3 },
@@ -66,7 +66,7 @@ $("#gallery").nanogallery2({
       { w: 1, h: 1, c: 2, r: 4 },
       { w: 1, h: 1, c: 3, r: 4 }
     ],
-    galleryMaxRows: 1,
+    galleryMaxRows: 3,
     galleryDisplayMode: 'rows',
     gallerySorting: 'random',
     thumbnailDisplayOrder: 'random',
