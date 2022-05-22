@@ -156,6 +156,6 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js"></script>
-<script src="../assets/js/photo-gallery.js"></script>
+<script src="/assets/js/photo-gallery.js"></script>
 
 
