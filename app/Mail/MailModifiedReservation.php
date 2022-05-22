@@ -30,7 +30,6 @@ class MailModifiedReservation extends Mailable
      */
     public function __construct($email, Reservation $reservation, $business_name)
     {
-        // TODO: change this to https when ssl works
         $this-> business_name = $business_name;
         $this-> date = $reservation->date;
         $this-> time = $reservation->time;

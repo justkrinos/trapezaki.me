@@ -57,7 +57,9 @@ class RegisterU3Controller extends RegisterController
             $user->is_verified = 1;
             $user->save();
         }
-        //TODO: email verification
+
+        Mail::to($user->email)->queue(new \App\Mail\MailPendingHandled
+        ($user->email, "decline", $user->full_name));
 
 
 
