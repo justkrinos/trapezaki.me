@@ -58,10 +58,6 @@ class RegisterU3Controller extends RegisterController
             $user->save();
         }
 
-        Mail::to($user->email)->queue(new \App\Mail\MailPendingHandled
-        ($user->email, "decline", $user->full_name));
-
-
 
         //Redirect to the login page
         return redirect('/login')->with('success',"Your account has been created successfully! Check your email for verification.");

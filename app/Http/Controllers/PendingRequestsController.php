@@ -35,13 +35,20 @@ class PendingRequestsController extends Controller
             if ($action === 'accept') {
                 if($user2->floorplan->json == null)
                     return 'no-floorplan';
-                //TODO
-                //sto manage customers na dixnei j ta pending j ta disabled j ta approved
-                //sto manage customer na dulefki to koumpi approve alla na dixni j tus pending
                 $user2->status = 2; //default na en disabled (pending=0, active=1, disabled=2)
+
+                if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+                Mail::to($user2->email)
+                    ->queue(new \App\Mail\MailPendingHandled($user2->email, $action, $user2->representative));
+
                 $user2->save();
                 return 'success';
             } else if ($action == 'decline') {
+
+                if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
+                    Mail::to($user2->email)
+                        ->queue(new \App\Mail\MailPendingHandled($user2->email, $action, $user2->representative));
+
                 $user2->deletePhotos();
                 $user2->floorPlan->delete();
                 $user2->deleteMenu();
@@ -50,11 +57,6 @@ class PendingRequestsController extends Controller
                 return 'success';
             }
 
-            if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
-            {
-                Mail::to($user2->email)->queue(new \App\Mail\MailPendingHandled
-                                                        ($user2->email, $action, $user2->representative));
-            }
         }
         return 'error';
     }
