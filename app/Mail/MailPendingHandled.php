@@ -21,7 +21,6 @@ class MailPendingHandled extends Mailable
      */
     public function __construct($email, $action, $representative)
     {
-        // TODO: change this to https when ssl works
         $this->action = $action;
         $this->representative = $representative;
     }

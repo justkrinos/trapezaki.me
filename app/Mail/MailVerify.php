@@ -22,9 +22,7 @@ class MailVerify extends Mailable
     public function __construct($email, $name, $secret, $user)
     {
         $this->name = $name;
-        $this->link = 'http://' . $user . '.trapezaki.me' . '/verify/' . $email . '/' . $secret . '/';
-        //TODO: //-an en business na stelni allo view j an en www na stelni allo
-                //-to variable $user lalei ti enei
+        $this->link = 'https://' . $user . '.trapezaki.me' . '/verify/' . $email . '/' . $secret . '/';
     }
 
     /**

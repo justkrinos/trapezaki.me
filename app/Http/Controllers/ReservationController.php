@@ -137,7 +137,7 @@ class ReservationController extends Controller
             {
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
                 Mail::to($user2->email)->queue(new \App\Mail\MailCreatedReservation
-                    ($user2->email, $reservation, $user2->business_name));
+                    ($reservation->user3->email, $reservation, $user2->business_name));
             }
 
             //TODO na men kamni return reservation afu en dia pisw ta data

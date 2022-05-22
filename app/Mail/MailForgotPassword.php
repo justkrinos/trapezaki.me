@@ -20,8 +20,7 @@ class MailForgotPassword extends Mailable
      */
     public function __construct($email, $secret, $user)
     {
-        // TODO: change this to https when ssl works
-        $this->link = 'http://' . $user . '.trapezaki.me' . '/change-password/' . $email . '/' . $secret . '/';
+        $this->link = 'https://' . $user . '.trapezaki.me' . '/change-password/' . $email . '/' . $secret . '/';
 
     }
 
