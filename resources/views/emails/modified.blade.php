@@ -143,7 +143,7 @@
                                  Reservation No: #{{ $reservation_id }}<br>
                                  Date: {{ $date }}<br>
                                  Time: {{ $time }}<br>
-                                 People: {{$pax}}
+                                 People: {{$pax}}<br>
                                  Table Number: {{ $table }}<br>
                                  Details: {{ $details }}<br><br>
                             </p>
