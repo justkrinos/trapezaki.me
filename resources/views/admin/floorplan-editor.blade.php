@@ -52,9 +52,6 @@
                                     <button class="btn btn-outline-primary btn-sm rectangle text-nowrap">+ &#9647;
                                         Table</button>
                                     <button class="btn btn-outline-primary btn-sm circle text-nowrap">+ &#9711; Table</button>
-                                    <button class="btn btn-outline-primary btn-sm triangle" hidden>+ &#9651; Table</button>
-                                    <button class="btn btn-outline-primary btn-sm chair text-nowrap" hidden>+ Chair</button>
-                                    <button class="btn btn-outline-primary btn-sm bar" hidden>+ Bar</button>
                                     <button class="btn btn-outline-primary btn-sm wall text-nowrap">+ &#9646; Wall</button>
                                 </div>
                                 <div class="btn-group mb-1">
