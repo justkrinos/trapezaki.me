@@ -1,11 +1,5 @@
 <?php
 
-/*
-    MEGALO TODO
-
-    AN DEN DIAGRAFONTE TA TABLES APO TIN VASI, TO SEARCH TA VRISKEI AN IKANOPOIEI TO PAX<=CAPACITY
-    KAI ETSI EMFANIZEI BUSINESSES PU ISWS DEN EXOUN KATALLILO TABLE, EPD I VASI LEEI PWS IPARXEI
-*/
 use App\Http\Controllers\ManualsController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\TagsApiController;

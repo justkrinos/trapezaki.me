@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $(document).on("click", ".issueName" , function() {
+    $(document).on("click", ".issueName", function () {
         //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
         //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
         $description = $(this).siblings(".issue-description").html();
@@ -155,12 +155,65 @@ let dataTable3 = new simpleDatatables.DataTable(table3, {
 });
 
 dataTable3.on("datatable.sort", function (column, direction) {
-    if($("#checkSolved").is(":checked"))
+    if ($("#checkSolved").is(":checked"))
         SolCheckbox()
 
-    if($("#checkCant").is(":checked"))
+    if ($("#checkCant").is(":checked"))
         CantCheckbox()
 
-    if($("#checkNot").is(":checked"))
+    if ($("#checkNot").is(":checked"))
         NotCheckbox()
 });
+
+//Ana allaksi selida pale na eshi listeners
+dataTable3.on("datatable.page", function () {
+    //Listeners gia na stili to request
+    $(".notSolved-flag").click(sendFlag)
+    $(".solved-flag").click(sendFlag)
+})
+
+
+
+
+//Listeners gia na stili to request
+$(".notSolved-flag").click(sendFlag)
+$(".solved-flag").click(sendFlag)
+
+
+//function gia na stili to request
+function sendFlag() {
+    //An en active to button kame to na gini not active
+    if ($(this).hasClass("active"))
+        issueFlag = 0;
+    else
+    //An denen active tote kame to na gini active
+        issueFlag = $(this).val();
+
+
+    issueId = $(this).parent().siblings("[name='id']").val()
+
+    buttonPressed = $(this)
+
+    $.ajaxSetup({
+        headers: {
+            "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
+        },
+    });
+
+    //Send the flag
+    $.ajax({
+        url: "/issues",
+        method: "post",
+        data: {
+            'id': issueId,
+            'status': issueFlag
+        },
+        success: function (result) {
+            //fie to active p to allo to button (an eshi)
+            buttonPressed.siblings(".active").removeClass("active")
+            //vale to active to button p epatithike
+            buttonPressed.toggleClass("active")
+        }
+    });
+}
+

@@ -30,26 +30,24 @@ class FloorPlanController extends Controller
         //also check if not cancelled
         $tablesWithReservations =
             Table::where('user2_id', $user2->id)
-                ->leftJoin('reservations', 'reservations.table_id', '=', 'tables.id')
-                ->leftJoin('cancellations', 'cancellations.reservation_id', '=', 'reservations.id')
-                ->select('reservations.date', 'tables.id', 'reservations.table_id', 'cancellations.reason')
-                ->whereDate('reservations.date', '>=', $today)
-                ->whereNull('cancellations.reason')
-                ->select('table_id')
-                ->distinct()
-                ->get();
+            ->leftJoin('reservations', 'reservations.table_id', '=', 'tables.id')
+            ->leftJoin('cancellations', 'cancellations.reservation_id', '=', 'reservations.id')
+            ->select('reservations.date', 'tables.id', 'reservations.table_id', 'cancellations.reason')
+            ->whereDate('reservations.date', '>=', $today)
+            ->whereNull('cancellations.reason')
+            ->select('table_id')
+            ->distinct()
+            ->get();
 
         //get the floorplan
         $floorplan = $user2->floorPlan->json;
 
-        if ($floorplan){ //an den en ofkero stilto
+        if ($floorplan) { //an den en ofkero stilto
             $returnData['floorplan'] = $floorplan;
             $returnData['tablesWithReservations'] = $tablesWithReservations;
 
             return $returnData;
-        }
-
-        else
+        } else
             return []; //aliws stile ofkero gia na kserei oti en null
 
         // //OLD CODE
@@ -88,6 +86,7 @@ class FloorPlanController extends Controller
             $user2->floorPlan->json = $validatedData['floorplan'];
             $user2->floorPlan->save();
 
+            //update tables with new data
             foreach ($validatedData['tables'] as $table) {
                 $user2->tables()->updateOrCreate(
                     ['id' => $table['id']],
@@ -95,10 +94,31 @@ class FloorPlanController extends Controller
                 );
             }
 
-            //TODO: table number prp nan unique gia kathe user
-            //TODO: jina p en exun ID mesto json na tus valw ta id tous afou ta dimiourgiso
+            //get all the tables of the user that are not deleted
+            $dbTables = $user2->tables()->where('capacity', '>', 0)->get();
+            //find the deleted tables from the new floorplan (differences)
+            $deletedTables= array_udiff(
+                $dbTables->toArray(),
+                $validatedData['tables'],
 
+                function ($obj_a, $obj_b) {
+                    return $obj_a['id'] - $obj_b['id'];
+                }
+            );
+
+            //delete those tables that are not in the floorplan
+            foreach ($deletedTables as $deletedTable) {
+                //find the table
+                $table = $dbTables->find($deletedTable["id"]);
+                //set its capacity
+                $table->capacity=0;
+                //save it
+                $table->save();
+            }
+
+            //return success
             return 'success';
+
         } else if (request()->has('getId')) {
 
             $validatedData = request()->validate([
@@ -111,5 +131,4 @@ class FloorPlanController extends Controller
             return $table->id;
         }
     }
-
 }

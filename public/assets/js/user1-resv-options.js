@@ -393,9 +393,6 @@ $(document).ready(function () {
 })
 
 
-
-
-
 //download file
 function downloadJSON(data, filename) {
 
@@ -420,3 +417,5 @@ function downloadJSON(data, filename) {
     e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
     a.dispatchEvent(e)
 }
+
+

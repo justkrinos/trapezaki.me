@@ -115,19 +115,17 @@ use App\Models\User2_Photo;
 
 
 
-                                                        <form action="/issues" method="POST">
                                                             @csrf
                                                             {{-- Hidden ID --}}
-                                                            <input type="hidden" id="id" name="id"
+                                                            <input type="hidden" name="id"
                                                                 value="{{ $issue->id }}">
                                                             <div class="form-group mb-3" style="width:300px;">
-                                                                <button type="submit" name="status" value="1"
-                                                                    class="btn btn-outline-success text-nowrap @if($issue->status == '1') active @endif " >Solved</button>
+                                                                <button name="status" value="1"
+                                                                    class="btn btn-outline-success text-nowrap solved-flag @if($issue->status == '1') active @endif " >Solved</button>
 
                                                                 <button type="submit" name="status" value="2"
-                                                                    class="btn btn-outline-danger text-nowrap  @if($issue->status == '2') active @endif">Can't be solved</button>
+                                                                    class="btn btn-outline-danger text-nowrap notSolved-flag @if($issue->status == '2') active @endif">Can't be solved</button>
                                                             </div>
-                                                        </form>
                                                 @endforeach
                                         </tbody>
                                     </table>
