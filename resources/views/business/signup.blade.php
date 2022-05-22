@@ -137,7 +137,7 @@
                                 <div class="d-flex row col-md-12 mb-4 justify-content-center">
                                     <div class="form-group col-md-5 col-12">
                                         <label for="business_name">Business Name</label>
-                                        <small class="text-muted"><i> The name of the place where the reservations will be held.</i></small>
+                                        <small class="text-muted"><i> The name of the place for reservations.</i></small>
                                         <input type="text"
                                             class="form-control
                                             @error('business_name') is-invalid @enderror"
@@ -154,7 +154,7 @@
                                     </div>
                                     <div class="form-group col-md-5 col-12 justify-content-center">
                                         <label for="company_name">Company Name</label>
-                                        <small class="text-muted"><i> The legal name of the company.</i></small>
+                                        <small class="text-muted"><i> The legal name of your company.</i></small>
                                         <input type="text"
                                             class="form-control
                                             @error('company_name') is-invalid @enderror"

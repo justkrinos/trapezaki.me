@@ -49,10 +49,13 @@ class PendingRequestsController extends Controller
                 $user2->delete();
                 return 'success';
             }
+
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
             {
                 Mail::to($user2->email)->queue(new \App\Mail\MailPendingHandled
                                                         ($user2->email, $action, $user2->representative));
+            }else{
+                return 'error';
             }
         }
         return 'error';
