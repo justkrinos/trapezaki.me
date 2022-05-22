@@ -90,7 +90,7 @@ class ForgotPasswordController extends Controller
     public function modifyForgotU2($email, $secret)
     {
         $user = User2::where('email', $email)->first();
-        return $this->changePassword($user,$secret, request());
+
         if ($user && !strcmp($secret, $user->verification_code)) {
             $validatedData = request()->validate([
                 'password' => 'required|max:50|min:7',
