@@ -32,6 +32,12 @@ class MailPendingHandled extends Mailable
      */
     public function build()
     {
-        return $this->subject("Trapezaki Associate Approval")->view('emails.pending-handled');
+        $subject = "";
+        if ($action == 'accept')
+            $subject = "Trapezaki Associate Approval";
+        else if($action == 'decline')
+            $subject = "Trapezaki Associate Request";
+
+        return $this->subject($subject)->view('emails.pending-handled');
     }
 }

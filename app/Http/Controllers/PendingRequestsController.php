@@ -54,8 +54,6 @@ class PendingRequestsController extends Controller
             {
                 Mail::to($user2->email)->queue(new \App\Mail\MailPendingHandled
                                                         ($user2->email, $action, $user2->representative));
-            }else{
-                return 'error';
             }
         }
         return 'error';
