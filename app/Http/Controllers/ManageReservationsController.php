@@ -47,7 +47,8 @@ class ManageReservationsController extends Controller
                                                     $validatedData['reason'], $user2->business_name));
 
             Cancellation::create($validatedData);
-            return back()->with('success', 'The reservation has been cancelled!');
+            return back()
+                ->with('success', 'The reservation has been cancelled!');
         }
 
         //back to the page p itan prin

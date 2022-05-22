@@ -178,7 +178,7 @@
                                                                                             @if (!$reservation->rating && !$reservation->cancelled && $reservation->attended)
                                                                                                 <div class="col-md-5 col-12"
                                                                                                     resv="{{ $reservation->id }}">
-                                                                                                    <button id="test"
+                                                                                                    <button
                                                                                                         class="btn text-nowrap btn-outline-info btn-sm btn-block rate">Rate
                                                                                                         Now!</button>
                                                                                                 </div>

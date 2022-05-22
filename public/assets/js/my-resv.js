@@ -80,7 +80,7 @@ $(document).ready(function () {
 function notification_update() {
     var num;
     //Find number of buttons shown
-    num = $("td > div > button").length;
+    num = $(dataTablePast.activeRows).find("button").length
 
     //Check if >0
     if (num > 0) {
@@ -149,12 +149,6 @@ let dataTablePast = new simpleDatatables.DataTable(pasttable, {
     ],
 });
 
-// //TODO: na fkallei j sta completed ena popup
-// dataTablePast.on("datatable.page", function (column, direction) {
-// });
-
-// dataTableUp.on("datatable.page", function (column, direction) {
-// });
 
 function pushRating(rating) {
     $.ajaxSetup({

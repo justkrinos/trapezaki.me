@@ -104,7 +104,7 @@ use App\Models\User2_Photo;
                                                         </div>
                                                     </td>
                                                     <td class="issueName" class="col-8 issueName">
-                                                        <p class=" mb-0">{{ $issue->created_at }}</p>
+                                                        <p class="text-nowrap">{{date('d-m-Y',strtotime($issue->created_at))}}</p>
                                                     </td>
                                                     {{-- To pass to JQuery --}}
                                                     <td class="issue-description" hidden>{{ $issue->details }}</td>

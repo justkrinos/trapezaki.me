@@ -162,21 +162,21 @@ $tags = $user2->tags->pluck('name')->toArray();
                                 </div>
                             </div>
 
-                            <div class="mb-3 col-12 col-md-4">
+                            <div class="mb-3 col-12 col-md-5">
                                 <h6>Services</h6>
                                 <div class="d-flex row">
-                                    <div class="checkbox col-5 col-sm-6 col-md-4">
+                                    <div style="white-space:nowrap" class="checkbox col-4 col-sm-6 col-md-4">
                                         <input name="coffee" type="checkbox" id="coffee" class="form-check-input"
                                             @if (str_contains($user2->type, 'coffee')) checked @endif>
                                         <label for="coffee">Coffee</label>
 
                                     </div>
-                                    <div class="checkbox col-5 col-sm-6 col-md-4">
+                                    <div style="white-space:nowrap" class="checkbox col-4 col-sm-6 col-md-4">
                                         <input type="checkbox" name="food" id="food" class="form-check-input"
                                             @if (str_contains($user2->type, 'food')) checked @endif>
                                         <label for="food">Food</label>
                                     </div>
-                                    <div class="checkbox col-5 col-sm-6 col-md-4">
+                                    <div style="white-space:nowrap" class="checkbox col-4 col-sm-6 col-md-4">
                                         <input name="drinks" type="checkbox" id="drinks" class="form-check-input"
                                             @if (str_contains($user2->type, 'drinks')) checked @endif>
                                         <label for="food">Drinks</label>

@@ -35,9 +35,9 @@ function bookTable() {
             type: "POST",
             url: "/add-reservation",
             data: data,
-            success: function (success) {
+            success: function (successData) {
                 sessionStorage.setItem("success", "The reservation has been added successfully.");
-                window.location.href = "/manage-reservations/";
+                window.location.href = "/manage-reservations?date=" + successData.date;
                 //window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
                 $("#user3_username").removeClass("is-invalid");
                 $("#resvModal").modal("hide");
@@ -51,7 +51,7 @@ function bookTable() {
 
                 if (error.responseJSON.errors.user3_username) {
                     $("#user3_username").addClass("is-invalid");
-                    $("#user3_username").next().html(error.responseJSON.errors.full_name);
+                    $("#user3_username").next().html(error.responseJSON.errors.user3_username);
                 }
 
                 if (error.responseJSON.errors.time) {

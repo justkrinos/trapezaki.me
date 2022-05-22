@@ -153,3 +153,14 @@ let dataTable3 = new simpleDatatables.DataTable(table3, {
         }
     ]
 });
+
+dataTable3.on("datatable.sort", function (column, direction) {
+    if($("#checkSolved").is(":checked"))
+        SolCheckbox()
+
+    if($("#checkCant").is(":checked"))
+        CantCheckbox()
+
+    if($("#checkNot").is(":checked"))
+        NotCheckbox()
+});

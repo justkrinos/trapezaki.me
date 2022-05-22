@@ -100,7 +100,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/assets/js/user2-resv-options.js"></script>
 <script src="/assets/js/user2-edit-modal.js"></script>
 
-<script src="/assets/js/date-no-prev.js"></script>
 <script src="/assets/js/reservation-date.js"></script>
 
 <script src="/assets/js/main-noside.js"></script>

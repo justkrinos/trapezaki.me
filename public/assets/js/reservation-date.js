@@ -1,3 +1,9 @@
+
+if(sessionStorage.getItem("date")){
+    $('#resv-date').val(sessionStorage.getItem("date"))
+    sessionStorage.removeItem('date');
+}
+
 //Forward-backward  buttons
 $(function () {
     $('.next-day').on('click', function () {

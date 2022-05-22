@@ -53,12 +53,7 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <div class="form-check form-check-lg d-flex align-items-end">
-                            <input name="remember_token" class="form-check-input me-2" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label text-gray-600 text-nowrap" for="flexCheckDefault">
-                                Keep me logged in
-                            </label>
-                        </div>
+
                         <button class="btn btn-primary btn-lg shadow-lg mt-4">Log in</button>
 
                         <div class="col-12 col-md-10 mt-3">

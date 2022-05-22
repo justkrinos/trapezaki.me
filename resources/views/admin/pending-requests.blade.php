@@ -49,7 +49,7 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Date/Time</th>
+                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,9 +68,7 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <p class="mb-0" data-type="date"
-                                                        style="overflow: auto; height: 60px; width: 150px;"
-                                                        data-format="DD/MM/YYYY">{{ $user->created_at }}</p>
+                                                    <p class="text-nowrap" data-type="date">{{date('d-m-Y',strtotime($user->created_at))}}</p>
                                                 </td>
                                                 <td class="d-flex flex-nowrap">
                                                         @csrf

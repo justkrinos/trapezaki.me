@@ -57,7 +57,6 @@ function setStatus(that){
 
 //Event on modal closed, send the ajax request
 $('#resvModal').on('hidden.bs.modal', function () {
-    canvas.discardActiveObject().renderAll();
     //get the attended number from modal
     modal_attendance = $("#attendance").val()
 

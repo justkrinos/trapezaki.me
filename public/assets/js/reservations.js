@@ -2,9 +2,8 @@ $(document).ready(function () {
 
     data_resv()
 
+    //Otan ginei click se ena row na emfanistei to modal
     $(".resvPopup").click(function () {
-        //otan fernw ta data me ajax or laravel prp na fernw j to id etsi wste kathe fora
-        //pu kamnei run tunto function na kamnw query to id j na allassw ta data tu modal
         $("#issueModal").modal('show')
     })
 
@@ -16,14 +15,17 @@ $(document).ready(function () {
 
     //On click sto modify reservvation tu modal
     $("#modResv").click(function () {
+        //get the reservation date
+        sessionStorage.setItem("date", $("#mydate").val());
         //change location to the edit page
-        // console.log("/edit-reservation/?id=" + parseInt($('#myresvBusiness').html(),10))
-
         window.location.href = "/edit-reservation/?id=" + parseInt($('#myresvBusiness').html(),10)
     })
 
     //Redirect when add a reservation is clicked
     $("#newRes").click(function () {
+        //save the current date
+        sessionStorage.setItem("date", $("#mydate").val());
+        //change location to the add page
         window.location.href = "/add-reservation";
     })
 
