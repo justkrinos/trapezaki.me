@@ -136,7 +136,7 @@ class ReservationController extends Controller
             if(str_ends_with(env('APP_URL'),'.me')) //stelni email mono o server oi sto local
             {
                 $user2 = User2::find(Table::find($reservation->table_id)->user2_id);
-                Mail::to($user2->email)->queue(new \App\Mail\MailCreatedReservation
+                Mail::to($reservation->user3->email)->queue(new \App\Mail\MailCreatedReservation
                     ($reservation->user3->email, $reservation, $user2->business_name));
             }
 
