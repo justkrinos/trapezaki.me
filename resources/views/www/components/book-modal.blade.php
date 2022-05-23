@@ -20,11 +20,13 @@
                                     <div id="inputSlots" class="input-group col-md-5">
                                         <span id="timeSlots" class="form-control row-cols-6"></span>
                                     </div>
+                                    <div class="invalid-feedback" id="time-error">
+                                    </div>
                                 <div class="col-md-6">
                                     <label for="pax">People</label>
                                     <fieldset class="form-group">
                                         <select class="form-select" name="people" id="pax">
-                                        @if(session('people')) 
+                                        @if(session('people'))
                                             <option value="{{session('people')}}" selected>{{session('people')}}</option>
                                         @endif
                                         </select>
@@ -32,14 +34,11 @@
                                 </div>
 
                                 <div class="form-group col-12 justify-content-center mb-5">
-                                    <label class="mb-2" for="description">Description</label>
+                                    <label class="mb-2" for="description">Details</label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
-                                        value="{{ old('description') }}" rows="3"
+                                         rows="3"
                                         placeholder="To drink, to eat etc..."></textarea>
-                                    <div class="invalid-feedback">
-                                        @error('description')
-                                            {{ $message }}
-                                        @enderror
+                                    <div class="invalid-feedback" id="details-error">
                                     </div>
                                 </div>
                             </div>

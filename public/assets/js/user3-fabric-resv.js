@@ -100,6 +100,12 @@ function initCanvas() {
     canvas.discardActiveObject()
   })
 
+  $('#resvModal').on('hidden.bs.modal', function () {
+    canvas.discardActiveObject().renderAll();
+    $('#description').removeClass("is-invalid")
+    $('#timeSlots').removeClass("is-invalid")
+})
+
   canvas.on({
     'selection:created': function (o) {
       pausePanning = true;

@@ -145,15 +145,23 @@ function bookTable()
             sessionStorage.setItem("reservation", "success");
             window.location.href = "/";
         },
-        error: function(error) {
+        error: function(errors) {
+            $('#description').removeClass("is-invalid")
+            $('#timeSlots').removeClass("is-invalid")
+            $.each(errors.responseJSON.errors, function (key, value) {
+                if(key == 'time')
+                    $('#timeSlots').addClass('is-invalid');
+                if(key == 'details')
+                    $('#description').addClass('is-invalid');
+            });
+
             Toastify({ //an exw error fkale toast
-                //TODO: na sasei analoga me ta eggrafa
-                text: 'Please, select a timeslot and enter a description!',
-                duration: 5000,
+                text: 'Please fill out all the details!',
+                duration: 700,
                 close: true,
                 gravity: "top",
                 position: "right",
-                backgroundColor: "#ba0b0b",
+                backgroundColor: "#db0f0f",
             }).showToast();
         }
     });

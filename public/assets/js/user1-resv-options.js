@@ -184,7 +184,6 @@ $('.import').click(function (func) {
         clickElem(fileInput)
     } else {
         Toastify({
-            //TODO: add this message sta eggrafa
             text: "You can't import a floorplan because some tables have upcoming reservations!",
             duration: 3000,
             close: true,

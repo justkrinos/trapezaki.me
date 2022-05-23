@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-
-//TODO: na ton valume sta eggrafa?
 class Format
 {
     public static function formatType(array $validatedData){

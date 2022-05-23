@@ -96,7 +96,6 @@ function initCanvas() {
     //   }
       if(o.selected[0].isDisabled){
         Toastify({
-            //TODO: add tunto text sta eggrafa
             text: "You can't move a table with upcoming reservations!",
             duration: 3000,
             close: true,
@@ -599,7 +598,6 @@ document.querySelectorAll('.remove')[0].addEventListener('click', function () {
   if (obj && !obj.isDisabled){
     canvas.remove(obj);
   }else if(obj.isDisabled){
-    //TODO: add these messages kapou sta eggrafa
     Toastify({
         text: "You can't delete a table with upcoming reservations!",
         duration: 3000,

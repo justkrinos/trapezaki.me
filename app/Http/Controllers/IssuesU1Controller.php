@@ -38,8 +38,6 @@ class IssuesU1Controller extends IssuesController
             Issue::where('id', $id)->first()->update($attribute);
         }
 
-        return view('admin.issues',[
-            'issues' => Issue::all()
-        ]);
+        return 'success';
     }
 }

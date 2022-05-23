@@ -1,3 +1,35 @@
+
+// Datatable
+// Documentation on this is in
+// https://github.com/fiduswriter/Simple-DataTables/wiki/
+
+let table3 = document.querySelector('#issueTable');
+let dataTable3 = new simpleDatatables.DataTable(table3, {
+    searchable: false,
+    layout: {
+        top: "",
+    },
+    columns: [
+        {
+            select: 1,
+            type: "date",
+            format: "DD/MM/YYYY"
+        }
+    ]
+});
+
+dataTable3.on("datatable.sort", function (column, direction) {
+    if ($("#checkSolved").is(":checked"))
+        SolCheckbox()
+
+    if ($("#checkCant").is(":checked"))
+        CantCheckbox()
+
+    if ($("#checkNot").is(":checked"))
+        NotCheckbox()
+});
+
+
 $(document).ready(function () {
 
     $(document).on("click", ".issueName", function () {
@@ -32,6 +64,7 @@ $(document).ready(function () {
     $("#checkNot").click(NotCheckbox);
 
 
+    var initialTable = dataTable3.activeRows
 
 
     //Search with first priority the search bar an then the check boxes
@@ -42,7 +75,9 @@ $(document).ready(function () {
         checkNot = document.getElementById("checkNot");
 
         table = document.getElementById("issueTable");
-        tr = table.getElementsByTagName("tr");
+        // tr = table.getElementsByTagName("tr");
+
+        tr = initialTable;
 
         filter = document.getElementById("SearchIssue").value.toUpperCase();
 
@@ -79,6 +114,9 @@ $(document).ready(function () {
                 }
             }
         }
+
+        dataTable3.refresh()
+        // edit()
     }
 
 
@@ -123,37 +161,6 @@ $(document).ready(function () {
 
 });
 
-
-
-// Datatable
-// Documentation on this is in
-// https://github.com/fiduswriter/Simple-DataTables/wiki/
-
-let table3 = document.querySelector('#issueTable');
-let dataTable3 = new simpleDatatables.DataTable(table3, {
-    searchable: false,
-    layout: {
-        top: "",
-    },
-    columns: [
-        {
-            select: 1,
-            type: "date",
-            format: "DD/MM/YYYY"
-        }
-    ]
-});
-
-dataTable3.on("datatable.sort", function (column, direction) {
-    if ($("#checkSolved").is(":checked"))
-        SolCheckbox()
-
-    if ($("#checkCant").is(":checked"))
-        CantCheckbox()
-
-    if ($("#checkNot").is(":checked"))
-        NotCheckbox()
-});
 
 //Ana allaksi selida pale na eshi listeners
 dataTable3.on("datatable.page", function () {
@@ -206,4 +213,3 @@ function sendFlag() {
         }
     });
 }
-
