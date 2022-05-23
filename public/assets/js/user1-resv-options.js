@@ -2,7 +2,7 @@ initCanvas()
 // resizeCanvas()
 // addDefaultObjects()
 
-var noReservationsOnTables = false;
+var noReservationsOnTables = 0;
 
 toast = Toastify({ // kamnw ena toast na exume gia meta
     text: '',
@@ -17,8 +17,7 @@ username = $('#username').attr('user')
 
 
 $('.clear').click(function () {
-    if (noReservationsOnTables) {
-        //TODO: na mpi sta eggrafa tuto to popup p kamni clear all sto floorplan editor
+    if (noReservationsOnTables == 1) {
         Swal.fire({
             title: 'Are you sure you want to delete everything?',
             text: "You won't be able to revert this!",
@@ -39,7 +38,7 @@ $('.clear').click(function () {
             }
         })
 
-    } else {
+    } else if(noReservationsOnTables == 0){
         Toastify({
             text: "You can't clear the floor plan because there are tables with upcoming reservations!",
             duration: 3000,
@@ -373,7 +372,10 @@ $(document).ready(function () {
                 //alios en default disabled so fkalli popup error
                 //mesto listener tu koumpiou checkari tin metavliti noReservationsOnTables
                 if (tablesWithReservations.length == 0) {
-                    noReservationsOnTables = true;
+                    noReservationsOnTables = 1;
+                }
+                if(result['floorplan'] == []){
+                    noReservationsOnTables = -1;
                 }
             }
         },
