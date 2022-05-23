@@ -156,7 +156,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"
     integrity="sha512-ZKqmaRVpwWCw7S7mEjC89jDdWRD/oMS0mlfH96mO0u3wrPYoN+lXmqvyptH4P9mY6zkoPTSy5U2SwKVXRY5tYQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script src="pinch-zoom-canvas.js"></script> -->
 
 {{-- Include for flash messages --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
@@ -164,7 +163,7 @@
 <script src="/assets/js/user1-fabric-resv.js"></script>
 <script src="/assets/js/user1-resv-options.js"></script>
 
-<script src="/assets/js/date-no-prev.js"></script>
+{{-- <script src="/assets/js/date-no-prev.js"></script> --}}
 
 
 <script src="/assets/js/popup-sweetalert2.js"></script>
