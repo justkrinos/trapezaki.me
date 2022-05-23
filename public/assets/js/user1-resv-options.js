@@ -17,7 +17,7 @@ username = $('#username').attr('user')
 
 
 $('.clear').click(function () {
-    if (noReservationsOnTables == 1) {
+    if (noReservationsOnTables ==1 || noReservationsOnTables == -1) {
         Swal.fire({
             title: 'Are you sure you want to delete everything?',
             text: "You won't be able to revert this!",
@@ -143,7 +143,7 @@ $('.export').click(function () {
 
 
 $('.import').click(function (func) {
-    if (noReservationsOnTables) {
+    if (noReservationsOnTables == 1 || noReservationsOnTables == -1) {
         readFile = function (e) {
             var file = e.target.files[0];
             if (!file) {
