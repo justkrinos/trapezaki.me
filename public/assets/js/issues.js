@@ -169,6 +169,11 @@ dataTable3.on("datatable.page", function () {
     $(".solved-flag").click(sendFlag)
 })
 
+dataTable3.on("datatable.sort", function () {
+    //Listeners gia na stili to request
+    $(".notSolved-flag").click(sendFlag)
+    $(".solved-flag").click(sendFlag)
+})
 
 
 
