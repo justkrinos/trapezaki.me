@@ -144,7 +144,6 @@ function bookTable() {
                     $("#timeSlots2").addClass("is-invalid");
                     $("#timeSlots2").next().html(error.responseJSON.errors.time);
                 }
-W
             },
         });
     }

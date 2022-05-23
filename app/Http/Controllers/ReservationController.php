@@ -202,10 +202,6 @@ class ReservationController extends Controller
                 $reservation = $guest->reservations()->create($validatedData);
             }
 
-
-
-            $reservation = Reservation::create($validatedData);
-
             return $reservation;
         }
         else
