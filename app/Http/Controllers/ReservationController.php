@@ -159,7 +159,7 @@ class ReservationController extends Controller
                 [
                     'full_name' => 'required|max:50|min:3',
                     'phone' => 'required|digits_between:8,13|numeric',
-                    'email' => 'required|email|max:100|unique:user3s,email',
+                    'email' => 'required|email|max:100',
                     'guest' => 'required',
                     'username' => 'required',
                     'password' => 'required'
