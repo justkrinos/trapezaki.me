@@ -67,14 +67,14 @@ function setPeople() {
         $("#pax").empty()
         for (i = 2; i <= canvas.getActiveObject().capacity; i++)
             $("#pax").append("<option value=\"" + i + "\">" + i + "</option>")
-        Toastify({
-            text: 'This table has a capacity of only ' + canvas.getActiveObject().capacity + ' people',
-            duration: 5000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            backgroundColor: "#ba0b0b",
-        }).showToast()
+        // Toastify({
+        //     text: 'This table has a capacity of only ' + canvas.getActiveObject().capacity + ' people',
+        //     duration: 5000,
+        //     close: true,
+        //     gravity: "top",
+        //     position: "right",
+        //     backgroundColor: "#ba0b0b",
+        // }).showToast()
     }
     else {
         for (i = 2; i <= canvas.getActiveObject().capacity; i++) {
