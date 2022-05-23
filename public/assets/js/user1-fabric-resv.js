@@ -565,20 +565,20 @@ function sendLinesToBack() {
 
 
 
-document.querySelectorAll('.triangle')[0].addEventListener('click', function () {
-  const o = addTriangle(0, 0, 30)
-  canvas.setActiveObject(o)
-})
+// document.querySelectorAll('.triangle')[0].addEventListener('click', function () {
+//   const o = addTriangle(0, 0, 30)
+//   canvas.setActiveObject(o)
+// })
 
-document.querySelectorAll('.chair')[0].addEventListener('click', function () {
-  const o = addChair(0, 0)
-  canvas.setActiveObject(o)
-})
+// document.querySelectorAll('.chair')[0].addEventListener('click', function () {
+//   const o = addChair(0, 0)
+//   canvas.setActiveObject(o)
+// })
 
-document.querySelectorAll('.bar')[0].addEventListener('click', function () {
-  const o = addBar(0, 0, 180, 60)
-  canvas.setActiveObject(o)
-})
+// document.querySelectorAll('.bar')[0].addEventListener('click', function () {
+//   const o = addBar(0, 0, 180, 60)
+//   canvas.setActiveObject(o)
+// })
 
 
 document.querySelectorAll('.wall')[0].addEventListener('click', function () {
@@ -618,32 +618,32 @@ document.querySelectorAll('.remove')[0].addEventListener('click', function () {
 })
 
 
-//Customer mode button listener
-document.querySelectorAll('.customer-mode')[0].addEventListener('click', function () {
-  adminMode = false;
-  canvas.getObjects().map(o => {
-    o.hasControls = false
-    o.lockMovementX = true
-    o.lockMovementY = true
-    o.lockScalingX = true
-    o.lockScalingY = true
-    o.lockRotation = true
+// //Customer mode button listener
+// document.querySelectorAll('.customer-mode')[0].addEventListener('click', function () {
+//   adminMode = false;
+//   canvas.getObjects().map(o => {
+//     o.hasControls = false
+//     o.lockMovementX = true
+//     o.lockMovementY = true
+//     o.lockScalingX = true
+//     o.lockScalingY = true
+//     o.lockRotation = true
 
-    if (o.visualType === 'chair' || o.visualType === 'bar' || o.visualType === 'wall' || o.visualType === 'entrance'
-      || o.visualType === 'exit') {
-      o.selectable = false
-    }
-    o.borderColor = '#38A62E'
-    o.borderScaleFactor = 2.5
-    o.hoverCursor = ''
-  })
-  canvas.selection = false
-  canvas.hoverCursor = 'pointer'
-  canvas.discardActiveObject()
-  canvas.renderAll()
-  document.querySelectorAll('.admin-menu')[0].style.display = 'none'
-  document.querySelectorAll('.customer-menu')[0].style.display = 'block'
-})
+//     if (o.visualType === 'chair' || o.visualType === 'bar' || o.visualType === 'wall' || o.visualType === 'entrance'
+//       || o.visualType === 'exit') {
+//       o.selectable = false
+//     }
+//     o.borderColor = '#38A62E'
+//     o.borderScaleFactor = 2.5
+//     o.hoverCursor = ''
+//   })
+//   canvas.selection = false
+//   canvas.hoverCursor = 'pointer'
+//   canvas.discardActiveObject()
+//   canvas.renderAll()
+//   document.querySelectorAll('.admin-menu')[0].style.display = 'none'
+//   document.querySelectorAll('.customer-menu')[0].style.display = 'block'
+// })
 
 
 //Admin mode button listener
