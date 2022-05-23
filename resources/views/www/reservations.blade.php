@@ -163,6 +163,11 @@
                                                                                             hidden>
                                                                                             {{ $reservation->table_id }}
                                                                                         </td>
+                                                                                        @if($reservation->cancelled)
+                                                                                            <td class="resvCancelReason" hidden>
+                                                                                                {{$reservation->cancelled->reason}}
+                                                                                            </td>
+                                                                                        @endif
                                                                                         <td class="resvTime"
                                                                                             hidden>
                                                                                             {{ $reservation->time }}
@@ -219,10 +224,10 @@
         @include('www.components.rating-modal')
         @include('www.components.resv-modal')
         @include('www.components.cancel-resv-modal')
-
+        @include('www.components.footer')
     </div>
 
-    @include('www.components.footer')
+
 
 </body>
 

@@ -27,6 +27,13 @@ $(document).ready(function () {
         $("#myresvTime").html($(this).siblings(".resvTime").html());
         $("#myresvDetails").html($(this).siblings(".resvDetails").html());
 
+        if($(this).siblings(".resvCancelReason").length != 0){
+            $("#myresvCancelReason").html($(this).siblings(".resvCancelReason").html());
+            $("#cancelReasonCard").show()
+        }else{
+            $("#cancelReasonCard").hide()
+        }
+
         //Give the id to the cancel modal
         $("#FormCancel").append(
             '<input name="reservation_id" value="' + id + '" hidden>'

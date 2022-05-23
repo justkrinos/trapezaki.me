@@ -21,7 +21,7 @@ class MailPendingHandled extends Mailable
      */
     public function __construct($email, $action, $representative)
     {
-        $this->action = $action;
+        $t!✖his->action = $action;
         $this->representative = $representative;
     }
 

@@ -51,7 +51,7 @@ function modifyBooking() {
         data: data,
         success: function (success) {
             sessionStorage.setItem("success", "The reservation has been modified successfully.");
-            window.location.href = "/manage-reservations/";
+            window.location.href = "/manage-reservations?date=" + $("#resv-date").val();
             // window.location.href = "/reservation/" + success.user3_id + "/" + success.id;
         },
          error: function (error) {

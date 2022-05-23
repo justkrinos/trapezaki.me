@@ -75,7 +75,10 @@
 
         </div>
     </div>
+
     @include('business.components.footer')
+
+
 </body>
 
 </html>

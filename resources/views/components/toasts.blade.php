@@ -11,7 +11,6 @@ Toastify({
 }).showToast()
 </script>
 @endif
-
 @if (session()->has('logout'))
 <span id="msg" txt="{{ session('logout') }}"></span>
 <script>

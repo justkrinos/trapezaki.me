@@ -84,9 +84,9 @@ TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
             @include('www.components.book-modal')
 
             <span id="username" user="{{ $user2->username }}" hidden></span>
-        </div>
+        </div>@include('www.components.footer')
     </div>
-    @include('www.components.footer')
+
 </body>
 
 </html>

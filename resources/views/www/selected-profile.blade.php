@@ -132,13 +132,15 @@
                                             </iframe>
                                         </div>
                                     </div>
+                        @include('www.components.login-modal')
                     </section>
 
                 </div>
+
             </div>
 
-            @include('www.components.login-modal')
-            @include('www.components.footer')
+@include('www.components.footer')
+
 </body>
 
 </html>

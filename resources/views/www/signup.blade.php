@@ -155,13 +155,9 @@
                     </div>
                 </div>
             </section>
-        </div>
+        </div>@include('www.components.footer')
     </div>
 
-
-    </div>
-
-    @include('www.components.footer')
 
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>

@@ -60,6 +60,10 @@
                                 as you want so that you can see the details written by the
                                 customer.</label>
                         </div>
+                        <div class="card" id="cancelReasonCard">
+                            <h6 class="" for="myresvCancelReason">Cancellation Reason</h6>
+                            <label class="form-control" id="myresvCancelReason"></label>
+                        </div>
 
                     </div>
                 </div>

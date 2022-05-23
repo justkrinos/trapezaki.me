@@ -15,10 +15,13 @@ for(var i = 0; i < sidebarItems.length; i++) {
     })
 }
 
+burgerbtn = document.querySelector('.burger-btn')
 
+if(burgerbtn != null)
 document.querySelector('.burger-btn').addEventListener('click', () => {
     document.getElementById('sidebar').classList.toggle('active');
 })
+
 document.querySelector('.sidebar-hide').addEventListener('click', () => {
     document.getElementById('sidebar').classList.toggle('active');
 

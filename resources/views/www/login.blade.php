@@ -87,4 +87,4 @@
 <script src="assets/js/extensions/toastify.js"></script>
 <script src="../assets/js/jquery-3.6.0.min.js"></script>
 
-@include("components.toasts");
+@include("components.toasts")

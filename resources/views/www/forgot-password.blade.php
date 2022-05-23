@@ -81,18 +81,11 @@
                     </div>
                 </section>
             </div>
-        </div>
+        </div>@include('www.components.footer')
     </div>
 
-
-    </div>
-
-
-    @include('www.components.footer')
 
 </body>
-
-</html>
 
 <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
@@ -103,3 +96,5 @@
 {{-- Include for flash messages --}}
 <script src="../assets/vendors/toastify/toastify.js"></script>
 @include('components.toasts')
+
+</html>
