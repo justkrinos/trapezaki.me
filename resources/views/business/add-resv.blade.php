@@ -87,7 +87,7 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
             </div>
 
             <!-- Modal starts here-->
-            @include ('business.components.book-modal')
+            @include('business.components.book-modal')
 
             <span id="username" user="{{ Auth::guard('user2')->user()->username }}"></span>
 

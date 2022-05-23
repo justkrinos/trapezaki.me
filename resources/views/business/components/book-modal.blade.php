@@ -39,21 +39,7 @@
                                     <div class="col-md-4 col-md-2">
                                         <label for="pax">People:</label>
                                         <select class="form-select" name="pax" id="pax">
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                            <option>6</option>
-                                            <option>7</option>
-                                            <option>8</option>
-                                            <option>9</option>
-                                            <option>10</option>
-                                            <option>11</option>
-                                            <option>12</option>
-                                            <option>13</option>
-                                            <option>14</option>
-                                            <option>15</option>
-                                            <option>16</option>
+
                                         </select>
                                     </div>
 
