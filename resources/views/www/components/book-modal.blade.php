@@ -26,9 +26,6 @@
                                     <label for="pax">People</label>
                                     <fieldset class="form-group">
                                         <select class="form-select" name="people" id="pax">
-                                        @if(session('people'))
-                                            <option value="{{session('people')}}" selected>{{session('people')}}</option>
-                                        @endif
                                         </select>
                                     </fieldset>
                                 </div>
