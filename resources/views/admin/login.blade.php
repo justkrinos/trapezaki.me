@@ -66,7 +66,10 @@
 
     </div>
 </body>
-@include('components.toasts')
 </html>
 
+
+{{-- Include for flash messages --}}
+<script src="/assets/vendors/toastify/toastify.js"></script>
+@include('components.toasts')
 

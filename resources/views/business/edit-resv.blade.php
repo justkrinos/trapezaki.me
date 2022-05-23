@@ -95,7 +95,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Toast dependencies --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
-<script src="/assets/js/extensions/toastify.js"></script>
+{{-- <script src="/assets/js/extensions/toastify.js"></script> --}}
 
 @include('components.toasts')
 
@@ -105,7 +105,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="/assets/js/reservation-date.js"></script>
 
-<script src="/assets/js/main-noside.js"></script>
+<script src="/assets/js/main-nosidepop.js"></script>
 
 {{-- Fancy input number dependency --}}
 <script src="/assets/js/input-number.js"></script>

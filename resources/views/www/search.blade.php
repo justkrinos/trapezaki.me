@@ -109,24 +109,6 @@
 {{-- Toast dependencies --}}
 <script src="assets/vendors/toastify/toastify.js"></script>
 @include('components.toasts')
-
-<script>
-    if(sessionStorage.getItem('reservation') == 'success'){
-        Toastify({
-            text: "The reservation was successfully booked, check your email for more information!",
-            duration: 5000,
-            close: true,
-            gravity: "top", // `top` or `bottom`
-            position: 'right', // `left`, `center` or `right`
-            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-            stopOnFocus: true // Prevents dismissing of toast on hover
-        }).showToast();
-    }
-    sessionStorage.removeItem("reservation");
-</script>
-
+<script src="/assets/js/toast2.js"></script>
 </html>
 
-
-{{-- //TODO: na apothikefkete kathe fora to city --}}
-<script src="/assets/js/choose-city.js">></script>

@@ -17,5 +17,8 @@ $(function(){
     }
 
     var today = new Date().toISOString().split('T')[0];
-    document.getElementsByName("date")[0].setAttribute('min', today);
+    dateelement = document.getElementsByName("date")[0]
+    if(dateelement){
+        dateelement.setAttribute('min', today);
+    }
 });

@@ -43,10 +43,6 @@ TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso st
         </header>
         <div class="container">
             <div class="page-heading">
-                <div class="page-title">
-
-                </div>
-
 
                 <div class="card">
 
@@ -110,8 +106,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Toast dependencies --}}
 <script src="/assets/vendors/toastify/toastify.js"></script>
-<script src="/assets/js/extensions/toastify.js"></script>
-
 @include('components.toasts')
 
 <script src="/assets/js/user2-fabric-resv.js"></script>
@@ -121,7 +115,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/assets/js/date-no-prev.js"></script>
 <script src="/assets/js/reservation-date.js"></script>
 
-<script src="/assets/js/main-noside.js"></script>
+<script src="/assets/js/main-nosidepop.js"></script>
 
 {{-- Fancy input number dependency --}}
 <script src="/assets/js/input-number.js"></script>
