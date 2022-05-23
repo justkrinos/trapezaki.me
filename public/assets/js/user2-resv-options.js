@@ -30,21 +30,40 @@ function loadFloorPlan(floorplan) {
     CustomerMode();
 }
 
+
 function recreateGrouppedObjects(obj, notpulled) {
+
     //Create the items using the old data
-    const o = new fabric.Rect({
-        width: notpulled.objects[0].width,
-        height: notpulled.objects[0].height,
-        fill: notpulled.objects[0].fill,
-        stroke: notpulled.objects[0].stroke,
-        strokeWidth: notpulled.objects[0].strokeWidth,
-        shadow: notpulled.objects[0].shadow,
-        originX: notpulled.objects[0].originX,
-        originY: notpulled.objects[0].originY,
-        centeredRotation: notpulled.objects[0].centeredRotation,
-        snapAngle: notpulled.objects[0].snapAngle,
-        selectable: notpulled.objects[0].selectable,
-    });
+    var o
+
+    if (obj.type == "rect") {
+
+        o = new fabric.Rect({
+            width: notpulled.objects[0].width,
+            height: notpulled.objects[0].height,
+            fill: notpulled.objects[0].fill,
+            stroke: notpulled.objects[0].stroke,
+            strokeWidth: notpulled.objects[0].strokeWidth,
+            shadow: notpulled.objects[0].shadow,
+            originX: notpulled.objects[0].originX,
+            originY: notpulled.objects[0].originY,
+            centeredRotation: notpulled.objects[0].centeredRotation,
+            snapAngle: notpulled.objects[0].snapAngle,
+            selectable: notpulled.objects[0].selectable
+        })
+
+    } else if (obj.type == "circle") {
+        o = new fabric.Circle({
+            radius: notpulled.objects[0].radius,
+            fill: notpulled.objects[0].fill,
+            stroke: notpulled.objects[0].stroke,
+            strokeWidth: notpulled.objects[0].strokeWidth,
+            shadow: notpulled.objects[0].shadow,
+            originX: notpulled.objects[0].originX,
+            originY: notpulled.objects[0].originY,
+            centeredRotation: notpulled.objects[0].centeredRotation
+        })
+    }
 
     const t = new fabric.IText(notpulled.number.toString(), {
         fontFamily: notpulled.objects[1].fontFamily,
@@ -52,12 +71,13 @@ function recreateGrouppedObjects(obj, notpulled) {
         fill: notpulled.objects[1].fill,
         textAlign: notpulled.objects[1].textAlign,
         originX: notpulled.objects[1].originX,
-        originY: notpulled.objects[1].originY,
-    });
+        originY: notpulled.objects[1].originY
+    })
 
     const g = new fabric.Group([o, t], {
         left: obj.left,
         top: obj.top,
+        capacity: obj.capacity,
         centeredRotation: obj.centeredRotation,
         snapAngle: obj.snapAngle,
         selectable: obj.selectable,
@@ -66,15 +86,16 @@ function recreateGrouppedObjects(obj, notpulled) {
         number: notpulled.number,
         id: obj.id,
         isGroupped: true,
-        capacity: notpulled.capacity
-    });
+        scaleX: notpulled.scaleX,
+        scaleY: notpulled.scaleY,
+        capacity: notpulled.capacity,
+    })
 
     //Remove the black object that was pulled
-    canvas.remove(obj);
+    canvas.remove(obj)
     //Add the new object that is the same as before
-    canvas.add(g);
+    canvas.add(g)
 }
-
 
 
 username = $("#username").attr("user");
