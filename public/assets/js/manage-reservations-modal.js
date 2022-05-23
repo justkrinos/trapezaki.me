@@ -112,6 +112,9 @@ function modalpop() {
             $("#modResv").hide();
             $("#attendance").prop("disabled", true).attr("type","text").addClass("bg-white")
         }
+        if(now.valueOf() < date.valueOf()){
+            $("#attendance").prop("disabled", true).attr("type","text").addClass("bg-white")
+        }
         if(cancelled){
             $("#modalContent").append("<div class=\"card\" id=\"cancelContent\"><h6 for=\"reasonTextArea\">Cancellation Reason</h6><label class=\"form-control\" id=\"reasonTextArea\">" + reason + "</label></div>")
         }
