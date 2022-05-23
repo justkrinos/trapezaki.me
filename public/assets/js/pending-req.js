@@ -104,7 +104,6 @@ $(document).ready(function () {
             });
 
         } else if ($(this).hasClass('decline')) {
-            //TODO: are you sure you want to decline?
             //The whole registretion will be deleted and they will have to make the account again
             $.ajaxSetup({
                 headers: {

@@ -126,7 +126,3 @@
 </script>
 
 </html>
-
-
-{{-- //TODO: na apothikefkete kathe fora to city --}}
-<script src="/assets/js/choose-city.js">></script>

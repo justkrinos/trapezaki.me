@@ -12,8 +12,6 @@ use App\Models\Table;
 
 class MailCancelledReservation extends Mailable
 {
-    //TODO: otan kami o u2 j o u3 cancel
-
     use Queueable, SerializesModels;
 
     public $reservation_id;

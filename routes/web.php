@@ -40,7 +40,6 @@ use App\Models\Reservation;
 
 //Bind a the wildcard {user2} to a username of user2
 //if it doesnt exist it will throw an 404 error
-//TODO: na to kamume se ulla ta wildcards etsi
 
 Route::bind('user2', function ($value) {
     return User2::where('username', $value)->first();
@@ -114,7 +113,6 @@ Route::domain('www.' . env('APP_URL'))->group(function () {
 
         Route::get('verify/{email}/{secret}/', [VerifyEmailController::class, 'verifyUser3']);
 
-        //TODO: na ginun bind ta secret me u2 j u3
         Route::get('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'showForgotU3']);
         Route::post('/change-password/{email}/{secret}/', [ForgotPasswordController::class, 'modifyForgotU3']);
 

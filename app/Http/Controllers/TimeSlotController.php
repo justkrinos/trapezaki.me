@@ -12,10 +12,6 @@ use App\Http\Controllers\Format;
 class TimeSlotController extends Controller
 {
 
-    //TODO: mesa sto booking controller prp na checkarume an
-    //to epilegmeno time slot en mesa sta available time slots me tinidia logiki opos dame\
-    //BUT an en modify prp na men lamvani ipopsi to idio
-
     public function getTimeSlots(User2 $user2)
     {
 
@@ -70,9 +66,6 @@ class TimeSlotController extends Controller
                 //add to timeslot array
                 array_push($timeSlots, $i);
         }
-
-        //TODO: to duration nan afstira kommathkiasmeno se misawra otan to kamume na mpennei sto db
-        //tuto ginete sto  manage customer tu admin
 
         //get the duration se misawra
         $duration = ($user2->duration) / 30;

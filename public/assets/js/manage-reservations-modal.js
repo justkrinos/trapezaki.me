@@ -1,7 +1,3 @@
-//TODO: aman patisis add reservation pu ton u2
-//      prp na dia sto epomeno page tin imerominia p ishe
-
-
 $(document).ready(function () {
     $("#mydate").val($("#mydate").attr("value"));
 

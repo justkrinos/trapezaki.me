@@ -2,7 +2,6 @@
 // https://github.com/fiduswriter/Simple-DataTables/wiki/
 
 
-//TODO: na dulefkun ta sort, idika me time j na ginei search
 function data_resv() {
     let table = document.querySelector("#resTable");
     let dataTable = new simpleDatatables.DataTable(table, {
@@ -113,8 +112,6 @@ function colorizeTable() {
         triggerSet(trigger_time - curr_time);
     }
 }
-
-//TODO: na grapsume sta eggrafa oti ginete trigger xoris refresh
 
 //Triggers colorize everytime the closest reservation is due
 //colorize function sets the trigger time again to the next closest

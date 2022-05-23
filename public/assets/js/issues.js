@@ -18,16 +18,6 @@ $(document).ready(function () {
         window.location.href = "/user" + "/" + $(this).html();
     })
 
-    //TODO: if issue.status == solved then
-    //          $("<currentuser_id> btn-outline-success").addClass("active")
-    //          and remove class sto allo button
-
-    //TODO: (Solved/Can't be solved button).click(
-    //           update the database
-    //            turn the button on and change the other one
-
-
-
 
     //When a key is pressed in the input field, run the function
     $("#SearchIssue").keyup(SearchIssue);

@@ -13,13 +13,11 @@ use App\Http\Controllers\Format;
 
 class SearchController extends Controller
 {
-    //TODO: sto random na men dixnei tus disabled
     public function show()
     {
         //An ginei search
         if (request()->has("btn-search")) {
 
-            //TODO: validation
             //Getting form variables
             $validatedData = request()->validate([
                 'search' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
@@ -34,7 +32,6 @@ class SearchController extends Controller
             $tagsSearch = explode(" ", $search);
             $tagsQuery = "";
 
-            //Todo: ta tags j to type na allaksei me to Format
             foreach ($tagsSearch as $key => $tag) {
                 if ($key == 0) {
                     $tagsQuery .= " tags.name like '" . $tag . "' ";
@@ -204,7 +201,6 @@ class SearchController extends Controller
                 array_push($timeSlots, $i);
         }
 
-        //TODO: to duration nan afstira kommathkiasmeno se misawra otan to kamume na mpennei sto db
         //tuto ginete sto  manage customer tu admin
 
         //get the duration se misawra

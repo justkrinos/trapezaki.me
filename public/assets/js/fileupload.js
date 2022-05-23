@@ -9,7 +9,6 @@ $("ul.images").on("click", "li span.del", function () {
             "X-CSRF-TOKEN": $('[name="_token"]').attr("value"),
         },
     });
-    //TODO: MESA STO deleteData prepei kapws na mpainei kai to path.
     deleteData = {
         user_id: $(".user_id").attr("value"),
         action: "delete",

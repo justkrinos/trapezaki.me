@@ -55,8 +55,7 @@ class ReservationController extends Controller
             $phone = session()->get('phone');
             $email = session()->get('email');
 
-            //TODO: opu eshi validation numeric na to kamume nan min:0 j na valume max an xriazete (px. pax <=16)
-            //TODO: an den valis date fkalli error logika epd en bori nan null otan mpei sto table (ekama to null sta migrations check if works)
+
             $validatedData = request()->validate([
                 'date'=> 'required|date',
                 'time'=> 'required|date_format:H:i',
@@ -67,7 +66,6 @@ class ReservationController extends Controller
                 'pax.required' => 'The people field is required.'
             ]);
 
-            //TODO: na gini uncomment tuto j na checkaristi an en ok
             session()->forget(['full_name', 'phone', 'email']);
 
 
@@ -111,7 +109,6 @@ class ReservationController extends Controller
             session()->forget('date');
             session()->forget('people');
 
-            //TODO: to idio me pukatw, na epistrefei success
             return $reservation;
 
         } else {
@@ -209,7 +206,6 @@ class ReservationController extends Controller
 
             $reservation = Reservation::create($validatedData);
 
-            //TODO: na men kamnei return to reservation
             return $reservation;
         }
         else

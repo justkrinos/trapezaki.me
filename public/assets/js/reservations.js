@@ -47,8 +47,6 @@ $(document).ready(function () {
 
     //If attendance changes in the modal
     $("#attendance").change(function () {
-        //TODO: update the table and the database
-
         colorizeTable();
     })
 

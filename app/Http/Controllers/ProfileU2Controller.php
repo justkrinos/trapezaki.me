@@ -36,7 +36,7 @@ class ProfileU2Controller extends ProfileController
 
             ],
             [
-                //TODO: nmz en fkalli error msg ama en epileksis kanena service
+
                 'food.required_without_all' => 'Please select at least one service that you provide.',
                 'coffee.required_without_all' => 'Please select at least one service that you provide.',
                 'drinks.required_without_all' => 'Please select at least one service that you provide.',

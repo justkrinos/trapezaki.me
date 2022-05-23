@@ -35,11 +35,6 @@ class SessionsU2Controller extends SessionsController
             'password' => 'required'
         ]);
 
-
-        //TODO: Gia to Keep me logged in, evre to section Remembering Users https://laravel.com/docs/7.x/authentication
-
-
-
         if (! Auth::guard('user2')->attempt($attributes)) //attempt to log the user in with the given data/credentials
         {
             return back()->withErrors(['message' => 'Your provided credentials could not be verified.']);

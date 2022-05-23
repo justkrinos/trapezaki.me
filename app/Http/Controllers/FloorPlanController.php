@@ -68,8 +68,7 @@ class FloorPlanController extends Controller
 
     public function modify(User2 $user2)
     {
-        //TODO: en prp na checkari an iparxi resv?
-        //      SOLUTION DONE: checkarei to sto front end
+
         if (request()->has('save')) {
             $validatedData = request()->validate([
                 'floorplan' => 'required',

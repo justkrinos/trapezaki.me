@@ -76,8 +76,7 @@ class ManageBusinessController extends Controller
 
             return redirect('/user/' . $user2->username)->with("success", "Your changes have been applied successfully!");
         } else if (request()->has('reservationSettings')) {
-            //TODO: -to reservation range na ginete validate se mod 30
-            //      -na erkunte pisw errors (ena gia oulla alla perigrafiko)
+
             $validatedData = request()->validate([
                 'res_range' => 'required|numeric',
                 'duration'  => 'required|numeric|min:30|max:420',
