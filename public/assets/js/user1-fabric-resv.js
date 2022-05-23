@@ -616,32 +616,32 @@ document.querySelectorAll('.remove')[0].addEventListener('click', function () {
 })
 
 
-//Customer mode button listener
-document.querySelectorAll('.customer-mode')[0].addEventListener('click', function () {
-  adminMode = false;
-  canvas.getObjects().map(o => {
-    o.hasControls = false
-    o.lockMovementX = true
-    o.lockMovementY = true
-    o.lockScalingX = true
-    o.lockScalingY = true
-    o.lockRotation = true
+// //Customer mode button listener
+// document.querySelectorAll('.customer-mode')[0].addEventListener('click', function () {
+//   adminMode = false;
+//   canvas.getObjects().map(o => {
+//     o.hasControls = false
+//     o.lockMovementX = true
+//     o.lockMovementY = true
+//     o.lockScalingX = true
+//     o.lockScalingY = true
+//     o.lockRotation = true
 
-    if (o.visualType === 'chair' || o.visualType === 'bar' || o.visualType === 'wall' || o.visualType === 'entrance'
-      || o.visualType === 'exit') {
-      o.selectable = false
-    }
-    o.borderColor = '#38A62E'
-    o.borderScaleFactor = 2.5
-    o.hoverCursor = ''
-  })
-  canvas.selection = false
-  canvas.hoverCursor = 'pointer'
-  canvas.discardActiveObject()
-  canvas.renderAll()
-  document.querySelectorAll('.admin-menu')[0].style.display = 'none'
-  document.querySelectorAll('.customer-menu')[0].style.display = 'block'
-})
+//     if (o.visualType === 'chair' || o.visualType === 'bar' || o.visualType === 'wall' || o.visualType === 'entrance'
+//       || o.visualType === 'exit') {
+//       o.selectable = false
+//     }
+//     o.borderColor = '#38A62E'
+//     o.borderScaleFactor = 2.5
+//     o.hoverCursor = ''
+//   })
+//   canvas.selection = false
+//   canvas.hoverCursor = 'pointer'
+//   canvas.discardActiveObject()
+//   canvas.renderAll()
+//   document.querySelectorAll('.admin-menu')[0].style.display = 'none'
+//   document.querySelectorAll('.customer-menu')[0].style.display = 'block'
+// })
 
 
 //Admin mode button listener

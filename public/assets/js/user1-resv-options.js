@@ -17,7 +17,7 @@ username = $('#username').attr('user')
 
 
 $('.clear').click(function () {
-    if (noReservationsOnTables ==1 || noReservationsOnTables == -1) {
+    if (noReservationsOnTables == 1 || noReservationsOnTables == -1) {
         Swal.fire({
             title: 'Are you sure you want to delete everything?',
             text: "You won't be able to revert this!",
@@ -374,10 +374,9 @@ $(document).ready(function () {
                 if (tablesWithReservations.length == 0) {
                     noReservationsOnTables = 1;
                 }
-                if(result['floorplan'] == []){
+            }else{
                     noReservationsOnTables = -1;
                 }
-            }
         },
         error: function (err) {
             Toastify({ //an exw error fkale toast
