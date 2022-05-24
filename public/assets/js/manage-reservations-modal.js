@@ -83,7 +83,7 @@ function modalpop() {
         phone = $(this).children(".phone").html();
         people = $(this).children().children(".people").html();
         cancelled = parseInt($(this).children().children(".cancelled").html(),10)
-        reason = $(this).children(".reason").html()
+        reason = $(this).children("td").children("span.reason").html()
         attendance = $(this).children().children(".attendance").html();
         unchanged_attendance = $(this).children().children(".attendance") //set the global variable to use it when modal is closed
 
