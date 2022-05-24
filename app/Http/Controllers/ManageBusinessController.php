@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Format;
 use App\Models\User2_Photo;
 
-// TODO: search all dd() and ddd() and remove them
 
 
 class ManageBusinessController extends Controller

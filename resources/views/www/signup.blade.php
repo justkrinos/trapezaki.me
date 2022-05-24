@@ -109,9 +109,6 @@
 
                                 </div>
 
-
-                                {{-- TODO: na fkallei j aman en valid to input --}}
-                                {{-- TODO: ta output messages enne ta idia me jina p evalame sta eggrafa, fix them --}}
                                 <div class="form-group">
                                     <label for="password">Create a Password</label>
                                     <input type="password"

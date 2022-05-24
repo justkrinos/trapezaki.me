@@ -5,7 +5,6 @@
                 <div class="logo">
                     <a href="/"><img src="/assets/images/logo/logo.png" alt="Trapezaki" srcset=""></a>
                 </div>
-                {{-- TODO: to logout button ennen toso emfanes, na sasei --}}
 
 
                 <div class="toggler">
@@ -36,7 +35,6 @@
                 @if (request()->route()->uri === 'pending-requests') active @endif
                 ">
 
-                {{-- TODO: na eshi ena arithmo opos eshi to rate now --}}
                     <a href="/pending-requests" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Pending Requests</span>

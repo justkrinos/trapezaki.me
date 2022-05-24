@@ -1,6 +1,3 @@
-{{-- TODO: na mpi tuto se ulla ta headers ullon ton selidon gia na dulefkun ta icons
-    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css"> --}}
-
 <div>
 
     <footer class="text-center text-lg-start text-muted" id="footer">
@@ -39,7 +36,6 @@
                             <a href="/tutorial" class="text-reset">Tutorial</a>
                         </p>
                         <p>
-                            {{-- TODO: search ulla ta http na ginun https molis mpei to ssl cert --}}
                             <a href="http://www.trapezaki.me/make-a-reservation" class="text-reset">Make a
                                 Reservation</a>
                         </p>

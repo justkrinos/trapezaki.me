@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{{-- TODO: ama kamneis sort en fkennun ta popup --}}
 
 <head>
     <meta charset="UTF-8">
@@ -31,12 +30,6 @@
 
 <body>
     <div id="app">
-        {{-- TODO: na mpoun numbers gia ta ratings pending
-            j pano sto username j sta list items tu
-            j sto sidebar dipla gia ulla ta pages
-        //- gia osa thelun rate en grafi arithmo an en paginated
-        //- episis en fefki to cancel reservation ute fenete to cancelled details --}}
-
         @include('www.components.sidebar')
 
         <div id="main" class='layout-navbar'>

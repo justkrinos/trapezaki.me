@@ -80,8 +80,6 @@
                                 </div>
                                 <div>
                                     <div>
-                                        {{-- TODO:fade in j out ta slots gt fenete ashimo
-                                            or na men to kamw an to kamw na erkunte ulla mazi ta tables --}}
                                         <label for="inputSlots">Availability</label>
                                         <div id="inputSlots" class="input-group col-md-12 mb-2">
                                             <span id="timeSlots" class="form-control "></span>
@@ -91,7 +89,6 @@
                                     </div>
                                 </div>
 
-                                {{-- TODO: opou eshi description na to onomasume details --}}
                                 <div class="form-group col-12 justify-content-center mb-5">
                                     <label for="description">Description</label>
                                     <textarea autocomplete="off" class="form-control" id="description" name="description" rows="3"

@@ -15,7 +15,6 @@
                                 <div class="row">
                                     <div class="col-sm-10">
                                         <div class="flex-nowrap input-group col-md-5 mb-4">
-                                            {{-- TODO: an tsillisis pano ston issuer en se perni swsta redirect --}}
                                             <label class="input-group-text" for="issueBusiness">Issuer</label>
                                             <label type="text" class="form-control link-primary" id="issueBusiness"
                                                 role="button">Si Cantik</label>

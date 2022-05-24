@@ -61,12 +61,6 @@
                             </div>
 
                             {{--@include('www.components.choose-city')--}}
-
-                            {{-- TODO: na katalaveni an ekames search j na fefki ta exta
-                                      magazia j na su fkalli ta search results --}}
-
-
-
                             {{-- tuto en gia na fkallei recommended magazia prin kamis search --}}
                             @isset($businesses)
                                 @include ('www.search.search-results')
@@ -85,12 +79,6 @@
         </div>
 
         @include('www.components.footer')
-
-
-{{-- TODO: na dulefki opos edulefke --}}
-        {{-- @if ($showCityPop)
-            @include('www.components.choose-city')
-        @endif --}}
 
 
 </body>

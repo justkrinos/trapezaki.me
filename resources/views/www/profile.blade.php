@@ -19,10 +19,6 @@ use App\Models\User2;
     <link rel="shortcut icon" href="/assets/images/logo/logo_small.png" type="image/x-icon">
 
 
-    {{-- TODO: ta error messages nan kalitera j to $user na erkete p to controller
-               aman kamis lathos en erkunte pisw ta old()
-               change password doesnt work --}}
-
     {{-- Toast dependency --}}
     <link rel="stylesheet" href="assets/vendors/toastify/toastify.css">
 </head>

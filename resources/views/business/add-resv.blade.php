@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{{-- TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
-TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
-
-TODO: Submit popup successfull j otan kamnis click ok na ginete redirect piso sto make a reservation --}}
-
-{{-- TODO: na iparxei to navbar j to sidebar swsta --}}
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

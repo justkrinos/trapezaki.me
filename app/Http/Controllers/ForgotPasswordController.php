@@ -19,8 +19,6 @@ class ForgotPasswordController extends Controller
             'email' => 'required|string|email|max:255'
         ]);
 
-        //  TODO: na ginei  base64 to email gt bori na men dulefkli to link
-
         $user = User3::where('email',$validatedData['email'])->first();
 
         if($user){
@@ -36,7 +34,6 @@ class ForgotPasswordController extends Controller
             'email' => 'required|string|email|max:255'
         ]);
 
-        //  TODO: na ginei  base64 to email gt bori na men dulefkli to link
 
         $user = User2::where('email',$validatedData['email'])->first();
 

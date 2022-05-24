@@ -44,9 +44,6 @@
                             <form method="POST" action="?" class="col-md-6">
                                 {{-- To prevent csrf attacks --}}
                                 @csrf
-
-                                {{-- TODO: na fkallei j aman en valid to input --}}
-                                {{-- TODO: ta output messages enne ta idia me jina p evalame sta eggrafa, fix them --}}
                                 <div class="form-group">
                                     <label for="password">New Password</label>
                                     <input type="password"

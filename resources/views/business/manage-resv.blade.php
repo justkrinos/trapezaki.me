@@ -60,11 +60,6 @@ use App\Models\Table;
                                     </div>
                                 </form>
                             </div>
-
-                            {{-- TODO:
-                                //- na mporei na kamnei search reservations me cancelled j not attended klp --}}
-
-
                             <section class="section">
                                 <div class="row" id="table-hover-row">
                                     <div class="col-12">

@@ -14,7 +14,6 @@ $city = request("city");
                     <button class="btn btn-outline-white bg-info" type="submit" name="btn-search"
                         id="button-search">Search</button>
                 </div>
-                {{-- TODO: ama kamis search j meta en su fkalli checkarismena ta coffee food drinks p ekames --}}
                 <div class="card-content bg-primary">
                     <div class="d-flex justify-content-center">
                         <div class="form-check form-check-inline form-switch">

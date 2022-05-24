@@ -58,7 +58,6 @@
                                     <button class="btn btn-outline-primary btn-sm wall text-nowrap">+ &#9646; Wall</button>
                                 </div>
                                 <div class="btn-group mb-1">
-                                {{-- TODO: efie to customer mode epd itan astoxo en efkalle kan timeslots so na fiei j pu ta eggrafa --}}
                                     <button class="btn btn-outline-danger btn-sm remove text-nowrap">@include('admin.components.delete-icon')</button>
                                     <button class="btn btn-outline-danger btn-sm clear text-nowrap">Clear All</button>
                                 </div>

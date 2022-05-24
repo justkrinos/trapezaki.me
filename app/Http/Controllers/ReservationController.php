@@ -41,7 +41,6 @@ class ReservationController extends Controller
                 'lastDay' => $lastDay
             ]);
 
-        // TODO: en fkallei to popup
 
         //an den ise tpt kamnise redirect piso j fkalli su to login popup
         else

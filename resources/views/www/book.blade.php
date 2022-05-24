@@ -5,10 +5,6 @@
 use App\Models\Table;
 @endphp
 
-{{-- TODO ta session variables pu katw en tha fenunte stin forma, enna pernoun apefthias ston controller opws to ekama
-TODO ta mona p ena eshi stin forma ennan ta stoixeia tis kratisis
-{{-- TODO: na iparxei to navbar j to sidebar swsta --}}
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -116,6 +112,3 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {{-- Fancy input number dependency --}}
 <script src="/assets/js/input-number.js"></script>
-
-
-{{-- TODO: otan kameis search j ertis dame en fernei to date j to pax dame --}}

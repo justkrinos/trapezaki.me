@@ -83,7 +83,6 @@ use App\Models\User2_Photo;
                                     <table id="issueTable" class="table table-hover table-lg">
                                         <thead>
                                             <tr>
-                                                {{-- TODO: na eshi issue type sta columns j na ginete search --}}
                                                 <th>Name</th>
                                                 <th>Date</th>
                                             </tr>

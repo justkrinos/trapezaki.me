@@ -1,8 +1,3 @@
-{{--
-    TODO: na mpi tuto se ulla ta headers ullon ton selidon gia na dulefkun ta icons
-    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
---}}
-
 <footer class="text-center text-lg-start text-muted">
     {{-- <!-- Section: Social media --> --}}
     <section
@@ -32,7 +27,6 @@
             <p>
               <a href="/about-us" class="text-reset">About Us</a>
             </p>
-            {{-- TODO: na mpoun ta agglika manuals gia ullus --}}
             <p>
               <a href="/tutorial" class="text-reset">Tutorial</a>
             </p>

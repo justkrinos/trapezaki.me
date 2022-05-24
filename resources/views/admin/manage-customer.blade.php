@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{{-- TODO: remove these --}}
 @php
 use App\Models\User2_Photo;
 use App\Models\User2;
@@ -233,8 +232,6 @@ $tags = $user2->tags->pluck('name')->toArray();
 
                                 <div class="card-body">
                                     <div class="row">
-                                        {{-- TODO: na ginun ulla etsi (na epistrefei sto anchor tag tu me to #) \
-                                                //-na sasun ta resizing na en kala se tuto --}}
                                         <form method="POST" action="/user/{{ $user2->username }}#resManagement">
                                             @csrf
                                             <div class="d-flex row col-12">
@@ -344,7 +341,6 @@ $tags = $user2->tags->pluck('name')->toArray();
                         <div class="card-body">
                             <label for="formFile" class="form-label">Upload a menu here</label>
                             <div class="row col-12">
-                                {{-- TODO: na mpei username kalitera anti id --}}
                                 <input type="hidden" id="id" name="id" class="form-control round"
                                     value="{{ $user2->id }}">
                                 <div class="col-6">

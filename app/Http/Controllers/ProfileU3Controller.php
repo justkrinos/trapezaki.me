@@ -18,13 +18,6 @@ class ProfileU3Controller extends ProfileController
     public function modify()
     {
 
-        //##TODO:
-        //-Se tuntes formes na sasun ta error messages (o tropos p fenunte sto view)
-        //-Na ginunte kochina ta input boxes j na mpenni to error me to class tou pukatw
-        //-Ta error messages kapies fores ennen sta sosta field na sasun
-        //- nan descriptive to kateh form se tuto j sta alla has() se alla controllers
-        //              dld na mennen 'form1' alla kapio name
-
         //Both change password and edit profile are here
         if(request()->has('changeAccountDetails'))
         {
