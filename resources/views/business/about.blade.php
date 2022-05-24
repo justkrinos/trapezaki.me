@@ -122,13 +122,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <h5 class="text-center">
+                            <p class="text-center">
                                 This project is developed by a group of third year students of Computer Engineering and
                                 Informatics
                                 <br>of Cyprus University of Technology, to serve the purposes of the course: CEI-328
                                 Software Engineering.
                                 <br> Spring Semester, 2022
-                            </h5>
+                            </p>
 
 
 
