@@ -3,6 +3,9 @@
         <div class="row text-center">
             <h3>No results :(</h3>
             <p>No worries, you can try again!</p>
+            <div>
+            <button type="button" class="btn btn-outline-primary" onclick="window.location.href = '/'">Go Back</button>
+            </div>
         </div>
     </div>
 @else
