@@ -2,18 +2,6 @@
 <html lang="en">
 
 
-
-{{-- TODO:  //- Na mpoun oi photos se blocks p na fenunte wraia j na tes tsillas j na kamnun pop up
-                    opws dame https://www.e-table.cy/restaurant/pier-one-cafe-restobar
-            //- To location na sioureftoume oti dulefki
-            //- To sidebar na sasei j dame j se ulla tu user1
-            //- to book na pai se selida p kamnei book
-            //- Na sasun oi santanoshies me tin php
-            //- To modal na mpi sta components alla na dw an dulefki prota
-            //- todo ta photos se mobile mode ennen orizontia
-
---}}
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

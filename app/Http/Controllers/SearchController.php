@@ -55,7 +55,7 @@ class SearchController extends Controller
                 }
                 $type .= ":drinks";
             }
-            //Main query
+            //Main query    
             $results = DB::select("SELECT user2s.id, user2s.username, user2s.password, user2s.business_name,
                                     user2s.company_name, user2s.email, user2s.phone, user2s.representative,
                                     user2s.city, user2s.address, user2s.postal, user2s.long, user2s.lat,
@@ -117,11 +117,10 @@ class SearchController extends Controller
     public function showProfile(User2 $user2)
     {
         return view(
-            'www.selected-profile',
-            [
-                'user2' => $user2
-            ]
-        );
+                'www.selected-profile',
+                [
+                    'user2' => $user2
+                ]);
     }
 
     private function getAvailableUsers(array $users2, string $date)

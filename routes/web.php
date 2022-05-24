@@ -45,6 +45,7 @@ Route::bind('user2', function ($value) {
     return User2::where('username', $value)->first();
 });
 
+
 // Route::bind('user3', function ($value) {
 //     return User3::where('id', $value)->where('guest',0)->first();
 // });
