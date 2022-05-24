@@ -83,12 +83,10 @@
             </div>
         </div>
     </div>
-
+    @include('www.components.footer')
 
     </div>
 
-
-    @include('www.components.footer')
 
 </body>
 

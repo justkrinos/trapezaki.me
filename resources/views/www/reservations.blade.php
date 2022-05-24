@@ -212,10 +212,8 @@
         @include('www.components.rating-modal')
         @include('www.components.resv-modal')
         @include('www.components.cancel-resv-modal')
-
-    </div>
-
     @include('www.components.footer')
+    </div>
 
 </body>
 

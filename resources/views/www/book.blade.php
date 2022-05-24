@@ -81,8 +81,8 @@ use App\Models\Table;
 
             <span id="username" user="{{ $user2->username }}" hidden></span>
         </div>
+            @include('www.components.footer')
     </div>
-    @include('www.components.footer')
 </body>
 
 </html>
